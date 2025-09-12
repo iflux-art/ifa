@@ -1,0 +1,190 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "**/.env.*local",
+    ".env",
+    "tsconfig.json",
+    "tailwind.config.*",
+    "postcss.config.*"
+  ],
+  "globalEnv": [
+    "NODE_ENV",
+    "NEXT_PUBLIC_*"
+  ],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build", "type-check"],
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "public/**",
+        "next.config.*",
+        "package.json",
+        "tsconfig.json",
+        "tailwind.config.*",
+        "postcss.config.*"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "dist/**",
+        "storybook-static/**"
+      ],
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*"],
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "public/**",
+        "next.config.*",
+        "package.json",
+        "tsconfig.json",
+        "tailwind.config.*",
+        "postcss.config.*",
+        ".env*"
+      ]
+    },
+    "start": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*"]
+    },
+    "lint": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "*.{ts,tsx,js,jsx}",
+        "package.json",
+        "biome.json",
+        ".biomejs.json"
+      ],
+      "outputs": []
+    },
+    "format": {
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "*.{ts,tsx,js,jsx,json,md,mdx}",
+        "package.json",
+        "biome.json",
+        ".biomejs.json"
+      ],
+      "outputs": [],
+      "cache": false
+    },
+    "check": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "*.{ts,tsx,js,jsx,json,md,mdx}",
+        "package.json",
+        "biome.json",
+        ".biomejs.json"
+      ],
+      "outputs": []
+    },
+    "type-check": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "src/**/*.{ts,tsx}",
+        "*.{ts,tsx}",
+        "package.json",
+        "tsconfig.json"
+      ],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "**/*.test.{ts,tsx,js,jsx}",
+        "**/*.spec.{ts,tsx,js,jsx}",
+        "vitest.config.*",
+        "package.json",
+        "tsconfig.json"
+      ],
+      "outputs": [
+        "coverage/**",
+        "test-results/**"
+      ],
+      "env": ["NODE_ENV"]
+    },
+    "test:watch": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV"]
+    },
+    "test:ui": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV"]
+    },
+    "test:coverage": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "**/*.test.{ts,tsx,js,jsx}",
+        "**/*.spec.{ts,tsx,js,jsx}",
+        "vitest.config.*",
+        "package.json",
+        "tsconfig.json"
+      ],
+      "outputs": [
+        "coverage/**"
+      ],
+      "env": ["NODE_ENV"]
+    },
+    "test:e2e": {
+      "dependsOn": ["build"],
+      "inputs": [
+        "e2e/**/*.{ts,js}",
+        "playwright.config.*",
+        "package.json"
+      ],
+      "outputs": [
+        "test-results/**",
+        "playwright-report/**"
+      ],
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*"]
+    },
+    "test:e2e:ui": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true,
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*"]
+    },
+    "storybook": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true,
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "**/*.stories.{ts,tsx,js,jsx}",
+        ".storybook/**",
+        "package.json"
+      ]
+    },
+    "build-storybook": {
+      "dependsOn": ["^build"],
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "**/*.stories.{ts,tsx,js,jsx}",
+        ".storybook/**",
+        "package.json"
+      ],
+      "outputs": ["storybook-static/**"]
+    },
+    "clean": {
+      "cache": false,
+      "inputs": [],
+      "outputs": []
+    }
+  },
+  "remoteCache": {
+    "signature": true
+  }
+}

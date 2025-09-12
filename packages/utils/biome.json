@@ -1,0 +1,6 @@
+{
+  "extends": ["../biome-config/base.json"],
+  "files": {
+    "include": ["src/**/*.ts", "src/**/*.js"]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "extends": ["./packages/biome-config/base.json"],
+  "files": {
+    "include": [
+      "apps/**/*.ts",
+      "apps/**/*.tsx",
+      "apps/**/*.js",
+      "apps/**/*.jsx",
+      "packages/**/*.ts",
+      "packages/**/*.tsx",
+      "packages/**/*.js",
+      "packages/**/*.jsx",
+      "*.ts",
+      "*.js"
+    ]
+  }
+}

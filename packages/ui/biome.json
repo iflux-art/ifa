@@ -1,0 +1,6 @@
+{
+  "extends": ["../biome-config/react.json"],
+  "files": {
+    "include": ["src/**/*.ts", "src/**/*.tsx"]
+  }
+}
