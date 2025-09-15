@@ -10,8 +10,8 @@
     "inlineSources": false,
     "isolatedModules": true,
     "moduleResolution": "bundler",
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,7 +21,12 @@
     "module": "ESNext",
     "allowJs": true,
     "resolveJsonModule": true,
-    "noEmit": true
+    "noEmit": true,
+    "ignoreDeprecations": "5.0",
+    "verbatimModuleSyntax": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true
   },
   "exclude": [
     "node_modules",

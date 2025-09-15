@@ -39,21 +39,21 @@ export function throttle<T extends (...args: unknown[]) => unknown>(
   let lastCallTime: number | undefined
   let lastInvokeTime = 0
 
-  function invokeFunc(time: number): ReturnType<T> {
+  function invokeFunc(time: number): ReturnType<T> | undefined {
     const args = lastArgs as Parameters<T>
     const thisArg = lastThis as ThisParameterType<T>
 
     lastArgs = undefined
     lastThis = undefined
     lastInvokeTime = time
-    result = func.apply(thisArg, args)
-    return result as ReturnType<T>
+    result = func.apply(thisArg, args) as ReturnType<T> | undefined
+    return result
   }
 
-  function leadingEdge(time: number): ReturnType<T> {
+  function leadingEdge(time: number): ReturnType<T> | undefined {
     lastInvokeTime = time
     timeoutId = setTimeout(timerExpired, wait)
-    return leading ? invokeFunc(time) : (getResult() as ReturnType<T>)
+    return leading ? invokeFunc(time) : getResult()
   }
 
   function remainingWait(time: number): number {
@@ -66,7 +66,7 @@ export function throttle<T extends (...args: unknown[]) => unknown>(
 
   function shouldInvoke(time: number): boolean {
     const timeSinceLastCall = time - (lastCallTime || 0)
-    const _timeSinceLastInvoke = time - lastInvokeTime
+    // const _timeSinceLastInvoke = time - lastInvokeTime
 
     return (
       lastCallTime === undefined ||

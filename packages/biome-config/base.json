@@ -1,5 +1,16 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx",
+      "!**/.next/**",
+      "!**/node_modules/**"
+    ]
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -7,7 +18,8 @@
       "complexity": {
         "noExtraBooleanCast": "error",
         "noUselessCatch": "error",
-        "noUselessTypeConstraint": "error"
+        "noUselessTypeConstraint": "error",
+        "noBannedTypes": "error"
       },
       "correctness": {
         "noConstAssign": "error",
@@ -31,11 +43,13 @@
         "noUnusedVariables": "error",
         "useIsNan": "error",
         "useValidForDirection": "error",
-        "useYield": "error"
+        "useYield": "error",
+        "noInnerDeclarations": "error"
       },
       "style": {
         "useConst": "error",
-        "useTemplate": "error"
+        "useTemplate": "error",
+        "useSelfClosingElements": "error"
       },
       "suspicious": {
         "noAsyncPromiseExecutor": "error",
@@ -60,7 +74,8 @@
         "noRedeclare": "error",
         "noShadowRestrictedNames": "error",
         "noUnsafeNegation": "error",
-        "useGetterReturn": "error"
+        "useGetterReturn": "error",
+        "noArrayIndexKey": "warn"
       }
     }
   },

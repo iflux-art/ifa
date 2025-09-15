@@ -3,9 +3,9 @@
  */
 export interface PageHeaderProps {
   /** 页面标题 */
-  title: string;
+  title: string
   /** 页面描述 */
-  description?: string;
+  description?: string
   /** 自定义类名 */
-  className?: string;
+  className?: string
 }

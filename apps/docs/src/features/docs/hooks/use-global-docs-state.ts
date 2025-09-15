@@ -3,36 +3,36 @@
  * @module hooks/use-global-docs-state
  */
 
-"use client";
+'use client'
 
-import { useCallback, useEffect } from "react";
-import type { GlobalDocsStructure } from "@/features/docs/components/global-docs";
-import { useDocsGlobalStructureStore } from "@/stores";
-import type { DocsGlobalStructureStore } from "@/stores/docs-global-structure-store.standard";
+import { useCallback, useEffect } from 'react'
+import type { GlobalDocsStructure } from '@/features/docs/components/global-docs'
+import { useDocsGlobalStructureStore } from '@/stores'
+import type { DocsGlobalStructureStore } from '@/stores/docs-global-structure-store.standard'
 
 // 定义selector函数，避免每次创建新对象
-const useGlobalDocsStateSelector = (state: DocsGlobalStructureStore) => state;
+const useGlobalDocsStateSelector = (state: DocsGlobalStructureStore) => state
 
 export interface UseGlobalDocsStateResult {
   /** 全局文档结构数据 */
-  structure: GlobalDocsStructure | null;
+  structure: GlobalDocsStructure | null
   /** 加载状态 */
-  loading: boolean;
+  loading: boolean
   /** 错误信息 */
-  error: string | null;
+  error: string | null
   /** 重新获取数据 */
-  refetch: () => Promise<void>;
+  refetch: () => Promise<void>
   /** 缓存是否有效 */
-  isCacheValid: boolean;
+  isCacheValid: boolean
   /** 文档分类 */
-  categories: GlobalDocsStructure["categories"] | null;
+  categories: GlobalDocsStructure['categories'] | null
   /** 所有文档 */
   allDocs: Array<{
-    id: string;
-    title: string;
-    path: string;
-    category: string;
-  }> | null;
+    id: string
+    title: string
+    path: string
+    category: string
+  }> | null
 }
 
 /**
@@ -44,7 +44,7 @@ export interface UseGlobalDocsStateResult {
  */
 export function useGlobalDocsState(): UseGlobalDocsStateResult {
   // 从 Zustand store 获取状态和动作 - 选择性订阅
-  const store = useDocsGlobalStructureStore(useGlobalDocsStateSelector);
+  const store = useDocsGlobalStructureStore(useGlobalDocsStateSelector)
 
   // 解构需要的状态和动作
   const {
@@ -58,41 +58,52 @@ export function useGlobalDocsState(): UseGlobalDocsStateResult {
     setLoading,
     setError,
     setTimestamp,
-  } = store;
+  } = store
 
   const fetchGlobalDocs = useCallback(async () => {
     try {
       // 只有在没有数据或缓存无效时才重新获取数据
       if (structure && isCacheValid) {
-        return;
+        return
       }
 
-      setLoading(true);
-      setError(null);
+      setLoading(true)
+      setError(null)
 
-      const response = await fetch("/api/docs-global-structure");
+      const response = await fetch('/api/docs-global-structure')
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch global docs structure: ${response.statusText}`);
+        throw new Error(
+          `Failed to fetch global docs structure: ${response.statusText}`
+        )
       }
 
-      const data: GlobalDocsStructure = (await response.json()) as GlobalDocsStructure;
-      setStructure(data);
+      const data: GlobalDocsStructure =
+        (await response.json()) as GlobalDocsStructure
+      setStructure(data)
 
       // Update timestamp
-      setTimestamp(Date.now());
+      setTimestamp(Date.now())
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Unknown error occurred";
-      setError(errorMessage);
-      console.error("Error fetching global docs structure:", err);
+      const errorMessage =
+        err instanceof Error ? err.message : 'Unknown error occurred'
+      setError(errorMessage)
+      console.error('Error fetching global docs structure:', err)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [structure, isCacheValid, setStructure, setLoading, setError, setTimestamp]);
+  }, [
+    structure,
+    isCacheValid,
+    setStructure,
+    setLoading,
+    setError,
+    setTimestamp,
+  ])
 
   useEffect(() => {
-    void fetchGlobalDocs();
-  }, [fetchGlobalDocs]);
+    void fetchGlobalDocs()
+  }, [fetchGlobalDocs])
 
   return {
     structure,
@@ -102,5 +113,5 @@ export function useGlobalDocsState(): UseGlobalDocsStateResult {
     isCacheValid,
     categories,
     allDocs,
-  };
+  }
 }

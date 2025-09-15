@@ -4,8 +4,13 @@
 
 // Greeting 组件 Props 类型
 export interface GreetingProps {
-  className?: string;
+  className?: string
 }
 
 // 时间段类型
-export type TimeSlot = "morning" | "noon" | "afternoon" | "evening" | "lateNight";
+export type TimeSlot =
+  | 'morning'
+  | 'noon'
+  | 'afternoon'
+  | 'evening'
+  | 'lateNight'

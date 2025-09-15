@@ -4,7 +4,7 @@ import { defineConfig } from 'vitest/config'
 export default defineConfig({
   test: {
     globals: true,
-    environment: 'node',
+    environment: 'jsdom',
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     exclude: [
       '**/node_modules/**',
@@ -15,7 +15,7 @@ export default defineConfig({
     ],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json', 'html'],
+      reporter: ['text', 'json', 'html', 'lcov'],
       exclude: [
         'coverage/**',
         'dist/**',
@@ -39,7 +39,13 @@ export default defineConfig({
     },
     typecheck: {
       enabled: true,
-      include: ['**/*.{test,spec}.ts', '**/*.{test,spec}.tsx']
+      include: ['**/*.{test,spec}.ts', '**/*.{test,spec}.tsx'],
+    },
+    setupFiles: ['./vitest.setup.ts'],
+    css: {
+      modules: {
+        classNameStrategy: 'non-scoped'
+      }
     }
   },
   resolve: {

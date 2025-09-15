@@ -1,36 +1,34 @@
 // 布局相关类型
 export type {
-  PageLayoutType,
-  PageContainerConfig,
-  SidebarConfig,
-  NotFoundProps,
-  PageProps,
-  PageLayoutProps,
   AppGridProps,
-  PageContainerProps,
-  ThreeColumnLayoutProps,
-  ThreeColumnGridProps,
-  SidebarWrapperProps,
   GridColsMap,
   GridGapMap,
-} from "@/features/layout/layout-types";
+  NotFoundProps,
+  PageContainerConfig,
+  PageContainerProps,
+  PageLayoutProps,
+  PageLayoutType,
+  PageProps,
+  SidebarConfig,
+  SidebarWrapperProps,
+  ThreeColumnGridProps,
+  ThreeColumnLayoutProps,
+} from '@/features/layout/layout-types'
 
 // 新增异步操作相关类型
-export type { CacheOptions, UseAsyncOptions } from "./async-types";
-
+export type { CacheOptions, UseAsyncOptions } from './async-types'
+// 配置相关类型
+export type { IosConfig, SiteMetadata, WindowsConfig } from './config-types'
 // SEO相关类型
 export type {
-  IconConfig,
-  VerificationConfig,
-  JsonLdConfig,
-  SocialConfig,
   GenerateMetadataOptions,
-  SiteConfig,
+  IconConfig,
+  JsonLdConfig,
   SEOPageOptions,
-} from "./seo-types";
-
-// 配置相关类型
-export type { SiteMetadata, IosConfig, WindowsConfig } from "./config-types";
+  SiteConfig,
+  SocialConfig,
+  VerificationConfig,
+} from './seo-types'
 
 // ==================== 组件 Props 类型 ====================
 // 已移除文档项目中不使用的通用组件Props类型定义

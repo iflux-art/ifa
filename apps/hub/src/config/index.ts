@@ -4,20 +4,20 @@
 
 // 元数据配置
 export {
-  SITE_METADATA,
-  SITE_AUTHOR,
-  SITE_URL,
-  SITE_TWITTER,
-  SITE_GITHUB,
-  SITE_EMAIL,
-  SITE_COPYRIGHT,
-  VIEWPORT_CONFIG,
   IOS_CONFIG,
+  SITE_AUTHOR,
+  SITE_COPYRIGHT,
+  SITE_EMAIL,
+  SITE_GITHUB,
+  SITE_METADATA,
+  SITE_TWITTER,
+  SITE_URL,
+  VIEWPORT_CONFIG,
   WINDOWS_CONFIG,
-} from "./metadata";
+} from './metadata'
 
 // 页面元数据配置
 export {
   LINKS_PAGE_METADATA,
   PAGE_METADATA_MAP,
-} from "./page-metadata";
+} from './page-metadata'

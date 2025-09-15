@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import Link from "next/link";
+import Link from 'next/link'
 
 export const Logo = () => (
   <Link
@@ -14,4 +14,4 @@ export const Logo = () => (
       iFluxArt
     </h2>
   </Link>
-);
+)

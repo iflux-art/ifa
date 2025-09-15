@@ -1,4 +1,4 @@
-import { SignUp } from "@clerk/nextjs";
+import { SignUp } from '@clerk/nextjs'
 
 const SignUpPage = () => (
   <div className="flex min-h-screen items-center justify-center bg-background p-4">
@@ -12,6 +12,6 @@ const SignUpPage = () => (
       />
     </div>
   </div>
-);
+)
 
-export default SignUpPage;
+export default SignUpPage

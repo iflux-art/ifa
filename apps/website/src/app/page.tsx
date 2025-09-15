@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import { HOME_CONFIG } from "@/features/home/config";
-import { HeroSection } from "@/features/home/components/hero-section";
-import { FeaturedLinks } from "@/features/home/components/featured-links";
+import type { Metadata } from 'next'
+import { FeaturedLinks } from '@/features/home/components/featured-links'
+import { HeroSection } from '@/features/home/components/hero-section'
+import { HOME_CONFIG } from '@/features/home/config'
 
 // 页面元数据
 export const metadata: Metadata = {
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     title: HOME_CONFIG.seo.title,
     description: HOME_CONFIG.seo.description,
     type: HOME_CONFIG.seo.type,
-    url: "https://iflux.art",
+    url: 'https://iflux.art',
     images: [
       {
-        url: "/images/og-image.png",
+        url: '/images/og-image.png',
         width: 1200,
         height: 630,
         alt: HOME_CONFIG.seo.title,
@@ -22,12 +22,12 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: HOME_CONFIG.seo.title,
     description: HOME_CONFIG.seo.description,
-    images: ["/images/og-image.png"],
+    images: ['/images/og-image.png'],
   },
-};
+}
 
 export default function Home() {
   return (
@@ -38,5 +38,5 @@ export default function Home() {
       {/* 特色链接 */}
       <FeaturedLinks />
     </>
-  );
+  )
 }

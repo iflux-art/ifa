@@ -1,27 +1,33 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { formatDate, formatNumber } from "@/features/content/lib";
-import type { ContentItem } from "@/features/content/types";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/utils";
+import Link from 'next/link'
+import { Badge } from '@/components/ui/badge'
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { formatDate, formatNumber } from '@/features/content/lib'
+import type { ContentItem } from '@/features/content/types'
+import { cn } from '@/utils'
 
 export interface ContentCardProps {
   /** 内容项 */
-  item: ContentItem;
+  item: ContentItem
   /** 自定义类名 */
-  className?: string;
+  className?: string
   /** 是否显示分类标签 */
-  showCategory?: boolean;
+  showCategory?: boolean
   /** 是否显示标签 */
-  showTags?: boolean;
+  showTags?: boolean
   /** 是否显示统计信息 */
-  showStats?: boolean;
+  showStats?: boolean
   /** 是否显示摘要 */
-  showExcerpt?: boolean;
+  showExcerpt?: boolean
   /** 点击事件处理 */
-  onClick?: () => void;
+  onClick?: () => void
 }
 
 export function ContentCard({
@@ -36,8 +42,8 @@ export function ContentCard({
   return (
     <Card
       className={cn(
-        "h-full overflow-hidden transition-all hover:shadow-lg",
-        onClick ? "cursor-pointer" : "",
+        'h-full overflow-hidden transition-all hover:shadow-lg',
+        onClick ? 'cursor-pointer' : '',
         className
       )}
       onClick={onClick}
@@ -55,7 +61,9 @@ export function ContentCard({
       </CardHeader>
       <CardContent className="pb-3">
         {showExcerpt && item.excerpt && (
-          <p className="text-muted-foreground text-sm line-clamp-2">{item.excerpt}</p>
+          <p className="text-muted-foreground text-sm line-clamp-2">
+            {item.excerpt}
+          </p>
         )}
         <div className="flex flex-wrap gap-2 mt-3">
           {showCategory && item.category && (
@@ -78,17 +86,17 @@ export function ContentCard({
           <div className="flex gap-2">
             {item.views !== undefined && (
               <span>
-                {formatNumber(item.views)} {item.views === 1 ? "view" : "views"}
+                {formatNumber(item.views)} {item.views === 1 ? 'view' : 'views'}
               </span>
             )}
             {item.likes !== undefined && (
               <span>
-                {formatNumber(item.likes)} {item.likes === 1 ? "like" : "likes"}
+                {formatNumber(item.likes)} {item.likes === 1 ? 'like' : 'likes'}
               </span>
             )}
           </div>
         )}
       </CardFooter>
     </Card>
-  );
+  )
 }

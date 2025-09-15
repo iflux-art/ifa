@@ -1,20 +1,20 @@
-import { Breadcrumb } from "@/components/breadcrumb";
-import { cn } from "@/utils";
-import { Calculator, Calendar, Clock } from "lucide-react";
-import React from "react";
+import { Calculator, Calendar, Clock } from 'lucide-react'
+import type React from 'react'
+import { Breadcrumb } from '@/components/breadcrumb'
+import { cn } from '@/utils'
 
 /** 内容显示类型 */
-export type ContentType = "docs";
+export type ContentType = 'docs'
 
 export interface ContentDisplayProps {
-  contentType: ContentType;
-  title: string;
-  date?: string | null;
-  updatedAt?: string | null;
-  wordCount?: number;
-  children?: React.ReactNode;
-  className?: string;
-  breadcrumbs?: { label: string; href?: string }[];
+  contentType: ContentType
+  title: string
+  date?: string | null
+  updatedAt?: string | null
+  wordCount?: number
+  children?: React.ReactNode
+  className?: string
+  breadcrumbs?: { label: string; href?: string }[]
 }
 
 /**
@@ -23,19 +23,19 @@ export interface ContentDisplayProps {
  * 这里采用保守估计 250 字/分钟
  */
 function calculateReadingTime(wordCount: number): string {
-  if (wordCount === 0) return "0 分钟";
+  if (wordCount === 0) return '0 分钟'
 
-  const wordsPerMinute = 250;
-  const minutes = Math.ceil(wordCount / wordsPerMinute);
+  const wordsPerMinute = 250
+  const minutes = Math.ceil(wordCount / wordsPerMinute)
 
-  if (minutes < 1) return "1 分钟";
-  if (minutes < 60) return `${minutes} 分钟`;
+  if (minutes < 1) return '1 分钟'
+  if (minutes < 60) return `${minutes} 分钟`
 
-  const hours = Math.floor(minutes / 60);
-  const remainingMinutes = minutes % 60;
+  const hours = Math.floor(minutes / 60)
+  const remainingMinutes = minutes % 60
 
-  if (remainingMinutes === 0) return `${hours} 小时`;
-  return `${hours} 小时 ${remainingMinutes} 分钟`;
+  if (remainingMinutes === 0) return `${hours} 小时`
+  return `${hours} 小时 ${remainingMinutes} 分钟`
 }
 
 /**
@@ -63,16 +63,16 @@ export const ContentDisplay = ({
   className,
   breadcrumbs,
 }: ContentDisplayProps) => {
-  const readingTime = calculateReadingTime(wordCount);
+  const readingTime = calculateReadingTime(wordCount)
 
   return (
     <article
       className={cn(
-        "prose-container",
+        'prose-container',
         // 添加卡片样式，与文档列表页的文章卡片保持一致
-        "rounded-lg border bg-card text-card-foreground shadow-sm",
+        'rounded-lg border bg-card text-card-foreground shadow-sm',
         // 响应式内边距，与文档卡片保持一致
-        "p-3 sm:p-4 md:p-5 lg:p-6",
+        'p-3 sm:p-4 md:p-5 lg:p-6',
         className
       )}
     >
@@ -84,7 +84,9 @@ export const ContentDisplay = ({
       )}
 
       <header className="mb-8">
-        <h1 className="mb-8 text-4xl font-bold tracking-tight sm:text-4xl">{title}</h1>
+        <h1 className="mb-8 text-4xl font-bold tracking-tight sm:text-4xl">
+          {title}
+        </h1>
         <div className="flex flex-wrap items-center gap-y-2 text-sm font-medium text-muted-foreground">
           {/* 发布日期和更新日期 */}
           {(date || updatedAt) && (
@@ -92,7 +94,7 @@ export const ContentDisplay = ({
               <Calendar className="mr-1 h-4 w-4" />
               <time>
                 {date && `发布于 ${date}`}
-                {date && updatedAt && " · "}
+                {date && updatedAt && ' · '}
                 {updatedAt && `更新于 ${updatedAt}`}
               </time>
             </div>
@@ -126,5 +128,5 @@ export const ContentDisplay = ({
         {children}
       </div>
     </article>
-  );
-};
+  )
+}

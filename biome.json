@@ -1,7 +1,8 @@
 {
+  "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
   "extends": ["./packages/biome-config/base.json"],
   "files": {
-    "include": [
+    "includes": [
       "apps/**/*.ts",
       "apps/**/*.tsx",
       "apps/**/*.js",
@@ -11,7 +12,9 @@
       "packages/**/*.js",
       "packages/**/*.jsx",
       "*.ts",
-      "*.js"
+      "*.js",
+      "!**/.next/**",
+      "!**/node_modules/**"
     ]
   }
 }

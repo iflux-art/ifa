@@ -1,23 +1,23 @@
-import { BackButton, Button } from "@/components";
-import { PageContainer } from "@/components/layout";
-import { AlertCircle, Home, Search } from "lucide-react";
-import type { Metadata } from "next";
-import type { NotFoundProps } from "@/types";
-import Link from "next/link";
-import { useId } from "react";
+import { AlertCircle, Home, Search } from 'lucide-react'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { useId } from 'react'
+import { BackButton, Button } from '@/components'
+import { PageContainer } from '@/components/layout'
+import type { NotFoundProps } from '@/types'
 
 export const metadata: Metadata = {
-  title: "404 - 页面未找到",
-  description: "抱歉，您访问的页面不存在或已被移除。",
-};
+  title: '404 - 页面未找到',
+  description: '抱歉，您访问的页面不存在或已被移除。',
+}
 
 const DEFAULT_TEXTS = {
-  code: "404",
-  title: "页面未找到",
-  description: "抱歉，您访问的页面不存在或已被移除。",
-  buttonText: "返回首页",
-  backUrl: "/",
-} as const;
+  code: '404',
+  title: '页面未找到',
+  description: '抱歉，您访问的页面不存在或已被移除。',
+  buttonText: '返回首页',
+  backUrl: '/',
+} as const
 
 /**
  * 全局404页面
@@ -29,19 +29,24 @@ const NotFoundPage = ({
   description = DEFAULT_TEXTS.description,
   buttonText = DEFAULT_TEXTS.buttonText,
   backUrl = DEFAULT_TEXTS.backUrl,
-  className = "",
+  className = '',
   showIcon = true,
 }: NotFoundProps) => {
-  const errorTitleId = useId();
+  const errorTitleId = useId()
 
   return (
-    <PageContainer config={{ layout: "full-width" }}>
-      <main className={`flex min-h-[70vh] items-center justify-center text-center ${className}`}>
+    <PageContainer config={{ layout: 'full-width' }}>
+      <main
+        className={`flex min-h-[70vh] items-center justify-center text-center ${className}`}
+      >
         <section aria-labelledby={errorTitleId} className="w-full max-w-4xl">
           <div className="flex flex-col items-center space-y-8">
             {showIcon && (
               <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-primary/10">
-                <AlertCircle className="h-12 w-12 text-primary" aria-hidden="true" />
+                <AlertCircle
+                  className="h-12 w-12 text-primary"
+                  aria-hidden="true"
+                />
               </div>
             )}
 
@@ -53,7 +58,9 @@ const NotFoundPage = ({
 
             <h2 className="mb-4 text-3xl font-bold">{title}</h2>
 
-            <p className="mx-auto mb-8 max-w-md text-lg text-muted-foreground">{description}</p>
+            <p className="mx-auto mb-8 max-w-md text-lg text-muted-foreground">
+              {description}
+            </p>
 
             {/* 主要操作按钮 */}
             <div className="mb-8 flex flex-wrap justify-center gap-4">
@@ -84,7 +91,7 @@ const NotFoundPage = ({
         </section>
       </main>
     </PageContainer>
-  );
-};
+  )
+}
 
-export default NotFoundPage;
+export default NotFoundPage

@@ -1,55 +1,55 @@
-import { create } from "zustand";
-import type { LinksItem } from "@/features/links/types";
+import { create } from 'zustand'
+import type { LinksItem } from '@/features/links/types'
 
 // 状态接口
 export interface AdminState {
   // 数据状态
-  items: LinksItem[];
-  loading: boolean;
-  error: string | null;
+  items: LinksItem[]
+  loading: boolean
+  error: string | null
 
   // 搜索和过滤状态
-  searchTerm: string;
-  selectedCategory: string;
+  searchTerm: string
+  selectedCategory: string
 
   // 对话框状态
-  showAddDialog: boolean;
-  editingItem: LinksItem | null;
-  deletingItem: LinksItem | null;
+  showAddDialog: boolean
+  editingItem: LinksItem | null
+  deletingItem: LinksItem | null
 
   // 统计数据
-  itemCount: number;
+  itemCount: number
 }
 
 // 动作接口
 export interface AdminActions {
   // 数据操作
-  setItems: (items: LinksItem[]) => void;
-  setLoading: (loading: boolean) => void;
-  setError: (error: string | null) => void;
-  addItem: (item: LinksItem) => void;
-  updateItem: (item: LinksItem) => void;
-  deleteItem: (id: string) => void;
+  setItems: (items: LinksItem[]) => void
+  setLoading: (loading: boolean) => void
+  setError: (error: string | null) => void
+  addItem: (item: LinksItem) => void
+  updateItem: (item: LinksItem) => void
+  deleteItem: (id: string) => void
 
   // 搜索和过滤操作
-  setSearchTerm: (term: string) => void;
-  setSelectedCategory: (category: string) => void;
+  setSearchTerm: (term: string) => void
+  setSelectedCategory: (category: string) => void
 
   // 对话框操作
-  setShowAddDialog: (show: boolean) => void;
-  setEditingItem: (item: LinksItem | null) => void;
-  setDeletingItem: (item: LinksItem | null) => void;
+  setShowAddDialog: (show: boolean) => void
+  setEditingItem: (item: LinksItem | null) => void
+  setDeletingItem: (item: LinksItem | null) => void
 
   // 统计操作
-  updateItemCount: (count: number) => void;
+  updateItemCount: (count: number) => void
 
   // 重置操作
-  resetState: () => void;
-  resetFilters: () => void;
+  resetState: () => void
+  resetFilters: () => void
 }
 
 // 派生状态接口 (空类型)
-export type AdminDerivedState = Record<never, never>;
+export type AdminDerivedState = Record<never, never>
 
 // 完整的Store接口
 export interface AdminStore extends AdminState, AdminActions {}
@@ -59,13 +59,13 @@ export const initialState: AdminState = {
   items: [],
   loading: false,
   error: null,
-  searchTerm: "",
-  selectedCategory: "",
+  searchTerm: '',
+  selectedCategory: '',
   showAddDialog: false,
   editingItem: null,
   deletingItem: null,
   itemCount: 0,
-};
+}
 
 // 创建函数
 export const createAdminStore = () => {
@@ -74,8 +74,8 @@ export const createAdminStore = () => {
     items: [],
     loading: false,
     error: null,
-    searchTerm: "",
-    selectedCategory: "",
+    searchTerm: '',
+    selectedCategory: '',
     showAddDialog: false,
     editingItem: null,
     deletingItem: null,
@@ -96,7 +96,9 @@ export const createAdminStore = () => {
 
     updateItem: updatedItem =>
       set(state => ({
-        items: state.items.map(item => (item.id === updatedItem.id ? updatedItem : item)),
+        items: state.items.map(item =>
+          item.id === updatedItem.id ? updatedItem : item
+        ),
       })),
 
     deleteItem: id =>
@@ -124,11 +126,11 @@ export const createAdminStore = () => {
     resetState: () => set({ ...initialState }),
 
     resetFilters: () => ({
-      searchTerm: "",
-      selectedCategory: "",
+      searchTerm: '',
+      selectedCategory: '',
     }),
-  }));
-};
+  }))
+}
 
 // 默认导出store实例
-export const useAdminStore = createAdminStore();
+export const useAdminStore = createAdminStore()

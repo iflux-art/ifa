@@ -2,7 +2,7 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig(options => ({
   entry: ['src/index.ts'],
-  format: ['cjs', 'esm'],
+  format: ['esm'], // 只生成 ESM 格式
   dts: !options.watch, // Skip DTS generation in watch mode for faster rebuilds
   splitting: false,
   sourcemap: true,

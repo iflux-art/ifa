@@ -1,6 +1,9 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
+import { SignOutButton, useUser } from '@clerk/nextjs'
+import { LogOut, User } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,15 +14,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { SignOutButton, useUser } from "@clerk/nextjs";
-import { LogOut, User } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
 
 export function AuthButtons() {
-  const { isSignedIn, isLoaded } = useUser();
-  const [open, setOpen] = useState(false);
+  const { isSignedIn, isLoaded } = useUser()
+  const [open, setOpen] = useState(false)
 
   // 如果 Clerk 还在加载中，显示登录图标
   if (!isLoaded) {
@@ -29,7 +29,7 @@ export function AuthButtons() {
           <User className="h-5 w-5" />
         </Button>
       </Link>
-    );
+    )
   }
 
   // 如果用户已登录，显示退出确认对话框
@@ -59,7 +59,7 @@ export function AuthButtons() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    );
+    )
   }
 
   // 如果用户未登录，显示登录图标
@@ -69,5 +69,5 @@ export function AuthButtons() {
         <User className="h-5 w-5" />
       </Button>
     </Link>
-  );
+  )
 }

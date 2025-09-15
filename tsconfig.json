@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES2022",
     "lib": ["dom", "dom.iterable", "es6"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -24,9 +24,11 @@
       "@repo/ui": ["./packages/ui/src"],
       "@repo/utils": ["./packages/utils/src"],
       "@repo/typescript-config": ["./packages/typescript-config"],
+      "@repo/typescript-config/base.json": ["./packages/typescript-config/base.json"],
+      "@repo/typescript-config/nextjs.json": ["./packages/typescript-config/nextjs.json"],
+      "@repo/typescript-config/react-library.json": ["./packages/typescript-config/react-library.json"],
       "@repo/eslint-config": ["./packages/eslint-config"],
-      "@repo/tailwind-config": ["./packages/tailwind-config"],
-      "@/*": ["./apps/bookmarks/src/*"]
+      "@repo/tailwind-config": ["./packages/tailwind-config"]
     }
   },
   "include": [

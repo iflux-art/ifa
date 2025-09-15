@@ -65,7 +65,10 @@ export function deepMerge<T extends Record<string, unknown>>(
     for (const key in source) {
       if (isObject(source[key])) {
         if (!target[key]) Object.assign(target, { [key]: {} })
-        deepMerge(target[key] as Record<string, unknown>, source[key] as Record<string, unknown>)
+        deepMerge(
+          target[key] as Record<string, unknown>,
+          source[key] as Record<string, unknown>
+        )
       } else {
         Object.assign(target, { [key]: source[key] })
       }
@@ -193,7 +196,11 @@ export function set<T extends Record<string, unknown>>(
 
   for (let i = 0; i < keys.length - 1; i++) {
     const key = keys[i]
-    if (!(key in current) || typeof current[key] !== 'object' || current[key] === null) {
+    if (
+      !(key in current) ||
+      typeof current[key] !== 'object' ||
+      current[key] === null
+    ) {
       current[key] = {}
     }
     current = current[key] as Record<string, unknown>

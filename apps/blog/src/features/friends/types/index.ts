@@ -8,23 +8,23 @@
  */
 export interface FriendLink {
   /** 唯一标识符 */
-  id: string;
+  id: string
   /** 友链标题 */
-  title: string;
+  title: string
   /** 友链URL */
-  url: string;
+  url: string
   /** 友链描述 */
-  description?: string;
+  description?: string
   /** 所属分类，友链固定为 "friends" */
-  category: "friends";
+  category: 'friends'
   /** 标签列表 */
-  tags?: string[];
+  tags?: string[]
   /** 是否推荐 */
-  featured?: boolean;
+  featured?: boolean
   /** 友链图标 */
-  icon?: string;
+  icon?: string
   /** 图标类型 */
-  iconType?: "image" | "text";
+  iconType?: 'image' | 'text'
 }
 
 /**
@@ -33,48 +33,48 @@ export interface FriendLink {
  */
 export interface ProfileLink {
   /** 唯一标识符 */
-  id: string;
+  id: string
   /** 链接标题 */
-  title: string;
+  title: string
   /** 链接URL */
-  url: string;
+  url: string
   /** 链接描述 */
-  description?: string;
+  description?: string
   /** 所属分类，个人资料固定为 "profile" */
-  category: "profile";
+  category: 'profile'
   /** 标签列表 */
-  tags?: string[];
+  tags?: string[]
   /** 是否推荐 */
-  featured?: boolean;
+  featured?: boolean
   /** 链接图标 */
-  icon?: string;
+  icon?: string
   /** 图标类型 */
-  iconType?: "image" | "text";
+  iconType?: 'image' | 'text'
 }
 
 export interface FriendLinkFormConfig {
   /** 友链申请表单URL */
-  formUrl: string;
+  formUrl: string
   /** 表单标题 */
-  title?: string;
+  title?: string
   /** 表单描述 */
-  description?: string;
+  description?: string
 }
 
 export interface FriendLinkRequirement {
   /** 要求图标 */
-  icon: string;
+  icon: string
   /** 要求标题 */
-  title: string;
+  title: string
   /** 要求描述 */
-  description: string;
+  description: string
 }
 
 export interface FriendsPageConfig {
   /** 友链申请表单配置 */
-  application: FriendLinkFormConfig;
+  application: FriendLinkFormConfig
   /** 友链申请要求 */
-  requirements: FriendLinkRequirement[];
+  requirements: FriendLinkRequirement[]
   /** 是否显示评论区 */
-  showComments?: boolean;
+  showComments?: boolean
 }

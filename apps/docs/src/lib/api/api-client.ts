@@ -3,86 +3,91 @@
  * 提供标准化的API请求处理，包括错误处理、重试机制、缓存等
  */
 
-import type { UseAsyncOptions } from "@/types/async-types";
-import { executeAsyncOperation, executeWithRetry } from "@/utils/async";
-import { handleNetworkError, logError, classifyError } from "@/lib/error";
+import { classifyError, handleNetworkError, logError } from '@/lib/error'
+import type { UseAsyncOptions } from '@/types/async-types'
+import { executeAsyncOperation, executeWithRetry } from '@/utils/async'
 
 // API配置接口
 interface ApiClientConfig {
   /** 基础URL */
-  baseURL?: string;
+  baseURL?: string
   /** 默认请求头 */
-  headers?: Record<string, string>;
+  headers?: Record<string, string>
   /** 默认超时时间（毫秒） */
-  timeout?: number;
+  timeout?: number
   /** 默认重试次数 */
-  retries?: number;
+  retries?: number
   /** 默认重试延迟（毫秒） */
-  retryDelay?: number;
+  retryDelay?: number
 }
 
 // 请求配置接口
 interface RequestConfig<T> extends UseAsyncOptions<T> {
   /** 请求方法 */
-  method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
   /** 请求头 */
-  headers?: Record<string, string>;
+  headers?: Record<string, string>
   /** 请求体 */
-  body?: unknown;
+  body?: unknown
   /** 查询参数 */
-  params?: Record<string, string | number | boolean>;
+  params?: Record<string, string | number | boolean>
   /** 超时时间（毫秒） */
-  timeout?: number;
+  timeout?: number
   /** 重试次数 */
-  retries?: number;
+  retries?: number
   /** 重试延迟（毫秒） */
-  retryDelay?: number;
+  retryDelay?: number
 }
 
 // API错误响应接口
 interface ApiErrorResponse {
   /** 错误消息 */
-  message: string;
+  message: string
   /** 错误代码 */
-  code?: string;
+  code?: string
   /** 错误详情 */
-  details?: Record<string, unknown>;
+  details?: Record<string, unknown>
 }
 
 /**
  * API客户端类
  */
 export class ApiClient {
-  private config: ApiClientConfig;
+  private config: ApiClientConfig
 
   constructor(config: ApiClientConfig = {}) {
     this.config = {
-      baseURL: config.baseURL || "",
+      baseURL: config.baseURL || '',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...config.headers,
       },
       timeout: config.timeout || 10000,
       retries: config.retries || 3,
       retryDelay: config.retryDelay || 1000,
-    };
+    }
   }
 
   /**
    * 构建完整URL
    */
-  private buildURL(endpoint: string, params?: Record<string, string | number | boolean>): string {
-    let url = this.config.baseURL ? `${this.config.baseURL}${endpoint}` : endpoint;
+  private buildURL(
+    endpoint: string,
+    params?: Record<string, string | number | boolean>
+  ): string {
+    let url = this.config.baseURL
+      ? `${this.config.baseURL}${endpoint}`
+      : endpoint
 
     if (params) {
-      const searchParams = new URLSearchParams();
+      const searchParams = new URLSearchParams()
       Object.entries(params).forEach(([key, value]) => {
-        searchParams.append(key, String(value));
-      });
-      url += `?${searchParams.toString()}`;
+        searchParams.append(key, String(value))
+      })
+      url += `?${searchParams.toString()}`
     }
 
-    return url;
+    return url
   }
 
   /**
@@ -92,19 +97,19 @@ export class ApiClient {
     const headers = {
       ...this.config.headers,
       ...config.headers,
-    };
-
-    const options: RequestInit = {
-      method: config.method || "GET",
-      headers,
-      signal: config.timeout ? AbortSignal.timeout(config.timeout) : undefined,
-    };
-
-    if (config.body) {
-      options.body = JSON.stringify(config.body);
     }
 
-    return options;
+    const options: RequestInit = {
+      method: config.method || 'GET',
+      headers,
+      signal: config.timeout ? AbortSignal.timeout(config.timeout) : undefined,
+    }
+
+    if (config.body) {
+      options.body = JSON.stringify(config.body)
+    }
+
+    return options
   }
 
   /**
@@ -113,21 +118,23 @@ export class ApiClient {
   private async handleResponse<T>(response: Response): Promise<T> {
     // 检查响应是否成功
     if (!response.ok) {
-      let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-      let errorCode: string | undefined;
+      let errorMessage = `HTTP ${response.status}: ${response.statusText}`
+      let errorCode: string | undefined
 
       // 尝试解析错误响应体
       try {
-        const errorData: ApiErrorResponse = await response.json();
-        errorMessage = errorData.message || errorMessage;
-        errorCode = errorData.code;
+        const errorData: ApiErrorResponse = await response.json()
+        errorMessage = errorData.message || errorMessage
+        errorCode = errorData.code
       } catch {
         // 如果无法解析错误响应体，使用默认消息
       }
 
       // 创建详细的错误信息
       const errorInfo = {
-        type: classifyError(new Error(errorMessage)) as "NetworkError" | "UnknownError",
+        type: classifyError(new Error(errorMessage)) as
+          | 'NetworkError'
+          | 'UnknownError',
         message: errorMessage,
         code: errorCode,
         context: {
@@ -136,40 +143,43 @@ export class ApiClient {
           url: response.url,
         },
         timestamp: new Date(),
-      };
+      }
 
       // 记录错误日志
-      logError(errorInfo);
+      logError(errorInfo)
 
       // 抛出自定义错误
-      const error = new Error(errorMessage);
-      (error as Error & { code?: string; status?: number }).code = errorCode;
-      (error as Error & { status?: number }).status = response.status;
-      throw error;
+      const error = new Error(errorMessage)
+      ;(error as Error & { code?: string; status?: number }).code = errorCode
+      ;(error as Error & { status?: number }).status = response.status
+      throw error
     }
 
     // 解析成功响应
     try {
-      const data = await response.json();
-      return data as T;
+      const data = await response.json()
+      return data as T
     } catch (error) {
-      const parseError = new Error("Failed to parse response data");
-      (parseError as Error & { originalError?: unknown }).originalError = error;
-      throw parseError;
+      const parseError = new Error('Failed to parse response data')
+      ;(parseError as Error & { originalError?: unknown }).originalError = error
+      throw parseError
     }
   }
 
   /**
    * 发送请求
    */
-  async request<T>(endpoint: string, config: RequestConfig<T> = {}): Promise<T | null> {
-    const url = this.buildURL(endpoint, config.params);
-    const options = this.createRequestOptions(config);
+  async request<T>(
+    endpoint: string,
+    config: RequestConfig<T> = {}
+  ): Promise<T | null> {
+    const url = this.buildURL(endpoint, config.params)
+    const options = this.createRequestOptions(config)
 
     const fetchOperation = async () => {
-      const response = await fetch(url, options);
-      return await this.handleResponse<T>(response);
-    };
+      const response = await fetch(url, options)
+      return await this.handleResponse<T>(response)
+    }
 
     // 如果配置了重试，则使用重试机制
     if (config.retries && config.retries > 0) {
@@ -183,14 +193,14 @@ export class ApiClient {
           onSuccess: config.onSuccess,
           onError: (error: unknown) => {
             // 使用统一的网络错误处理
-            handleNetworkError(error, url);
+            handleNetworkError(error, url)
             if (config.onError) {
-              config.onError(error);
+              config.onError(error)
             }
           },
           validator: config.validator,
         }
-      );
+      )
     }
 
     // 否则使用标准异步操作
@@ -200,58 +210,64 @@ export class ApiClient {
       onSuccess: config.onSuccess,
       onError: (error: unknown) => {
         // 使用统一的网络错误处理
-        handleNetworkError(error, url);
+        handleNetworkError(error, url)
         if (config.onError) {
-          config.onError(error);
+          config.onError(error)
         }
       },
       validator: config.validator,
-    });
+    })
   }
 
   /**
    * GET请求
    */
-  get<T>(endpoint: string, config: Omit<RequestConfig<T>, "method" | "body"> = {}) {
-    return this.request<T>(endpoint, { ...config, method: "GET" });
+  get<T>(
+    endpoint: string,
+    config: Omit<RequestConfig<T>, 'method' | 'body'> = {}
+  ) {
+    return this.request<T>(endpoint, { ...config, method: 'GET' })
   }
 
   /**
    * POST请求
    */
-  post<T>(endpoint: string, config: Omit<RequestConfig<T>, "method"> = {}) {
-    return this.request<T>(endpoint, { ...config, method: "POST" });
+  post<T>(endpoint: string, config: Omit<RequestConfig<T>, 'method'> = {}) {
+    return this.request<T>(endpoint, { ...config, method: 'POST' })
   }
 
   /**
    * PUT请求
    */
-  put<T>(endpoint: string, config: Omit<RequestConfig<T>, "method"> = {}) {
-    return this.request<T>(endpoint, { ...config, method: "PUT" });
+  put<T>(endpoint: string, config: Omit<RequestConfig<T>, 'method'> = {}) {
+    return this.request<T>(endpoint, { ...config, method: 'PUT' })
   }
 
   /**
    * DELETE请求
    */
-  delete<T>(endpoint: string, config: Omit<RequestConfig<T>, "method" | "body"> = {}) {
-    return this.request<T>(endpoint, { ...config, method: "DELETE" });
+  delete<T>(
+    endpoint: string,
+    config: Omit<RequestConfig<T>, 'method' | 'body'> = {}
+  ) {
+    return this.request<T>(endpoint, { ...config, method: 'DELETE' })
   }
 
   /**
    * PATCH请求
    */
-  patch<T>(endpoint: string, config: Omit<RequestConfig<T>, "method"> = {}) {
-    return this.request<T>(endpoint, { ...config, method: "PATCH" });
+  patch<T>(endpoint: string, config: Omit<RequestConfig<T>, 'method'> = {}) {
+    return this.request<T>(endpoint, { ...config, method: 'PATCH' })
   }
 }
 
 // 创建默认API客户端实例
 export const apiClient = new ApiClient({
-  baseURL: "/api",
+  baseURL: '/api',
   timeout: 10000,
   retries: 3,
   retryDelay: 1000,
-});
+})
 
 // 导出便捷函数
-export const { get, post, put, delete: deleteRequest, patch } = apiClient;
+export const { get, post, put, delete: deleteRequest, patch } = apiClient

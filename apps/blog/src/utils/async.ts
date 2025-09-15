@@ -3,8 +3,8 @@
  * 提供统一的异步操作处理，包括错误处理和加载状态管理
  */
 
-import type { UseAsyncOptions } from "@/types";
-import { logError, handleContentError, classifyError } from "@/lib/error";
+import { classifyError, handleContentError, logError } from '@/lib/error'
+import type { UseAsyncOptions } from '@/types'
 
 /**
  * 异步操作执行器
@@ -14,76 +14,84 @@ export async function executeAsyncOperation<T>(
   operation: () => Promise<T>,
   options: UseAsyncOptions<T> = {}
 ): Promise<T | null> {
-  const { setLoading, setError, onSuccess, onError, contentType, contentId, validator } = options;
+  const {
+    setLoading,
+    setError,
+    onSuccess,
+    onError,
+    contentType,
+    contentId,
+    validator,
+  } = options
 
   try {
     // 设置加载状态
     if (setLoading) {
-      setLoading(true);
+      setLoading(true)
     }
 
     // 清除之前的错误
     if (setError) {
-      setError(null);
+      setError(null)
     }
 
     // 执行操作
-    const result = await operation();
+    const result = await operation()
 
     // 验证结果（如果提供了验证器）
     if (validator && !validator(result)) {
-      throw new Error("数据验证失败");
+      throw new Error('数据验证失败')
     }
 
     // 成功回调
     if (onSuccess) {
-      onSuccess(result);
+      onSuccess(result)
     }
 
-    return result;
+    return result
   } catch (error) {
     // 统一错误处理
-    let errorMessage = "操作失败";
+    let errorMessage = '操作失败'
 
     if (error instanceof Error) {
-      errorMessage = error.message;
-    } else if (typeof error === "string") {
-      errorMessage = error;
+      errorMessage = error.message
+    } else if (typeof error === 'string') {
+      errorMessage = error
     }
 
     // 使用专门的错误处理工具
     if (contentType) {
-      const errorInfo = handleContentError(error, contentType, contentId);
-      errorMessage = errorInfo.message;
+      const errorInfo = handleContentError(error, contentType, contentId)
+      errorMessage = errorInfo.message
     } else {
       const errorInfo = {
         type: classifyError(error) as
-          | "ContentNotFound"
-          | "NetworkError"
-          | "ValidationError"
-          | "UnknownError",
+          | 'ContentNotFound'
+          | 'NetworkError'
+          | 'ValidationError'
+          | 'UnknownError',
         message: errorMessage,
         originalError: error,
         timestamp: new Date(),
-      };
-      logError(errorInfo);
+      }
+      logError(errorInfo)
     }
 
     // 错误回调
     if (onError) {
-      onError(error);
+      onError(error)
     }
 
     // 设置错误状态
     if (setError) {
-      setError(errorMessage);
+      setError(errorMessage)
     }
 
-    return null;
+    return null
   } finally {
     // 清除加载状态
     if (setLoading) {
-      setLoading(false);
+      setLoading(false)
     }
   }
 }
@@ -97,28 +105,28 @@ export async function executeWithRetry<T>(
   delay = 1000,
   options: UseAsyncOptions<T> = {}
 ): Promise<T | null> {
-  let lastError: unknown;
+  let lastError: unknown
 
   for (let i = 0; i <= maxRetries; i++) {
     try {
-      const result = await executeAsyncOperation(operation, options);
+      const result = await executeAsyncOperation(operation, options)
       if (result !== null) {
-        return result;
+        return result
       }
     } catch (error) {
-      lastError = error;
+      lastError = error
 
       // 如果不是最后一次重试，等待后继续
       if (i < maxRetries) {
-        await new Promise(resolve => setTimeout(resolve, delay * 2 ** i));
+        await new Promise(resolve => setTimeout(resolve, delay * 2 ** i))
       }
     }
   }
 
   // 所有重试都失败了，抛出最后一个错误
   if (lastError) {
-    throw lastError;
+    throw lastError
   }
 
-  return null;
+  return null
 }

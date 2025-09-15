@@ -2,27 +2,23 @@
  * 内容相关公共组件导出
  */
 
-// 原有内容组件
-export { ContentCard } from "./content-card";
-export type { ContentCardProps } from "./content-card";
-
-export { ContentList } from "./content-list";
-export type { ContentListProps } from "./content-list";
-
+// 内容展示组件
+export { ContentDisplay } from '@/components/content-display'
 // MDX 组件
 export {
   ClientMDXRenderer,
+  MDXBlockquote,
+  MDXCode,
   MDXComponents,
   MDXImg,
   MDXLink,
-  MDXBlockquote,
-  MDXCode,
   MDXPre,
-} from "@/features/mdx";
-
-// 内容展示组件
-export { ContentDisplay } from "@/components/content-display";
-
+} from '@/features/mdx'
+export type { CodeBlockProps } from '@/features/mdx/code'
 // 代码高亮组件
-export { CodeBlock } from "@/features/mdx/code";
-export type { CodeBlockProps } from "@/features/mdx/code";
+export { CodeBlock } from '@/features/mdx/code'
+export type { ContentCardProps } from './content-card'
+// 原有内容组件
+export { ContentCard } from './content-card'
+export type { ContentListProps } from './content-list'
+export { ContentList } from './content-list'

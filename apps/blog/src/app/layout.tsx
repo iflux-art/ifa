@@ -1,8 +1,8 @@
-import "./globals.css";
-import { Footer } from "@/components/layout";
-import { MainNavbar } from "@/features/navbar/components/main-navbar";
-import { ThemeProvider } from "@/features/theme/theme-provider";
-import React from "react";
+import './globals.css'
+import type React from 'react'
+import { Footer } from '@/components/layout'
+import { MainNavbar } from '@/features/navbar/components/main-navbar'
+import { ThemeProvider } from '@/features/theme/theme-provider'
 
 /**
  * 导入集中管理的元数据配置
@@ -10,11 +10,11 @@ import React from "react";
  * 1. 先从配置文件导入 - 便于集中管理和复用
  * 2. 然后再导出 - 满足Next.js的约定要求
  */
-import { generateMetadata, generateViewport } from "@/lib/metadata";
+import { generateMetadata, generateViewport } from '@/lib/metadata'
 
 // 导出元数据配置 - Next.js会在构建时处理这些导出
-export const metadata = generateMetadata();
-export const viewport = generateViewport();
+export const metadata = generateMetadata()
+export const viewport = generateViewport()
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html
@@ -24,7 +24,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
   >
     <head />
     <body>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
         {/* 页面主体布局容器 */}
         <div className="flex flex-col">
           <MainNavbar className="flex-shrink-0" />
@@ -35,6 +40,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
       </ThemeProvider>
     </body>
   </html>
-);
+)
 
-export default RootLayout;
+export default RootLayout

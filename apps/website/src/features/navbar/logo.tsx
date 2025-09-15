@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import Link from "next/link";
+import Link from 'next/link'
 
 export const Logo = () => (
   <Link href="/" className="inline-block" aria-label="iFluxArt - 返回首页">
@@ -8,4 +8,4 @@ export const Logo = () => (
       iFluxArt
     </h2>
   </Link>
-);
+)

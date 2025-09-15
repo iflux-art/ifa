@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from 'react'
 
-import { useNavbarStore } from "@/stores";
+import { useNavbarStore } from '@/stores'
 
 /**
  * 节流滚动事件处理函数类型（带 cancel 方法）
  */
 type ThrottledScrollHandler = ((event: Event) => void) & {
-  cancel: () => void;
-};
+  cancel: () => void
+}
 
 /**
  * 导航栏滚动配置项
  */
-const THROTTLE_DELAY = 16; // 约60fps的节流响应
+const THROTTLE_DELAY = 16 // 约60fps的节流响应
 
 /**
  * 导航栏滚动效果 Hook
@@ -39,86 +39,86 @@ export function useNavbarScroll() {
     setPageTitle: _setPageTitle, // Keep for potential future use
     scrollToTop,
     initialize,
-  } = useNavbarStore();
+  } = useNavbarStore()
 
   // 初始化 navbar store
   useEffect(() => {
     if (!isInitialized) {
-      initialize();
+      initialize()
     }
-  }, [isInitialized, initialize]);
+  }, [isInitialized, initialize])
 
   const handleScroll = useCallback(
     (_: Event) => {
-      setScrollPosition(window.scrollY);
+      setScrollPosition(window.scrollY)
     },
     [setScrollPosition]
-  );
+  )
 
   const throttledHandleScroll = useMemo(() => {
-    let lastCall = 0;
-    let timeoutId: NodeJS.Timeout | null = null;
+    let lastCall = 0
+    let timeoutId: NodeJS.Timeout | null = null
 
     const throttled = function (this: Window, _: Event) {
-      const now = Date.now();
-      const timeSinceLastCall = now - lastCall;
+      const now = Date.now()
+      const timeSinceLastCall = now - lastCall
 
       if (timeSinceLastCall >= THROTTLE_DELAY) {
-        lastCall = now;
-        handleScroll.call(this, _);
+        lastCall = now
+        handleScroll.call(this, _)
       } else {
-        if (timeoutId) clearTimeout(timeoutId);
+        if (timeoutId) clearTimeout(timeoutId)
         timeoutId = setTimeout(() => {
-          lastCall = Date.now();
-          handleScroll.call(this, _);
-        }, THROTTLE_DELAY - timeSinceLastCall);
+          lastCall = Date.now()
+          handleScroll.call(this, _)
+        }, THROTTLE_DELAY - timeSinceLastCall)
       }
-    } as ThrottledScrollHandler;
+    } as ThrottledScrollHandler
 
     throttled.cancel = () => {
       if (timeoutId) {
-        clearTimeout(timeoutId);
-        timeoutId = null;
+        clearTimeout(timeoutId)
+        timeoutId = null
       }
-    };
+    }
 
-    return throttled;
-  }, [handleScroll]);
+    return throttled
+  }, [handleScroll])
 
   // 检查当前页面是否应该显示页面标题
   const shouldShowPageTitle = useCallback(() => {
     // Since blog and docs pages are removed, no pages should show page title in navbar
-    return false;
-  }, []);
+    return false
+  }, [])
 
   // 设置页面标题
   const updatePageTitle = useCallback(() => {
     // Since no pages should show page title, this function does nothing
     // Keeping the structure for potential future use
-  }, []);
+  }, [])
 
   // 监听滚动事件
   useEffect(() => {
-    if (typeof window === "undefined" || !isInitialized) return;
+    if (typeof window === 'undefined' || !isInitialized) return
 
-    window.addEventListener("scroll", throttledHandleScroll, { passive: true });
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true })
     return () => {
-      window.removeEventListener("scroll", throttledHandleScroll);
-      throttledHandleScroll.cancel();
-    };
-  }, [throttledHandleScroll, isInitialized]);
+      window.removeEventListener('scroll', throttledHandleScroll)
+      throttledHandleScroll.cancel()
+    }
+  }, [throttledHandleScroll, isInitialized])
 
   // 路径变化时更新标题
   useEffect(() => {
-    if (typeof window === "undefined" || !isInitialized) return;
-    updatePageTitle();
-  }, [updatePageTitle, isInitialized]);
+    if (typeof window === 'undefined' || !isInitialized) return
+    updatePageTitle()
+  }, [updatePageTitle, isInitialized])
 
   const showNavMenu = useMemo(() => {
     // Since no pages show page titles anymore, always show navigation menu
     // NAV_ITEMS now contains the links page, so the menu will show navigation items
-    return true;
-  }, []);
+    return true
+  }, [])
 
   return {
     direction,
@@ -129,5 +129,5 @@ export function useNavbarScroll() {
     lastDirectionChange,
     scrollToTop,
     shouldShowPageTitle: shouldShowPageTitle(),
-  } as const;
+  } as const
 }

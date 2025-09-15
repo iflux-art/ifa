@@ -1,32 +1,35 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { AlertCircle, ArrowLeft, Home } from "lucide-react";
-import Link from "next/link";
-import { useId } from "react";
+import { AlertCircle, ArrowLeft, Home } from 'lucide-react'
+import Link from 'next/link'
+import { useId } from 'react'
+import { Button } from '@/components/ui/button'
 
 const DEFAULT_TEXTS = {
-  code: "404",
-  title: "页面未找到",
-  description: "抱歉，您访问的页面不存在或已被移除。",
-  buttonText: "返回首页",
-  backUrl: "https://www.iflux.art/",
-} as const;
+  code: '404',
+  title: '页面未找到',
+  description: '抱歉，您访问的页面不存在或已被移除。',
+  buttonText: '返回首页',
+  backUrl: 'https://www.iflux.art/',
+} as const
 
 export default function NotFoundPage() {
-  const errorTitleId = useId();
-  const code = DEFAULT_TEXTS.code;
-  const title = DEFAULT_TEXTS.title;
-  const description = DEFAULT_TEXTS.description;
-  const buttonText = DEFAULT_TEXTS.buttonText;
-  const backUrl = DEFAULT_TEXTS.backUrl;
+  const errorTitleId = useId()
+  const code = DEFAULT_TEXTS.code
+  const title = DEFAULT_TEXTS.title
+  const description = DEFAULT_TEXTS.description
+  const buttonText = DEFAULT_TEXTS.buttonText
+  const backUrl = DEFAULT_TEXTS.backUrl
 
   return (
     <div className="container mx-auto flex min-h-[70vh] items-center justify-center px-4 py-20 text-center">
       <section aria-labelledby={errorTitleId} className="w-full max-w-4xl">
         <div className="flex flex-col items-center space-y-8">
           <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-primary/10">
-            <AlertCircle className="h-12 w-12 text-primary" aria-hidden="true" />
+            <AlertCircle
+              className="h-12 w-12 text-primary"
+              aria-hidden="true"
+            />
           </div>
 
           <h1 id={errorTitleId} className="text-9xl font-bold text-primary">
@@ -37,7 +40,9 @@ export default function NotFoundPage() {
 
           <h2 className="mb-4 text-3xl font-bold">{title}</h2>
 
-          <p className="mx-auto mb-8 max-w-md text-lg text-muted-foreground">{description}</p>
+          <p className="mx-auto mb-8 max-w-md text-lg text-muted-foreground">
+            {description}
+          </p>
 
           {/* 主要操作按钮 */}
           <div className="mb-8 flex flex-wrap justify-center gap-4">
@@ -48,7 +53,11 @@ export default function NotFoundPage() {
               </Link>
             </Button>
 
-            <Button variant="outline" size="lg" onClick={() => window.history.back()}>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => window.history.back()}
+            >
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               返回上页
             </Button>
@@ -63,5 +72,5 @@ export default function NotFoundPage() {
         </div>
       </section>
     </div>
-  );
+  )
 }

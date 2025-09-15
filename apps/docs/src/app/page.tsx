@@ -1,39 +1,41 @@
-import type { Metadata } from "next";
-import { LinkCard } from "@/components/ui/link-card";
-import { DocPageLayout } from "@/features/docs/components";
-import { DocsSidebarCard } from "@/features/docs/components";
-import { ThreeColumnLayout } from "@/features/layout";
-import { getAllDocsStructure } from "@/features/docs/components";
+import type { Metadata } from 'next'
+import { LinkCard } from '@/components/ui/link-card'
+import {
+  DocPageLayout,
+  DocsSidebarCard,
+  getAllDocsStructure,
+} from '@/features/docs/components'
+import { ThreeColumnLayout } from '@/features/layout'
 
 /**
  * 首页元数据配置
  */
 const HOME_PAGE_METADATA: Metadata = {
-  title: "斐流艺创",
-  description: "斐流艺创项目文档和使用指南",
+  title: '斐流艺创',
+  description: '斐流艺创项目文档和使用指南',
   openGraph: {
-    title: "斐流艺创",
-    description: "斐流艺创项目文档和使用指南",
-    type: "website",
+    title: '斐流艺创',
+    description: '斐流艺创项目文档和使用指南',
+    type: 'website',
   },
-};
+}
 
 /**
  * 生成首页元数据
  */
 export function generateMetadata(): Metadata {
-  return HOME_PAGE_METADATA;
+  return HOME_PAGE_METADATA
 }
 
 export default function HomePage() {
   // 获取文档结构数据
-  const structure = getAllDocsStructure();
+  const structure = getAllDocsStructure()
 
   // 过滤掉index页面，只保留分类
-  const categories = structure.categories;
+  const categories = structure.categories
 
   // 左侧边栏内容 - 文档导航
-  const leftSidebar = <DocsSidebarCard showHeader={false} />;
+  const leftSidebar = <DocsSidebarCard showHeader={false} />
 
   return (
     <DocPageLayout>
@@ -53,5 +55,5 @@ export default function HomePage() {
         </div>
       </ThreeColumnLayout>
     </DocPageLayout>
-  );
+  )
 }

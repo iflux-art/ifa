@@ -1,28 +1,28 @@
-import type { SearchResult } from "@/features/search/types";
-import { cn } from "@/utils";
-import { ArrowRight, ExternalLink, Loader2 } from "lucide-react";
+import { ArrowRight, ExternalLink, Loader2 } from 'lucide-react'
+import type { SearchResult } from '@/features/search/types'
+import { cn } from '@/utils'
 
 const TYPE_LABELS = {
-  tool: "工具",
-  link: "网址导航",
-  docs: "文档",
-  blog: "文章",
-  command: "命令",
-  navigation: "网址导航",
-  doc: "文档",
-  history: "历史记录",
-} as const;
+  tool: '工具',
+  link: '网址导航',
+  docs: '文档',
+  blog: '文章',
+  command: '命令',
+  navigation: '网址导航',
+  doc: '文档',
+  history: '历史记录',
+} as const
 
 interface SearchResultsProps {
-  results: SearchResult[];
-  searchQuery: string;
-  isLoading: boolean;
-  selectedIndex: number;
-  setSelectedIndex: (index: number) => void;
-  onSelect: (result: SearchResult) => void;
-  onClearHistory: () => void;
-  searchHistory: string[];
-  onHistoryClick: (query: string) => void;
+  results: SearchResult[]
+  searchQuery: string
+  isLoading: boolean
+  selectedIndex: number
+  setSelectedIndex: (index: number) => void
+  onSelect: (result: SearchResult) => void
+  onClearHistory: () => void
+  searchHistory: string[]
+  onHistoryClick: (query: string) => void
 }
 
 export const SearchResults = ({
@@ -41,7 +41,7 @@ export const SearchResults = ({
       <div className="flex items-center justify-center p-8">
         <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
       </div>
-    );
+    )
   }
 
   if (results.length > 0) {
@@ -52,37 +52,40 @@ export const SearchResults = ({
             type="button"
             key={result.title || index}
             onClick={() => onSelect(result)}
-            onKeyDown={e => e.key === "Enter" && onSelect(result)}
+            onKeyDown={e => e.key === 'Enter' && onSelect(result)}
             tabIndex={0}
             className={cn(
-              "flex cursor-pointer items-start gap-2 px-4 py-3 transition-colors hover:bg-accent/50",
-              selectedIndex === index && "bg-accent"
+              'flex cursor-pointer items-start gap-2 px-4 py-3 transition-colors hover:bg-accent/50',
+              selectedIndex === index && 'bg-accent'
             )}
             onMouseEnter={() => setSelectedIndex(index)}
           >
             <div className="mt-1 flex-shrink-0 text-muted-foreground">
-              {result.type === "tool" && "🔧"}
-              {result.type === "link" && "🔗"}
-              {result.type === "command" && "⚡"}
-              {result.type === "navigation" && "🧭"}
-              {result.type === "history" && "📜"}
+              {result.type === 'tool' && '🔧'}
+              {result.type === 'link' && '🔗'}
+              {result.type === 'command' && '⚡'}
+              {result.type === 'navigation' && '🧭'}
+              {result.type === 'history' && '📜'}
             </div>
             <div className="min-w-0 flex-1">
               <h4 className="mb-1 flex items-center gap-1 truncate text-sm font-medium">
                 {result.title}
-                {result.type === "link" && <ExternalLink className="h-3 w-3" />}
+                {result.type === 'link' && <ExternalLink className="h-3 w-3" />}
               </h4>
-              <p className="line-clamp-2 text-xs text-muted-foreground">{result.description}</p>
+              <p className="line-clamp-2 text-xs text-muted-foreground">
+                {result.description}
+              </p>
               <div className="mt-1 text-xs text-muted-foreground capitalize">
-                {TYPE_LABELS[result.type as keyof typeof TYPE_LABELS] || result.type}
+                {TYPE_LABELS[result.type as keyof typeof TYPE_LABELS] ||
+                  result.type}
               </div>
             </div>
-            {result.type === "command" && result.description === "最近搜索" ? (
+            {result.type === 'command' && result.description === '最近搜索' ? (
               <button
                 type="button"
                 onClick={e => {
-                  e.stopPropagation();
-                  onHistoryClick(result.title);
+                  e.stopPropagation()
+                  onHistoryClick(result.title)
                 }}
                 className="shrink-0 hover:text-primary"
               >
@@ -94,15 +97,17 @@ export const SearchResults = ({
           </button>
         ))}
       </div>
-    );
+    )
   }
 
   if (searchQuery.trim()) {
     return (
       <div className="p-8 text-center">
-        <p className="text-muted-foreground">没有找到与 &quot;{searchQuery}&quot; 相关的结果</p>
+        <p className="text-muted-foreground">
+          没有找到与 &quot;{searchQuery}&quot; 相关的结果
+        </p>
       </div>
-    );
+    )
   }
 
   return (
@@ -118,5 +123,5 @@ export const SearchResults = ({
         </button>
       )}
     </div>
-  );
-};
+  )
+}

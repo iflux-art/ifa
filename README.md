@@ -82,6 +82,51 @@ Technical documentation site with search and navigation.
 ### Bookmarks (`apps/bookmarks`)
 URL bookmark manager with categories and tags.
 
+## 🚀 Independent Deployment
+
+Each application in this monorepo can be deployed independently without downloading the entire project.
+
+### Using Published npm Packages
+
+The shared packages in this monorepo are also published to npm under the `@iflux-art` organization:
+
+- `@iflux-art/ui` - Shared UI components
+- `@iflux-art/utils` - Utility functions
+- `@iflux-art/tailwind-config` - Tailwind CSS configurations
+- `@iflux-art/typescript-config` - TypeScript configurations
+
+You can use these packages directly in your projects without copying code:
+
+```bash
+npm install @iflux-art/ui @iflux-art/utils
+```
+
+```javascript
+import { Button } from '@iflux-art/ui';
+import { cn } from '@iflux-art/utils';
+```
+
+### One-Click Independent Deployment
+
+To deploy an application independently:
+
+1. Download or clone the specific application directory (e.g., `apps/docs`)
+2. Run the setup script in the application directory:
+   ```bash
+   cd apps/docs
+   node setup-standalone.js
+   ```
+3. Install dependencies and build the application:
+   ```bash
+   pnpm install
+   pnpm build
+   ```
+
+The setup script automatically:
+- Replaces workspace dependencies with npm package dependencies
+- Updates configuration files
+- Prepares the application for independent deployment
+
 ## 🔧 Development
 
 ### Adding a New App

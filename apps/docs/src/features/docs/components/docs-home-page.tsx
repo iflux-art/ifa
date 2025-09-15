@@ -1,14 +1,17 @@
-import { ThreeColumnLayout } from "@/features/layout";
-import { Breadcrumb } from "@/components/breadcrumb";
-import { DocsSidebarCard } from "@/features/docs/components";
-import { DocsSidebar, getAllDocsStructure } from "@/features/docs/components";
-import { ContentDisplay } from "@/components/content-display";
-import { DocPagination } from "@/components";
-import type { NavDocItem } from "@/features/docs/types";
-import type { BreadcrumbItem } from "@/components/breadcrumb";
+import { DocPagination } from '@/components'
+import type { BreadcrumbItem } from '@/components/breadcrumb'
+import { Breadcrumb } from '@/components/breadcrumb'
+import { ContentDisplay } from '@/components/content-display'
+import {
+  DocsSidebar,
+  DocsSidebarCard,
+  getAllDocsStructure,
+} from '@/features/docs/components'
+import type { NavDocItem } from '@/features/docs/types'
+import { ThreeColumnLayout } from '@/features/layout'
 
 interface DocsHomePageProps {
-  firstDoc?: NavDocItem | null;
+  firstDoc?: NavDocItem | null
 }
 
 /**
@@ -18,21 +21,21 @@ interface DocsHomePageProps {
  */
 export function DocsHomePage({ firstDoc }: DocsHomePageProps) {
   // 获取文档结构
-  const structure = getAllDocsStructure();
+  const structure = getAllDocsStructure()
 
   // 左侧边栏内容 - 文档导航
-  const leftSidebar = <DocsSidebarCard currentDoc="" showHeader={true} />;
+  const leftSidebar = <DocsSidebarCard currentDoc="" showHeader={true} />
 
   // 右侧边栏内容 - 空白占位
-  const rightSidebar = <div className="h-full" />;
+  const rightSidebar = <div className="h-full" />
 
   // 面包屑导航项
   const breadcrumbItems: BreadcrumbItem[] = [
     {
-      label: "文档",
-      href: "/docs",
+      label: '文档',
+      href: '/docs',
     },
-  ];
+  ]
 
   return (
     <ThreeColumnLayout leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
@@ -44,12 +47,15 @@ export function DocsHomePage({ firstDoc }: DocsHomePageProps) {
         {/* 文档内容展示 */}
         <ContentDisplay contentType="docs" title="文档中心">
           <div className="prose prose-gray dark:prose-invert">
-            <p>欢迎来到斐流艺创文档中心，这里包含了项目的所有文档和使用指南。</p>
+            <p>
+              欢迎来到斐流艺创文档中心，这里包含了项目的所有文档和使用指南。
+            </p>
             <h2>开始使用</h2>
             <p>如果您是第一次使用斐流艺创，建议从以下文档开始：</p>
             <ul>
               <li>
-                <a href="/getting-started">快速开始指南</a> - 了解如何快速上手使用项目
+                <a href="/getting-started">快速开始指南</a> -
+                了解如何快速上手使用项目
               </li>
               <li>
                 <a href="/project">项目介绍</a> - 了解项目的背景、目标和功能
@@ -70,5 +76,5 @@ export function DocsHomePage({ firstDoc }: DocsHomePageProps) {
         <DocPagination nextDoc={firstDoc} />
       </div>
     </ThreeColumnLayout>
-  );
+  )
 }

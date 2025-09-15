@@ -13,10 +13,10 @@
  */
 export function isValidUrl(urlString: string): boolean {
   try {
-    const url = new URL(urlString);
-    return ["http:", "https:"].includes(url.protocol);
+    const url = new URL(urlString)
+    return ['http:', 'https:'].includes(url.protocol)
   } catch {
-    return false;
+    return false
   }
 }
 
@@ -27,15 +27,15 @@ export function isValidUrl(urlString: string): boolean {
  */
 export function normalizeUrl(url: string): string {
   // 如果没有协议，添加 https://
-  if (!(url.startsWith("http://") || url.startsWith("https://"))) {
-    url = `https://${url}`;
+  if (!(url.startsWith('http://') || url.startsWith('https://'))) {
+    url = `https://${url}`
   }
 
   try {
-    const urlObj = new URL(url);
-    return urlObj.href;
+    const urlObj = new URL(url)
+    return urlObj.href
   } catch {
-    throw new Error("Invalid URL format");
+    throw new Error('Invalid URL format')
   }
 }
 
@@ -49,16 +49,19 @@ export function validateRequiredFields(
   data: Record<string, unknown>,
   requiredFields: string[]
 ): string[] {
-  const missingFields: string[] = [];
+  const missingFields: string[] = []
 
   for (const field of requiredFields) {
     // 检查字段是否存在且不为空
-    if (!data[field] || (typeof data[field] === "string" && !data[field]?.toString().trim())) {
-      missingFields.push(field);
+    if (
+      !data[field] ||
+      (typeof data[field] === 'string' && !data[field]?.toString().trim())
+    ) {
+      missingFields.push(field)
     }
   }
 
-  return missingFields;
+  return missingFields
 }
 
 /**
@@ -72,13 +75,16 @@ export function validatePageParams(
   requiredFields: string[] = []
 ): { isValid: boolean; missingFields: string[] } {
   const missingFields = requiredFields.filter(
-    field => params[field] === undefined || params[field] === null || params[field] === ""
-  );
+    field =>
+      params[field] === undefined ||
+      params[field] === null ||
+      params[field] === ''
+  )
 
   return {
     isValid: missingFields.length === 0,
     missingFields,
-  };
+  }
 }
 
 /**
@@ -89,9 +95,9 @@ export function validatePageParams(
  */
 export function safeJsonParse<T>(jsonString: string, defaultValue: T): T {
   try {
-    return JSON.parse(jsonString) as T;
+    return JSON.parse(jsonString) as T
   } catch {
-    return defaultValue;
+    return defaultValue
   }
 }
 
@@ -102,8 +108,12 @@ export function safeJsonParse<T>(jsonString: string, defaultValue: T): T {
  * @param max 最大长度
  * @returns 是否符合长度要求
  */
-export function validateStringLength(value: string, min: number, max: number): boolean {
-  return value.length >= min && value.length <= max;
+export function validateStringLength(
+  value: string,
+  min: number,
+  max: number
+): boolean {
+  return value.length >= min && value.length <= max
 }
 
 /**
@@ -113,8 +123,12 @@ export function validateStringLength(value: string, min: number, max: number): b
  * @param max 最大长度
  * @returns 是否符合长度要求
  */
-export function validateArrayLength<T>(value: T[], min: number, max: number): boolean {
-  return value.length >= min && value.length <= max;
+export function validateArrayLength<T>(
+  value: T[],
+  min: number,
+  max: number
+): boolean {
+  return value.length >= min && value.length <= max
 }
 
 /**
@@ -127,5 +141,5 @@ export function isValidCategory<T extends readonly string[]>(
   category: string,
   validCategories: T
 ): category is T[number] {
-  return validCategories.includes(category as T[number]);
+  return validCategories.includes(category as T[number])
 }

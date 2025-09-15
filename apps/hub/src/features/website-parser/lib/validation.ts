@@ -2,20 +2,23 @@
  * URL 验证相关工具函数
  */
 
-import { isValidUrl as isValidUrlUtil, normalizeUrl as normalizeUrlUtil } from "@/utils/validation";
+import {
+  isValidUrl as isValidUrlUtil,
+  normalizeUrl as normalizeUrlUtil,
+} from '@/utils/validation'
 
 /**
  * 验证 URL 格式
  */
 export function isValidUrl(url: string): boolean {
-  return isValidUrlUtil(url);
+  return isValidUrlUtil(url)
 }
 
 /**
  * 标准化 URL
  */
 export function normalizeUrl(url: string): string {
-  return normalizeUrlUtil(url);
+  return normalizeUrlUtil(url)
 }
 
 /**
@@ -23,9 +26,9 @@ export function normalizeUrl(url: string): string {
  */
 export function isSecureUrl(url: string): boolean {
   try {
-    const urlObj = new URL(normalizeUrl(url));
-    return ["http:", "https:"].includes(urlObj.protocol);
+    const urlObj = new URL(normalizeUrl(url))
+    return ['http:', 'https:'].includes(urlObj.protocol)
   } catch {
-    return false;
+    return false
   }
 }

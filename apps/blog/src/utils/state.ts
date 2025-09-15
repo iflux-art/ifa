@@ -3,8 +3,8 @@
  * 提供统一的状态管理操作，减少重复代码
  */
 
-import type { UseAsyncOptions } from "@/types";
-import { executeAsyncOperation } from "@/utils/async";
+import type { UseAsyncOptions } from '@/types'
+import { executeAsyncOperation } from '@/utils/async'
 
 /**
  * 创建标准化的状态操作函数
@@ -20,14 +20,14 @@ export function createStandardStateActions<T>(
      */
     loadData: async (
       fetchFn: () => Promise<T>,
-      options: Omit<UseAsyncOptions<T>, "setLoading" | "setError"> = {}
+      options: Omit<UseAsyncOptions<T>, 'setLoading' | 'setError'> = {}
     ): Promise<T | null> => {
       return await executeAsyncOperation(fetchFn, {
         setLoading,
         setError,
         onSuccess: setData,
         ...options,
-      });
+      })
     },
 
     /**
@@ -35,23 +35,23 @@ export function createStandardStateActions<T>(
      */
     updateData: async (
       updateFn: () => Promise<T>,
-      options: Omit<UseAsyncOptions<T>, "setLoading" | "setError"> = {}
+      options: Omit<UseAsyncOptions<T>, 'setLoading' | 'setError'> = {}
     ): Promise<T | null> => {
       return await executeAsyncOperation(updateFn, {
         setLoading,
         setError,
         onSuccess: setData,
         ...options,
-      });
+      })
     },
 
     /**
      * 清除状态
      */
     clearState: () => {
-      setLoading(false);
-      setError(null);
-      setData(undefined as unknown as T);
+      setLoading(false)
+      setError(null)
+      setData(undefined as unknown as T)
     },
 
     /**
@@ -63,7 +63,7 @@ export function createStandardStateActions<T>(
      * 设置错误状态
      */
     setError,
-  };
+  }
 }
 
 /**
@@ -79,17 +79,17 @@ export function createFilteredStateManager<T>(
      */
     filterItems: (searchTerm: string): T[] => {
       if (!searchTerm) {
-        return items;
+        return items
       }
 
-      return items.filter(item => filterFn(item, searchTerm));
+      return items.filter(item => filterFn(item, searchTerm))
     },
 
     /**
      * 检查是否有数据
      */
     hasData: (): boolean => {
-      return items.length > 0;
+      return items.length > 0
     },
 
     /**
@@ -98,7 +98,7 @@ export function createFilteredStateManager<T>(
     getStats: () => ({
       totalCount: items.length,
     }),
-  };
+  }
 }
 
 /**
@@ -118,23 +118,23 @@ export function createConfigManager<T>(
         ...defaultConfig,
         ...currentConfig,
         ...partialConfig,
-      } as T;
+      } as T
 
-      setConfig(newConfig);
+      setConfig(newConfig)
     },
 
     /**
      * 重置配置为默认值
      */
     resetConfig: (): void => {
-      setConfig({ ...defaultConfig });
+      setConfig({ ...defaultConfig })
     },
 
     /**
      * 获取配置值
      */
     getConfig: (): T => {
-      return currentConfig;
+      return currentConfig
     },
-  };
+  }
 }

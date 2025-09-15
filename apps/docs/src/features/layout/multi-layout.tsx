@@ -1,25 +1,25 @@
-import type { ReactNode } from "react";
-import type { SidebarConfig } from "./layout-types";
-import { THREE_COLUMN_LAYOUT_CONFIG } from "./layout-utils";
-import { PageContainer } from "./page-container";
+import type { ReactNode } from 'react'
+import type { SidebarConfig } from './layout-types'
+import { THREE_COLUMN_LAYOUT_CONFIG } from './layout-utils'
+import { PageContainer } from './page-container'
 
 export interface ThreeColumnLayoutProps {
   /**
    * 左侧边栏内容
    */
-  leftSidebar?: ReactNode;
+  leftSidebar?: ReactNode
   /**
    * 主内容
    */
-  children: ReactNode;
+  children: ReactNode
   /**
    * 右侧边栏内容
    */
-  rightSidebar?: ReactNode;
+  rightSidebar?: ReactNode
   /**
    * 自定义类名
    */
-  className?: string;
+  className?: string
 }
 
 /**
@@ -30,31 +30,35 @@ export const ThreeColumnLayout = ({
   leftSidebar,
   children,
   rightSidebar,
-  className = "",
+  className = '',
 }: ThreeColumnLayoutProps) => {
-  const sidebars: SidebarConfig[] = [];
+  const sidebars: SidebarConfig[] = []
 
   // 左侧边栏配置
   if (leftSidebar) {
     sidebars.push({
       content: leftSidebar,
-      position: "left",
+      position: 'left',
       ...THREE_COLUMN_LAYOUT_CONFIG.leftSidebar,
-    });
+    })
   }
 
   // 右侧边栏配置
   if (rightSidebar) {
     sidebars.push({
       content: rightSidebar,
-      position: "right",
+      position: 'right',
       ...THREE_COLUMN_LAYOUT_CONFIG.rightSidebar,
-    });
+    })
   }
 
   return (
-    <PageContainer config={{ layout: "double-sidebar" }} sidebars={sidebars} className={className}>
+    <PageContainer
+      config={{ layout: 'double-sidebar' }}
+      sidebars={sidebars}
+      className={className}
+    >
       {children}
     </PageContainer>
-  );
-};
+  )
+}

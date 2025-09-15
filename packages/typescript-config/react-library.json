@@ -3,8 +3,8 @@
   "display": "React Library",
   "extends": "./base.json",
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "es6"],
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "es2022"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,7 +18,9 @@
     "declaration": true,
     "declarationMap": true,
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "src",
+    "ignoreDeprecations": "5.0",
+    "verbatimModuleSyntax": true
   },
   "include": [
     "src/**/*.ts",

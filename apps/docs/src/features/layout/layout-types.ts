@@ -1,10 +1,10 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react'
 
 /**
  * 页面布局类型枚举
  * 只保留双侧栏布局作为默认布局
  */
-export type PageLayoutType = "double-sidebar"; // 双侧栏布局：左右侧栏各占2列，中间主内容区占8列
+export type PageLayoutType = 'double-sidebar' // 双侧栏布局：左右侧栏各占2列，中间主内容区占8列
 
 /**
  * 页面容器配置接口
@@ -13,23 +13,23 @@ export interface PageContainerConfig {
   /**
    * 布局类型
    */
-  layout?: PageLayoutType;
+  layout?: PageLayoutType
   /**
    * 是否显示页面头部
    */
-  showHeader?: boolean;
+  showHeader?: boolean
   /**
    * 是否显示页面footer
    */
-  showFooter?: boolean;
+  showFooter?: boolean
   /**
    * 自定义容器类名
    */
-  className?: string;
+  className?: string
   /**
    * 最小高度设置
    */
-  minHeight?: string;
+  minHeight?: string
 }
 
 /**
@@ -40,35 +40,35 @@ export interface SidebarConfig {
   /**
    * 侧边栏唯一标识符（可选）
    */
-  id?: string;
+  id?: string
   /**
    * 侧边栏内容
    */
-  content: ReactNode;
+  content: ReactNode
   /**
    * 侧边栏位置
    */
-  position: "left" | "right";
+  position: 'left' | 'right'
   /**
    * 是否粘性定位
    */
-  sticky?: boolean;
+  sticky?: boolean
   /**
    * 粘性定位的top值
    */
-  stickyTop?: string;
+  stickyTop?: string
   /**
    * 最大高度
    */
-  maxHeight?: string;
+  maxHeight?: string
   /**
    * 响应式显示设置
    */
   responsive?: {
-    hideOnMobile?: boolean;
-    hideOnTablet?: boolean;
-    hideOnDesktop?: boolean;
-  };
+    hideOnMobile?: boolean
+    hideOnTablet?: boolean
+    hideOnDesktop?: boolean
+  }
 }
 
 /**
@@ -78,31 +78,31 @@ export interface NotFoundProps {
   /**
    * 错误代码，默认为 '404'
    */
-  code?: string;
+  code?: string
   /**
    * 错误标题
    */
-  title?: string;
+  title?: string
   /**
    * 错误描述
    */
-  description?: string;
+  description?: string
   /**
    * 返回按钮文本
    */
-  buttonText?: string;
+  buttonText?: string
   /**
    * 返回链接地址
    */
-  backUrl?: string;
+  backUrl?: string
   /**
    * 自定义类名
    */
-  className?: string;
+  className?: string
   /**
    * 是否显示图标
    */
-  showIcon?: boolean;
+  showIcon?: boolean
 }
 
 /**
@@ -112,11 +112,11 @@ export interface PageProps {
   /**
    * 页面参数
    */
-  params?: Record<string, string | string[]>;
+  params?: Record<string, string | string[]>
   /**
    * 搜索参数
    */
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams?: Record<string, string | string[] | undefined>
 }
 
 /**
@@ -126,23 +126,23 @@ export interface PageLayoutProps extends PageProps {
   /**
    * 页面内容
    */
-  children: ReactNode;
+  children: ReactNode
   /**
    * 页面配置
    */
-  config?: PageContainerConfig;
+  config?: PageContainerConfig
   /**
    * 侧边栏配置
    */
-  sidebars?: SidebarConfig[];
+  sidebars?: SidebarConfig[]
   /**
    * 页面标题
    */
-  title?: string;
+  title?: string
   /**
    * 页面描述
    */
-  description?: string;
+  description?: string
 }
 
 // ==================== 页面容器和网格布局相关类型 ====================
@@ -151,12 +151,12 @@ export interface PageLayoutProps extends PageProps {
  * AppGrid 相关类型定义
  */
 export interface AppGridProps {
-  children?: ReactNode;
-  className?: string;
-  columns?: 1 | 2 | 3 | 4 | 5;
-  gap?: "small" | "default" | "large";
-  rowGap?: string; // 新增：行间距
-  columnGap?: string; // 新增：列间距
+  children?: ReactNode
+  className?: string
+  columns?: 1 | 2 | 3 | 4 | 5
+  gap?: 'small' | 'default' | 'large'
+  rowGap?: string // 新增：行间距
+  columnGap?: string // 新增：列间距
 }
 
 /**
@@ -166,19 +166,19 @@ export interface PageContainerProps {
   /**
    * 页面内容
    */
-  children: ReactNode;
+  children: ReactNode
   /**
    * 页面配置
    */
-  config?: PageContainerConfig;
+  config?: PageContainerConfig
   /**
    * 侧边栏配置数组
    */
-  sidebars?: SidebarConfig[];
+  sidebars?: SidebarConfig[]
   /**
    * 自定义类名
    */
-  className?: string;
+  className?: string
 }
 
 /**
@@ -188,47 +188,47 @@ export interface ThreeColumnLayoutProps {
   /**
    * 左侧边栏内容
    */
-  leftSidebar?: ReactNode;
+  leftSidebar?: ReactNode
   /**
    * 主内容
    */
-  children: ReactNode;
+  children: ReactNode
   /**
    * 右侧边栏内容
    */
-  rightSidebar?: ReactNode;
+  rightSidebar?: ReactNode
   /**
    * 自定义类名
    */
-  className?: string;
+  className?: string
 }
 
 /**
  * 三栏网格布局组件属性接口
  */
 export interface ThreeColumnGridProps {
-  children: ReactNode;
-  sidebars: SidebarConfig[];
+  children: ReactNode
+  sidebars: SidebarConfig[]
 }
 
 /**
  * 侧边栏包装组件属性接口
  */
 export interface SidebarWrapperProps {
-  children: ReactNode;
-  config: SidebarConfig;
+  children: ReactNode
+  config: SidebarConfig
 }
 
 /**
  * 网格列数样式映射类型
  */
 export type GridColsMap = {
-  [K in 1 | 2 | 3 | 4 | 5]: string;
-};
+  [K in 1 | 2 | 3 | 4 | 5]: string
+}
 
 /**
  * 网格间距样式映射类型
  */
 export type GridGapMap = {
-  [K in "small" | "default" | "large"]: string;
-};
+  [K in 'small' | 'default' | 'large']: string
+}

@@ -1,21 +1,42 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    // Turbopack configuration for SVG handling
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
-  },
+  transpilePackages: ['@repo/ui', '@repo/utils'],
+
   images: {
     domains: ['www.google.com', 'favicon.yandex.net', 'icons.duckduckgo.com'],
   },
-  // Enable React Strict Mode
-  reactStrictMode: true,
+
+  // Development optimizations
+  ...(process.env.NODE_ENV === 'development' && {
+    // Enable fast refresh
+    reactStrictMode: true,
+
+    // Enable experimental features for better dev experience
+    experimental: {
+      optimizePackageImports: ['@repo/ui', '@repo/utils'],
+    },
+  }),
+
+  // Production optimizations
+  ...(process.env.NODE_ENV === 'production' && {
+    reactStrictMode: true,
+    // Turbopack handles compression automatically in Next.js 15+
+  }),
+
+  // Enable Turbopack for faster builds
+  experimental: {
+    // Move turbo config to turbopack
+  },
+
+  // Turbopack configuration (replaces experimental.turbo)
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
 }
 
 export default nextConfig

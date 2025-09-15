@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import { Sidebar } from "@/features/sidebar/components";
-import type { LinksCategory } from "@/features/links/types";
-import type { SidebarItem } from "@/features/sidebar/types";
-import { Folder } from "lucide-react";
-import { useMemo } from "react";
+import { Folder } from 'lucide-react'
+import { useMemo } from 'react'
+import type { LinksCategory } from '@/features/links/types'
+import { Sidebar } from '@/features/sidebar/components'
+import type { SidebarItem } from '@/features/sidebar/types'
 
 export interface LinksSidebarProps {
-  categories: LinksCategory[];
-  selectedCategory?: string;
-  onCategoryChange: (categoryId: string) => void;
-  className?: string;
+  categories: LinksCategory[]
+  selectedCategory?: string
+  onCategoryChange: (categoryId: string) => void
+  className?: string
 }
 
 /**
@@ -28,7 +28,9 @@ export const LinksSidebar = ({
   // 将 LinksCategory 转换为 SidebarItem 格式
   const sidebarItems = useMemo(() => {
     // 按 order 排序分类
-    const sortedCategories = categories.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const sortedCategories = categories.sort(
+      (a, b) => (a.order ?? 0) - (b.order ?? 0)
+    )
 
     // 转换为 SidebarItem 格式
     const items: SidebarItem[] = sortedCategories.map(category => ({
@@ -41,10 +43,10 @@ export const LinksSidebar = ({
         title: child.name,
         description: child.description,
       })),
-    }));
+    }))
 
-    return items;
-  }, [categories]);
+    return items
+  }, [categories])
 
   return (
     <Sidebar
@@ -56,5 +58,5 @@ export const LinksSidebar = ({
       showAllOption
       allOptionTitle="全部分类"
     />
-  );
-};
+  )
+}

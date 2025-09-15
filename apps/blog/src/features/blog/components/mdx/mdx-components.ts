@@ -3,11 +3,11 @@
  * 合并静态和交互组件配置
  */
 
-import { MDXBlockquote } from "@/features/blog/components/mdx/mdx-blockquote";
-import { MDXCode } from "@/features/blog/components/mdx/mdx-code";
-import { MDXImg } from "@/features/blog/components/mdx/mdx-img";
-import { MDXLink } from "@/features/blog/components/mdx/mdx-link";
-import { MDXPre } from "@/features/blog/components/mdx/mdx-pre";
+import { MDXBlockquote } from '@/features/blog/components/mdx/mdx-blockquote'
+import { MDXCode } from '@/features/blog/components/mdx/mdx-code'
+import { MDXImg } from '@/features/blog/components/mdx/mdx-img'
+import { MDXLink } from '@/features/blog/components/mdx/mdx-link'
+import { MDXPre } from '@/features/blog/components/mdx/mdx-pre'
 
 export const MDXComponents = {
   a: MDXLink,
@@ -15,12 +15,12 @@ export const MDXComponents = {
   code: MDXCode,
   img: MDXImg,
   pre: MDXPre,
-};
+}
 
-export const useMDXComponents = () => MDXComponents;
+export const useMDXComponents = () => MDXComponents
 
 /**
  * 兼容旧用法的映射
  */
-export const MDXComponentsMapping = MDXComponents;
+export const MDXComponentsMapping = MDXComponents
 // ===== END =====

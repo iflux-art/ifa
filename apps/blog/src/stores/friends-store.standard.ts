@@ -1,38 +1,38 @@
-import { create } from "zustand";
+import { create } from 'zustand'
 import type {
   FriendLink,
-  FriendsPageConfig,
   FriendLinkRequirement,
-} from "@/features/friends/types";
+  FriendsPageConfig,
+} from '@/features/friends/types'
 
 // 状态接口
 export interface FriendsState {
   // 数据状态
-  friendsItems: FriendLink[];
-  loading: boolean;
-  error: string | null;
+  friendsItems: FriendLink[]
+  loading: boolean
+  error: string | null
 
   // 配置状态
-  config: FriendsPageConfig;
-  requirements: FriendLinkRequirement[];
+  config: FriendsPageConfig
+  requirements: FriendLinkRequirement[]
 
   // 过滤状态
-  searchTerm: string;
+  searchTerm: string
 }
 
 // 动作接口
 export interface FriendsActions {
-  setFriendsItems: (items: FriendLink[]) => void;
-  setLoading: (loading: boolean) => void;
-  setError: (error: string | null) => void;
-  setConfig: (config: FriendsPageConfig) => void;
-  setRequirements: (requirements: FriendLinkRequirement[]) => void;
-  setSearchTerm: (term: string) => void;
-  resetState: () => void;
+  setFriendsItems: (items: FriendLink[]) => void
+  setLoading: (loading: boolean) => void
+  setError: (error: string | null) => void
+  setConfig: (config: FriendsPageConfig) => void
+  setRequirements: (requirements: FriendLinkRequirement[]) => void
+  setSearchTerm: (term: string) => void
+  resetState: () => void
 }
 
 // 派生状态接口 (空类型)
-export type FriendsDerivedState = Record<never, never>;
+export type FriendsDerivedState = Record<never, never>
 
 // 完整的Store接口
 export interface FriendsStore extends FriendsState, FriendsActions {}
@@ -44,16 +44,16 @@ export const initialState: FriendsState = {
   error: null,
   config: {
     application: {
-      formUrl: "",
-      title: "",
-      description: "",
+      formUrl: '',
+      title: '',
+      description: '',
     },
     requirements: [],
     showComments: true,
   },
   requirements: [],
-  searchTerm: "",
-};
+  searchTerm: '',
+}
 
 // 创建函数
 export const createFriendsStore = () => {
@@ -64,15 +64,15 @@ export const createFriendsStore = () => {
     error: null,
     config: {
       application: {
-        formUrl: "",
-        title: "",
-        description: "",
+        formUrl: '',
+        title: '',
+        description: '',
       },
       requirements: [],
       showComments: true,
     },
     requirements: [],
-    searchTerm: "",
+    searchTerm: '',
 
     // Actions
     setFriendsItems: items => set({ friendsItems: items }),
@@ -82,8 +82,8 @@ export const createFriendsStore = () => {
     setRequirements: requirements => set({ requirements }),
     setSearchTerm: term => set({ searchTerm: term }),
     resetState: () => set({ ...initialState }),
-  }));
-};
+  }))
+}
 
 // 默认导出store实例
-export const useFriendsStore = createFriendsStore();
+export const useFriendsStore = createFriendsStore()

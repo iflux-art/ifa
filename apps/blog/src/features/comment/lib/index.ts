@@ -6,4 +6,4 @@ export {
   GREETINGS_BY_TIME,
   getCurrentTimeSlot,
   getRandomGreeting,
-} from "./greetings";
+} from './greetings'

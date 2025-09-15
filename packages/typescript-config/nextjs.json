@@ -3,8 +3,8 @@
   "display": "Next.js",
   "extends": "./base.json",
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "es6"],
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "es2022"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,7 +21,9 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "ignoreDeprecations": "5.0",
+    "verbatimModuleSyntax": true
   },
   "include": [
     "next-env.d.ts",

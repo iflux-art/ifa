@@ -7,57 +7,58 @@
 // MDX 组件导出
 export {
   ClientMDXRenderer,
+  MDXBlockquote,
+  MDXCode,
   MDXComponents,
   MDXImg,
   MDXLink,
-  MDXBlockquote,
-  MDXCode,
   MDXPre,
-} from "@/features/mdx";
-
+} from '@/features/mdx'
+export type { CodeBlockProps } from '@/features/mdx/code'
 // 代码高亮组件导出
-export { CodeBlock } from "@/features/mdx/code";
-export type { CodeBlockProps } from "@/features/mdx/code";
+export { CodeBlock } from '@/features/mdx/code'
 
 // ==================== 主题提供者 ====================
 // 已移动到 src/features/theme 目录下集中管理
-export { ThemeProvider } from "@/features/theme";
+export { ThemeProvider } from '@/features/theme'
 
 // ==================== 面包屑组件 ====================
-export { Breadcrumb } from "./breadcrumb";
-
-// ==================== 内容展示组件 ====================
-export { ContentDisplay } from "./content-display";
-export type { ContentDisplayProps, ContentType } from "./content-display";
-
-// ==================== 分页组件 ====================
-export { DocPagination } from "./pagination";
-
+export { Breadcrumb } from './breadcrumb'
 // ==================== 业务按钮组件 ====================
-export { GitHubButton } from "./button/github-button";
-export { TravelButton } from "./button/travel-button";
-
+export { GitHubButton } from './button/github-button'
+export { TravelButton } from './button/travel-button'
+export type { ContentDisplayProps, ContentType } from './content-display'
+// ==================== 内容展示组件 ====================
+export { ContentDisplay } from './content-display'
 // ==================== 页脚组件 ====================
-export { Footer } from "./footer";
-
-// ==================== UI 组件库 ====================
-export { BackButton } from "./ui/back-button";
-export { Button, buttonVariants } from "./ui/button";
-export { Alert, AlertTitle, AlertDescription } from "./ui/alert";
+export { Footer } from './footer'
+// ==================== 分页组件 ====================
+export { DocPagination } from './pagination'
+export { Alert, AlertDescription, AlertTitle } from './ui/alert'
 export {
   AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogTitle,
-  AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
-} from "./ui/alert-dialog";
-export { Badge } from "./ui/badge";
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "./ui/card";
-export { Input } from "./ui/input";
-export { Label } from "./ui/label";
-export { Switch } from "./ui/switch";
-export { Textarea } from "./ui/textarea";
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from './ui/alert-dialog'
+// ==================== UI 组件库 ====================
+export { BackButton } from './ui/back-button'
+export { Badge } from './ui/badge'
+export { Button, buttonVariants } from './ui/button'
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from './ui/card'
+export { Input } from './ui/input'
+export { Label } from './ui/label'
+export { Switch } from './ui/switch'
+export { Textarea } from './ui/textarea'

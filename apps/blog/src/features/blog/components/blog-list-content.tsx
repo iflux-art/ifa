@@ -1,8 +1,7 @@
-"use client";
+'use client'
 
-import { BlogCard } from "./blog-card";
-
-import type { BlogPost } from "@/features/blog/types";
+import type { BlogPost } from '@/features/blog/types'
+import { BlogCard } from './blog-card'
 
 // ====== 迁移自 src/utils/date.ts ======
 /**
@@ -12,29 +11,29 @@ import type { BlogPost } from "@/features/blog/types";
  * @returns 格式化后的日期字符串
  */
 function formatDate(date: string | Date | undefined, format?: string): string {
-  if (!date) return "";
+  if (!date) return ''
 
-  const d = new Date(date);
-  if (Number.isNaN(d.getTime())) return "";
+  const d = new Date(date)
+  if (Number.isNaN(d.getTime())) return ''
 
-  if (format === "MM月dd日") {
-    return `${d.getMonth() + 1}月${d.getDate()}日`;
+  if (format === 'MM月dd日') {
+    return `${d.getMonth() + 1}月${d.getDate()}日`
   }
 
-  return d.toLocaleDateString("zh-CN", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  return d.toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 }
 // ====== END ======
 
 export interface BlogListContentProps {
-  posts: BlogPost[];
-  selectedCategory?: string | null;
-  selectedTag?: string | null;
-  onCategoryClick?: (category: string | null) => void;
-  onTagClick?: (tag: string | null) => void;
+  posts: BlogPost[]
+  selectedCategory?: string | null
+  selectedTag?: string | null
+  onCategoryClick?: (category: string | null) => void
+  onTagClick?: (tag: string | null) => void
 }
 
 /**
@@ -52,15 +51,15 @@ export const BlogListContent = ({
   // 生成筛选结果为空时的提示信息
   const getEmptyMessage = () => {
     if (selectedCategory && selectedTag) {
-      return `未找到分类为"${selectedCategory}"且包含标签"${selectedTag}"的文章`;
+      return `未找到分类为"${selectedCategory}"且包含标签"${selectedTag}"的文章`
     } else if (selectedCategory) {
-      return `未找到分类为"${selectedCategory}"的文章`;
+      return `未找到分类为"${selectedCategory}"的文章`
     } else if (selectedTag) {
-      return `未找到包含标签"${selectedTag}"的文章`;
+      return `未找到包含标签"${selectedTag}"的文章`
     } else {
-      return "暂无文章";
+      return '暂无文章'
     }
-  };
+  }
 
   if (!posts.length) {
     return (
@@ -74,7 +73,7 @@ export const BlogListContent = ({
           )}
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -95,5 +94,5 @@ export const BlogListContent = ({
         />
       ))}
     </div>
-  );
-};
+  )
+}

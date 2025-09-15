@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { useThemeStore } from "./theme-store.standard";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect } from "react";
+import { Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import { useEffect } from 'react'
+import { Button } from '@/components/ui/button'
+import { useThemeStore } from './theme-store.standard'
 
 /**
  * 主题切换组件
@@ -19,37 +19,43 @@ import { useEffect } from "react";
  * <ThemeToggle />
  */
 export const ThemeToggle = () => {
-  const { resolvedTheme, setTheme } = useTheme();
-  const { mounted, setMounted } = useThemeStore();
+  const { resolvedTheme, setTheme } = useTheme()
+  const { mounted, setMounted } = useThemeStore()
 
   useEffect(() => {
-    setMounted(true);
-  }, [setMounted]);
+    setMounted(true)
+  }, [setMounted])
 
   if (!mounted) {
-    return null; // Let Next.js loading.tsx handle loading states
+    return null // Let Next.js loading.tsx handle loading states
   }
 
   const handleToggle = () => {
-    if (resolvedTheme === "dark") {
-      setTheme("light");
+    if (resolvedTheme === 'dark') {
+      setTheme('light')
     } else {
-      setTheme("dark");
+      setTheme('dark')
     }
-  };
+  }
 
-  const isDark = resolvedTheme === "dark";
+  const isDark = resolvedTheme === 'dark'
   const icon = isDark ? (
     <Sun className="h-[1.2rem] w-[1.2rem]" />
   ) : (
     <Moon className="h-[1.2rem] w-[1.2rem]" />
-  );
-  const label = isDark ? "切换到浅色模式" : "切换到深色模式";
+  )
+  const label = isDark ? '切换到浅色模式' : '切换到深色模式'
 
   return (
-    <Button variant="ghost" size="icon" aria-label={label} title={label} onClick={handleToggle}>
+    <Button
+      variant="ghost"
+      size="icon"
+      aria-label={label}
+      title={label}
+      onClick={handleToggle}
+    >
       {icon}
       <span className="sr-only">{label}</span>
     </Button>
-  );
-};
+  )
+}

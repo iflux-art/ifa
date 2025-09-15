@@ -7,64 +7,64 @@
 // ==================== 基础类型定义（原 src/types/content-types.ts 内容）====================
 
 /** Url 类型 */
-export type Url = string;
+export type Url = string
 
 /** 基础 Frontmatter 类型 */
 export interface BaseFrontmatter {
   /** 标题 */
-  title: string;
+  title: string
   /** 描述 */
-  description?: string;
+  description?: string
   /** 发布日期 */
-  date?: string | Date;
+  date?: string | Date
   /** 标签列表 */
-  tags?: string[];
+  tags?: string[]
   /** 是否为草稿 */
-  draft?: boolean;
+  draft?: boolean
   /** 分类 */
-  category?: string;
+  category?: string
   /** 作者 */
-  author?: string;
+  author?: string
   /** 封面图片 */
-  image?: URL;
+  image?: URL
   /** URL 路径 */
-  slug?: string;
+  slug?: string
   /** 最后修改时间 */
-  lastModified?: string | Date;
+  lastModified?: string | Date
   /** 字数统计 */
-  wordCount?: number;
+  wordCount?: number
   /** SEO 相关数据 */
-  seo?: Record<string, unknown>;
+  seo?: Record<string, unknown>
 }
 
 /** 基础内容接口 */
 export interface BaseContent {
   /** 唯一标识（URL路径） */
-  slug: string;
+  slug: string
   /** 标题 */
-  title: string;
+  title: string
   /** 描述 */
-  description: string;
+  description: string
   /** 标签列表 */
-  tags?: string[];
+  tags?: string[]
   /** 发布日期 */
-  date?: string | Date;
+  date?: string | Date
   /** 分类 */
-  category?: string;
+  category?: string
 }
 
 /** 基础分类接口 */
 export interface BaseCategory {
   /** 分类唯一标识 */
-  id: string;
+  id: string
   /** 分类标题 */
-  title: string;
+  title: string
   /** 分类描述 */
-  description: string;
+  description: string
   /** 分类下的内容数量 */
-  count?: number;
+  count?: number
   /** 排序权重 */
-  order?: number;
+  order?: number
 }
 
 // ==================== 扩展类型定义 ====================
@@ -72,75 +72,75 @@ export interface BaseCategory {
 /** 内容项基础接口 */
 export interface ContentItem extends BaseContent {
   /** 内容摘要 */
-  excerpt?: string;
+  excerpt?: string
   /** 是否已发布 */
-  published?: boolean;
+  published?: boolean
   /** 封面图片 */
-  cover?: Url;
+  cover?: Url
   /** 阅读时间（分钟） */
-  readingTime?: number;
+  readingTime?: number
   /** 浏览次数 */
-  views?: number;
+  views?: number
   /** 点赞数 */
-  likes?: number;
+  likes?: number
   /** 更新时间 */
-  update?: string | Date;
+  update?: string | Date
 }
 
 /** 内容分类接口 */
 export interface ContentCategory extends BaseCategory {
   /** 分类图标 */
-  icon?: string;
+  icon?: string
   /** 分类颜色 */
-  color?: string;
+  color?: string
 }
 
 /** 内容搜索结果基础接口 */
 export interface ContentSearchResult {
   /** 标题 */
-  title: string;
+  title: string
   /** 路径 */
-  path: string;
+  path: string
   /** 摘要 */
-  excerpt: string;
+  excerpt: string
   /** 类型 */
-  type: "doc" | "page";
+  type: 'doc' | 'page'
 }
 
 /** 内容搜索参数 */
 export interface ContentSearchParams {
   /** 搜索查询 */
-  query: string;
+  query: string
   /** 搜索限制 */
-  limit?: number;
+  limit?: number
   /** 搜索类型 */
-  type?: "doc" | "all";
+  type?: 'doc' | 'all'
 }
 
 /** 内容统计信息 */
 export interface ContentStats {
   /** 总文章数 */
-  total: number;
+  total: number
   /** 分类统计 */
-  categories: Record<string, number>;
+  categories: Record<string, number>
   /** 标签统计 */
-  tags: Record<string, number>;
+  tags: Record<string, number>
 }
 
 /** 内容页面状态 */
 export interface ContentPageState {
   /** 当前页码 */
-  page: number;
+  page: number
   /** 每页条数 */
-  limit: number;
+  limit: number
   /** 搜索关键词 */
-  search?: string;
+  search?: string
   /** 分类筛选 */
-  category?: string;
+  category?: string
   /** 标签筛选 */
-  tag?: string;
+  tag?: string
   /** 排序方式 */
-  sort?: "date" | "views" | "likes";
+  sort?: 'date' | 'views' | 'likes'
   /** 排序方向 */
-  order?: "asc" | "desc";
+  order?: 'asc' | 'desc'
 }

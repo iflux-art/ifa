@@ -6,50 +6,51 @@
 
 // WebSocket连接URL，开发环境和生产环境区分
 const WS_URL =
-  process.env.NODE_ENV === "production"
+  process.env.NODE_ENV === 'production'
     ? `wss://${process.env.NEXT_PUBLIC_VERCEL_URL || window.location.host}/ws/links`
-    : `ws://${window.location.host}/ws/links`;
+    : `ws://${window.location.host}/ws/links`
 
 // 消息类型
 export enum LinkDataMessageType {
-  Connect = "connect",
-  Sync = "sync",
-  Update = "update",
-  Error = "error",
+  Connect = 'connect',
+  Sync = 'sync',
+  Update = 'update',
+  Error = 'error',
 }
 
 // WebSocket消息接口
 export interface LinkDataMessage {
-  type: LinkDataMessageType;
-  payload?: unknown;
-  timestamp: number;
-  version?: string;
+  type: LinkDataMessageType
+  payload?: unknown
+  timestamp: number
+  version?: string
 }
 
 // 连接状态
 export enum ConnectionState {
-  Disconnected = "disconnected",
-  Connecting = "connecting",
-  Connected = "connected",
-  Error = "error",
+  Disconnected = 'disconnected',
+  Connecting = 'connecting',
+  Connected = 'connected',
+  Error = 'error',
 }
 
 // 重连配置
-const RECONNECT_INTERVAL = 3000; // 3秒
-const MAX_RECONNECT_ATTEMPTS = 5;
+const RECONNECT_INTERVAL = 3000 // 3秒
+const MAX_RECONNECT_ATTEMPTS = 5
 
 /**
  * 链接数据WebSocket客户端
  * 负责与WebSocket服务器建立连接并处理数据更新
  */
 class LinkDataSocketClient {
-  private socket: WebSocket | null = null;
-  private connectionState: ConnectionState = ConnectionState.Disconnected;
-  private reconnectAttempts = 0;
-  private reconnectTimer: NodeJS.Timeout | null = null;
-  private messageHandlers: ((message: LinkDataMessage) => void)[] = [];
-  private connectionStateHandlers: ((state: ConnectionState) => void)[] = [];
-  private clientVersion: string = localStorage.getItem("links_data_version") || "0";
+  private socket: WebSocket | null = null
+  private connectionState: ConnectionState = ConnectionState.Disconnected
+  private reconnectAttempts = 0
+  private reconnectTimer: NodeJS.Timeout | null = null
+  private messageHandlers: ((message: LinkDataMessage) => void)[] = []
+  private connectionStateHandlers: ((state: ConnectionState) => void)[] = []
+  private clientVersion: string =
+    localStorage.getItem('links_data_version') || '0'
 
   /**
    * 初始化WebSocket连接
@@ -59,29 +60,29 @@ class LinkDataSocketClient {
       this.connectionState === ConnectionState.Connecting ||
       this.connectionState === ConnectionState.Connected
     ) {
-      return;
+      return
     }
 
-    this.updateConnectionState(ConnectionState.Connecting);
+    this.updateConnectionState(ConnectionState.Connecting)
 
     try {
-      this.socket = new WebSocket(WS_URL);
+      this.socket = new WebSocket(WS_URL)
 
       // 处理连接打开
-      this.socket.onopen = this.handleOpen.bind(this);
+      this.socket.onopen = this.handleOpen.bind(this)
 
       // 处理接收消息
-      this.socket.onmessage = this.handleMessage.bind(this);
+      this.socket.onmessage = this.handleMessage.bind(this)
 
       // 处理错误
-      this.socket.onerror = this.handleError.bind(this);
+      this.socket.onerror = this.handleError.bind(this)
 
       // 处理连接关闭
-      this.socket.onclose = this.handleClose.bind(this);
+      this.socket.onclose = this.handleClose.bind(this)
     } catch (error) {
-      console.error("Failed to connect to WebSocket server:", error);
-      this.updateConnectionState(ConnectionState.Error);
-      this.scheduleReconnect();
+      console.error('Failed to connect to WebSocket server:', error)
+      this.updateConnectionState(ConnectionState.Error)
+      this.scheduleReconnect()
     }
   }
 
@@ -90,17 +91,17 @@ class LinkDataSocketClient {
    */
   disconnect() {
     if (this.socket) {
-      this.socket.close();
-      this.socket = null;
+      this.socket.close()
+      this.socket = null
     }
 
     if (this.reconnectTimer) {
-      clearTimeout(this.reconnectTimer);
-      this.reconnectTimer = null;
+      clearTimeout(this.reconnectTimer)
+      this.reconnectTimer = null
     }
 
-    this.updateConnectionState(ConnectionState.Disconnected);
-    this.reconnectAttempts = 0;
+    this.updateConnectionState(ConnectionState.Disconnected)
+    this.reconnectAttempts = 0
   }
 
   /**
@@ -111,7 +112,7 @@ class LinkDataSocketClient {
       type: LinkDataMessageType.Sync,
       timestamp: Date.now(),
       version: this.clientVersion,
-    });
+    })
   }
 
   /**
@@ -119,7 +120,7 @@ class LinkDataSocketClient {
    * @param handler 消息处理函数
    */
   addMessageHandler(handler: (message: LinkDataMessage) => void) {
-    this.messageHandlers.push(handler);
+    this.messageHandlers.push(handler)
   }
 
   /**
@@ -127,7 +128,7 @@ class LinkDataSocketClient {
    * @param handler 要移除的消息处理函数
    */
   removeMessageHandler(handler: (message: LinkDataMessage) => void) {
-    this.messageHandlers = this.messageHandlers.filter(h => h !== handler);
+    this.messageHandlers = this.messageHandlers.filter(h => h !== handler)
   }
 
   /**
@@ -135,9 +136,9 @@ class LinkDataSocketClient {
    * @param handler 连接状态处理函数
    */
   addConnectionStateHandler(handler: (state: ConnectionState) => void) {
-    this.connectionStateHandlers.push(handler);
+    this.connectionStateHandlers.push(handler)
     // 立即调用处理器以通知当前状态
-    handler(this.connectionState);
+    handler(this.connectionState)
   }
 
   /**
@@ -145,21 +146,23 @@ class LinkDataSocketClient {
    * @param handler 要移除的连接状态处理函数
    */
   removeConnectionStateHandler(handler: (state: ConnectionState) => void) {
-    this.connectionStateHandlers = this.connectionStateHandlers.filter(h => h !== handler);
+    this.connectionStateHandlers = this.connectionStateHandlers.filter(
+      h => h !== handler
+    )
   }
 
   /**
    * 获取当前连接状态
    */
   getConnectionState(): ConnectionState {
-    return this.connectionState;
+    return this.connectionState
   }
 
   /**
    * 获取当前客户端数据版本
    */
   getClientVersion(): string {
-    return this.clientVersion;
+    return this.clientVersion
   }
 
   /**
@@ -167,8 +170,8 @@ class LinkDataSocketClient {
    * @param version 新的版本号
    */
   updateClientVersion(version: string) {
-    this.clientVersion = version;
-    localStorage.setItem("links_data_version", version);
+    this.clientVersion = version
+    localStorage.setItem('links_data_version', version)
   }
 
   // 私有方法
@@ -180,9 +183,9 @@ class LinkDataSocketClient {
   private sendMessage(message: LinkDataMessage) {
     if (this.socket && this.connectionState === ConnectionState.Connected) {
       try {
-        this.socket.send(JSON.stringify(message));
+        this.socket.send(JSON.stringify(message))
       } catch (error) {
-        console.error("Failed to send message:", error);
+        console.error('Failed to send message:', error)
       }
     }
   }
@@ -191,11 +194,11 @@ class LinkDataSocketClient {
    * 处理WebSocket连接打开事件
    */
   private handleOpen() {
-    this.updateConnectionState(ConnectionState.Connected);
-    this.reconnectAttempts = 0;
+    this.updateConnectionState(ConnectionState.Connected)
+    this.reconnectAttempts = 0
 
     // 连接后发送同步请求，包含当前数据版本
-    this.requestSync();
+    this.requestSync()
   }
 
   /**
@@ -204,19 +207,19 @@ class LinkDataSocketClient {
    */
   private handleMessage(event: MessageEvent) {
     try {
-      const message = JSON.parse(event.data) as LinkDataMessage;
+      const message = JSON.parse(event.data) as LinkDataMessage
 
       // 如果收到更新消息，更新客户端版本
       if (message.type === LinkDataMessageType.Update && message.version) {
-        this.updateClientVersion(message.version);
+        this.updateClientVersion(message.version)
       }
 
       // 通知所有消息处理器
       for (const handler of this.messageHandlers) {
-        handler(message);
+        handler(message)
       }
     } catch (error) {
-      console.error("Failed to parse WebSocket message:", error);
+      console.error('Failed to parse WebSocket message:', error)
     }
   }
 
@@ -225,8 +228,8 @@ class LinkDataSocketClient {
    * @param event WebSocket错误事件
    */
   private handleError(event: Event) {
-    console.error("WebSocket error:", event);
-    this.updateConnectionState(ConnectionState.Error);
+    console.error('WebSocket error:', event)
+    this.updateConnectionState(ConnectionState.Error)
   }
 
   /**
@@ -234,8 +237,8 @@ class LinkDataSocketClient {
    */
   private handleClose() {
     if (this.connectionState !== ConnectionState.Disconnected) {
-      this.updateConnectionState(ConnectionState.Disconnected);
-      this.scheduleReconnect();
+      this.updateConnectionState(ConnectionState.Disconnected)
+      this.scheduleReconnect()
     }
   }
 
@@ -244,21 +247,23 @@ class LinkDataSocketClient {
    */
   private scheduleReconnect() {
     if (this.reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) {
-      console.warn(`Maximum reconnect attempts (${MAX_RECONNECT_ATTEMPTS}) reached.`);
-      return;
+      console.warn(
+        `Maximum reconnect attempts (${MAX_RECONNECT_ATTEMPTS}) reached.`
+      )
+      return
     }
 
     if (this.reconnectTimer) {
-      clearTimeout(this.reconnectTimer);
+      clearTimeout(this.reconnectTimer)
     }
 
-    this.reconnectAttempts++;
+    this.reconnectAttempts++
     this.reconnectTimer = setTimeout(() => {
       console.log(
         `Attempting to reconnect (${this.reconnectAttempts}/${MAX_RECONNECT_ATTEMPTS})...`
-      );
-      this.connect();
-    }, RECONNECT_INTERVAL);
+      )
+      this.connect()
+    }, RECONNECT_INTERVAL)
   }
 
   /**
@@ -266,12 +271,12 @@ class LinkDataSocketClient {
    * @param state 新的连接状态
    */
   private updateConnectionState(state: ConnectionState) {
-    this.connectionState = state;
+    this.connectionState = state
     for (const handler of this.connectionStateHandlers) {
-      handler(state);
+      handler(state)
     }
   }
 }
 
 // 导出单例实例
-export const linkDataSocket = new LinkDataSocketClient();
+export const linkDataSocket = new LinkDataSocketClient()

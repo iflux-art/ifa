@@ -1,48 +1,52 @@
-import { create } from "zustand";
-import type { UserResource } from "@clerk/types";
+import type { UserResource } from '@clerk/types'
+import { create } from 'zustand'
 
 // 用户偏好设置类型
 export interface UserPreferences {
-  theme: "light" | "dark" | "system";
-  language: string;
+  theme: 'light' | 'dark' | 'system'
+  language: string
   notifications: {
-    email: boolean;
-    push: boolean;
-  };
+    email: boolean
+    push: boolean
+  }
   privacy: {
-    profileVisible: boolean;
-    showEmail: boolean;
-  };
+    profileVisible: boolean
+    showEmail: boolean
+  }
 }
 
 // 状态接口
 export interface AuthState {
   // 用户数据 (来自 Clerk)
-  user: UserResource | null;
-  isLoaded: boolean;
-  isSignedIn: boolean;
+  user: UserResource | null
+  isLoaded: boolean
+  isSignedIn: boolean
 
   // 用户偏好设置
-  preferences: UserPreferences;
+  preferences: UserPreferences
 
   // 应用状态
-  isAdminMode: boolean;
-  lastActiveAt: number | null;
+  isAdminMode: boolean
+  lastActiveAt: number | null
 }
 
 // 动作接口
 export interface AuthActions {
-  setUser: (user: UserResource | null, isLoaded: boolean, isSignedIn: boolean) => void;
-  setPreferences: (preferences: Partial<UserPreferences>) => void;
-  setTheme: (theme: "light" | "dark" | "system") => void;
-  setLanguage: (language: string) => void;
-  setAdminMode: (isAdminMode: boolean) => void;
-  updateLastActive: () => void;
-  resetState: () => void;
+  setUser: (
+    user: UserResource | null,
+    isLoaded: boolean,
+    isSignedIn: boolean
+  ) => void
+  setPreferences: (preferences: Partial<UserPreferences>) => void
+  setTheme: (theme: 'light' | 'dark' | 'system') => void
+  setLanguage: (language: string) => void
+  setAdminMode: (isAdminMode: boolean) => void
+  updateLastActive: () => void
+  resetState: () => void
 }
 
 // 派生状态接口 (空类型)
-export type AuthDerivedState = Record<never, never>;
+export type AuthDerivedState = Record<never, never>
 
 // 完整的Store接口
 export interface AuthStore extends AuthState, AuthActions {}
@@ -53,8 +57,8 @@ export const initialState: AuthState = {
   isLoaded: false,
   isSignedIn: false,
   preferences: {
-    theme: "system",
-    language: "zh-CN",
+    theme: 'system',
+    language: 'zh-CN',
     notifications: {
       email: true,
       push: true,
@@ -66,7 +70,7 @@ export const initialState: AuthState = {
   },
   isAdminMode: false,
   lastActiveAt: null,
-};
+}
 
 // 创建函数
 export const createAuthStore = () => {
@@ -76,8 +80,8 @@ export const createAuthStore = () => {
     isLoaded: false,
     isSignedIn: false,
     preferences: {
-      theme: "system",
-      language: "zh-CN",
+      theme: 'system',
+      language: 'zh-CN',
       notifications: {
         email: true,
         push: true,
@@ -126,8 +130,8 @@ export const createAuthStore = () => {
       set({
         ...initialState,
       }),
-  }));
-};
+  }))
+}
 
 // 默认导出store实例
-export const useAuthStore = createAuthStore();
+export const useAuthStore = createAuthStore()

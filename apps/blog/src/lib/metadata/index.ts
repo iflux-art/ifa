@@ -3,9 +3,9 @@
  */
 
 export {
-  generateViewport,
-  generateMetadata,
   generateArticleMetadata,
+  generateMetadata,
   generateProfileMetadata,
-} from "./metadata";
-export { generateDocsMetadata, generateSEOMetadata } from "./seo-utils";
+  generateViewport,
+} from './metadata'
+export { generateDocsMetadata, generateSEOMetadata } from './seo-utils'

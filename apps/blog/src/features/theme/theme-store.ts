@@ -1,59 +1,59 @@
-import { create } from "zustand";
-import type { ThemeProviderProps } from "next-themes";
+import type { ThemeProviderProps } from 'next-themes'
+import { create } from 'zustand'
 
 // 状态接口
 export interface ThemeState {
   // 当前主题
-  theme: "light" | "dark" | "system";
+  theme: 'light' | 'dark' | 'system'
 
   // 已解析的主题（实际应用的主题）
-  resolvedTheme: "light" | "dark";
+  resolvedTheme: 'light' | 'dark'
 
   // 主题配置
-  config: Omit<ThemeProviderProps, "children">;
+  config: Omit<ThemeProviderProps, 'children'>
 
   // 状态标志
-  mounted: boolean;
+  mounted: boolean
 }
 
 // 动作接口
 export interface ThemeActions {
-  setTheme: (theme: "light" | "dark" | "system") => void;
-  setResolvedTheme: (resolvedTheme: "light" | "dark") => void;
-  setConfig: (config: Omit<ThemeProviderProps, "children">) => void;
-  setMounted: (mounted: boolean) => void;
-  toggleTheme: () => void;
-  resetState: () => void;
+  setTheme: (theme: 'light' | 'dark' | 'system') => void
+  setResolvedTheme: (resolvedTheme: 'light' | 'dark') => void
+  setConfig: (config: Omit<ThemeProviderProps, 'children'>) => void
+  setMounted: (mounted: boolean) => void
+  toggleTheme: () => void
+  resetState: () => void
 }
 
 // 派生状态接口 (空类型)
-export type ThemeDerivedState = Record<never, never>;
+export type ThemeDerivedState = Record<never, never>
 
 // 完整的Store接口
 export interface ThemeStore extends ThemeState, ThemeActions {}
 
 // 初始状态
 export const initialState: ThemeState = {
-  theme: "system",
-  resolvedTheme: "light",
+  theme: 'system',
+  resolvedTheme: 'light',
   config: {
-    attribute: "class",
-    defaultTheme: "system",
+    attribute: 'class',
+    defaultTheme: 'system',
     enableSystem: true,
     disableTransitionOnChange: false,
   },
   mounted: false,
-};
+}
 
 // 创建函数
 export const createThemeStore = () => {
   return create<ThemeStore>()((set, _get) => ({
     // ...initialState,
-    theme: "system",
-    resolvedTheme: "light",
+    theme: 'system',
+    resolvedTheme: 'light',
     config: {
-      attribute: "class",
-      defaultTheme: "system",
+      attribute: 'class',
+      defaultTheme: 'system',
       enableSystem: true,
       disableTransitionOnChange: false,
     },
@@ -66,14 +66,14 @@ export const createThemeStore = () => {
     setMounted: mounted => set({ mounted }),
     toggleTheme: () =>
       set(state => ({
-        theme: state.theme === "dark" ? "light" : "dark",
+        theme: state.theme === 'dark' ? 'light' : 'dark',
       })),
     resetState: () =>
       set({
         ...initialState,
       }),
-  }));
-};
+  }))
+}
 
 // 默认导出store实例
-export const useThemeStore = createThemeStore();
+export const useThemeStore = createThemeStore()

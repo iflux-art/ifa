@@ -9,37 +9,37 @@
  */
 export interface BlogPost {
   /** 唯一标识（URL路径） */
-  slug: string;
+  slug: string
   /** 标题 */
-  title: string;
+  title: string
   /** 描述 */
-  description: string;
+  description: string
   /** 标签列表 */
-  tags?: string[];
+  tags?: string[]
   /** 发布日期 */
-  date?: string | Date;
+  date?: string | Date
   /** 分类 */
-  category?: string;
+  category?: string
   /** 作者 */
-  author?: string;
+  author?: string
   /** 作者头像 */
-  authorAvatar?: string | null;
+  authorAvatar?: string | null
   /** 作者简介 */
-  authorBio?: string;
+  authorBio?: string
   /** 是否已发布 */
-  published?: boolean;
+  published?: boolean
   /** 文章摘要 */
-  excerpt: string;
+  excerpt: string
   /** 是否为特色文章 */
-  featured?: boolean;
+  featured?: boolean
   /** 文章封面图片 */
-  image?: string;
+  image?: string
   /** 阅读时间（分钟） */
-  readingTime?: number;
+  readingTime?: number
   /** 浏览次数 */
-  views?: number;
+  views?: number
   /** 点赞数 */
-  likes?: number;
+  likes?: number
 }
 
 /**
@@ -47,37 +47,37 @@ export interface BlogPost {
  */
 export interface ContentItem {
   /** 唯一标识（URL路径） */
-  slug: string;
+  slug: string
   /** 标题 */
-  title: string;
+  title: string
   /** 描述 */
-  description: string;
+  description: string
   /** 标签列表 */
-  tags?: string[];
+  tags?: string[]
   /** 发布日期 */
-  date?: string | Date;
+  date?: string | Date
   /** 分类 */
-  category?: string;
+  category?: string
   /** 内容摘要 */
-  excerpt?: string;
+  excerpt?: string
   /** 是否已发布 */
-  published?: boolean;
+  published?: boolean
   /** 封面图片 */
-  cover?: string;
+  cover?: string
   /** 阅读时间（分钟） */
-  readingTime?: number;
+  readingTime?: number
   /** 浏览次数 */
-  views?: number;
+  views?: number
   /** 点赞数 */
-  likes?: number;
+  likes?: number
   /** 更新时间 */
-  update?: string | Date;
+  update?: string | Date
 }
 
 export interface RelatedPost {
-  title: string;
-  href: string;
-  category?: string;
+  title: string
+  href: string
+  category?: string
 }
 
 /**
@@ -85,11 +85,11 @@ export interface RelatedPost {
  */
 export interface TagCount {
   /** 标签名称 */
-  tag: string;
+  tag: string
   /** 文章数量 */
-  count: number;
+  count: number
   /** 标签颜色 */
-  color?: string;
+  color?: string
 }
 
 /**
@@ -97,24 +97,24 @@ export interface TagCount {
  */
 export interface CategoryWithCount {
   /** 分类名称 */
-  name: string;
+  name: string
   /** 文章数量 */
-  count: number;
+  count: number
 }
 
 /**
  * 博客文章Frontmatter
  */
 export interface BlogFrontmatter {
-  title: string;
-  description?: string;
-  date?: string | Date;
-  update?: string | Date;
-  category?: string;
-  tags?: string[];
-  published?: boolean;
-  excerpt?: string;
-  cover?: string;
+  title: string
+  description?: string
+  date?: string | Date
+  update?: string | Date
+  category?: string
+  tags?: string[]
+  published?: boolean
+  excerpt?: string
+  cover?: string
 }
 
 // ================= 博客搜索相关类型 =================
@@ -122,19 +122,19 @@ export interface BlogFrontmatter {
 /** 博客搜索结果 */
 export interface BlogSearchResult {
   /** 文章标题 */
-  title: string;
+  title: string
   /** 文章路径 */
-  path: string;
+  path: string
   /** 文章摘要 */
-  excerpt: string;
+  excerpt: string
 }
 
 /** 博客搜索参数 */
 export interface BlogSearchParams {
   /** 搜索查询 */
-  query: string;
+  query: string
   /** 搜索限制 */
-  limit?: number;
+  limit?: number
 }
 
 // ================= 内容搜索相关类型 =================
@@ -142,29 +142,29 @@ export interface BlogSearchParams {
 /** 内容搜索参数 */
 export interface ContentSearchParams {
   /** 搜索查询 */
-  query: string;
+  query: string
   /** 搜索限制 */
-  limit?: number;
+  limit?: number
   /** 搜索类型 */
-  type?: "blog" | "doc" | "all";
+  type?: 'blog' | 'doc' | 'all'
 }
 
 /** 内容页面状态 */
 export interface ContentPageState {
   /** 当前页码 */
-  page: number;
+  page: number
   /** 每页条数 */
-  limit: number;
+  limit: number
   /** 搜索关键词 */
-  search?: string;
+  search?: string
   /** 分类筛选 */
-  category?: string;
+  category?: string
   /** 标签筛选 */
-  tag?: string;
+  tag?: string
   /** 排序方式 */
-  sort?: "date" | "views" | "likes";
+  sort?: 'date' | 'views' | 'likes'
   /** 排序方向 */
-  order?: "asc" | "desc";
+  order?: 'asc' | 'desc'
 }
 
 // ================= 内容标题相关类型 =================
@@ -172,9 +172,9 @@ export interface ContentPageState {
 /** 内容标题 */
 export interface TocHeading {
   /** 标题ID */
-  id: string;
+  id: string
   /** 标题文本 */
-  text: string;
+  text: string
   /** 标题级别 */
-  level: number;
+  level: number
 }

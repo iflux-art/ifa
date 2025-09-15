@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import { gridColsMap, gridGapMap } from "@/utils/layout-utils";
-import type { AppGridProps } from "@/types/layout-types";
-import { cn } from "@/utils";
+import type { AppGridProps } from '@/types/layout-types'
+import { cn } from '@/utils'
+import { gridColsMap, gridGapMap } from '@/utils/layout-utils'
 
 /**
  * 通用网格布局组件
@@ -19,15 +19,22 @@ export const AppGrid = ({
   children,
   className,
   columns = 3,
-  gap = "default",
+  gap = 'default',
   rowGap,
   columnGap,
 }: AppGridProps) => {
   // 构建行列间距类
   const gapClasses =
     rowGap || columnGap
-      ? cn(rowGap && `row-gap-${rowGap}`, columnGap && `column-gap-${columnGap}`)
-      : gridGapMap[gap];
+      ? cn(
+          rowGap && `row-gap-${rowGap}`,
+          columnGap && `column-gap-${columnGap}`
+        )
+      : gridGapMap[gap]
 
-  return <div className={cn("grid", gridColsMap[columns], gapClasses, className)}>{children}</div>;
-};
+  return (
+    <div className={cn('grid', gridColsMap[columns], gapClasses, className)}>
+      {children}
+    </div>
+  )
+}

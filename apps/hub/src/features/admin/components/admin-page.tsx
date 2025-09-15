@@ -1,29 +1,38 @@
-"use client";
+'use client'
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Search } from 'lucide-react'
+import { useCallback, useEffect, useMemo } from 'react'
+import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { AddDialog, AdminActions, DeleteDialog, EditDialog } from "@/features/admin/components";
-import { useDebouncedValue } from "@/features/admin/hooks/use-debounced-value";
-import { fetchLinksData } from "@/features/admin/lib";
+} from '@/components/ui/select'
+import {
+  AddDialog,
+  AdminActions,
+  DeleteDialog,
+  EditDialog,
+} from '@/features/admin/components'
+import { useDebouncedValue } from '@/features/admin/hooks/use-debounced-value'
+import { fetchLinksData } from '@/features/admin/lib'
 import {
   DataTable,
   getPageActions,
   getTableActions,
   getTableColumns,
-} from "@/features/links/components";
-import { useCategories } from "@/features/links/hooks/use-categories";
-import type { LinksCategory, LinksItem, LinksSubCategory } from "@/features/links/types";
-import type { SearchFilterProps } from "@/features/search/types";
-import { Search } from "lucide-react";
-import { useCallback, useEffect, useMemo } from "react";
-import { useAdminStore } from "@/stores";
+} from '@/features/links/components'
+import { useCategories } from '@/features/links/hooks/use-categories'
+import type {
+  LinksCategory,
+  LinksItem,
+  LinksSubCategory,
+} from '@/features/links/types'
+import type { SearchFilterProps } from '@/features/search/types'
+import { useAdminStore } from '@/stores'
 
 /**
  * 页面标题组件 Props
@@ -31,7 +40,7 @@ import { useAdminStore } from "@/stores";
  */
 interface PageHeaderProps {
   /** 项目总数 */
-  itemCount: number;
+  itemCount: number
 }
 
 const PageHeader = ({ itemCount }: PageHeaderProps) => (
@@ -41,7 +50,7 @@ const PageHeader = ({ itemCount }: PageHeaderProps) => (
       管理网站导航中的所有网址，当前共有 {itemCount} 个网址
     </p>
   </div>
-);
+)
 
 /**
  * 搜索和过滤组件 Props (已移除，使用通用类型)
@@ -72,8 +81,10 @@ const SearchFilter = (
         </div>
         <div className="w-48">
           <Select
-            value={selectedCategory || "all"}
-            onValueChange={value => onCategoryChange(value === "all" ? "" : value)}
+            value={selectedCategory || 'all'}
+            onValueChange={value =>
+              onCategoryChange(value === 'all' ? '' : value)
+            }
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="所有分类" />
@@ -106,7 +117,7 @@ const SearchFilter = (
       </div>
     </CardContent>
   </Card>
-);
+)
 
 /**
  * 过滤链接项的自定义 hook
@@ -117,19 +128,23 @@ const SearchFilter = (
  * @param selectedCategory 选中的分类
  * @returns 过滤后的链接项数组
  */
-const useFilteredItems = (items: LinksItem[], searchTerm: string, selectedCategory: string) => {
+const useFilteredItems = (
+  items: LinksItem[],
+  searchTerm: string,
+  selectedCategory: string
+) => {
   /** 防抖后的搜索词 */
-  const debouncedSearchTerm = useDebouncedValue(searchTerm, 300);
+  const debouncedSearchTerm = useDebouncedValue(searchTerm, 300)
 
   /** 过滤后的链接项 */
   const filteredItems = useMemo(() => {
     // 如果没有搜索条件和分类筛选，直接返回原数据
     if (!(debouncedSearchTerm || selectedCategory)) {
-      return items;
+      return items
     }
 
     /** 小写搜索词，用于不区分大小写的匹配 */
-    const searchLower = debouncedSearchTerm.toLowerCase();
+    const searchLower = debouncedSearchTerm.toLowerCase()
 
     return items.filter(item => {
       /** 检查是否匹配搜索词 */
@@ -138,17 +153,18 @@ const useFilteredItems = (items: LinksItem[], searchTerm: string, selectedCatego
         item.title.toLowerCase().includes(searchLower) ||
         item.description.toLowerCase().includes(searchLower) ||
         item.url.toLowerCase().includes(searchLower) ||
-        item.tags.some((tag: string) => tag.toLowerCase().includes(searchLower));
+        item.tags.some((tag: string) => tag.toLowerCase().includes(searchLower))
 
       /** 检查是否匹配分类 */
-      const matchesCategory = !selectedCategory || item.category === selectedCategory;
+      const matchesCategory =
+        !selectedCategory || item.category === selectedCategory
 
-      return matchesSearch && matchesCategory;
-    });
-  }, [items, debouncedSearchTerm, selectedCategory]);
+      return matchesSearch && matchesCategory
+    })
+  }, [items, debouncedSearchTerm, selectedCategory])
 
-  return filteredItems;
-};
+  return filteredItems
+}
 
 /**
  * 事件处理器 hook
@@ -161,33 +177,33 @@ const useEventHandlers = (
 ) => {
   const handleAddSuccess = useCallback(
     (_item: LinksItem) => {
-      void loadData();
-      setShowAddDialog(false);
+      void loadData()
+      setShowAddDialog(false)
     },
     [loadData, setShowAddDialog]
-  );
+  )
 
   const handleEditSuccess = useCallback(() => {
-    void loadData();
-    setEditingItem(null);
-  }, [loadData, setEditingItem]);
+    void loadData()
+    setEditingItem(null)
+  }, [loadData, setEditingItem])
 
   const handleDeleteSuccess = useCallback(() => {
-    void loadData();
-    setDeletingItem(null);
-  }, [loadData, setDeletingItem]);
+    void loadData()
+    setDeletingItem(null)
+  }, [loadData, setDeletingItem])
 
   const handleAddError = useCallback(() => {
     // 可以在这里添加错误处理逻辑
-  }, []);
+  }, [])
 
   const handleEditError = useCallback(() => {
     // 可以在这里添加错误处理逻辑
-  }, []);
+  }, [])
 
   const handleDeleteError = useCallback(() => {
     // 可以在这里添加错误处理逻辑
-  }, []);
+  }, [])
 
   return {
     handleAddSuccess,
@@ -196,8 +212,8 @@ const useEventHandlers = (
     handleAddError,
     handleEditError,
     handleDeleteError,
-  };
-};
+  }
+}
 
 /**
  * 链接管理页面组件
@@ -220,30 +236,30 @@ export const LinksAdminPage = () => {
     setDeletingItem,
     setLoading,
     setError,
-  } = useAdminStore();
+  } = useAdminStore()
 
   // 使用共享的分类数据 hook
-  const { categories, getCategoryName } = useCategories();
+  const { categories, getCategoryName } = useCategories()
 
   // 加载数据
   const loadData = useCallback(async () => {
-    setLoading(true);
+    setLoading(true)
     try {
-      const linksData = await fetchLinksData();
-      setItems(linksData.flat());
+      const linksData = await fetchLinksData()
+      setItems(linksData.flat())
     } catch (error) {
-      setError(error instanceof Error ? error.message : "Failed to load data");
+      setError(error instanceof Error ? error.message : 'Failed to load data')
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [setItems, setLoading, setError]);
+  }, [setItems, setLoading, setError])
 
   useEffect(() => {
-    void loadData();
-  }, [loadData]);
+    void loadData()
+  }, [loadData])
 
   // 过滤数据
-  const filteredItems = useFilteredItems(items, searchTerm, selectedCategory);
+  const filteredItems = useFilteredItems(items, searchTerm, selectedCategory)
 
   // 事件处理器
   const {
@@ -253,7 +269,12 @@ export const LinksAdminPage = () => {
     handleAddError,
     handleEditError,
     handleDeleteError,
-  } = useEventHandlers(loadData, setShowAddDialog, setEditingItem, setDeletingItem);
+  } = useEventHandlers(
+    loadData,
+    setShowAddDialog,
+    setEditingItem,
+    setDeletingItem
+  )
 
   return (
     <>
@@ -277,7 +298,9 @@ export const LinksAdminPage = () => {
       {/* 网址表格 */}
       <DataTable
         data={filteredItems}
-        columns={getTableColumns((categoryId: string) => getCategoryName(categoryId) ?? "")}
+        columns={getTableColumns(
+          (categoryId: string) => getCategoryName(categoryId) ?? ''
+        )}
         actions={getTableActions(
           (record: LinksItem) => setEditingItem(record),
           (record: LinksItem) => setDeletingItem(record)
@@ -307,7 +330,7 @@ export const LinksAdminPage = () => {
         onError={handleDeleteError}
       />
     </>
-  );
-};
+  )
+}
 
-export default LinksAdminPage;
+export default LinksAdminPage

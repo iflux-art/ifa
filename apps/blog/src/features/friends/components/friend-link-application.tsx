@@ -1,36 +1,47 @@
-"use client";
+'use client'
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { ExternalLink, HandHeart } from "lucide-react";
-import Link from "next/link";
-import type { FriendsPageConfig } from "../types";
+import { ExternalLink, HandHeart } from 'lucide-react'
+import Link from 'next/link'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import type { FriendsPageConfig } from '../types'
 
 interface FriendLinkApplicationProps {
   /** 友链页面配置 */
-  config: FriendsPageConfig;
+  config: FriendsPageConfig
   /** 自定义类名 */
-  className?: string;
+  className?: string
 }
 
 /**
  * 友链申请卡片组件
  * 简化版，采用类似博客文章卡片的样式
  */
-export const FriendLinkApplication = ({ config, className = "" }: FriendLinkApplicationProps) => {
-  const { application, requirements } = config;
+export const FriendLinkApplication = ({
+  config,
+  className = '',
+}: FriendLinkApplicationProps) => {
+  const { application, requirements } = config
 
   return (
     <div className={`mt-8 ${className}`}>
-      <Link href={application.formUrl} target="_blank" rel="noopener noreferrer" className="block">
+      <Link
+        href={application.formUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block"
+      >
         <Card className="group h-full overflow-hidden border transition-all duration-300 hover:border-primary/50 hover:shadow-lg touch-manipulation active:scale-[0.98]">
           <div className="flex h-full">
             {/* 左侧内容区域 */}
             <div className="flex flex-1 flex-col p-5 md:p-6">
               {/* 标题和徽章区 */}
               <div className="mb-2 sm:mb-3">
-                <Badge variant="secondary" className="min-h-[28px] px-3 py-1 text-xs font-medium">
+                <Badge
+                  variant="secondary"
+                  className="min-h-[28px] px-3 py-1 text-xs font-medium"
+                >
                   申请友链
                 </Badge>
               </div>
@@ -75,7 +86,7 @@ export const FriendLinkApplication = ({ config, className = "" }: FriendLinkAppl
             {/* 右侧图标区域 */}
             <div
               className="relative hidden flex-shrink-0 overflow-hidden rounded-r-[calc(var(--radius)-1px)] bg-gradient-to-br from-primary/5 via-background to-primary/10 lg:flex lg:items-center lg:justify-center"
-              style={{ width: "25%", minWidth: "120px" }}
+              style={{ width: '25%', minWidth: '120px' }}
             >
               <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
                 <HandHeart className="h-10 w-10 text-primary" />
@@ -85,5 +96,5 @@ export const FriendLinkApplication = ({ config, className = "" }: FriendLinkAppl
         </Card>
       </Link>
     </div>
-  );
-};
+  )
+}

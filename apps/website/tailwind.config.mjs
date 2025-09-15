@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  extends: ['@repo/tailwind-config'],
+export default {
+  presets: [import('@repo/tailwind-config/nextjs')],
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     '../../packages/ui/src/**/*.{js,ts,jsx,tsx,mdx}',
