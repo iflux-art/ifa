@@ -1,22 +1,22 @@
-import { randomUUID } from 'node:crypto'
-import type { Server as HttpServer } from 'node:http'
-import type { WebSocket } from 'ws'
-import { WebSocketServer } from 'ws'
-import { loadAllLinksData } from '@/features/links/lib'
-import type { LinksItem } from '@/features/links/types'
+import { randomUUID } from "node:crypto";
+import type { Server as HttpServer } from "node:http";
+import type { WebSocket } from "ws";
+import { WebSocketServer } from "ws";
+import { loadAllLinksData } from "@/features/links/lib";
+import type { LinksItem } from "@/features/links/types";
 
 // 消息类型接口
 interface WebSocketMessage {
-  type: string
-  payload?: unknown
-  timestamp: number
-  version?: string
+  type: string;
+  payload?: unknown;
+  timestamp: number;
+  version?: string;
 }
 
 // 客户端消息接口
 interface ClientMessage {
-  type: string
-  version?: string
+  type: string;
+  version?: string;
 }
 
 /**
@@ -25,27 +25,27 @@ interface ClientMessage {
  * 用于实时推送链接数据更新
  */
 export class LinkDataWebSocketServer {
-  private wss: WebSocketServer
-  private clients: Map<string, WebSocket> = new Map()
-  private dataVersion = '1.0.0'
-  private data: LinksItem[] = []
+  private wss: WebSocketServer;
+  private clients: Map<string, WebSocket> = new Map();
+  private dataVersion = "1.0.0";
+  private data: LinksItem[] = [];
 
   constructor(server: HttpServer) {
     // 创建WebSocket服务器
     this.wss = new WebSocketServer({
       server,
-      path: '/ws/links',
-    })
+      path: "/ws/links",
+    });
 
     // 初始化数据和版本信息
-    this.initializeData().catch(err => {
-      console.error('Failed to initialize link data:', err)
-    })
+    this.initializeData().catch((err) => {
+      console.error("Failed to initialize link data:", err);
+    });
 
     // 设置连接处理程序
-    this.wss.on('connection', this.handleConnection.bind(this))
+    this.wss.on("connection", this.handleConnection.bind(this));
 
-    console.log('LinkDataWebSocketServer initialized')
+    console.log("LinkDataWebSocketServer initialized");
   }
 
   /**
@@ -54,17 +54,17 @@ export class LinkDataWebSocketServer {
   private async initializeData() {
     try {
       // 加载链接数据
-      this.data = await loadAllLinksData()
+      this.data = await loadAllLinksData();
 
       // 使用时间戳作为版本号
-      this.dataVersion = new Date().toISOString()
+      this.dataVersion = new Date().toISOString();
 
       console.log(
-        `LinkDataWebSocketServer initialized with version ${this.dataVersion}`
-      )
+        `LinkDataWebSocketServer initialized with version ${this.dataVersion}`,
+      );
     } catch (error) {
-      console.error('Failed to initialize data:', error)
-      throw error
+      console.error("Failed to initialize data:", error);
+      throw error;
     }
   }
 
@@ -73,45 +73,45 @@ export class LinkDataWebSocketServer {
    */
   private handleConnection(ws: WebSocket) {
     // 为新客户端生成ID
-    const clientId = randomUUID()
-    this.clients.set(clientId, ws)
+    const clientId = randomUUID();
+    this.clients.set(clientId, ws);
 
     console.log(
-      `New client connected: ${clientId}, total clients: ${this.clients.size}`
-    )
+      `New client connected: ${clientId}, total clients: ${this.clients.size}`,
+    );
 
     // 设置消息处理程序
-    ws.on('message', (message: string) => {
+    ws.on("message", (message: string) => {
       try {
-        const data: ClientMessage = JSON.parse(message)
-        this.handleClientMessage(clientId, ws, data)
+        const data: ClientMessage = JSON.parse(message);
+        this.handleClientMessage(clientId, ws, data);
       } catch (error) {
-        console.error('Failed to parse client message:', error)
-        this.sendError(ws, 'Invalid message format')
+        console.error("Failed to parse client message:", error);
+        this.sendError(ws, "Invalid message format");
       }
-    })
+    });
 
     // 设置关闭处理程序
-    ws.on('close', () => {
-      console.log(`Client disconnected: ${clientId}`)
-      this.clients.delete(clientId)
-    })
+    ws.on("close", () => {
+      console.log(`Client disconnected: ${clientId}`);
+      this.clients.delete(clientId);
+    });
 
     // 设置错误处理程序
-    ws.on('error', (error: Error) => {
-      console.error(`WebSocket error for client ${clientId}:`, error)
-      this.clients.delete(clientId)
-    })
+    ws.on("error", (error: Error) => {
+      console.error(`WebSocket error for client ${clientId}:`, error);
+      this.clients.delete(clientId);
+    });
 
     // 发送连接成功消息
     this.sendMessage(ws, {
-      type: 'connect',
+      type: "connect",
       timestamp: Date.now(),
       payload: {
         clientId,
-        message: 'Connected to links data WebSocket server',
+        message: "Connected to links data WebSocket server",
       },
-    })
+    });
   }
 
   /**
@@ -120,25 +120,25 @@ export class LinkDataWebSocketServer {
   private handleClientMessage(
     clientId: string,
     ws: WebSocket,
-    message: ClientMessage
+    message: ClientMessage,
   ) {
     // 确保消息有有效的类型
     if (!message.type) {
-      this.sendError(ws, 'Missing message type')
-      return
+      this.sendError(ws, "Missing message type");
+      return;
     }
 
     switch (message.type) {
-      case 'sync':
-        this.handleSyncRequest(ws, message)
-        break
+      case "sync":
+        this.handleSyncRequest(ws, message);
+        break;
 
       default:
         console.warn(
           `Unknown message type from client ${clientId}:`,
-          message.type
-        )
-        this.sendError(ws, `Unknown message type: ${message.type}`)
+          message.type,
+        );
+        this.sendError(ws, `Unknown message type: ${message.type}`);
     }
   }
 
@@ -146,17 +146,17 @@ export class LinkDataWebSocketServer {
    * 处理同步请求
    */
   private handleSyncRequest(ws: WebSocket, message: ClientMessage) {
-    const clientVersion = message.version || '0'
+    const clientVersion = message.version || "0";
 
     // 检查客户端版本是否需要更新
     if (clientVersion !== this.dataVersion) {
       console.log(
-        `Client version (${clientVersion}) differs from server version (${this.dataVersion})`
-      )
+        `Client version (${clientVersion}) differs from server version (${this.dataVersion})`,
+      );
 
       // 始终发送全量更新
       this.sendMessage(ws, {
-        type: 'sync',
+        type: "sync",
         timestamp: Date.now(),
         version: this.dataVersion,
         payload: {
@@ -164,19 +164,19 @@ export class LinkDataWebSocketServer {
           isIncremental: false,
           items: this.data,
         },
-      })
+      });
     }
     // 客户端版本是最新的
     else {
       this.sendMessage(ws, {
-        type: 'sync',
+        type: "sync",
         timestamp: Date.now(),
         version: this.dataVersion,
         payload: {
           needsUpdate: false,
-          message: 'Client is up to date',
+          message: "Client is up to date",
         },
-      })
+      });
     }
   }
 
@@ -186,7 +186,7 @@ export class LinkDataWebSocketServer {
   private sendMessage(ws: WebSocket, message: WebSocketMessage) {
     if (ws.readyState === 1) {
       // WebSocket.OPEN
-      ws.send(JSON.stringify(message))
+      ws.send(JSON.stringify(message));
     }
   }
 
@@ -194,9 +194,9 @@ export class LinkDataWebSocketServer {
    * 向所有连接的客户端广播消息
    */
   public broadcastMessage(message: WebSocketMessage) {
-    this.clients.forEach(client => {
-      this.sendMessage(client, message)
-    })
+    this.clients.forEach((client) => {
+      this.sendMessage(client, message);
+    });
   }
 
   /**
@@ -204,12 +204,12 @@ export class LinkDataWebSocketServer {
    */
   private sendError(ws: WebSocket, errorMessage: string) {
     this.sendMessage(ws, {
-      type: 'error',
+      type: "error",
       timestamp: Date.now(),
       payload: {
         message: errorMessage,
       },
-    })
+    });
   }
 
   /**
@@ -217,42 +217,42 @@ export class LinkDataWebSocketServer {
    */
   public broadcastUpdate(items: LinksItem[]) {
     // 更新数据版本
-    this.dataVersion = new Date().toISOString()
+    this.dataVersion = new Date().toISOString();
 
     // 更新内存中的数据
     // 更新指定项
-    items.forEach(updatedItem => {
-      const index = this.data.findIndex(item => item.id === updatedItem.id)
+    items.forEach((updatedItem) => {
+      const index = this.data.findIndex((item) => item.id === updatedItem.id);
       if (index !== -1) {
-        this.data[index] = updatedItem
+        this.data[index] = updatedItem;
       } else {
-        this.data.push(updatedItem)
+        this.data.push(updatedItem);
       }
-    })
+    });
 
     // 广播更新
     this.broadcastMessage({
-      type: 'update',
+      type: "update",
       timestamp: Date.now(),
       version: this.dataVersion,
       payload: {
         items,
-        message: 'Links data updated',
+        message: "Links data updated",
       },
-    })
+    });
   }
 
   /**
    * 获取连接的客户端数量
    */
   public getClientCount(): number {
-    return this.clients.size
+    return this.clients.size;
   }
 
   /**
    * 获取当前数据版本
    */
   public getDataVersion(): string {
-    return this.dataVersion
+    return this.dataVersion;
   }
 }

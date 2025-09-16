@@ -16,10 +16,10 @@ export const CACHE_CONFIG = {
 
   // 不缓存
   noCache: 0,
-} as const
+} as const;
 
 // 缓存策略类型
-export type CacheStrategy = keyof typeof CACHE_CONFIG
+export type CacheStrategy = keyof typeof CACHE_CONFIG;
 
 /**
  * 生成Cache-Control头值
@@ -30,22 +30,22 @@ export type CacheStrategy = keyof typeof CACHE_CONFIG
  */
 export function generateCacheControl(
   strategy: CacheStrategy,
-  isPublic = true
+  isPublic = true,
 ): string {
-  const maxAge = CACHE_CONFIG[strategy] / 1000 // 转换为秒
+  const maxAge = CACHE_CONFIG[strategy] / 1000; // 转换为秒
 
   if (maxAge === 0) {
-    return 'no-store, max-age=0'
+    return "no-store, max-age=0";
   }
 
   const directives = [
-    isPublic ? 'public' : 'private',
+    isPublic ? "public" : "private",
     `max-age=${maxAge}`,
     `s-maxage=${Math.floor(maxAge * 2)}`, // CDN缓存时间是浏览器的2倍
     `stale-while-revalidate=${Math.floor(maxAge * 10)}`, // 允许在后台重新验证时使用陈旧数据
-  ]
+  ];
 
-  return directives.join(', ')
+  return directives.join(", ");
 }
 
 /**
@@ -57,11 +57,11 @@ export function generateCacheControl(
  */
 export function setCacheHeaders(
   strategy: CacheStrategy,
-  isPublic = true
+  isPublic = true,
 ): Headers {
-  const headers = new Headers()
-  headers.set('Cache-Control', generateCacheControl(strategy, isPublic))
-  return headers
+  const headers = new Headers();
+  headers.set("Cache-Control", generateCacheControl(strategy, isPublic));
+  return headers;
 }
 
 /**
@@ -72,12 +72,12 @@ export function setCacheHeaders(
  */
 export function getCacheStrategy(contentType: string): CacheStrategy {
   switch (contentType) {
-    case 'docs-structure':
-    case 'links-data':
-      return 'semiStatic'
-    case 'search-results':
-      return 'dynamic'
+    case "docs-structure":
+    case "links-data":
+      return "semiStatic";
+    case "search-results":
+      return "dynamic";
     default:
-      return 'noCache'
+      return "noCache";
   }
 }

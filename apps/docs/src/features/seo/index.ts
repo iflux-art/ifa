@@ -9,7 +9,7 @@ export {
   generateMetadata,
   generateProfileMetadata,
   generateViewport,
-} from './metadata'
+} from "./metadata";
 
 // SEO 工具函数
-export { generateDocsMetadata, generateSEOMetadata } from './seo-utils'
+export { generateDocsMetadata, generateSEOMetadata } from "./seo-utils";

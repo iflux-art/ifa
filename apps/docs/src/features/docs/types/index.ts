@@ -7,41 +7,41 @@
 /** 文档分类 */
 export interface DocCategory {
   /** 分类 ID */
-  id: string
+  id: string;
   /** 分类名称 */
-  name: string
+  name: string;
   /** 分类标题 */
-  title: string
+  title: string;
   /** 分类 slug */
-  slug: string
+  slug: string;
   /** 分类描述 */
-  description?: string
+  description?: string;
   /** 文档数量 */
-  count?: number
+  count?: number;
   /** 分类排序 */
-  order?: number
+  order?: number;
   /** 分类图标 */
-  icon?: string
+  icon?: string;
 }
 
 export interface DocContentBase {
   /** 文档标题 */
-  title: string
+  title: string;
   /** 文档路径 */
-  path?: string
+  path?: string;
   /** 文档描述 */
-  description?: string
+  description?: string;
   /** 文档分类 */
-  category?: string
+  category?: string;
   /** 是否为索引页 */
-  isIndex?: boolean
+  isIndex?: boolean;
 }
 
 export interface DocFrontmatter extends DocContentBase {
-  date?: string
-  update?: string
-  tags?: string[]
-  [key: string]: unknown
+  date?: string;
+  update?: string;
+  tags?: string[];
+  [key: string]: unknown;
 }
 
 /**
@@ -50,106 +50,106 @@ export interface DocFrontmatter extends DocContentBase {
  * @returns 转换后的 DocFrontmatter 对象
  */
 export function toDocFrontmatter<T extends Record<string, unknown>>(
-  obj: T
+  obj: T,
 ): DocFrontmatter {
   return {
     ...obj,
-    title: (obj.title as string) ?? '',
-  } as DocFrontmatter
+    title: (obj.title as string) ?? "",
+  } as DocFrontmatter;
 }
 
 /** 文档标题 */
 export interface Heading {
   /** 标题ID */
-  id: string
+  id: string;
   /** 标题文本 */
-  text: string
+  text: string;
   /** 标题内容 */
-  content: string
+  content: string;
   /** 标题级别 */
-  level: number
+  level: number;
 }
 
 export interface DocItem extends DocContentBase {
   /** 文档内容 */
-  content: string
+  content: string;
   /** 文档元数据 */
-  frontmatter: DocFrontmatter
+  frontmatter: DocFrontmatter;
   /** 文档标题 */
-  headings: Heading[]
+  headings: Heading[];
   /** 文档深度 */
-  depth?: number
+  depth?: number;
   /** 文档 slug */
-  slug?: string
+  slug?: string;
   /** 文档日期 */
-  date?: string | null
+  date?: string | null;
 }
 
 export interface DocTreeNode extends DocContentBase {
-  children?: DocTreeNode[]
+  children?: DocTreeNode[];
 }
 
 // ================= 文档导航相关类型 =================
 export interface DocNavBase {
-  title: string
-  path: string
+  title: string;
+  path: string;
 }
 
 export interface SidebarItem extends DocNavBase {
-  items?: SidebarItem[]
-  collapsed?: boolean
-  type?: 'separator' | 'page' | 'menu'
-  isExternal?: boolean
-  href?: string
-  filePath?: string
+  items?: SidebarItem[];
+  collapsed?: boolean;
+  type?: "separator" | "page" | "menu";
+  isExternal?: boolean;
+  href?: string;
+  filePath?: string;
 }
 
 export interface NavDocItem extends DocNavBase {
-  isNext?: boolean
-  [key: string]: unknown
+  isNext?: boolean;
+  [key: string]: unknown;
 }
 
 // ================= 保留原有类型别名以保持兼容 =================
 
 export type DocListItem = Pick<
   DocItem,
-  'title' | 'description' | 'path' | 'category'
+  "title" | "description" | "path" | "category"
 > & {
-  slug?: string
-  date?: string | null
-  isActive?: boolean
-  isParent?: boolean
-}
+  slug?: string;
+  date?: string | null;
+  isActive?: boolean;
+  isParent?: boolean;
+};
 
 export type DocContentResult = DocItem & {
-  prevDoc: NavDocItem | null
-  nextDoc: NavDocItem | null
-  breadcrumbs: unknown[]
-  mdxContent: React.ReactNode
-  wordCount: number
-  date: string | null
-  update?: string | null
-  relativePathFromTopCategory: string
-  topLevelCategorySlug: string
-  isIndexPage: boolean
-}
+  prevDoc: NavDocItem | null;
+  nextDoc: NavDocItem | null;
+  breadcrumbs: unknown[];
+  mdxContent: React.ReactNode;
+  wordCount: number;
+  date: string | null;
+  update?: string | null;
+  relativePathFromTopCategory: string;
+  topLevelCategorySlug: string;
+  isIndexPage: boolean;
+};
 
 // ================= 文档搜索相关类型 =================
 
 /** 文档搜索结果 */
 export interface DocSearchResult {
   /** 文档标题 */
-  title: string
+  title: string;
   /** 文档路径 */
-  path: string
+  path: string;
   /** 文档摘要 */
-  excerpt: string
+  excerpt: string;
 }
 
 /** 文档搜索参数 */
 export interface DocSearchParams {
   /** 搜索查询 */
-  query: string
+  query: string;
   /** 搜索限制 */
-  limit?: number
+  limit?: number;
 }

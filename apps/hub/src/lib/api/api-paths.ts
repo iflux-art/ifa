@@ -6,42 +6,42 @@
 // 内容API路径
 export const CONTENT_API_PATHS = {
   // 链接相关
-  Links: '/api/links',
+  Links: "/api/links",
   Link: (id: string) => `/api/links/${id}`,
-  LinkCategories: '/api/links/categories',
-} as const
+  LinkCategories: "/api/links/categories",
+} as const;
 
 // 搜索API路径
 export const SEARCH_API_PATHS = {
-  Search: '/api/search',
-} as const
+  Search: "/api/search",
+} as const;
 
 // 博客API路径
 export const BLOG_API_PATHS = {
-  Posts: '/api/blog/posts',
-  TagsCount: '/api/blog/tags',
-  Timeline: '/api/blog/timeline',
-} as const
+  Posts: "/api/blog/posts",
+  TagsCount: "/api/blog/tags",
+  Timeline: "/api/blog/timeline",
+} as const;
 
 // 用户API路径
 export const USER_API_PATHS = {
-  Profile: '/api/user/profile',
-  Settings: '/api/user/settings',
-  Preferences: '/api/user/preferences',
-} as const
+  Profile: "/api/user/profile",
+  Settings: "/api/user/settings",
+  Preferences: "/api/user/preferences",
+} as const;
 
 // 分析API路径
 export const ANALYTICS_API_PATHS = {
-  PageViews: '/api/analytics/page-views',
-  UserActivity: '/api/analytics/user-activity',
-} as const
+  PageViews: "/api/analytics/page-views",
+  UserActivity: "/api/analytics/user-activity",
+} as const;
 
 // 通知API路径
 export const NOTIFICATION_API_PATHS = {
-  Notifications: '/api/notifications',
+  Notifications: "/api/notifications",
   Notification: (id: string) => `/api/notifications/${id}`,
-  MarkAsRead: '/api/notifications/mark-as-read',
-} as const
+  MarkAsRead: "/api/notifications/mark-as-read",
+} as const;
 
 // 导出API_PATHS以保持向后兼容性
 export const API_PATHS = {
@@ -52,4 +52,4 @@ export const API_PATHS = {
   analytics: ANALYTICS_API_PATHS,
   notification: NOTIFICATION_API_PATHS,
   docs: CONTENT_API_PATHS, // 为文档API提供别名以保持向后兼容性
-} as const
+} as const;

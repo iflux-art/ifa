@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
-import { useCallback, useEffect, useRef } from 'react'
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef } from "react";
 
 interface UseRoutePrefetchOptions {
   /** 预取延迟时间（毫秒） */
-  prefetchDelay?: number
+  prefetchDelay?: number;
   /** 是否在组件挂载时立即预取 */
-  prefetchOnMount?: boolean
+  prefetchOnMount?: boolean;
   /** 是否在空闲时预取 */
-  prefetchOnIdle?: boolean
+  prefetchOnIdle?: boolean;
 }
 
 /**
@@ -20,94 +20,94 @@ interface UseRoutePrefetchOptions {
  */
 export function useRoutePrefetch(
   routes: string[],
-  options: UseRoutePrefetchOptions = {}
+  options: UseRoutePrefetchOptions = {},
 ) {
-  const router = useRouter()
-  const prefetchedRoutes = useRef<Set<string>>(new Set())
+  const router = useRouter();
+  const prefetchedRoutes = useRef<Set<string>>(new Set());
 
   const {
     prefetchDelay = 0,
     prefetchOnMount = false,
     prefetchOnIdle = true,
-  } = options
+  } = options;
 
   // 预取路由
   const prefetchRoute = useCallback(
     (route: string) => {
-      if (prefetchedRoutes.current.has(route)) return
+      if (prefetchedRoutes.current.has(route)) return;
 
       try {
-        router.prefetch(route)
-        prefetchedRoutes.current.add(route)
+        router.prefetch(route);
+        prefetchedRoutes.current.add(route);
       } catch (error) {
-        console.warn(`Failed to prefetch route: ${route}`, error)
+        console.warn(`Failed to prefetch route: ${route}`, error);
       }
     },
-    [router]
-  )
+    [router],
+  );
 
   // 延迟预取路由
   const prefetchRouteWithDelay = useCallback(
     (route: string, delay: number = prefetchDelay) => {
       if (delay > 0) {
         setTimeout(() => {
-          prefetchRoute(route)
-        }, delay)
+          prefetchRoute(route);
+        }, delay);
       } else {
-        prefetchRoute(route)
+        prefetchRoute(route);
       }
     },
-    [prefetchDelay, prefetchRoute]
-  )
+    [prefetchDelay, prefetchRoute],
+  );
 
   // 预取所有路由
   const prefetchAllRoutes = useCallback(() => {
-    routes.forEach(route => {
-      prefetchRouteWithDelay(route)
-    })
-  }, [routes, prefetchRouteWithDelay])
+    routes.forEach((route) => {
+      prefetchRouteWithDelay(route);
+    });
+  }, [routes, prefetchRouteWithDelay]);
 
   // 在组件挂载时预取
   useEffect(() => {
     if (prefetchOnMount) {
-      prefetchAllRoutes()
+      prefetchAllRoutes();
     }
-  }, [prefetchOnMount, prefetchAllRoutes])
+  }, [prefetchOnMount, prefetchAllRoutes]);
 
   // 在空闲时预取
   useEffect(() => {
     if (
       prefetchOnIdle &&
-      typeof window !== 'undefined' &&
-      'requestIdleCallback' in window
+      typeof window !== "undefined" &&
+      "requestIdleCallback" in window
     ) {
       const idleCallback = window.requestIdleCallback(() => {
-        prefetchAllRoutes()
-      })
+        prefetchAllRoutes();
+      });
 
       return () => {
-        window.cancelIdleCallback(idleCallback)
-      }
+        window.cancelIdleCallback(idleCallback);
+      };
     }
     if (prefetchOnIdle) {
       // 如果不支持 requestIdleCallback，使用 setTimeout 作为备选
       const timeout = setTimeout(() => {
-        prefetchAllRoutes()
-      }, 1000)
+        prefetchAllRoutes();
+      }, 1000);
 
       return () => {
-        clearTimeout(timeout)
-      }
+        clearTimeout(timeout);
+      };
     }
     // 默认返回空的清理函数
     return () => {
       // 无操作清理函数
-    }
-  }, [prefetchOnIdle, prefetchAllRoutes])
+    };
+  }, [prefetchOnIdle, prefetchAllRoutes]);
 
   return {
     prefetchRoute,
     prefetchRouteWithDelay,
     prefetchAllRoutes,
-  }
+  };
 }

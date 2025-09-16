@@ -12,12 +12,16 @@ export {
   NavLink,
   NavListMenu,
   // HamburgerMenu 和 NavCardMenu 已移除
-} from './components'
-export type { NavConfigItem } from './components/nav-config'
+} from "./components";
+export type { NavConfigItem } from "./components/nav-config";
 // 配置和类型导出
-export { NAV_DESCRIPTIONS, NAV_ITEMS, NAV_PATHS } from './components/nav-config'
+export {
+  NAV_DESCRIPTIONS,
+  NAV_ITEMS,
+  NAV_PATHS,
+} from "./components/nav-config";
 // Hooks 导出
-export { useActiveSection, useNavbarScroll } from './hooks'
+export { useActiveSection, useNavbarScroll } from "./hooks";
 // 类型导出
 export type {
   BaseNavItem,
@@ -28,4 +32,4 @@ export type {
   NestedNavItem,
   SidebarItem,
   SidebarProps,
-} from './types'
+} from "./types";

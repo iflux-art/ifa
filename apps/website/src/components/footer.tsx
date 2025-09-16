@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { cn } from '@/utils'
+import { cn } from "@/utils";
 
 /**
  * 底栏组件
@@ -9,9 +9,9 @@ import { cn } from '@/utils'
 export const Footer = () => (
   <footer
     className={cn(
-      'w-full py-4 md:py-6',
-      'border-t border-border/30',
-      'bg-transparent'
+      "w-full py-4 md:py-6",
+      "border-t border-border/30",
+      "bg-transparent",
     )}
   >
     <div className="container mx-auto flex items-center justify-center px-4">
@@ -20,4 +20,4 @@ export const Footer = () => (
       </div>
     </div>
   </footer>
-)
+);

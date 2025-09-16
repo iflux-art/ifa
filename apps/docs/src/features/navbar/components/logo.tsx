@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 export const Logo = () => (
   <a
@@ -12,4 +12,4 @@ export const Logo = () => (
       iFluxArt
     </h2>
   </a>
-)
+);

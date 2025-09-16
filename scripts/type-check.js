@@ -1,99 +1,61 @@
 #!/usr/bin/env node
 
-const { spawn } = require('node:child_process')
-const path = require('node:path')
-const fs = require('node:fs')
-
 /**
- * TypeScript type checking script for monorepo
- * Runs type checking across all packages and apps
+ * Type check script for running type checking across the monorepo
+ * This script runs tsc --noEmit for all packages and apps
  */
 
-const workspaces = [
+const { spawn } = require('child_process')
+const path = require('path')
+
+// Packages to type check
+const packages = [
   'packages/ui',
   'packages/utils',
-  'packages/typescript-config',
-  'packages/biome-config',
-  'packages/tailwind-config',
   'apps/website',
   'apps/blog',
   'apps/docs',
+  'apps/hub',
 ]
 
-async function runTypeCheck() {
-  console.log('🔍 Running TypeScript type checking across monorepo...\n')
+// Function to run type checking for a package
+function typeCheckPackage(packagePath) {
+  return new Promise((resolve, reject) => {
+    const packageDir = path.join(process.cwd(), packagePath)
+    const child = spawn('pnpm', ['type-check'], {
+      cwd: packageDir,
+      stdio: 'inherit',
+      shell: true,
+    })
 
-  let hasErrors = false
+    child.on('close', code => {
+      if (code === 0) {
+        resolve()
+      } else {
+        reject(new Error(`Type check failed for ${packagePath}`))
+      }
+    })
 
-  for (const workspace of workspaces) {
-    const workspacePath = path.join(process.cwd(), workspace)
-    const tsconfigPath = path.join(workspacePath, 'tsconfig.json')
-
-    // Skip if no tsconfig.json exists
-    if (!fs.existsSync(tsconfigPath)) {
-      console.log(`⏭️  Skipping ${workspace} (no tsconfig.json)`)
-      continue
-    }
-
-    console.log(`🔍 Type checking ${workspace}...`)
-
-    try {
-      await new Promise((resolve, _reject) => {
-        const tsc = spawn('npx', ['tsc', '--noEmit'], {
-          cwd: workspacePath,
-          stdio: 'pipe',
-        })
-
-        let output = ''
-        let errorOutput = ''
-
-        tsc.stdout.on('data', data => {
-          output += data.toString()
-        })
-
-        tsc.stderr.on('data', data => {
-          errorOutput += data.toString()
-        })
-
-        tsc.on('close', code => {
-          if (code === 0) {
-            console.log(`✅ ${workspace} - Type checking passed`)
-            resolve()
-          } else {
-            console.log(`❌ ${workspace} - Type checking failed`)
-            if (output) console.log(output)
-            if (errorOutput) console.log(errorOutput)
-            hasErrors = true
-            resolve() // Continue with other workspaces
-          }
-        })
-
-        tsc.on('error', error => {
-          console.log(
-            `❌ ${workspace} - Failed to run type check: ${error.message}`
-          )
-          hasErrors = true
-          resolve()
-        })
-      })
-    } catch (error) {
-      console.log(`❌ ${workspace} - Error: ${error.message}`)
-      hasErrors = true
-    }
-
-    console.log('')
-  }
-
-  if (hasErrors) {
-    console.log('❌ Type checking completed with errors')
-    process.exit(1)
-  } else {
-    console.log('✅ All type checks passed!')
-    process.exit(0)
-  }
+    child.on('error', reject)
+  })
 }
 
-runTypeCheck().catch(error => {
-  console.error('Failed to run type checking:', error)
-  process.exit(1)
-})
+// Run type checking for all packages
+async function runTypeCheck() {
+  console.log('Running type checking for all packages...\n')
+
+  for (const pkg of packages) {
+    try {
+      console.log(`🔍 Type checking ${pkg}...`)
+      await typeCheckPackage(pkg)
+      console.log(`✅ ${pkg} type check passed\n`)
+    } catch (error) {
+      console.error(`❌ ${pkg} type check failed`)
+      process.exit(1)
+    }
+  }
+
+  console.log('🎉 All packages passed type checking!')
+}
+
+runTypeCheck()

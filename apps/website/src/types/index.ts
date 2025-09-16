@@ -6,4 +6,4 @@ export type {
   PageLayoutProps,
   PageLayoutType,
   PageProps,
-} from './layout-types'
+} from "./layout-types";

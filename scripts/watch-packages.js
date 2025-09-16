@@ -67,34 +67,6 @@ const packages = {
     buildCommand: ['pnpm', 'turbo', 'run', 'build', '--filter=@repo/utils'],
     dependents: ['@repo/ui', '@repo/website', '@repo/blog', '@repo/docs'],
   },
-  'packages/typescript-config': {
-    name: '@repo/typescript-config',
-    buildCommand: [
-      'pnpm',
-      'turbo',
-      'run',
-      'build',
-      '--filter=@repo/typescript-config',
-    ],
-    dependents: [
-      '@repo/ui',
-      '@repo/utils',
-      '@repo/website',
-      '@repo/blog',
-      '@repo/docs',
-    ],
-  },
-  'packages/tailwind-config': {
-    name: '@repo/tailwind-config',
-    buildCommand: [
-      'pnpm',
-      'turbo',
-      'run',
-      'build',
-      '--filter=@repo/tailwind-config',
-    ],
-    dependents: ['@repo/ui', '@repo/website', '@repo/blog', '@repo/docs'],
-  },
 }
 
 // Debounced rebuild functions for each package

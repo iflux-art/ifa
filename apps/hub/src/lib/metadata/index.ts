@@ -6,5 +6,5 @@ export {
   generateArticleMetadata,
   generateMetadata,
   generateViewport,
-} from './metadata'
-export { generateSEOMetadata } from './seo-utils'
+} from "./metadata";
+export { generateSEOMetadata } from "./seo-utils";

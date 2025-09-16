@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import {
   Card,
   CardContent,
@@ -7,10 +7,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../components/card'
+} from "../components/card";
 
-describe('Card Components', () => {
-  it('renders card with all components', () => {
+describe("Card Components", () => {
+  it("renders card with all components", () => {
     render(
       <Card>
         <CardHeader>
@@ -23,16 +23,16 @@ describe('Card Components', () => {
         <CardFooter>
           <button type="button">Action</button>
         </CardFooter>
-      </Card>
-    )
+      </Card>,
+    );
 
-    expect(screen.getByText('Card Title')).toBeInTheDocument()
-    expect(screen.getByText('Card Description')).toBeInTheDocument()
-    expect(screen.getByText('Card content goes here')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Action' })).toBeInTheDocument()
-  })
+    expect(screen.getByText("Card Title")).toBeInTheDocument();
+    expect(screen.getByText("Card Description")).toBeInTheDocument();
+    expect(screen.getByText("Card content goes here")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Action" })).toBeInTheDocument();
+  });
 
-  it('applies correct CSS classes', () => {
+  it("applies correct CSS classes", () => {
     render(
       <Card data-testid="card">
         <CardHeader data-testid="header">
@@ -43,51 +43,54 @@ describe('Card Components', () => {
         </CardHeader>
         <CardContent data-testid="content">Content</CardContent>
         <CardFooter data-testid="footer">Footer</CardFooter>
-      </Card>
-    )
+      </Card>,
+    );
 
-    expect(screen.getByTestId('card')).toHaveClass(
-      'rounded-lg',
-      'border',
-      'bg-card'
-    )
-    expect(screen.getByTestId('header')).toHaveClass(
-      'flex',
-      'flex-col',
-      'space-y-1.5',
-      'p-6'
-    )
-    expect(screen.getByTestId('title')).toHaveClass('text-2xl', 'font-semibold')
-    expect(screen.getByTestId('description')).toHaveClass(
-      'text-sm',
-      'text-muted-foreground'
-    )
-    expect(screen.getByTestId('content')).toHaveClass('p-6', 'pt-0')
-    expect(screen.getByTestId('footer')).toHaveClass(
-      'flex',
-      'items-center',
-      'p-6',
-      'pt-0'
-    )
-  })
+    expect(screen.getByTestId("card")).toHaveClass(
+      "rounded-lg",
+      "border",
+      "bg-card",
+    );
+    expect(screen.getByTestId("header")).toHaveClass(
+      "flex",
+      "flex-col",
+      "space-y-1.5",
+      "p-6",
+    );
+    expect(screen.getByTestId("title")).toHaveClass(
+      "text-2xl",
+      "font-semibold",
+    );
+    expect(screen.getByTestId("description")).toHaveClass(
+      "text-sm",
+      "text-muted-foreground",
+    );
+    expect(screen.getByTestId("content")).toHaveClass("p-6", "pt-0");
+    expect(screen.getByTestId("footer")).toHaveClass(
+      "flex",
+      "items-center",
+      "p-6",
+      "pt-0",
+    );
+  });
 
-  it('accepts custom className', () => {
+  it("accepts custom className", () => {
     render(
       <Card className="custom-class" data-testid="card">
         Content
-      </Card>
-    )
-    expect(screen.getByTestId('card')).toHaveClass('custom-class')
-  })
+      </Card>,
+    );
+    expect(screen.getByTestId("card")).toHaveClass("custom-class");
+  });
 
-  it('renders minimal card structure', () => {
+  it("renders minimal card structure", () => {
     render(
       <Card data-testid="card">
         <CardContent>Simple content</CardContent>
-      </Card>
-    )
+      </Card>,
+    );
 
-    expect(screen.getByTestId('card')).toBeInTheDocument()
-    expect(screen.getByText('Simple content')).toBeInTheDocument()
-  })
-})
+    expect(screen.getByTestId("card")).toBeInTheDocument();
+    expect(screen.getByText("Simple content")).toBeInTheDocument();
+  });
+});

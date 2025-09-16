@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
-import { Footer } from '@/components'
-import { SITE_METADATA } from '@/config'
-import { MainNavbar } from '@/features/navbar'
-import { ThemeProvider } from '@/features/theme'
-import './globals.css'
+import type { Metadata } from "next";
+import { Footer } from "@/components";
+import { SITE_METADATA } from "@/config";
+import { MainNavbar } from "@/features/navbar";
+import { ThemeProvider } from "@/features/theme";
+import "./globals.css";
 
 // 转换 SITE_METADATA 为 Next.js Metadata 格式
 export const metadata: Metadata = {
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   publisher: SITE_METADATA.author,
   metadataBase: new URL(SITE_METADATA.url),
   openGraph: {
-    type: 'website',
-    locale: 'zh_CN',
+    type: "website",
+    locale: "zh_CN",
     url: SITE_METADATA.url,
     title: SITE_METADATA.title,
     description: SITE_METADATA.description,
@@ -31,18 +31,18 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: SITE_METADATA.title,
     description: SITE_METADATA.description,
     images: [SITE_METADATA.image],
     creator: SITE_METADATA.twitter,
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
@@ -61,5 +61,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

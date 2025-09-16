@@ -4,34 +4,34 @@
  * 内联所有相关类型和逻辑，避免过度抽象
  */
 
-'use client'
+"use client";
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { forwardRef } from 'react'
-import { Badge } from '@/components/ui/badge'
-import { Card } from '@/components/ui/card'
-import { cn } from '@/utils'
+import Image from "next/image";
+import Link from "next/link";
+import { forwardRef } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/utils";
 
 // 内联文章卡片相关类型定义
 interface BlogCardProps {
-  title: string
-  description?: string
-  href: string
-  category?: string
-  tags?: string[]
-  cover?: string
-  date?: string
-  author?: string
-  className?: string
-  onCategoryClick?: (category: string) => void
-  onTagClick?: (tag: string) => void
+  title: string;
+  description?: string;
+  href: string;
+  category?: string;
+  tags?: string[];
+  cover?: string;
+  date?: string;
+  author?: string;
+  className?: string;
+  onCategoryClick?: (category: string) => void;
+  onTagClick?: (tag: string) => void;
 }
 
 // 分类徽章组件
 interface CategoryBadgeProps {
-  category: string
-  onCategoryClick?: (category: string) => void
+  category: string;
+  onCategoryClick?: (category: string) => void;
 }
 
 const CategoryBadge = ({ category, onCategoryClick }: CategoryBadgeProps) => (
@@ -39,52 +39,52 @@ const CategoryBadge = ({ category, onCategoryClick }: CategoryBadgeProps) => (
     <Badge
       variant="secondary"
       className="min-h-[28px] cursor-pointer touch-manipulation px-3 py-1 text-xs font-medium transition-colors hover:bg-primary hover:text-primary-foreground"
-      onClick={e => {
-        e.preventDefault()
-        e.stopPropagation()
-        onCategoryClick?.(category)
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onCategoryClick?.(category);
       }}
     >
       {category}
     </Badge>
   </div>
-)
+);
 
 // 标签列表组件
 interface TagBadgesProps {
-  tags: string[]
-  onTagClick?: (tag: string) => void
+  tags: string[];
+  onTagClick?: (tag: string) => void;
 }
 
 const TagBadges = ({ tags, onTagClick }: TagBadgesProps) => (
   <div className="mb-2 flex flex-wrap gap-1.5 sm:mb-3 sm:gap-2">
-    {tags.map(tag => (
+    {tags.map((tag) => (
       <Badge
         key={tag}
         variant="outline"
         className="min-h-[24px] cursor-pointer touch-manipulation border-muted-foreground/20 px-2 py-1 text-xs transition-colors hover:border-primary/30 hover:bg-accent/50"
-        onClick={e => {
-          e.preventDefault()
-          e.stopPropagation()
-          onTagClick?.(tag)
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onTagClick?.(tag);
         }}
       >
         {tag}
       </Badge>
     ))}
   </div>
-)
+);
 
 // 封面图片组件
 interface CoverImageProps {
-  cover: string
-  title: string
+  cover: string;
+  title: string;
 }
 
 const CoverImage = ({ cover, title }: CoverImageProps) => (
   <div
     className="relative hidden flex-shrink-0 overflow-hidden rounded-r-[calc(var(--radius)-1px)] bg-muted/30 lg:block"
-    style={{ width: '45%', aspectRatio: '4/3' }}
+    style={{ width: "45%", aspectRatio: "4/3" }}
   >
     <Image
       src={cover}
@@ -92,19 +92,19 @@ const CoverImage = ({ cover, title }: CoverImageProps) => (
       fill
       className="object-cover transition-transform duration-300 group-hover:scale-105"
       sizes="(max-width: 1024px) 0vw, 45vw"
-      onError={e => {
+      onError={(e) => {
         // 图片加载失败时隐藏图片容器
-        const img = e.target as HTMLImageElement
-        const container = img.closest('div')
+        const img = e.target as HTMLImageElement;
+        const container = img.closest("div");
         if (container) {
-          container.style.display = 'none'
+          container.style.display = "none";
         }
       }}
     />
     {/* 封面渐变遮罩效果 */}
     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
   </div>
-)
+);
 
 /**
  * 文章卡片组件
@@ -124,27 +124,27 @@ export const BlogCard = forwardRef<HTMLAnchorElement, BlogCardProps>(
       onCategoryClick,
       onTagClick,
     },
-    ref
+    ref,
   ) => (
     <Link ref={ref} href={href} className="block h-full">
       <Card
         className={cn(
-          'group h-full overflow-hidden border transition-all duration-300 hover:border-primary/50 hover:shadow-lg',
+          "group h-full overflow-hidden border transition-all duration-300 hover:border-primary/50 hover:shadow-lg",
           // 移动端触摸优化 - 更大的触摸区域和更好的反馈
-          'touch-manipulation active:scale-[0.98]',
+          "touch-manipulation active:scale-[0.98]",
           // 移动端最小高度确保一致性
-          'h-[240px]',
-          className
+          "h-[240px]",
+          className,
         )}
       >
         <div className="flex h-full">
           {/* 左侧内容区域 */}
           <div
             className={cn(
-              'flex flex-1 flex-col p-3 sm:p-4 md:p-5 lg:p-6',
+              "flex flex-1 flex-col p-3 sm:p-4 md:p-5 lg:p-6",
               // 移动端始终占满宽度，桌面端根据是否有封面调整
-              'w-full',
-              cover ? 'lg:w-auto lg:flex-1' : ''
+              "w-full",
+              cover ? "lg:w-auto lg:flex-1" : "",
             )}
           >
             {/* Category Badge - Above title */}
@@ -186,7 +186,7 @@ export const BlogCard = forwardRef<HTMLAnchorElement, BlogCardProps>(
         </div>
       </Card>
     </Link>
-  )
-)
+  ),
+);
 
-BlogCard.displayName = 'BlogCard'
+BlogCard.displayName = "BlogCard";

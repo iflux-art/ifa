@@ -1,28 +1,28 @@
-'use client'
+"use client";
 
-import { AppGrid } from '@/components/app-grid'
-import { LinkCard } from '@/components/link-card'
-import profileData from '../data/profile.json'
+import { AppGrid } from "@/components/app-grid";
+import { LinkCard } from "@/components/link-card";
+import profileData from "../data/profile.json";
 
 // 定义个人资料链接类型
 interface ProfileLink {
-  id: string
-  title: string
-  url: string
-  description?: string
-  icon?: string
-  iconType?: 'image' | 'text'
+  id: string;
+  title: string;
+  url: string;
+  description?: string;
+  icon?: string;
+  iconType?: "image" | "text";
 }
 
 export const FeaturedLinks = () => {
   // 处理个人资料数据，转换为 ProfileLink 格式
-  const profileItems: ProfileLink[] = profileData.map(item => {
-    const typedItem = item as ProfileLink & { iconType?: 'image' | 'text' }
+  const profileItems: ProfileLink[] = profileData.map((item) => {
+    const typedItem = item as ProfileLink & { iconType?: "image" | "text" };
     return {
       ...typedItem,
-      iconType: typedItem.iconType ?? 'image',
-    }
-  })
+      iconType: typedItem.iconType ?? "image",
+    };
+  });
 
   return (
     <section className="py-12 bg-background">
@@ -34,7 +34,7 @@ export const FeaturedLinks = () => {
 
         {profileItems.length > 0 && (
           <AppGrid columns={5} className="items-stretch">
-            {profileItems.map(item => (
+            {profileItems.map((item) => (
               <LinkCard
                 key={item.id}
                 title={item.title}
@@ -48,5 +48,5 @@ export const FeaturedLinks = () => {
         )}
       </div>
     </section>
-  )
-}
+  );
+};

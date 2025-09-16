@@ -1,32 +1,32 @@
-import { DocPagination } from '@/components'
-import type { BreadcrumbItem } from '@/components/breadcrumb'
-import { Breadcrumb } from '@/components/breadcrumb'
-import { ContentDisplay } from '@/components/content-display'
-import { TwikooComment } from '@/features/comment'
-import { DocsSidebarCard } from '@/features/docs/components'
-import { createDocBreadcrumbsServer } from '@/features/docs/lib'
-import type { Heading, NavDocItem } from '@/features/docs/types'
-import { ThreeColumnLayout } from '@/features/layout'
-import { ClientMDXRenderer } from '@/features/mdx'
-import { TableOfContentsCard } from '@/features/toc'
+import { DocPagination } from "@/components";
+import type { BreadcrumbItem } from "@/components/breadcrumb";
+import { Breadcrumb } from "@/components/breadcrumb";
+import { ContentDisplay } from "@/components/content-display";
+import { TwikooComment } from "@/features/comment";
+import { DocsSidebarCard } from "@/features/docs/components";
+import { createDocBreadcrumbsServer } from "@/features/docs/lib";
+import type { Heading, NavDocItem } from "@/features/docs/types";
+import { ThreeColumnLayout } from "@/features/layout";
+import { ClientMDXRenderer } from "@/features/mdx";
+import { TableOfContentsCard } from "@/features/toc";
 
 interface DocPageContainerProps {
   doc: {
     frontmatter: {
-      title: string
-      description?: string
-    }
-    content: string
-    headings: Heading[]
-    date?: string | null
-    update?: string | null
-    wordCount?: number
-    prevDoc?: NavDocItem | null
-    nextDoc?: NavDocItem | null
-  }
-  breadcrumbs?: BreadcrumbItem[]
-  currentDocPath: string
-  showSidebarHeader?: boolean
+      title: string;
+      description?: string;
+    };
+    content: string;
+    headings: Heading[];
+    date?: string | null;
+    update?: string | null;
+    wordCount?: number;
+    prevDoc?: NavDocItem | null;
+    nextDoc?: NavDocItem | null;
+  };
+  breadcrumbs?: BreadcrumbItem[];
+  currentDocPath: string;
+  showSidebarHeader?: boolean;
 }
 
 /**
@@ -42,7 +42,7 @@ export function DocPageContainer({
 }: DocPageContainerProps) {
   // 生成面包屑导航
   const breadcrumbItems =
-    breadcrumbs ?? createDocBreadcrumbsServer(currentDocPath.split('/'))
+    breadcrumbs ?? createDocBreadcrumbsServer(currentDocPath.split("/"));
 
   // 左侧边栏内容 - 文档导航
   const leftSidebar = (
@@ -50,12 +50,12 @@ export function DocPageContainer({
       currentDoc={currentDocPath}
       showHeader={showSidebarHeader}
     />
-  )
+  );
 
   // 右侧边栏内容 - 目录导航
   const rightSidebar = (
     <TableOfContentsCard headings={doc.headings} className="prose-sm" />
-  )
+  );
 
   return (
     <ThreeColumnLayout leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
@@ -82,5 +82,5 @@ export function DocPageContainer({
         <TwikooComment />
       </div>
     </ThreeColumnLayout>
-  )
+  );
 }

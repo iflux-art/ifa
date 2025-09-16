@@ -23,9 +23,6 @@ console.log('开始准备 npm 包发布...\n')
 const packageMappings = {
   '@repo/ui': '@iflux-art/ui',
   '@repo/utils': '@iflux-art/utils',
-  '@repo/tailwind-config': '@iflux-art/tailwind-config',
-  '@repo/typescript-config': '@iflux-art/typescript-config',
-  '@repo/biome-config': '@iflux-art/biome-config',
 }
 
 // 1. 更新 packages 目录下各个包的 package.json
@@ -194,18 +191,6 @@ npm publish
 
 cd ../utils
 echo "发布 @iflux-art/utils..."
-npm publish
-
-cd ../tailwind-config
-echo "发布 @iflux-art/tailwind-config..."
-npm publish
-
-cd ../typescript-config
-echo "发布 @iflux-art/typescript-config..."
-npm publish
-
-cd ../biome-config
-echo "发布 @iflux-art/biome-config..."
 npm publish
 
 echo "所有包发布完成！"

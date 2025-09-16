@@ -1,25 +1,25 @@
-'use client'
+"use client";
 
-import { AlertCircle, ArrowLeft, Home } from 'lucide-react'
-import Link from 'next/link'
-import { useId } from 'react'
-import { Button } from '@/components/ui/button'
+import { AlertCircle, ArrowLeft, Home } from "lucide-react";
+import Link from "next/link";
+import { useId } from "react";
+import { Button } from "@/components/ui/button";
 
 const DEFAULT_TEXTS = {
-  code: '404',
-  title: '页面未找到',
-  description: '抱歉，您访问的页面不存在或已被移除。',
-  buttonText: '返回首页',
-  backUrl: 'https://www.iflux.art/',
-} as const
+  code: "404",
+  title: "页面未找到",
+  description: "抱歉，您访问的页面不存在或已被移除。",
+  buttonText: "返回首页",
+  backUrl: "https://www.iflux.art/",
+} as const;
 
 export default function NotFoundPage() {
-  const errorTitleId = useId()
-  const code = DEFAULT_TEXTS.code
-  const title = DEFAULT_TEXTS.title
-  const description = DEFAULT_TEXTS.description
-  const buttonText = DEFAULT_TEXTS.buttonText
-  const backUrl = DEFAULT_TEXTS.backUrl
+  const errorTitleId = useId();
+  const code = DEFAULT_TEXTS.code;
+  const title = DEFAULT_TEXTS.title;
+  const description = DEFAULT_TEXTS.description;
+  const buttonText = DEFAULT_TEXTS.buttonText;
+  const backUrl = DEFAULT_TEXTS.backUrl;
 
   return (
     <div className="container mx-auto flex min-h-[70vh] items-center justify-center px-4 py-20 text-center">
@@ -72,5 +72,5 @@ export default function NotFoundPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

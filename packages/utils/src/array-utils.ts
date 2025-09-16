@@ -13,18 +13,18 @@
  */
 export function unique<T, K>(array: T[], keyFn?: (item: T) => K): T[] {
   if (!keyFn) {
-    return [...new Set(array)]
+    return [...new Set(array)];
   }
 
-  const seen = new Set<K>()
-  return array.filter(item => {
-    const key = keyFn(item)
+  const seen = new Set<K>();
+  return array.filter((item) => {
+    const key = keyFn(item);
     if (seen.has(key)) {
-      return false
+      return false;
     }
-    seen.add(key)
-    return true
-  })
+    seen.add(key);
+    return true;
+  });
 }
 
 /**
@@ -47,19 +47,19 @@ export function unique<T, K>(array: T[], keyFn?: (item: T) => K): T[] {
  */
 export function groupBy<T, K extends string | number | symbol>(
   array: T[],
-  keyFn: (item: T) => K
+  keyFn: (item: T) => K,
 ): Record<K, T[]> {
   return array.reduce(
     (groups, item) => {
-      const key = keyFn(item)
+      const key = keyFn(item);
       if (!groups[key]) {
-        groups[key] = []
+        groups[key] = [];
       }
-      groups[key].push(item)
-      return groups
+      groups[key].push(item);
+      return groups;
     },
-    {} as Record<K, T[]>
-  )
+    {} as Record<K, T[]>,
+  );
 }
 
 /**
@@ -76,13 +76,13 @@ export function groupBy<T, K extends string | number | symbol>(
  * ```
  */
 export function chunk<T>(array: T[], size: number): T[][] {
-  if (size <= 0) throw new Error('Chunk size must be greater than 0')
+  if (size <= 0) throw new Error("Chunk size must be greater than 0");
 
-  const chunks: T[][] = []
+  const chunks: T[][] = [];
   for (let i = 0; i < array.length; i += size) {
-    chunks.push(array.slice(i, i + size))
+    chunks.push(array.slice(i, i + size));
   }
-  return chunks
+  return chunks;
 }
 
 /**
@@ -97,12 +97,12 @@ export function chunk<T>(array: T[], size: number): T[][] {
  * ```
  */
 export function shuffle<T>(array: T[]): T[] {
-  const shuffled = [...array]
+  const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
-  return shuffled
+  return shuffled;
 }
 
 /**
@@ -118,8 +118,8 @@ export function shuffle<T>(array: T[]): T[] {
  * ```
  */
 export function sample<T>(array: T[]): T | undefined {
-  if (array.length === 0) return undefined
-  return array[Math.floor(Math.random() * array.length)]
+  if (array.length === 0) return undefined;
+  return array[Math.floor(Math.random() * array.length)];
 }
 
 /**
@@ -135,11 +135,11 @@ export function sample<T>(array: T[]): T | undefined {
  * ```
  */
 export function sampleSize<T>(array: T[], count: number): T[] {
-  if (count >= array.length) return shuffle(array)
-  if (count <= 0) return []
+  if (count >= array.length) return shuffle(array);
+  if (count <= 0) return [];
 
-  const shuffled = shuffle(array)
-  return shuffled.slice(0, count)
+  const shuffled = shuffle(array);
+  return shuffled.slice(0, count);
 }
 
 /**
@@ -154,12 +154,12 @@ export function sampleSize<T>(array: T[], count: number): T[] {
  * ```
  */
 export function intersection<T>(...arrays: T[][]): T[] {
-  if (arrays.length === 0) return []
-  if (arrays.length === 1) return [...arrays[0]]
+  if (arrays.length === 0) return [];
+  if (arrays.length === 1) return [...arrays[0]];
 
-  return arrays[0].filter(item =>
-    arrays.slice(1).every(array => array.includes(item))
-  )
+  return arrays[0].filter((item) =>
+    arrays.slice(1).every((array) => array.includes(item)),
+  );
 }
 
 /**
@@ -175,6 +175,6 @@ export function intersection<T>(...arrays: T[][]): T[] {
  * ```
  */
 export function difference<T>(array: T[], ...others: T[][]): T[] {
-  const otherItems = new Set(others.flat())
-  return array.filter(item => !otherItems.has(item))
+  const otherItems = new Set(others.flat());
+  return array.filter((item) => !otherItems.has(item));
 }

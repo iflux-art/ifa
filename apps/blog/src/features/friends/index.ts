@@ -3,8 +3,8 @@
  */
 
 // 组件导出
-export { FriendLinkApplication } from './components/friend-link-application'
-export { FriendsPageContainer } from './components/friends-page-container'
+export { FriendLinkApplication } from "./components/friend-link-application";
+export { FriendsPageContainer } from "./components/friends-page-container";
 // 工具函数导出
 export {
   DEFAULT_FRIENDS_CONFIG,
@@ -12,10 +12,10 @@ export {
   FRIEND_LINK_REQUIREMENTS,
   hasFriendsData,
   processFriendsData,
-} from './lib'
+} from "./lib";
 // 类型导出
 export type {
   FriendLinkFormConfig,
   FriendLinkRequirement,
   FriendsPageConfig,
-} from './types'
+} from "./types";

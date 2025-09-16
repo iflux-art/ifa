@@ -2,66 +2,66 @@
  * Navigation 类型定义
  */
 
-import type { ComponentType, ReactNode } from 'react'
+import type { ComponentType, ReactNode } from "react";
 
 // ==================== 面包屑相关类型 ====================
 
 /** 面包屑导航项 */
 export interface BreadcrumbItem {
   /** 显示的标签文本 */
-  label: string
+  label: string;
   /** 链接地址，如果不提供则显示为纯文本 */
-  href?: string
+  href?: string;
   /** 是否为当前页面 */
-  isCurrent?: boolean
+  isCurrent?: boolean;
 }
 
 /** 面包屑属性 */
 export interface BreadcrumbProps {
   /** 面包屑导航项列表 */
-  items: BreadcrumbItem[]
+  items: BreadcrumbItem[];
   /** 分隔符，默认为 "/" */
-  separator?: string | React.ReactNode
+  separator?: string | React.ReactNode;
   /** 额外的CSS类名 */
-  className?: string
+  className?: string;
 }
 
 // ==================== 侧边栏相关类型 ====================
 
 /** 侧边栏项目 */
 export interface SidebarItem {
-  id: string
-  title: string
-  href?: string
-  children?: SidebarItem[]
-  isActive?: boolean
-  isExternal?: boolean
-  description?: string
-  icon?: ReactNode
+  id: string;
+  title: string;
+  href?: string;
+  children?: SidebarItem[];
+  isActive?: boolean;
+  isExternal?: boolean;
+  description?: string;
+  icon?: ReactNode;
 }
 
 /** 侧边栏属性 */
 export interface SidebarProps {
   /** 侧边栏项目列表 */
-  items: SidebarItem[]
+  items: SidebarItem[];
   /** 当前选中的项目ID */
-  currentItem?: string
+  currentItem?: string;
   /** 项目点击回调 */
-  onItemClick?: (itemId: string) => void
+  onItemClick?: (itemId: string) => void;
   /** 自定义类名 */
-  className?: string
+  className?: string;
   /** 本地存储键前缀 */
-  storageKey?: string
+  storageKey?: string;
   /** 是否显示全部选项 */
-  showAllOption?: boolean
+  showAllOption?: boolean;
   /** 全部选项的标题 */
-  allOptionTitle?: string
+  allOptionTitle?: string;
 }
 
 /** 侧边栏包装组件属性接口 */
 export interface SidebarWrapperProps {
-  children: ReactNode
-  config: SidebarConfig
+  children: ReactNode;
+  config: SidebarConfig;
 }
 
 // ==================== 目录相关类型 ====================
@@ -71,11 +71,11 @@ export interface SidebarWrapperProps {
  */
 export interface TocHeading {
   /** 标题ID */
-  id: string
+  id: string;
   /** 标题文本 */
-  text: string
+  text: string;
   /** 标题级别 */
-  level: number
+  level: number;
 }
 
 /**
@@ -83,15 +83,15 @@ export interface TocHeading {
  */
 export interface TocProps {
   /** 标题列表 */
-  headings: TocHeading[]
+  headings: TocHeading[];
   /** 自定义类名 */
-  className?: string
+  className?: string;
   /** 卡片标题 */
-  title?: string
+  title?: string;
   /** 是否自适应高度 */
-  adaptive?: boolean
+  adaptive?: boolean;
   /** 自适应偏移量 */
-  adaptiveOffset?: number
+  adaptiveOffset?: number;
 }
 
 /**
@@ -99,11 +99,11 @@ export interface TocProps {
  */
 export interface TableOfContentsCardProps {
   /** 标题列表 */
-  headings: TocHeading[]
+  headings: TocHeading[];
   /** 自定义类名 */
-  className?: string
+  className?: string;
   /** 卡片标题 */
-  title?: string
+  title?: string;
 }
 
 // ==================== 基础导航类型 ====================
@@ -111,44 +111,44 @@ export interface TableOfContentsCardProps {
 /** 基础导航项 */
 export interface BaseNavItem {
   /** 导航项标识 */
-  key: string
+  key: string;
   /** 显示标签 */
-  label: string
+  label: string;
   /** 链接地址 */
-  href?: string
+  href?: string;
   /** 图标 */
-  icon?: ComponentType<{ className?: string }> | ReactNode
+  icon?: ComponentType<{ className?: string }> | ReactNode;
   /** 是否为外部链接 */
-  external?: boolean
+  external?: boolean;
   /** 是否禁用 */
-  disabled?: boolean
+  disabled?: boolean;
 }
 
 /** 嵌套导航项 */
 export interface NestedNavItem extends BaseNavItem {
   /** 子导航项 */
-  children?: NestedNavItem[]
+  children?: NestedNavItem[];
   /** 是否默认展开 */
-  defaultOpen?: boolean
+  defaultOpen?: boolean;
 }
 
 /** 基础搜索结果 */
 export interface BaseSearchResult {
   /** 标题 */
-  title: string
+  title: string;
   /** 路径 */
-  path: string
+  path: string;
   /** 摘要 */
-  excerpt: string
+  excerpt: string;
   /** 类型 */
-  type: string
+  type: string;
   /** 相关性评分 */
-  score?: number
+  score?: number;
   /** 高亮信息 */
   highlights?: {
-    title?: string
-    content?: string[]
-  }
+    title?: string;
+    content?: string[];
+  };
 }
 
 // ==================== 布局相关类型 ====================
@@ -161,33 +161,33 @@ export interface SidebarConfig {
   /**
    * 侧边栏唯一标识符（可选）
    */
-  id?: string
+  id?: string;
   /**
    * 侧边栏内容
    */
-  content: ReactNode
+  content: ReactNode;
   /**
    * 侧边栏位置
    */
-  position: 'left' | 'right'
+  position: "left" | "right";
   /**
    * 是否粘性定位
    */
-  sticky?: boolean
+  sticky?: boolean;
   /**
    * 粘性定位的top值
    */
-  stickyTop?: string
+  stickyTop?: string;
   /**
    * 最大高度
    */
-  maxHeight?: string
+  maxHeight?: string;
   /**
    * 响应式显示设置
    */
   responsive?: {
-    hideOnMobile?: boolean
-    hideOnTablet?: boolean
-    hideOnDesktop?: boolean
-  }
+    hideOnMobile?: boolean;
+    hideOnTablet?: boolean;
+    hideOnDesktop?: boolean;
+  };
 }

@@ -1,69 +1,69 @@
-'use client'
+"use client";
 
-import { AlertCircle, CheckCircle, Loader2, Plus, X } from 'lucide-react'
-import type React from 'react'
-import { useEffect, useId, useState } from 'react'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { AlertCircle, CheckCircle, Loader2, Plus, X } from "lucide-react";
+import type React from "react";
+import { useEffect, useId, useState } from "react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Switch } from '@/components/ui/switch'
-import { Textarea } from '@/components/ui/textarea'
-import { useCategories } from '@/features/links/hooks/use-categories'
-import type { LinksCategory, LinksFormData } from '@/features/links/types'
-import { useWebsiteParser } from '@/features/website-parser/hooks/use-website-parser'
-import { isValidUrl } from '@/utils/validation'
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { useCategories } from "@/features/links/hooks/use-categories";
+import type { LinksCategory, LinksFormData } from "@/features/links/types";
+import { useWebsiteParser } from "@/features/website-parser/hooks/use-website-parser";
+import { isValidUrl } from "@/utils/validation";
 
 // 表单状态管理hook
 function useLinksFormState(initialData?: Partial<LinksFormData>) {
   const [formData, setFormData] = useState<LinksFormData>({
-    title: '',
-    description: '',
-    url: '',
-    icon: '',
-    iconType: 'image',
+    title: "",
+    description: "",
+    url: "",
+    icon: "",
+    iconType: "image",
     tags: [],
     featured: false,
-    category: '' as LinksFormData['category'],
+    category: "" as LinksFormData["category"],
     ...initialData,
-  })
+  });
 
-  const [newTag, setNewTag] = useState('')
-  const [parseSuccess, setParseSuccess] = useState(false)
-  const [urlError, setUrlError] = useState('')
+  const [newTag, setNewTag] = useState("");
+  const [parseSuccess, setParseSuccess] = useState(false);
+  const [urlError, setUrlError] = useState("");
 
   // URL验证effect
   useEffect(() => {
     if (
       formData.url &&
-      typeof formData.url === 'string' &&
+      typeof formData.url === "string" &&
       !isValidUrl(formData.url)
     ) {
-      setUrlError('请输入有效的 URL 格式')
+      setUrlError("请输入有效的 URL 格式");
     } else {
-      setUrlError('')
+      setUrlError("");
     }
-  }, [formData.url])
+  }, [formData.url]);
 
   const handleInputChange = (
     field: keyof LinksFormData,
-    value: LinksFormData[keyof LinksFormData]
+    value: LinksFormData[keyof LinksFormData],
   ) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
+    setFormData((prev) => ({ ...prev, [field]: value }));
 
     // 清除解析状态
-    if (field === 'url') {
-      setParseSuccess(false)
+    if (field === "url") {
+      setParseSuccess(false);
     }
-  }
+  };
 
   return {
     formData,
@@ -75,21 +75,21 @@ function useLinksFormState(initialData?: Partial<LinksFormData>) {
     urlError,
     setUrlError,
     handleInputChange,
-  }
+  };
 }
 
 // URL输入组件
 interface UrlInputSectionProps {
-  formData: LinksFormData
-  urlError: string
-  parseSuccess: boolean
-  parseError: string | null
-  isParsing: boolean
+  formData: LinksFormData;
+  urlError: string;
+  parseSuccess: boolean;
+  parseError: string | null;
+  isParsing: boolean;
   onInputChange: (
     field: keyof LinksFormData,
-    value: LinksFormData[keyof LinksFormData]
-  ) => void
-  onParseWebsite: () => void
+    value: LinksFormData[keyof LinksFormData],
+  ) => void;
+  onParseWebsite: () => void;
 }
 
 const UrlInputSection = ({
@@ -101,7 +101,7 @@ const UrlInputSection = ({
   onInputChange,
   onParseWebsite,
 }: UrlInputSectionProps) => {
-  const urlId = useId()
+  const urlId = useId();
 
   return (
     <div className="space-y-2">
@@ -112,8 +112,8 @@ const UrlInputSection = ({
           type="url"
           placeholder="https://example.com"
           value={formData.url}
-          onChange={e => onInputChange('url', e.target.value)}
-          className={urlError ? 'border-destructive' : ''}
+          onChange={(e) => onInputChange("url", e.target.value)}
+          className={urlError ? "border-destructive" : ""}
           required
         />
         <Button
@@ -122,7 +122,7 @@ const UrlInputSection = ({
           onClick={onParseWebsite}
           disabled={isParsing || !formData.url || !!urlError}
         >
-          {isParsing ? <Loader2 className="h-4 w-4 animate-spin" /> : '解析'}
+          {isParsing ? <Loader2 className="h-4 w-4 animate-spin" /> : "解析"}
         </Button>
       </div>
       {urlError && (
@@ -144,24 +144,24 @@ const UrlInputSection = ({
         </Alert>
       )}
     </div>
-  )
-}
+  );
+};
 
 // 基本信息组件
 interface BasicInfoSectionProps {
-  formData: LinksFormData
+  formData: LinksFormData;
   onInputChange: (
     field: keyof LinksFormData,
-    value: LinksFormData[keyof LinksFormData]
-  ) => void
+    value: LinksFormData[keyof LinksFormData],
+  ) => void;
 }
 
 const BasicInfoSection = ({
   formData,
   onInputChange,
 }: BasicInfoSectionProps) => {
-  const titleId = useId()
-  const descriptionId = useId()
+  const titleId = useId();
+  const descriptionId = useId();
 
   return (
     <>
@@ -172,7 +172,7 @@ const BasicInfoSection = ({
           id={titleId}
           placeholder="网站标题"
           value={formData.title}
-          onChange={e => onInputChange('title', e.target.value)}
+          onChange={(e) => onInputChange("title", e.target.value)}
           required
         />
       </div>
@@ -184,28 +184,28 @@ const BasicInfoSection = ({
           id={descriptionId}
           placeholder="网站描述"
           value={formData.description}
-          onChange={e => onInputChange('description', e.target.value)}
+          onChange={(e) => onInputChange("description", e.target.value)}
           rows={3}
         />
       </div>
     </>
-  )
-}
+  );
+};
 
 // 图标输入组件
 interface IconInputSectionProps {
-  formData: LinksFormData
+  formData: LinksFormData;
   onInputChange: (
     field: keyof LinksFormData,
-    value: LinksFormData[keyof LinksFormData]
-  ) => void
+    value: LinksFormData[keyof LinksFormData],
+  ) => void;
 }
 
 const IconInputSection = ({
   formData,
   onInputChange,
 }: IconInputSectionProps) => {
-  const iconId = useId()
+  const iconId = useId();
 
   return (
     <div className="space-y-2">
@@ -213,8 +213,8 @@ const IconInputSection = ({
       <div className="flex gap-2">
         <Select
           value={formData.iconType}
-          onValueChange={(value: 'image' | 'text') =>
-            onInputChange('iconType', value)
+          onValueChange={(value: "image" | "text") =>
+            onInputChange("iconType", value)
           }
         >
           <SelectTrigger className="w-32">
@@ -228,26 +228,26 @@ const IconInputSection = ({
         <Input
           id={iconId}
           placeholder={
-            formData.iconType === 'image' ? 'https://example.com/icon.png' : 'A'
+            formData.iconType === "image" ? "https://example.com/icon.png" : "A"
           }
           value={formData.icon}
-          onChange={e => onInputChange('icon', e.target.value)}
+          onChange={(e) => onInputChange("icon", e.target.value)}
           className="flex-1"
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 // 分类选择组件
 interface CategorySectionProps {
-  formData: LinksFormData
-  categories: LinksCategory[]
-  categoriesLoading: boolean
+  formData: LinksFormData;
+  categories: LinksCategory[];
+  categoriesLoading: boolean;
   onInputChange: (
     field: keyof LinksFormData,
-    value: LinksFormData[keyof LinksFormData]
-  ) => void
+    value: LinksFormData[keyof LinksFormData],
+  ) => void;
 }
 
 const CategorySection = ({
@@ -256,14 +256,14 @@ const CategorySection = ({
   categoriesLoading,
   onInputChange,
 }: CategorySectionProps) => {
-  const categoryId = useId()
+  const categoryId = useId();
 
   return (
     <div className="space-y-2">
       <Label htmlFor={categoryId}>分类 *</Label>
       <Select
         value={formData.category}
-        onValueChange={value => onInputChange('category', value)}
+        onValueChange={(value) => onInputChange("category", value)}
         required
         disabled={categoriesLoading}
       >
@@ -280,7 +280,7 @@ const CategorySection = ({
               {/* 子分类 */}
               {category.children &&
                 Array.isArray(category.children) &&
-                category.children.map(subCategory => (
+                category.children.map((subCategory) => (
                   <SelectItem
                     key={subCategory.id}
                     value={subCategory.id}
@@ -294,18 +294,18 @@ const CategorySection = ({
         </SelectContent>
       </Select>
     </div>
-  )
-}
+  );
+};
 
 // 标签管理组件
 interface TagsSectionProps {
-  formData: LinksFormData
-  newTag: string
-  setNewTag: (tag: string) => void
+  formData: LinksFormData;
+  newTag: string;
+  setNewTag: (tag: string) => void;
   onInputChange: (
     field: keyof LinksFormData,
-    value: LinksFormData[keyof LinksFormData]
-  ) => void
+    value: LinksFormData[keyof LinksFormData],
+  ) => void;
 }
 
 const TagsSection = ({
@@ -316,17 +316,17 @@ const TagsSection = ({
 }: TagsSectionProps) => {
   const handleAddTag = () => {
     if (newTag.trim() && !formData.tags.includes(newTag.trim())) {
-      onInputChange('tags', [...formData.tags, newTag.trim()])
-      setNewTag('')
+      onInputChange("tags", [...formData.tags, newTag.trim()]);
+      setNewTag("");
     }
-  }
+  };
 
   const handleRemoveTag = (tagToRemove: string) => {
     onInputChange(
-      'tags',
-      formData.tags.filter(tag => tag !== tagToRemove)
-    )
-  }
+      "tags",
+      formData.tags.filter((tag) => tag !== tagToRemove),
+    );
+  };
 
   return (
     <div className="space-y-2">
@@ -335,11 +335,11 @@ const TagsSection = ({
         <Input
           placeholder="添加标签"
           value={newTag}
-          onChange={e => setNewTag(e.target.value)}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              e.preventDefault()
-              handleAddTag()
+          onChange={(e) => setNewTag(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              handleAddTag();
             }
           }}
         />
@@ -349,7 +349,7 @@ const TagsSection = ({
       </div>
       {formData.tags.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          {formData.tags.map(tag => (
+          {formData.tags.map((tag) => (
             <Badge
               key={tag}
               variant="secondary"
@@ -363,14 +363,14 @@ const TagsSection = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 interface LinksFormProps {
-  submitAction: (data: LinksFormData) => Promise<void>
-  onCancel?: () => void
-  initialData?: Partial<LinksFormData>
-  isLoading?: boolean
+  submitAction: (data: LinksFormData) => Promise<void>;
+  onCancel?: () => void;
+  initialData?: Partial<LinksFormData>;
+  isLoading?: boolean;
 }
 
 export const LinksForm = ({
@@ -388,49 +388,49 @@ export const LinksForm = ({
     setParseSuccess,
     urlError,
     handleInputChange,
-  } = useLinksFormState(initialData)
+  } = useLinksFormState(initialData);
 
-  const { categories, loading: categoriesLoading } = useCategories()
+  const { categories, loading: categoriesLoading } = useCategories();
   const {
     parseWebsite,
     isLoading: isParsing,
     error: parseError,
-  } = useWebsiteParser()
+  } = useWebsiteParser();
 
   const handleParseWebsite = () => {
     if (!(formData.url && isValidUrl(formData.url))) {
-      return
+      return;
     }
 
-    setParseSuccess(false)
+    setParseSuccess(false);
 
-    void parseWebsite(formData.url).then(metadata => {
+    void parseWebsite(formData.url).then((metadata) => {
       if (metadata) {
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
           title: metadata.title ?? prev.title,
           description: metadata.description ?? prev.description,
           icon: metadata.icon ?? prev.icon,
-        }))
+        }));
 
-        setParseSuccess(true)
+        setParseSuccess(true);
       }
-    })
-  }
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!(formData.title && formData.url && formData.category)) {
-      return
+      return;
     }
 
     if (urlError) {
-      return
+      return;
     }
 
-    void submitAction(formData)
-  }
+    void submitAction(formData);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 px-6 pb-6">
@@ -471,7 +471,7 @@ export const LinksForm = ({
           {isLoading ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : undefined}
-          {initialData ? '更新' : '添加'}
+          {initialData ? "更新" : "添加"}
         </Button>
         {onCancel && (
           <Button type="button" variant="outline" onClick={onCancel}>
@@ -480,29 +480,29 @@ export const LinksForm = ({
         )}
       </div>
     </form>
-  )
-}
+  );
+};
 
 // 精选开关组件
 interface FeaturedSectionProps {
-  formData: LinksFormData
+  formData: LinksFormData;
   onInputChange: (
     field: keyof LinksFormData,
-    value: LinksFormData[keyof LinksFormData]
-  ) => void
+    value: LinksFormData[keyof LinksFormData],
+  ) => void;
 }
 
 const FeaturedSection = ({ formData, onInputChange }: FeaturedSectionProps) => {
-  const featuredId = useId()
+  const featuredId = useId();
 
   return (
     <div className="flex items-center space-x-2">
       <Switch
         id={featuredId}
         checked={formData.featured}
-        onCheckedChange={checked => onInputChange('featured', checked)}
+        onCheckedChange={(checked) => onInputChange("featured", checked)}
       />
       <Label htmlFor={featuredId}>设为精选</Label>
     </div>
-  )
-}
+  );
+};

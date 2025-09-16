@@ -3,15 +3,15 @@
  */
 export interface FormatDateOptions {
   /** Include time in the formatted string */
-  includeTime?: boolean
+  includeTime?: boolean;
   /** Locale for formatting (defaults to 'en-US') */
-  locale?: string
+  locale?: string;
   /** Timezone for formatting */
-  timeZone?: string
+  timeZone?: string;
   /** Custom format style */
-  dateStyle?: 'full' | 'long' | 'medium' | 'short'
+  dateStyle?: "full" | "long" | "medium" | "short";
   /** Custom time style */
-  timeStyle?: 'full' | 'long' | 'medium' | 'short'
+  timeStyle?: "full" | "long" | "medium" | "short";
 }
 
 /**
@@ -35,29 +35,29 @@ export interface FormatDateOptions {
  */
 export function formatDate(
   date: Date | string | number,
-  options: FormatDateOptions = {}
+  options: FormatDateOptions = {},
 ): string {
   const {
     includeTime = false,
-    locale = 'en-US',
+    locale = "en-US",
     timeZone,
-    dateStyle = 'medium',
-    timeStyle = 'short',
-  } = options
+    dateStyle = "medium",
+    timeStyle = "short",
+  } = options;
 
-  const dateObj = new Date(date)
+  const dateObj = new Date(date);
 
   if (Number.isNaN(dateObj.getTime())) {
-    throw new Error('Invalid date provided')
+    throw new Error("Invalid date provided");
   }
 
   const formatOptions: Intl.DateTimeFormatOptions = {
     dateStyle,
     ...(includeTime && { timeStyle }),
     ...(timeZone && { timeZone }),
-  }
+  };
 
-  return new Intl.DateTimeFormat(locale, formatOptions).format(dateObj)
+  return new Intl.DateTimeFormat(locale, formatOptions).format(dateObj);
 }
 
 /**
@@ -78,30 +78,30 @@ export function formatDate(
  */
 export function formatRelativeTime(
   date: Date | string | number,
-  locale = 'en-US'
+  locale = "en-US",
 ): string {
-  const dateObj = new Date(date)
-  const now = new Date()
-  const diffInSeconds = Math.floor((now.getTime() - dateObj.getTime()) / 1000)
+  const dateObj = new Date(date);
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.getTime() - dateObj.getTime()) / 1000);
 
-  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' })
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
 
   const intervals = [
-    { label: 'year', seconds: 31536000 },
-    { label: 'month', seconds: 2592000 },
-    { label: 'week', seconds: 604800 },
-    { label: 'day', seconds: 86400 },
-    { label: 'hour', seconds: 3600 },
-    { label: 'minute', seconds: 60 },
-    { label: 'second', seconds: 1 },
-  ] as const
+    { label: "year", seconds: 31536000 },
+    { label: "month", seconds: 2592000 },
+    { label: "week", seconds: 604800 },
+    { label: "day", seconds: 86400 },
+    { label: "hour", seconds: 3600 },
+    { label: "minute", seconds: 60 },
+    { label: "second", seconds: 1 },
+  ] as const;
 
   for (const interval of intervals) {
-    const count = Math.floor(Math.abs(diffInSeconds) / interval.seconds)
+    const count = Math.floor(Math.abs(diffInSeconds) / interval.seconds);
     if (count >= 1) {
-      return rtf.format(diffInSeconds > 0 ? -count : count, interval.label)
+      return rtf.format(diffInSeconds > 0 ? -count : count, interval.label);
     }
   }
 
-  return rtf.format(0, 'second')
+  return rtf.format(0, "second");
 }

@@ -13,29 +13,29 @@
  * ```
  */
 export function deepClone<T>(obj: T): T {
-  if (obj === null || typeof obj !== 'object') {
-    return obj
+  if (obj === null || typeof obj !== "object") {
+    return obj;
   }
 
   if (obj instanceof Date) {
-    return new Date(obj.getTime()) as T
+    return new Date(obj.getTime()) as T;
   }
 
   if (Array.isArray(obj)) {
-    return obj.map(item => deepClone(item)) as T
+    return obj.map((item) => deepClone(item)) as T;
   }
 
-  if (typeof obj === 'object') {
-    const cloned = {} as T
+  if (typeof obj === "object") {
+    const cloned = {} as T;
     for (const key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        cloned[key] = deepClone(obj[key])
+      if (Object.hasOwn(obj, key)) {
+        cloned[key] = deepClone(obj[key]);
       }
     }
-    return cloned
+    return cloned;
   }
 
-  return obj
+  return obj;
 }
 
 /**
@@ -56,26 +56,26 @@ export function deepMerge<T extends Record<string, unknown>>(
   target: T,
   ...sources: Partial<T>[]
 ): T {
-  if (!sources.length) return target
+  if (!sources.length) return target;
 
-  const source = sources.shift()
-  if (!source) return target
+  const source = sources.shift();
+  if (!source) return target;
 
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
-        if (!target[key]) Object.assign(target, { [key]: {} })
+        if (!target[key]) Object.assign(target, { [key]: {} });
         deepMerge(
           target[key] as Record<string, unknown>,
-          source[key] as Record<string, unknown>
-        )
+          source[key] as Record<string, unknown>,
+        );
       } else {
-        Object.assign(target, { [key]: source[key] })
+        Object.assign(target, { [key]: source[key] });
       }
     }
   }
 
-  return deepMerge(target, ...sources)
+  return deepMerge(target, ...sources);
 }
 
 /**
@@ -85,7 +85,7 @@ export function deepMerge<T extends Record<string, unknown>>(
  * @returns True if the value is a plain object
  */
 function isObject<T>(obj: T): obj is T & Record<string, unknown> {
-  return obj && typeof obj === 'object' && !Array.isArray(obj)
+  return obj && typeof obj === "object" && !Array.isArray(obj);
 }
 
 /**
@@ -103,15 +103,15 @@ function isObject<T>(obj: T): obj is T & Record<string, unknown> {
  */
 export function pick<T extends Record<string, unknown>, K extends keyof T>(
   obj: T,
-  keys: K[]
+  keys: K[],
 ): Pick<T, K> {
-  const result = {} as Pick<T, K>
+  const result = {} as Pick<T, K>;
   for (const key of keys) {
     if (key in obj) {
-      result[key] = obj[key]
+      result[key] = obj[key];
     }
   }
-  return result
+  return result;
 }
 
 /**
@@ -129,13 +129,13 @@ export function pick<T extends Record<string, unknown>, K extends keyof T>(
  */
 export function omit<T extends Record<string, unknown>, K extends keyof T>(
   obj: T,
-  keys: K[]
+  keys: K[],
 ): Omit<T, K> {
-  const result = { ...obj }
+  const result = { ...obj };
   for (const key of keys) {
-    delete result[key]
+    delete result[key];
   }
-  return result
+  return result;
 }
 
 /**
@@ -156,19 +156,19 @@ export function omit<T extends Record<string, unknown>, K extends keyof T>(
 export function get<T = unknown>(
   obj: Record<string, unknown>,
   path: string,
-  defaultValue?: T
+  defaultValue?: T,
 ): T {
-  const keys = path.split('.')
-  let result = obj
+  const keys = path.split(".");
+  let result = obj;
 
   for (const key of keys) {
-    if (result == null || typeof result !== 'object') {
-      return defaultValue as T
+    if (result == null || typeof result !== "object") {
+      return defaultValue as T;
     }
-    result = result[key] as Record<string, unknown>
+    result = result[key] as Record<string, unknown>;
   }
 
-  return result === undefined ? (defaultValue as T) : (result as T)
+  return result === undefined ? (defaultValue as T) : (result as T);
 }
 
 /**
@@ -189,25 +189,25 @@ export function get<T = unknown>(
 export function set<T extends Record<string, unknown>>(
   obj: T,
   path: string,
-  value: unknown
+  value: unknown,
 ): T {
-  const keys = path.split('.')
-  let current: Record<string, unknown> = obj
+  const keys = path.split(".");
+  let current: Record<string, unknown> = obj;
 
   for (let i = 0; i < keys.length - 1; i++) {
-    const key = keys[i]
+    const key = keys[i];
     if (
       !(key in current) ||
-      typeof current[key] !== 'object' ||
+      typeof current[key] !== "object" ||
       current[key] === null
     ) {
-      current[key] = {}
+      current[key] = {};
     }
-    current = current[key] as Record<string, unknown>
+    current = current[key] as Record<string, unknown>;
   }
 
-  current[keys[keys.length - 1]] = value
-  return obj
+  current[keys[keys.length - 1]] = value;
+  return obj;
 }
 
 /**
@@ -225,15 +225,15 @@ export function set<T extends Record<string, unknown>>(
  * ```
  */
 export function has(obj: Record<string, unknown>, path: string): boolean {
-  const keys = path.split('.')
-  let current = obj
+  const keys = path.split(".");
+  let current = obj;
 
   for (const key of keys) {
-    if (current == null || typeof current !== 'object' || !(key in current)) {
-      return false
+    if (current == null || typeof current !== "object" || !(key in current)) {
+      return false;
     }
-    current = current[key] as Record<string, unknown>
+    current = current[key] as Record<string, unknown>;
   }
 
-  return true
+  return true;
 }

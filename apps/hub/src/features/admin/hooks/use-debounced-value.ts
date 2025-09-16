@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 /**
  * 防抖值 Hook
@@ -17,19 +17,19 @@ import { useEffect, useState } from 'react'
  */
 export function useDebouncedValue<T>(value: T, delay: number): T {
   /** 防抖后的值状态 */
-  const [debouncedValue, setDebouncedValue] = useState<T>(value)
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
     /** 延迟定时器 */
     const timer = setTimeout(() => {
-      setDebouncedValue(value)
-    }, delay)
+      setDebouncedValue(value);
+    }, delay);
 
     // 清理函数：组件卸载或值变化时清除定时器
     return () => {
-      clearTimeout(timer)
-    }
-  }, [value, delay])
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
 
-  return debouncedValue
+  return debouncedValue;
 }

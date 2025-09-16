@@ -16,10 +16,10 @@ export const CACHE_CONFIG = {
 
   // 不缓存
   noCache: 0,
-} as const
+} as const;
 
 // 缓存策略类型
-export type CacheStrategy = keyof typeof CACHE_CONFIG
+export type CacheStrategy = keyof typeof CACHE_CONFIG;
 
 /**
  * 为API响应设置缓存头
@@ -30,24 +30,24 @@ export type CacheStrategy = keyof typeof CACHE_CONFIG
  */
 export function setCacheHeaders(
   strategy: CacheStrategy,
-  isPublic = true
+  isPublic = true,
 ): Headers {
-  const headers = new Headers()
+  const headers = new Headers();
 
-  const maxAge = CACHE_CONFIG[strategy] / 1000 // 转换为秒
+  const maxAge = CACHE_CONFIG[strategy] / 1000; // 转换为秒
 
   if (maxAge === 0) {
-    headers.set('Cache-Control', 'no-store, max-age=0')
+    headers.set("Cache-Control", "no-store, max-age=0");
   } else {
     const directives = [
-      isPublic ? 'public' : 'private',
+      isPublic ? "public" : "private",
       `max-age=${maxAge}`,
       `s-maxage=${Math.floor(maxAge * 2)}`, // CDN缓存时间是浏览器的2倍
       `stale-while-revalidate=${Math.floor(maxAge * 10)}`, // 允许在后台重新验证时使用陈旧数据
-    ]
+    ];
 
-    headers.set('Cache-Control', directives.join(', '))
+    headers.set("Cache-Control", directives.join(", "));
   }
 
-  return headers
+  return headers;
 }

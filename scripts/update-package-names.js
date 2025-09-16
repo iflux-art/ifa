@@ -21,9 +21,6 @@ console.log('开始更新包名称...\n')
 const packageMappings = {
   '@repo/ui': '@iflux-art/ui',
   '@repo/utils': '@iflux-art/utils',
-  '@repo/tailwind-config': '@iflux-art/tailwind-config',
-  '@repo/typescript-config': '@iflux-art/typescript-config',
-  '@repo/biome-config': '@iflux-art/biome-config',
 }
 
 // 1. 更新 packages 目录下各包的名称

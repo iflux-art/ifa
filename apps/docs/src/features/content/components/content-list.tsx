@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import type { ContentItem } from '@/features/content/types'
-import { ContentCard, type ContentCardProps } from './content-card'
+import type { ContentItem } from "@/features/content/types";
+import { ContentCard, type ContentCardProps } from "./content-card";
 
 export interface ContentListProps {
   /** 内容项数组 */
-  items: ContentItem[]
+  items: ContentItem[];
   /** 内容卡片属性 */
-  cardProps?: Partial<ContentCardProps>
+  cardProps?: Partial<ContentCardProps>;
   /** 自定义类名 */
-  className?: string
+  className?: string;
 }
 
 export function ContentList({
@@ -20,10 +20,10 @@ export function ContentList({
   return (
     <div className={className}>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map(item => (
+        {items.map((item) => (
           <ContentCard key={item.slug} item={item} {...cardProps} />
         ))}
       </div>
     </div>
-  )
+  );
 }

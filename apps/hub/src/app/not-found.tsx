@@ -1,30 +1,30 @@
-import { AlertCircle, Home, Search } from 'lucide-react'
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { useId } from 'react'
-import { PageContainer } from '@/components/layout'
-import { Button } from '@/components/ui/button'
-import type { NotFoundProps } from '@/types'
+import { AlertCircle, Home, Search } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { useId } from "react";
+import { PageContainer } from "@/components/layout";
+import { Button } from "@/components/ui/button";
+import type { NotFoundProps } from "@/types";
 
 export const metadata: Metadata = {
-  title: '404 - 页面未找到',
-  description: '抱歉，您访问的页面不存在或已被移除。',
-}
+  title: "404 - 页面未找到",
+  description: "抱歉，您访问的页面不存在或已被移除。",
+};
 
 const DEFAULT_TEXTS = {
-  code: '404',
-  title: '页面未找到',
-  description: '抱歉，您访问的页面不存在或已被移除。',
-  buttonText: '返回首页',
-  backUrl: '/',
-} as const
+  code: "404",
+  title: "页面未找到",
+  description: "抱歉，您访问的页面不存在或已被移除。",
+  buttonText: "返回首页",
+  backUrl: "/",
+} as const;
 
 /**
  * 全局404页面
  * 符合404页面设计规范，使用通用的布局和组件
  */
 const NotFoundPage = () => {
-  const errorTitleId = useId()
+  const errorTitleId = useId();
 
   // 使用与组件相同的props结构
   const props: NotFoundProps = {
@@ -33,15 +33,15 @@ const NotFoundPage = () => {
     description: DEFAULT_TEXTS.description,
     buttonText: DEFAULT_TEXTS.buttonText,
     backUrl: DEFAULT_TEXTS.backUrl,
-    className: '',
+    className: "",
     showIcon: true,
-  }
+  };
 
   const { code, title, description, buttonText, backUrl, className, showIcon } =
-    props
+    props;
 
   return (
-    <PageContainer config={{ layout: 'full-width' }}>
+    <PageContainer config={{ layout: "full-width" }}>
       <main
         className={`flex min-h-[70vh] items-center justify-center text-center ${className}`}
       >
@@ -71,7 +71,7 @@ const NotFoundPage = () => {
             {/* 主要操作按钮 */}
             <div className="mb-8 flex flex-wrap justify-center gap-4">
               <Button asChild size="lg">
-                <Link href={backUrl || '/'} className="flex items-center gap-2">
+                <Link href={backUrl || "/"} className="flex items-center gap-2">
                   <Home className="h-4 w-4" aria-hidden="true" />
                   {buttonText}
                 </Link>
@@ -95,7 +95,7 @@ const NotFoundPage = () => {
         </section>
       </main>
     </PageContainer>
-  )
-}
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;

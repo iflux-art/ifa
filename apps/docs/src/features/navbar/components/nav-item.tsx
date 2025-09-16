@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { cn } from '@/utils'
+import Link from "next/link";
+import { cn } from "@/utils";
 
 /**
  * 基础导航项属性
@@ -10,27 +10,27 @@ interface BaseNavItemProps {
   /**
    * 链接地址
    */
-  href: string
+  href: string;
 
   /**
    * 显示文本
    */
-  label: string
+  label: string;
 
   /**
    * 是否激活
    */
-  isActive?: boolean
+  isActive?: boolean;
 
   /**
    * 自定义类名
    */
-  className?: string
+  className?: string;
 
   /**
    * 点击事件处理函数
    */
-  onClick?: () => void
+  onClick?: () => void;
 }
 
 /**
@@ -41,19 +41,19 @@ export interface NavItemProps extends BaseNavItemProps {
    * 是否使用动画
    * @default true
    */
-  animated?: boolean
+  animated?: boolean;
 
   /**
    * 动画延迟（单位：秒）
    * @default 0
    */
-  animationDelay?: number
+  animationDelay?: number;
 
   /**
    * 是否使用下划线
    * @default true
    */
-  underline?: boolean
+  underline?: boolean;
 }
 
 /**
@@ -78,22 +78,24 @@ export const NavItem = ({
 }: NavItemProps) => {
   // 组合所有样式类名
   const linkClasses = cn(
-    'py-2 px-3 rounded-lg',
-    isActive ? 'text-primary' : 'text-muted-foreground hover:text-primary',
-    underline && 'hover:underline',
-    animated && 'transition-all duration-300',
-    className
-  )
+    "py-2 px-3 rounded-lg",
+    isActive ? "text-primary" : "text-muted-foreground hover:text-primary",
+    underline && "hover:underline",
+    animated && "transition-all duration-300",
+    className,
+  );
 
   // 添加动画延迟样式
-  const style = animated ? { transitionDelay: `${animationDelay}s` } : undefined
+  const style = animated
+    ? { transitionDelay: `${animationDelay}s` }
+    : undefined;
 
   return (
     <Link href={href} className={linkClasses} onClick={onClick} style={style}>
       {label}
     </Link>
-  )
-}
+  );
+};
 
 /**
  * 导航项列表组件属性
@@ -103,43 +105,43 @@ export interface NavItemListProps {
    * 导航项列表
    */
   items: {
-    href: string
-    label: string
-    key?: string
-  }[]
+    href: string;
+    label: string;
+    key?: string;
+  }[];
 
   /**
    * 当前激活的路径
    */
-  activePath?: string
+  activePath?: string;
 
   /**
    * 额外的类名
    */
-  className?: string
+  className?: string;
 
   /**
    * 导航项额外的类名
    */
-  itemClassName?: string
+  itemClassName?: string;
 
   /**
    * 是否使用动画
    * @default true
    */
-  animated?: boolean
+  animated?: boolean;
 
   /**
    * 是否使用水平布局
    * @default true
    */
-  horizontal?: boolean
+  horizontal?: boolean;
 
   /**
    * 是否使用下划线
    * @default true
    */
-  underline?: boolean
+  underline?: boolean;
 }
 
 /**
@@ -169,16 +171,16 @@ export const NavItemList = ({
 }: NavItemListProps) => {
   // 检查导航项是否激活
   const isActive = (href: string) => {
-    if (!activePath) return false
-    return activePath === href || activePath.startsWith(`${href}/`)
-  }
+    if (!activePath) return false;
+    return activePath === href || activePath.startsWith(`${href}/`);
+  };
 
   return (
     <ul
       className={cn(
-        'flex gap-2',
-        horizontal ? 'flex-row items-center' : 'flex-col',
-        className
+        "flex gap-2",
+        horizontal ? "flex-row items-center" : "flex-col",
+        className,
       )}
     >
       {items.map((item, index) => (
@@ -195,5 +197,5 @@ export const NavItemList = ({
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};

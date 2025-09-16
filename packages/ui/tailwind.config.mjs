@@ -1,2 +1,2 @@
 /** @type {import('tailwindcss').Config} */
-export { default } from '@repo/tailwind-config/react'
+export { default } from "@repo/tailwind-config/react";

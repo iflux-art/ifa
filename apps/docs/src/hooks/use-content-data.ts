@@ -1,47 +1,47 @@
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
-import { useCache } from '@/hooks/use-advanced-cache'
+import { usePathname } from "next/navigation";
+import { useCache } from "@/hooks/use-advanced-cache";
 
 // 定义默认缓存时间（30分钟）
-const DEFAULT_CACHE_TIME = 30 * 60 * 1000
+const DEFAULT_CACHE_TIME = 30 * 60 * 1000;
 
 // 定义请求选项接口
 export interface ContentLoadOptions {
   /** 内容类型 */
-  type: string
+  type: string;
   /** 内容路径 */
-  path?: string
+  path?: string;
   /** 请求 URL */
-  url?: string
+  url?: string;
   /** 内容分类 */
-  category?: string
+  category?: string;
   /** 缓存时间（毫秒） */
-  cacheTime?: number
+  cacheTime?: number;
   /** 是否禁用缓存 */
-  disableCache?: boolean
+  disableCache?: boolean;
   /** 是否强制刷新 */
-  forceRefresh?: boolean
+  forceRefresh?: boolean;
   /** 请求参数 */
-  params?: Record<string, unknown>
+  params?: Record<string, unknown>;
   /** 请求头 */
-  headers?: Record<string, string>
+  headers?: Record<string, string>;
 }
 
 // 定义返回结果接口
 export interface HookResult<T> {
   /** 数据 */
-  data: T | null
+  data: T | null;
   /** 加载状态 */
-  loading: boolean
+  loading: boolean;
   /** 错误信息 */
-  error: Error | null
+  error: Error | null;
   /** 刷新数据 */
-  refresh: () => Promise<void>
+  refresh: () => Promise<void>;
 }
 
 // 存储正在进行的请求，避免重复请求
-const pendingRequests = new Map<string, Promise<unknown>>()
+const pendingRequests = new Map<string, Promise<unknown>>();
 
 /**
  * 通用内容数据获取钩子
@@ -69,27 +69,27 @@ export function useContentData<T>({
   headers,
   forceRefresh = false, // 新增强制刷新参数
 }: ContentLoadOptions): HookResult<T> {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   // 生成缓存key
-  const getCacheKey = () => `${type}:${category ?? 'all'}:${pathname}`
+  const getCacheKey = () => `${type}:${category ?? "all"}:${pathname}`;
 
   // 数据获取函数
   const fetchData = () => {
-    const apiUrl = url ?? path ?? ''
+    const apiUrl = url ?? path ?? "";
     if (!apiUrl) {
-      throw new Error('URL or path is required')
+      throw new Error("URL or path is required");
     }
 
     // 只有在强制刷新时才添加时间戳来防止缓存
-    const cacheBuster = forceRefresh ? `?_t=${Date.now()}` : ''
-    const finalUrl = `${apiUrl}${cacheBuster}`
+    const cacheBuster = forceRefresh ? `?_t=${Date.now()}` : "";
+    const finalUrl = `${apiUrl}${cacheBuster}`;
 
-    const requestKey = `${finalUrl}:${JSON.stringify(params)}`
+    const requestKey = `${finalUrl}:${JSON.stringify(params)}`;
 
     // 检查是否有相同请求正在进行
     if (pendingRequests.has(requestKey)) {
-      return pendingRequests.get(requestKey) as Promise<T>
+      return pendingRequests.get(requestKey) as Promise<T>;
     }
 
     // 创建请求函数
@@ -97,46 +97,47 @@ export function useContentData<T>({
       try {
         // 添加缓存控制头来防止服务器缓存
         const headerOptions: Record<string, string> = {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           ...(headers ?? {}),
-        }
+        };
 
         // 有条件地添加缓存控制头
         if (forceRefresh) {
-          headerOptions['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-          headerOptions.Pragma = 'no-cache'
-          headerOptions.Expires = '0'
+          headerOptions["Cache-Control"] =
+            "no-cache, no-store, must-revalidate";
+          headerOptions.Pragma = "no-cache";
+          headerOptions.Expires = "0";
         }
 
         const fetchOptions: RequestInit = {
           headers: headerOptions,
-          cache: forceRefresh || disableCache ? 'no-store' : 'force-cache',
+          cache: forceRefresh || disableCache ? "no-store" : "force-cache",
           next: { revalidate: forceRefresh || disableCache ? 0 : 60 }, // 60秒重新验证
           ...(params ?? {}),
-        }
+        };
 
-        const response = await fetch(finalUrl, fetchOptions)
+        const response = await fetch(finalUrl, fetchOptions);
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const result: T = (await response.json()) as T
-        return result
+        const result: T = (await response.json()) as T;
+        return result;
       } catch {
-        throw new Error('Failed to fetch content')
+        throw new Error("Failed to fetch content");
       } finally {
         // 请求完成后移除
-        pendingRequests.delete(requestKey)
+        pendingRequests.delete(requestKey);
       }
-    }
+    };
 
-    const request = makeRequest()
+    const request = makeRequest();
 
     // 存储请求Promise
-    pendingRequests.set(requestKey, request)
-    return request
-  }
+    pendingRequests.set(requestKey, request);
+    return request;
+  };
 
   const { data, error, loading, refetch } = useCache<T>(
     getCacheKey(),
@@ -145,13 +146,13 @@ export function useContentData<T>({
       expiry: disableCache || forceRefresh ? 0 : cacheTime,
       useMemoryCache: !(forceRefresh || disableCache),
       useLocalStorage: !(forceRefresh || disableCache),
-    }
-  )
+    },
+  );
 
   return {
     data: data ?? null,
     loading,
     error: error ?? null,
     refresh: () => refetch(),
-  }
+  };
 }

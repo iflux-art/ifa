@@ -1,5 +1,5 @@
-import '@testing-library/jest-dom/vitest';
-import { afterEach } from 'vitest';
+import "@testing-library/jest-dom/vitest";
+import { afterEach } from "vitest";
 
 // Cleans up after each test
 afterEach(() => {
@@ -9,7 +9,7 @@ afterEach(() => {
 // Mocks localStorage
 const localStorageMock = (() => {
   let store: Record<string, string> = {};
-  
+
   return {
     getItem(key: string) {
       return store[key] || null;
@@ -22,16 +22,16 @@ const localStorageMock = (() => {
     },
     clear() {
       store = {};
-    }
+    },
   };
 })();
 
-Object.defineProperty(window, 'localStorage', {
+Object.defineProperty(window, "localStorage", {
   value: localStorageMock,
 });
 
 // Mocks matchMedia
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: (query: string) => ({
     matches: false,

@@ -1,33 +1,33 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { formatDate, formatNumber } from '@/features/blog/lib/client-utils'
-import type { ContentItem } from '@/features/blog/types'
-import { cn } from '@/utils'
+} from "@/components/ui/card";
+import { formatDate, formatNumber } from "@/features/blog/lib/client-utils";
+import type { ContentItem } from "@/features/blog/types";
+import { cn } from "@/utils";
 
 export interface ContentCardProps {
   /** 内容项 */
-  item: ContentItem
+  item: ContentItem;
   /** 自定义类名 */
-  className?: string
+  className?: string;
   /** 是否显示分类标签 */
-  showCategory?: boolean
+  showCategory?: boolean;
   /** 是否显示标签 */
-  showTags?: boolean
+  showTags?: boolean;
   /** 是否显示统计信息 */
-  showStats?: boolean
+  showStats?: boolean;
   /** 是否显示摘要 */
-  showExcerpt?: boolean
+  showExcerpt?: boolean;
   /** 点击事件处理 */
-  onClick?: () => void
+  onClick?: () => void;
 }
 
 export function ContentCard({
@@ -42,9 +42,9 @@ export function ContentCard({
   return (
     <Card
       className={cn(
-        'h-full overflow-hidden transition-all hover:shadow-lg',
-        onClick ? 'cursor-pointer' : '',
-        className
+        "h-full overflow-hidden transition-all hover:shadow-lg",
+        onClick ? "cursor-pointer" : "",
+        className,
       )}
       onClick={onClick}
     >
@@ -53,7 +53,7 @@ export function ContentCard({
           <Link
             href={item.slug}
             className="hover:text-primary transition-colors"
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
             {item.title}
           </Link>
@@ -73,7 +73,7 @@ export function ContentCard({
           )}
           {showTags &&
             item.tags &&
-            item.tags.map(tag => (
+            item.tags.map((tag) => (
               <Badge key={tag} variant="outline" className="text-xs">
                 {tag}
               </Badge>
@@ -86,17 +86,17 @@ export function ContentCard({
           <div className="flex gap-2">
             {item.views !== undefined && (
               <span>
-                {formatNumber(item.views)} {item.views === 1 ? 'view' : 'views'}
+                {formatNumber(item.views)} {item.views === 1 ? "view" : "views"}
               </span>
             )}
             {item.likes !== undefined && (
               <span>
-                {formatNumber(item.likes)} {item.likes === 1 ? 'like' : 'likes'}
+                {formatNumber(item.likes)} {item.likes === 1 ? "like" : "likes"}
               </span>
             )}
           </div>
         )}
       </CardFooter>
     </Card>
-  )
+  );
 }

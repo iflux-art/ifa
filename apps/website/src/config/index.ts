@@ -3,4 +3,4 @@
  */
 
 // 元数据配置
-export { SITE_METADATA } from './metadata'
+export { SITE_METADATA } from "./metadata";

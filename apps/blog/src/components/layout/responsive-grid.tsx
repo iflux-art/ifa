@@ -1,30 +1,30 @@
-import type { ReactNode } from 'react'
-import { SidebarWrapper } from '@/features/navigation'
+import type { ReactNode } from "react";
+import { SidebarWrapper } from "@/features/navigation";
 import {
   getMainContentClasses,
   getSidebarClasses,
-} from '@/lib/layout/layout-utils'
-import { useLayoutStore } from '@/stores'
-import type { PageLayoutType, SidebarConfig } from '@/types'
-import { cn } from '@/utils'
+} from "@/lib/layout/layout-utils";
+import { useLayoutStore } from "@/stores";
+import type { PageLayoutType, SidebarConfig } from "@/types";
+import { cn } from "@/utils";
 
 interface ResponsiveGridProps {
   /**
    * 网格内容
    */
-  children: ReactNode
+  children: ReactNode;
   /**
    * 侧边栏配置
    */
-  sidebars: SidebarConfig[]
+  sidebars: SidebarConfig[];
   /**
    * 手动指定布局类型（可选）
    */
-  layoutType?: PageLayoutType
+  layoutType?: PageLayoutType;
   /**
    * 自定义类名
    */
-  className?: string
+  className?: string;
 }
 
 /**
@@ -38,27 +38,27 @@ export const ResponsiveGrid = ({
   children,
   sidebars,
   layoutType: propLayoutType,
-  className = '',
+  className = "",
 }: ResponsiveGridProps) => {
-  const { layoutType: storeLayoutType } = useLayoutStore()
+  const { layoutType: storeLayoutType } = useLayoutStore();
 
   // 优先使用传入的布局类型，否则使用 store 中的类型
-  const layoutType = propLayoutType || storeLayoutType
+  const layoutType = propLayoutType || storeLayoutType;
 
-  const leftSidebars = sidebars.filter(s => s.position === 'left')
-  const rightSidebars = sidebars.filter(s => s.position === 'right')
+  const leftSidebars = sidebars.filter((s) => s.position === "left");
+  const rightSidebars = sidebars.filter((s) => s.position === "right");
 
   return (
     <div
       className={cn(
-        'grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-12 md:gap-6 lg:gap-8 xl:gap-10',
-        layoutType === 'narrow' ? 'py-4 lg:py-6' : 'py-6 lg:py-8',
-        className
+        "grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-12 md:gap-6 lg:gap-8 xl:gap-10",
+        layoutType === "narrow" ? "py-4 lg:py-6" : "py-6 lg:py-8",
+        className,
       )}
     >
       {/* 左侧边栏区域 */}
       {leftSidebars.length > 0 && (
-        <div className={getSidebarClasses('left', layoutType)}>
+        <div className={getSidebarClasses("left", layoutType)}>
           {leftSidebars.map((sidebar, index) => (
             <SidebarWrapper
               key={sidebar.id || `left-${index}`}
@@ -75,7 +75,7 @@ export const ResponsiveGrid = ({
 
       {/* 右侧边栏区域 */}
       {rightSidebars.length > 0 && (
-        <div className={getSidebarClasses('right', layoutType)}>
+        <div className={getSidebarClasses("right", layoutType)}>
           {rightSidebars.map((sidebar, index) => (
             <SidebarWrapper
               key={sidebar.id || `right-${index}`}
@@ -87,5 +87,5 @@ export const ResponsiveGrid = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};

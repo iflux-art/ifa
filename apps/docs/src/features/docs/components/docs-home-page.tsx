@@ -1,17 +1,17 @@
-import { DocPagination } from '@/components'
-import type { BreadcrumbItem } from '@/components/breadcrumb'
-import { Breadcrumb } from '@/components/breadcrumb'
-import { ContentDisplay } from '@/components/content-display'
+import { DocPagination } from "@/components";
+import type { BreadcrumbItem } from "@/components/breadcrumb";
+import { Breadcrumb } from "@/components/breadcrumb";
+import { ContentDisplay } from "@/components/content-display";
 import {
   DocsSidebar,
   DocsSidebarCard,
   getAllDocsStructure,
-} from '@/features/docs/components'
-import type { NavDocItem } from '@/features/docs/types'
-import { ThreeColumnLayout } from '@/features/layout'
+} from "@/features/docs/components";
+import type { NavDocItem } from "@/features/docs/types";
+import { ThreeColumnLayout } from "@/features/layout";
 
 interface DocsHomePageProps {
-  firstDoc?: NavDocItem | null
+  firstDoc?: NavDocItem | null;
 }
 
 /**
@@ -21,21 +21,21 @@ interface DocsHomePageProps {
  */
 export function DocsHomePage({ firstDoc }: DocsHomePageProps) {
   // 获取文档结构
-  const structure = getAllDocsStructure()
+  const structure = getAllDocsStructure();
 
   // 左侧边栏内容 - 文档导航
-  const leftSidebar = <DocsSidebarCard currentDoc="" showHeader={true} />
+  const leftSidebar = <DocsSidebarCard currentDoc="" showHeader={true} />;
 
   // 右侧边栏内容 - 空白占位
-  const rightSidebar = <div className="h-full" />
+  const rightSidebar = <div className="h-full" />;
 
   // 面包屑导航项
   const breadcrumbItems: BreadcrumbItem[] = [
     {
-      label: '文档',
-      href: '/docs',
+      label: "文档",
+      href: "/docs",
     },
-  ]
+  ];
 
   return (
     <ThreeColumnLayout leftSidebar={leftSidebar} rightSidebar={rightSidebar}>
@@ -76,5 +76,5 @@ export function DocsHomePage({ firstDoc }: DocsHomePageProps) {
         <DocPagination nextDoc={firstDoc} />
       </div>
     </ThreeColumnLayout>
-  )
+  );
 }

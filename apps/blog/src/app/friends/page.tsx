@@ -1,38 +1,38 @@
-import type { Metadata } from 'next'
-import { AppGrid, PageContainer } from '@/components/layout'
-import { TwikooComment } from '@/features/comment'
+import type { Metadata } from "next";
+import { AppGrid, PageContainer } from "@/components/layout";
+import { TwikooComment } from "@/features/comment";
 import {
   FriendLinkApplication,
   FriendLinkCard,
-} from '@/features/friends/components'
-import friendsData from '@/features/friends/data/friends.json'
+} from "@/features/friends/components";
+import friendsData from "@/features/friends/data/friends.json";
 import {
   DEFAULT_FRIENDS_CONFIG,
   hasFriendsData,
   processFriendsData,
-} from '@/features/friends/lib'
-import type { FriendLink } from '@/features/friends/types'
+} from "@/features/friends/lib";
+import type { FriendLink } from "@/features/friends/types";
 
 export const metadata: Metadata = {
-  title: '友情链接',
-  description: '友情链接列表和申请方式',
-  keywords: '友链,网站,合作',
+  title: "友情链接",
+  description: "友情链接列表和申请方式",
+  keywords: "友链,网站,合作",
   openGraph: {
-    title: '友情链接',
-    description: '友情链接列表和申请方式',
-    type: 'website',
+    title: "友情链接",
+    description: "友情链接列表和申请方式",
+    type: "website",
   },
-}
+};
 
 const FriendsPage = () => {
   // 处理友链数据
-  const friendsItems: FriendLink[] = processFriendsData(friendsData)
-  const config = DEFAULT_FRIENDS_CONFIG
+  const friendsItems: FriendLink[] = processFriendsData(friendsData);
+  const config = DEFAULT_FRIENDS_CONFIG;
 
   // 如果没有友链数据，显示空状态
   if (!hasFriendsData(friendsItems)) {
     return (
-      <PageContainer config={{ layout: 'narrow' }}>
+      <PageContainer config={{ layout: "narrow" }}>
         <div className="flex min-h-[50vh] items-center justify-center">
           <div className="text-center">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight lg:text-5xl">
@@ -50,15 +50,15 @@ const FriendsPage = () => {
           </div>
         </div>
       </PageContainer>
-    )
+    );
   }
 
   return (
-    <PageContainer config={{ layout: 'narrow' }}>
+    <PageContainer config={{ layout: "narrow" }}>
       <div>
         {/* 友链列表网格 */}
         <AppGrid columns={4} className="items-stretch">
-          {friendsItems.map(item => (
+          {friendsItems.map((item) => (
             <FriendLinkCard
               key={item.id}
               title={item.title}
@@ -83,7 +83,7 @@ const FriendsPage = () => {
         )}
       </div>
     </PageContainer>
-  )
-}
+  );
+};
 
-export default FriendsPage
+export default FriendsPage;

@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Bell, Check } from 'lucide-react'
+import type { Meta, StoryObj } from "@storybook/react";
+import { Bell, Check } from "lucide-react";
 
-import { Button } from './button'
+import { Button } from "./button";
 import {
   Card,
   CardContent,
@@ -9,61 +9,68 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from './card'
+} from "./card";
+import { useId } from "react";
 
 const meta = {
-  title: 'Components/Card',
+  title: "Components/Card",
   component: Card,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
-} satisfies Meta<typeof Card>
+  tags: ["autodocs"],
+} satisfies Meta<typeof Card>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => (
-    <Card className="w-[350px]">
-      <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form>
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                placeholder="Name of your project"
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              />
+  render: () => {
+    const nameId = useId();
+    const frameworkId = useId();
+    return (
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle>Create project</CardTitle>
+          <CardDescription>
+            Deploy your new project in one-click.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form>
+            <div className="grid w-full items-center gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <label htmlFor={nameId}>Name</label>
+                <input
+                  id={nameId}
+                  placeholder="Name of your project"
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <label htmlFor={frameworkId}>Framework</label>
+                <select
+                  id={frameworkId}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <option value="">Select</option>
+                  <option value="next">Next.js</option>
+                  <option value="sveltekit">SvelteKit</option>
+                  <option value="astro">Astro</option>
+                  <option value="nuxt">Nuxt.js</option>
+                </select>
+              </div>
             </div>
-            <div className="flex flex-col space-y-1.5">
-              <label htmlFor="framework">Framework</label>
-              <select
-                id="framework"
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                <option value="">Select</option>
-                <option value="next">Next.js</option>
-                <option value="sveltekit">SvelteKit</option>
-                <option value="astro">Astro</option>
-                <option value="nuxt">Nuxt.js</option>
-              </select>
-            </div>
-          </div>
-        </form>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <Button>Deploy</Button>
-      </CardFooter>
-    </Card>
-  ),
-}
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-between">
+          <Button variant="outline">Cancel</Button>
+          <Button>Deploy</Button>
+        </CardFooter>
+      </Card>
+    );
+  },
+};
 
 export const Simple: Story = {
   render: () => (
@@ -77,7 +84,7 @@ export const Simple: Story = {
       </CardContent>
     </Card>
   ),
-}
+};
 
 export const WithNotification: Story = {
   render: () => (
@@ -116,7 +123,7 @@ export const WithNotification: Story = {
       </CardContent>
     </Card>
   ),
-}
+};
 
 export const MinimalCard: Story = {
   render: () => (
@@ -131,4 +138,4 @@ export const MinimalCard: Story = {
       </CardContent>
     </Card>
   ),
-}
+};

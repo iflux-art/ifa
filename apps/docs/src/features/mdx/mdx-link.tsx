@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import { ExternalLink } from 'lucide-react'
-import Link from 'next/link'
-import { cn } from '@/utils'
+import { ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@/utils";
 
 type MDXLinkProps = {
-  href: string
-  children: React.ReactNode
-  className?: string
-  external?: boolean
-  openInNewTab?: boolean
-  showExternalIcon?: boolean
-} & React.AnchorHTMLAttributes<HTMLAnchorElement>
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+  external?: boolean;
+  openInNewTab?: boolean;
+  showExternalIcon?: boolean;
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const isExternalLink = (href: string): boolean =>
-  href.startsWith('http') ||
-  href.startsWith('mailto:') ||
-  href.startsWith('tel:')
+  href.startsWith("http") ||
+  href.startsWith("mailto:") ||
+  href.startsWith("tel:");
 
 export const MDXLink = ({
   href,
@@ -26,24 +26,24 @@ export const MDXLink = ({
   openInNewTab = true,
   showExternalIcon = true,
 }: MDXLinkProps) => {
-  if (!href) return null
+  if (!href) return null;
 
-  const isExternal = external ?? isExternalLink(href)
+  const isExternal = external ?? isExternalLink(href);
   const linkClasses = cn(
-    'not-prose font-medium text-primary hover:text-primary/80',
-    'relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0',
-    'after:bg-current after:transition-all after:duration-300 after:ease-out',
-    'hover:after:w-full',
-    isExternal && 'text-primary',
-    className
-  )
+    "not-prose font-medium text-primary hover:text-primary/80",
+    "relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0",
+    "after:bg-current after:transition-all after:duration-300 after:ease-out",
+    "hover:after:w-full",
+    isExternal && "text-primary",
+    className,
+  );
 
   if (isExternal) {
     return (
       <a
         href={href}
         className={linkClasses}
-        target={openInNewTab ? '_blank' : undefined}
+        target={openInNewTab ? "_blank" : undefined}
         rel="noopener noreferrer"
       >
         {children}
@@ -51,12 +51,12 @@ export const MDXLink = ({
           <ExternalLink className="ml-1 inline-block h-3 w-3" />
         )}
       </a>
-    )
+    );
   }
 
   return (
     <Link href={href} className={linkClasses}>
       {children}
     </Link>
-  )
-}
+  );
+};

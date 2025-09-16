@@ -14,10 +14,10 @@ export {
   SITE_URL,
   VIEWPORT_CONFIG,
   WINDOWS_CONFIG,
-} from './metadata'
+} from "./metadata";
 
 // 页面元数据配置
 export {
   LINKS_PAGE_METADATA,
   PAGE_METADATA_MAP,
-} from './page-metadata'
+} from "./page-metadata";

@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { GitHubButton, TravelButton } from '@/components/button'
-import { cn } from '@/utils'
+import { GitHubButton, TravelButton } from "@/components/button";
+import { cn } from "@/utils";
 
 /**
  * 底栏组件
@@ -10,9 +10,9 @@ import { cn } from '@/utils'
 export const Footer = () => (
   <footer
     className={cn(
-      'w-full py-4 md:py-6',
-      'border-t border-border/30',
-      'bg-transparent'
+      "w-full py-4 md:py-6",
+      "border-t border-border/30",
+      "bg-transparent",
     )}
   >
     <div className="container mx-auto flex items-center justify-between px-4">
@@ -25,4 +25,4 @@ export const Footer = () => (
       </div>
     </div>
   </footer>
-)
+);

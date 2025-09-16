@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server'
-import { getPostsByYear } from '@/features/blog/lib'
+import { NextResponse } from "next/server";
+import { getPostsByYear } from "@/features/blog/lib";
 
 /**
  * GET 处理程序
@@ -7,13 +7,13 @@ import { getPostsByYear } from '@/features/blog/lib'
  */
 export function GET() {
   try {
-    const postsByYear = getPostsByYear()
-    return NextResponse.json(postsByYear)
+    const postsByYear = getPostsByYear();
+    return NextResponse.json(postsByYear);
   } catch (error) {
-    console.error('Error fetching timeline posts:', error)
+    console.error("Error fetching timeline posts:", error);
     return NextResponse.json(
-      { error: 'Failed to fetch timeline posts' },
-      { status: 500 }
-    )
+      { error: "Failed to fetch timeline posts" },
+      { status: 500 },
+    );
   }
 }

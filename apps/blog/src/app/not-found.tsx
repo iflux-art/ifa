@@ -1,23 +1,23 @@
-import { AlertCircle, Home, Search } from 'lucide-react'
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { useId } from 'react'
-import { BackButton, Button } from '@/components'
-import { PageContainer } from '@/components/layout'
-import type { NotFoundProps } from '@/types'
+import { AlertCircle, Home, Search } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { useId } from "react";
+import { BackButton, Button } from "@/components";
+import { PageContainer } from "@/components/layout";
+import type { NotFoundProps } from "@/types";
 
 export const metadata: Metadata = {
-  title: '404 - 页面未找到',
-  description: '抱歉，您访问的页面不存在或已被移除。',
-}
+  title: "404 - 页面未找到",
+  description: "抱歉，您访问的页面不存在或已被移除。",
+};
 
 const DEFAULT_TEXTS = {
-  code: '404',
-  title: '页面未找到',
-  description: '抱歉，您访问的页面不存在或已被移除。',
-  buttonText: '返回首页',
-  backUrl: '/',
-} as const
+  code: "404",
+  title: "页面未找到",
+  description: "抱歉，您访问的页面不存在或已被移除。",
+  buttonText: "返回首页",
+  backUrl: "/",
+} as const;
 
 /**
  * 全局404页面
@@ -29,13 +29,13 @@ const NotFoundPage = ({
   description = DEFAULT_TEXTS.description,
   buttonText = DEFAULT_TEXTS.buttonText,
   backUrl = DEFAULT_TEXTS.backUrl,
-  className = '',
+  className = "",
   showIcon = true,
 }: NotFoundProps) => {
-  const errorTitleId = useId()
+  const errorTitleId = useId();
 
   return (
-    <PageContainer config={{ layout: 'full-width' }}>
+    <PageContainer config={{ layout: "full-width" }}>
       <main
         className={`flex min-h-[70vh] items-center justify-center text-center ${className}`}
       >
@@ -91,7 +91,7 @@ const NotFoundPage = ({
         </section>
       </main>
     </PageContainer>
-  )
-}
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;

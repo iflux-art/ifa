@@ -18,16 +18,16 @@
  */
 export function debounceSync<T extends (...args: never[]) => void>(
   fn: T,
-  delay: number
+  delay: number,
 ): T {
-  let timer: NodeJS.Timeout | null = null
+  let timer: NodeJS.Timeout | null = null;
   return ((...args: Parameters<T>) => {
-    if (timer) clearTimeout(timer)
+    if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
-      fn(...args)
-      timer = null
-    }, delay)
-  }) as T
+      fn(...args);
+      timer = null;
+    }, delay);
+  }) as T;
 }
 
 /**
@@ -38,11 +38,11 @@ export function debounceSync<T extends (...args: never[]) => void>(
  * @returns 过滤后的对象
  */
 export function filterUndefinedValues<T>(obj: T): T {
-  const result: Record<string, unknown> = {}
+  const result: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(obj as Record<string, unknown>)) {
     if (value !== undefined) {
-      result[key] = value
+      result[key] = value;
     }
   }
-  return result as T
+  return result as T;
 }

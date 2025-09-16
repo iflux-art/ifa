@@ -3,35 +3,35 @@
  * 用于展示带有链接的卡片，支持外部链接和内部链接
  */
 
-'use client'
+"use client";
 
-import { ExternalLink } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import type * as React from 'react'
-import { forwardRef } from 'react'
-import { Card, CardContent } from '@/components/ui/card'
-import { cn } from '@/utils'
+import { ExternalLink } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import type * as React from "react";
+import { forwardRef } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/utils";
 
 interface LinkCardProps {
   /** 标题 */
-  title: string
+  title: string;
   /** 描述 */
-  description?: string
+  description?: string;
   /** 链接URL */
-  href: string
+  href: string;
   /** 图标 */
-  icon?: React.ReactNode
+  icon?: React.ReactNode;
   /** 图标类型 */
-  iconType?: 'image' | 'text'
+  iconType?: "image" | "text";
   /** 是否为外部链接 */
-  isExternal?: boolean
+  isExternal?: boolean;
   /** 主题色 */
-  color?: string
+  color?: string;
   /** 自定义类名 */
-  className?: string
+  className?: string;
   /** 子元素 */
-  children?: React.ReactNode
+  children?: React.ReactNode;
 }
 
 /**
@@ -50,12 +50,12 @@ export const LinkCard = forwardRef<HTMLAnchorElement, LinkCardProps>(
       className,
       children,
     },
-    ref
+    ref,
   ) => {
     // 图标渲染逻辑
     const renderIcon = () => {
       // 获取标题首个字符
-      const firstChar = title.charAt(0)
+      const firstChar = title.charAt(0);
 
       // 如果没有icon，直接返回标题首个字符
       if (!icon) {
@@ -65,12 +65,12 @@ export const LinkCard = forwardRef<HTMLAnchorElement, LinkCardProps>(
               {firstChar}
             </span>
           </div>
-        )
+        );
       }
 
       // 如果是React元素，直接渲染
-      if (typeof icon !== 'string') {
-        return icon
+      if (typeof icon !== "string") {
+        return icon;
       }
 
       // 尝试显示图片
@@ -84,30 +84,30 @@ export const LinkCard = forwardRef<HTMLAnchorElement, LinkCardProps>(
             className="object-cover"
             unoptimized
             loading="lazy"
-            onError={e => {
+            onError={(e) => {
               // 图片加载失败时显示标题首个字符
-              const parent = e.currentTarget.parentElement
+              const parent = e.currentTarget.parentElement;
               if (parent) {
-                parent.innerHTML = `<div class="w-full h-full flex items-center justify-center"><span class="text-lg font-medium text-primary">${firstChar}</span></div>`
+                parent.innerHTML = `<div class="w-full h-full flex items-center justify-center"><span class="text-lg font-medium text-primary">${firstChar}</span></div>`;
               }
             }}
           />
         </div>
-      )
-    }
+      );
+    };
 
     // 样式处理逻辑
-    const cardStyle = color?.startsWith('#')
+    const cardStyle = color?.startsWith("#")
       ? {
           background: `linear-gradient(to bottom right, ${color}10, ${color}30)`,
         }
-      : {}
+      : {};
 
     const cardContent = (
       <Card
         className={cn(
-          'group transition-all duration-300 hover:scale-[1.01] hover:border-primary/50',
-          className
+          "group transition-all duration-300 hover:scale-[1.01] hover:border-primary/50",
+          className,
         )}
         style={cardStyle}
       >
@@ -131,24 +131,24 @@ export const LinkCard = forwardRef<HTMLAnchorElement, LinkCardProps>(
           </div>
         </CardContent>
       </Card>
-    )
+    );
 
     const commonProps = {
       ref,
-      className: 'block',
+      className: "block",
       href,
-    }
+    };
 
     if (isExternal) {
       return (
         <a {...commonProps} target="_blank" rel="noopener noreferrer">
           {cardContent}
         </a>
-      )
+      );
     }
 
-    return <Link {...commonProps}>{cardContent}</Link>
-  }
-)
+    return <Link {...commonProps}>{cardContent}</Link>;
+  },
+);
 
-LinkCard.displayName = 'LinkCard'
+LinkCard.displayName = "LinkCard";

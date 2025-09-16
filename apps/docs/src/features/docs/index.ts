@@ -16,14 +16,14 @@ export {
   getAllDocsStructure,
   resolveDocumentPath,
   useGlobalDocs,
-} from './components'
+} from "./components";
 
 // ==================== Hooks 导出 ====================
 export {
   useDocCategories,
   useDocContent,
   useDocMeta,
-} from './hooks'
+} from "./hooks";
 
 // ==================== 工具函数导出 ====================
 export {
@@ -33,7 +33,7 @@ export {
   getFirstDocInDirectory,
   isRedirectLoop,
   resolveDocPath,
-} from './lib'
+} from "./lib";
 
 // ==================== 类型定义导出 ====================
 export type {
@@ -47,4 +47,4 @@ export type {
   DocTreeNode,
   NavDocItem,
   SidebarItem,
-} from './types'
+} from "./types";

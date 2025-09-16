@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { ExternalLink, HandHeart } from 'lucide-react'
-import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import type { FriendsPageConfig } from '../types'
+import { ExternalLink, HandHeart } from "lucide-react";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import type { FriendsPageConfig } from "../types";
 
 interface FriendLinkApplicationProps {
   /** 友链页面配置 */
-  config: FriendsPageConfig
+  config: FriendsPageConfig;
   /** 自定义类名 */
-  className?: string
+  className?: string;
 }
 
 /**
@@ -20,9 +20,9 @@ interface FriendLinkApplicationProps {
  */
 export const FriendLinkApplication = ({
   config,
-  className = '',
+  className = "",
 }: FriendLinkApplicationProps) => {
-  const { application, requirements } = config
+  const { application, requirements } = config;
 
   return (
     <div className={`mt-8 ${className}`}>
@@ -58,7 +58,7 @@ export const FriendLinkApplication = ({
 
               {/* 要求标签 */}
               <div className="mb-4 flex flex-wrap gap-1.5 sm:gap-2">
-                {requirements.map(requirement => (
+                {requirements.map((requirement) => (
                   <Badge
                     key={requirement.title}
                     variant="outline"
@@ -86,7 +86,7 @@ export const FriendLinkApplication = ({
             {/* 右侧图标区域 */}
             <div
               className="relative hidden flex-shrink-0 overflow-hidden rounded-r-[calc(var(--radius)-1px)] bg-gradient-to-br from-primary/5 via-background to-primary/10 lg:flex lg:items-center lg:justify-center"
-              style={{ width: '25%', minWidth: '120px' }}
+              style={{ width: "25%", minWidth: "120px" }}
             >
               <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
                 <HandHeart className="h-10 w-10 text-primary" />
@@ -96,5 +96,5 @@ export const FriendLinkApplication = ({
         </Card>
       </Link>
     </div>
-  )
-}
+  );
+};

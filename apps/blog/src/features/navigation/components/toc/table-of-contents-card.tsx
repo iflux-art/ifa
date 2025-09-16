@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
-import { Text } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Text } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type {
   TableOfContentsCardProps,
   TocHeading,
-} from '@/features/navigation/types'
-import { useHeadingObserver } from '@/hooks/use-heading-observer'
-import { cn } from '@/utils'
+} from "@/features/navigation/types";
+import { useHeadingObserver } from "@/hooks/use-heading-observer";
+import { cn } from "@/utils";
 
 // ====== 迁移自 src/config/layout.ts ======
 /**
  * 页面顶部固定导航栏的高度
  */
-const NAVBAR_HEIGHT = 80
+const NAVBAR_HEIGHT = 80;
 /**
  * 滚动偏移量，用于锚点定位时避免被导航栏遮挡
  */
-const SCROLL_OFFSET = NAVBAR_HEIGHT
+const SCROLL_OFFSET = NAVBAR_HEIGHT;
 // ====== END ======
 
 // ====== 迁移自 src/utils/dom.ts ======
@@ -31,46 +31,46 @@ const SCROLL_OFFSET = NAVBAR_HEIGHT
 function scrollToElement(
   elementId: string,
   offset = 0,
-  updateHash = false
+  updateHash = false,
 ): void {
-  const element = document.getElementById(elementId)
-  if (!element) return
+  const element = document.getElementById(elementId);
+  if (!element) return;
 
-  const elementPosition = element.getBoundingClientRect().top
-  const offsetPosition = elementPosition + window.scrollY - offset
+  const elementPosition = element.getBoundingClientRect().top;
+  const offsetPosition = elementPosition + window.scrollY - offset;
 
   window.scrollTo({
     top: offsetPosition,
-    behavior: 'smooth',
-  })
+    behavior: "smooth",
+  });
 
   // 仅在需要时更新 URL hash
   if (updateHash) {
-    window.location.hash = elementId
+    window.location.hash = elementId;
   }
 }
 // ====== END ======
 
 // 标题项组件
 interface HeadingItemProps {
-  heading: TocHeading
-  isActive: boolean
+  heading: TocHeading;
+  isActive: boolean;
 }
 
 const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
   // 计算缩进，根据标题级别
-  const indent = (heading.level - 2) * 0.75
+  const indent = (heading.level - 2) * 0.75;
 
   // 添加状态跟踪hover
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   // 根据标题级别设置不同的样式
   const headingSize =
     {
-      2: 'font-medium',
-      3: 'font-normal',
-      4: 'text-sm',
-    }[heading.level] ?? ''
+      2: "font-medium",
+      3: "font-normal",
+      4: "text-sm",
+    }[heading.level] ?? "";
 
   return (
     <div className="relative">
@@ -87,27 +87,27 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
       <a
         href={`#${heading.id}`}
         className={cn(
-          'group relative flex min-w-0 items-start py-1.5 text-sm transition-colors',
+          "group relative flex min-w-0 items-start py-1.5 text-sm transition-colors",
           headingSize,
           // 普通文本
-          'text-muted-foreground',
+          "text-muted-foreground",
           // hover 状态
-          'hover:text-foreground',
+          "hover:text-foreground",
           // active 状态
-          isActive && 'font-medium text-foreground',
-          'w-full'
+          isActive && "font-medium text-foreground",
+          "w-full",
         )}
         style={{
-          paddingLeft: heading.level > 2 ? `calc(${indent}rem + 1rem)` : '1rem',
+          paddingLeft: heading.level > 2 ? `calc(${indent}rem + 1rem)` : "1rem",
         }}
-        onClick={e => {
-          e.preventDefault()
+        onClick={(e) => {
+          e.preventDefault();
           // 先设置URL的hash，以便正确更新状态
-          window.location.hash = heading.id // 这会触发hashchange事件
+          window.location.hash = heading.id; // 这会触发hashchange事件
           // 滚动到元素
           setTimeout(() => {
-            scrollToElement(heading.id, SCROLL_OFFSET, false) // 不更新hash，因为已经更新过了
-          }, 10)
+            scrollToElement(heading.id, SCROLL_OFFSET, false); // 不更新hash，因为已经更新过了
+          }, 10);
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -117,14 +117,14 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
         </span>
       </a>
     </div>
-  )
-}
+  );
+};
 
 // 目录容器组件
 interface TocContainerProps {
-  headings: TocHeading[]
-  activeId: string | null
-  tocRef: React.RefObject<HTMLDivElement | null>
+  headings: TocHeading[];
+  activeId: string | null;
+  tocRef: React.RefObject<HTMLDivElement | null>;
 }
 
 const TocContainer = ({ headings, activeId, tocRef }: TocContainerProps) => (
@@ -144,7 +144,7 @@ const TocContainer = ({ headings, activeId, tocRef }: TocContainerProps) => (
       </div>
     </div>
   </div>
-)
+);
 
 /**
  * 目录卡片组件
@@ -155,67 +155,67 @@ const TocContainer = ({ headings, activeId, tocRef }: TocContainerProps) => (
 export const TableOfContentsCard = ({
   headings,
   className,
-  title = '目录',
+  title = "目录",
 }: TableOfContentsCardProps) => {
-  const tocRef = useRef<HTMLDivElement>(null)
+  const tocRef = useRef<HTMLDivElement>(null);
 
   // 使用自定义 hook 处理标题观察
-  const activeId = useHeadingObserver(headings)
+  const activeId = useHeadingObserver(headings);
 
   // 自动滚动目录到当前活动标题
   useEffect(() => {
     // 如果没有标题，不执行任何操作
     if (headings.length === 0) {
-      return
+      return;
     }
-    let timeoutId: number
+    let timeoutId: number;
 
     const handleScroll = () => {
       if (timeoutId) {
-        clearTimeout(timeoutId)
+        clearTimeout(timeoutId);
       }
 
       timeoutId = window.setTimeout(() => {
         if (activeId && tocRef.current) {
           const activeElement = tocRef.current.querySelector(
-            `a[href="#${activeId}"]`
-          )
+            `a[href="#${activeId}"]`,
+          );
           if (activeElement) {
-            const containerRect = tocRef.current.getBoundingClientRect()
-            const activeRect = activeElement.getBoundingClientRect()
+            const containerRect = tocRef.current.getBoundingClientRect();
+            const activeRect = activeElement.getBoundingClientRect();
 
             const isInView =
               activeRect.top >= containerRect.top &&
-              activeRect.bottom <= containerRect.bottom
+              activeRect.bottom <= containerRect.bottom;
 
             if (!isInView) {
               const scrollTop =
                 activeRect.top -
                 containerRect.top -
                 containerRect.height / 2 +
-                activeRect.height / 2
+                activeRect.height / 2;
               tocRef.current.scrollTo({
                 top: tocRef.current.scrollTop + scrollTop,
-                behavior: 'smooth',
-              })
+                behavior: "smooth",
+              });
             }
           }
         }
-      }, 150)
-    }
+      }, 150);
+    };
 
-    handleScroll()
+    handleScroll();
     return () => {
       if (timeoutId) {
-        clearTimeout(timeoutId)
+        clearTimeout(timeoutId);
       }
-    }
-  }, [activeId, headings.length])
+    };
+  }, [activeId, headings.length]);
 
   // 过滤掉h1标题，只显示h2-h4
   const filteredHeadings = headings.filter(
-    (heading: TocHeading) => heading.level >= 2 && heading.level <= 4
-  )
+    (heading: TocHeading) => heading.level >= 2 && heading.level <= 4,
+  );
 
   // 根据标题级别对目录进行分组和嵌套
   const organizeHeadings = (headings: TocHeading[]) =>
@@ -225,20 +225,20 @@ export const TableOfContentsCard = ({
       if (!heading.id) {
         heading.id = `heading-${heading.text
           .toLowerCase()
-          .replace(/\s+/g, '-')
-          .replace(/[^\w-]/g, '')}-${index}`
+          .replace(/\s+/g, "-")
+          .replace(/[^\w-]/g, "")}-${index}`;
       }
-      return heading
-    })
+      return heading;
+    });
   // 如果过滤后没有标题，返回null，不显示任何内容
   if (filteredHeadings.length === 0) {
-    return null
+    return null;
   }
 
-  const organizedHeadings = organizeHeadings(filteredHeadings)
+  const organizedHeadings = organizeHeadings(filteredHeadings);
 
   return (
-    <Card className={cn('w-full', className)}>
+    <Card className={cn("w-full", className)}>
       <CardHeader className="pt-4 pb-2">
         <CardTitle className="flex items-center gap-2 text-sm font-medium text-foreground">
           <Text className="h-3.5 w-3.5 text-primary" />
@@ -253,5 +253,5 @@ export const TableOfContentsCard = ({
         />
       </CardContent>
     </Card>
-  )
-}
+  );
+};

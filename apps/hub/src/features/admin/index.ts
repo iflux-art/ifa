@@ -10,9 +10,9 @@ export {
   DeleteDialog,
   EditDialog,
   LinksAdminPage,
-} from './components'
+} from "./components";
 // Hooks 导出
-export { useDebouncedValue } from './hooks/use-debounced-value'
+export { useDebouncedValue } from "./hooks/use-debounced-value";
 // 类型导出
 export type {
   AddDialogProps,
@@ -24,4 +24,4 @@ export type {
   DeleteDialogProps,
   EditDialogProps,
   LinksFormData,
-} from './types'
+} from "./types";

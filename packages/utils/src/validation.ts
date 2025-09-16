@@ -11,8 +11,8 @@
  * ```
  */
 export function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  return emailRegex.test(email)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
 /**
@@ -29,10 +29,10 @@ export function isValidEmail(email: string): boolean {
  */
 export function isValidUrl(url: string): boolean {
   try {
-    new URL(url)
-    return true
+    new URL(url);
+    return true;
   } catch {
-    return false
+    return false;
   }
 }
 
@@ -50,8 +50,8 @@ export function isValidUrl(url: string): boolean {
  */
 export function isValidUuid(uuid: string): boolean {
   const uuidRegex =
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
-  return uuidRegex.test(uuid)
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  return uuidRegex.test(uuid);
 }
 
 /**
@@ -67,8 +67,8 @@ export function isValidUuid(uuid: string): boolean {
  * ```
  */
 export function isAlphanumeric(str: string): boolean {
-  const alphanumericRegex = /^[a-zA-Z0-9]+$/
-  return alphanumericRegex.test(str)
+  const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+  return alphanumericRegex.test(str);
 }
 
 /**
@@ -87,11 +87,11 @@ export function isAlphanumeric(str: string): boolean {
  * ```
  */
 export function isEmpty(value: unknown): boolean {
-  if (value == null) return true
-  if (typeof value === 'string') return value.length === 0
-  if (Array.isArray(value)) return value.length === 0
-  if (typeof value === 'object') return Object.keys(value).length === 0
-  return false
+  if (value == null) return true;
+  if (typeof value === "string") return value.length === 0;
+  if (Array.isArray(value)) return value.length === 0;
+  if (typeof value === "object") return Object.keys(value).length === 0;
+  return false;
 }
 
 /**
@@ -108,14 +108,14 @@ export function isEmpty(value: unknown): boolean {
  * ```
  */
 export function isNumeric(value: unknown): boolean {
-  if (typeof value === 'number') {
-    return !Number.isNaN(value) && Number.isFinite(value)
+  if (typeof value === "number") {
+    return !Number.isNaN(value) && Number.isFinite(value);
   }
-  if (typeof value === 'string') {
-    const num = Number.parseFloat(value)
-    return !Number.isNaN(num) && Number.isFinite(num)
+  if (typeof value === "string") {
+    const num = Number.parseFloat(value);
+    return !Number.isNaN(num) && Number.isFinite(num);
   }
-  return false
+  return false;
 }
 
 /**
@@ -132,10 +132,10 @@ export function isNumeric(value: unknown): boolean {
  */
 export function isValidJson(str: string): boolean {
   try {
-    JSON.parse(str)
-    return true
+    JSON.parse(str);
+    return true;
   } catch {
-    return false
+    return false;
   }
 }
 
@@ -155,16 +155,16 @@ export function isValidJson(str: string): boolean {
 export function validatePassword(
   password: string,
   options: {
-    minLength?: number
-    requireUppercase?: boolean
-    requireLowercase?: boolean
-    requireNumbers?: boolean
-    requireSpecialChars?: boolean
-  } = {}
+    minLength?: number;
+    requireUppercase?: boolean;
+    requireLowercase?: boolean;
+    requireNumbers?: boolean;
+    requireSpecialChars?: boolean;
+  } = {},
 ): {
-  isValid: boolean
-  score: number
-  feedback: string[]
+  isValid: boolean;
+  score: number;
+  feedback: string[];
 } {
   const {
     minLength = 8,
@@ -172,49 +172,49 @@ export function validatePassword(
     requireLowercase = true,
     requireNumbers = true,
     requireSpecialChars = true,
-  } = options
+  } = options;
 
-  const feedback: string[] = []
-  let score = 0
+  const feedback: string[] = [];
+  let score = 0;
 
   // Length check
   if (password.length < minLength) {
-    feedback.push(`Password must be at least ${minLength} characters long`)
+    feedback.push(`Password must be at least ${minLength} characters long`);
   } else {
-    score += 1
+    score += 1;
   }
 
   // Uppercase check
   if (requireUppercase && !/[A-Z]/.test(password)) {
-    feedback.push('Add uppercase letters')
+    feedback.push("Add uppercase letters");
   } else if (/[A-Z]/.test(password)) {
-    score += 1
+    score += 1;
   }
 
   // Lowercase check
   if (requireLowercase && !/[a-z]/.test(password)) {
-    feedback.push('Add lowercase letters')
+    feedback.push("Add lowercase letters");
   } else if (/[a-z]/.test(password)) {
-    score += 1
+    score += 1;
   }
 
   // Numbers check
   if (requireNumbers && !/\d/.test(password)) {
-    feedback.push('Add numbers')
+    feedback.push("Add numbers");
   } else if (/\d/.test(password)) {
-    score += 1
+    score += 1;
   }
 
   // Special characters check
   if (requireSpecialChars && !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-    feedback.push('Add special characters')
+    feedback.push("Add special characters");
   } else if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-    score += 1
+    score += 1;
   }
 
   return {
     isValid: feedback.length === 0,
     score,
     feedback,
-  }
+  };
 }

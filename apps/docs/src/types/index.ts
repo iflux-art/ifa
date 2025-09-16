@@ -13,12 +13,12 @@ export type {
   SidebarWrapperProps,
   ThreeColumnGridProps,
   ThreeColumnLayoutProps,
-} from '@/features/layout/layout-types'
+} from "@/features/layout/layout-types";
 
 // 新增异步操作相关类型
-export type { CacheOptions, UseAsyncOptions } from './async-types'
+export type { CacheOptions, UseAsyncOptions } from "./async-types";
 // 配置相关类型
-export type { IosConfig, SiteMetadata, WindowsConfig } from './config-types'
+export type { IosConfig, SiteMetadata, WindowsConfig } from "./config-types";
 // SEO相关类型
 export type {
   GenerateMetadataOptions,
@@ -28,7 +28,7 @@ export type {
   SiteConfig,
   SocialConfig,
   VerificationConfig,
-} from './seo-types'
+} from "./seo-types";
 
 // ==================== 组件 Props 类型 ====================
 // 已移除文档项目中不使用的通用组件Props类型定义

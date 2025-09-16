@@ -1,29 +1,29 @@
-import type { ReactNode } from 'react'
-import { DEFAULT_SIDEBAR_CONFIG } from '@/lib/layout/layout-utils'
-import type { PageLayoutType, SidebarConfig } from '@/types'
-import { PageContainer } from './page-container'
+import type { ReactNode } from "react";
+import { DEFAULT_SIDEBAR_CONFIG } from "@/lib/layout/layout-utils";
+import type { PageLayoutType, SidebarConfig } from "@/types";
+import { PageContainer } from "./page-container";
 
 interface MultiLayoutProps {
   /**
    * 左侧边栏内容
    */
-  leftSidebar?: ReactNode
+  leftSidebar?: ReactNode;
   /**
    * 主内容
    */
-  children: ReactNode
+  children: ReactNode;
   /**
    * 右侧边栏内容（已弃用）
    */
-  rightSidebar?: ReactNode
+  rightSidebar?: ReactNode;
   /**
    * 布局类型
    */
-  layout?: PageLayoutType
+  layout?: PageLayoutType;
   /**
    * 自定义类名
    */
-  className?: string
+  className?: string;
 }
 
 /**
@@ -37,18 +37,18 @@ export const MultiLayout = ({
   leftSidebar,
   children,
   rightSidebar: _rightSidebar, // 标记为已弃用但保留参数以保持接口兼容性
-  layout = 'full-width',
-  className = '',
+  layout = "full-width",
+  className = "",
 }: MultiLayoutProps) => {
-  const sidebars: SidebarConfig[] = []
+  const sidebars: SidebarConfig[] = [];
 
   // 左侧边栏配置 - 只在单侧栏布局中添加
-  if (leftSidebar && layout === 'single-sidebar') {
+  if (leftSidebar && layout === "single-sidebar") {
     sidebars.push({
       content: leftSidebar,
-      position: 'left',
+      position: "left",
       ...DEFAULT_SIDEBAR_CONFIG,
-    })
+    });
   }
 
   // 右侧边栏配置 - 不再支持右侧边栏
@@ -61,8 +61,8 @@ export const MultiLayout = ({
     >
       {children}
     </PageContainer>
-  )
-}
+  );
+};
 
 // 为了向后兼容，保留ThreeColumnLayout的导出
-export const ThreeColumnLayout = MultiLayout
+export const ThreeColumnLayout = MultiLayout;

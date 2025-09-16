@@ -8,17 +8,17 @@
 export {
   // 面包屑组件
   Breadcrumb,
-} from './components/breadcrumb'
+} from "./components/breadcrumb";
 export {
   // 侧边栏组件
   Sidebar,
   SidebarWrapper,
-} from './components/sidebar'
+} from "./components/sidebar";
 export {
   // 目录组件
   TableOfContents,
   TableOfContentsCard,
-} from './components/toc'
+} from "./components/toc";
 // 类型导出
 export type {
   // 基础导航类型
@@ -38,7 +38,7 @@ export type {
   // 目录相关类型
   TocHeading,
   TocProps,
-} from './types'
+} from "./types";
 
 // Hooks 导出
 // export {} from "./hooks";

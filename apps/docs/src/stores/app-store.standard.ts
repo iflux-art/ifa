@@ -1,65 +1,65 @@
-import { create } from 'zustand'
-import { createResetFunction } from '@/utils/store'
+import { create } from "zustand";
+import { createResetFunction } from "@/utils/store";
 
 // 状态接口
 export interface AppUIState {
   // UI 状态
-  isSidebarOpen: boolean
-  isSearchOpen: boolean
-  isMobile: boolean
+  isSidebarOpen: boolean;
+  isSearchOpen: boolean;
+  isMobile: boolean;
 
   // 应用配置
-  theme: 'light' | 'dark' | 'system'
-  language: string
+  theme: "light" | "dark" | "system";
+  language: string;
 
   // 通知状态
   notifications: {
-    hasUnread: boolean
-    count: number
-  }
+    hasUnread: boolean;
+    count: number;
+  };
 
   // 加载状态
-  isLoading: boolean
-  loadingMessage: string
+  isLoading: boolean;
+  loadingMessage: string;
 
   // 错误状态
-  error: string | null
+  error: string | null;
 }
 
 // 动作接口
 export interface AppActions {
   // UI Actions
-  setIsSidebarOpen: (isOpen: boolean) => void
-  setIsSearchOpen: (isOpen: boolean) => void
-  setIsMobile: (isMobile: boolean) => void
-  toggleSidebar: () => void
-  toggleSearch: () => void
+  setIsSidebarOpen: (isOpen: boolean) => void;
+  setIsSearchOpen: (isOpen: boolean) => void;
+  setIsMobile: (isMobile: boolean) => void;
+  toggleSidebar: () => void;
+  toggleSearch: () => void;
 
   // 配置 Actions
-  setTheme: (theme: 'light' | 'dark' | 'system') => void
-  setLanguage: (language: string) => void
+  setTheme: (theme: "light" | "dark" | "system") => void;
+  setLanguage: (language: string) => void;
 
   // 通知 Actions
   setNotifications: (notifications: {
-    hasUnread: boolean
-    count: number
-  }) => void
-  showNotificationBadge: () => void
-  hideNotificationBadge: () => void
-  incrementNotificationCount: () => void
+    hasUnread: boolean;
+    count: number;
+  }) => void;
+  showNotificationBadge: () => void;
+  hideNotificationBadge: () => void;
+  incrementNotificationCount: () => void;
 
   // 加载 Actions
-  setLoading: (isLoading: boolean, message?: string) => void
-  showError: (error: string) => void
-  clearError: () => void
+  setLoading: (isLoading: boolean, message?: string) => void;
+  showError: (error: string) => void;
+  clearError: () => void;
 
   // 重置 Actions
-  resetState: () => void
-  resetUIState: () => void
+  resetState: () => void;
+  resetUIState: () => void;
 }
 
 // 派生状态接口 (空类型)
-export type AppDerivedState = Record<never, never>
+export type AppDerivedState = Record<never, never>;
 
 // 完整的Store接口
 export interface AppStore extends AppUIState, AppActions {}
@@ -69,19 +69,19 @@ export const initialState: AppUIState = {
   isSidebarOpen: false,
   isSearchOpen: false,
   isMobile: false,
-  theme: 'system',
-  language: 'zh-CN',
+  theme: "system",
+  language: "zh-CN",
   notifications: {
     hasUnread: false,
     count: 0,
   },
   isLoading: false,
-  loadingMessage: '',
+  loadingMessage: "",
   error: null,
-}
+};
 
 // 创建标准化的重置函数
-const resetState = createResetFunction(initialState)
+const resetState = createResetFunction(initialState);
 
 // 创建函数
 export const createAppStore = () => {
@@ -89,21 +89,21 @@ export const createAppStore = () => {
     ...initialState,
 
     // UI Actions
-    setIsSidebarOpen: isOpen => set({ isSidebarOpen: isOpen }),
-    setIsSearchOpen: isOpen => set({ isSearchOpen: isOpen }),
-    setIsMobile: isMobile => set({ isMobile }),
+    setIsSidebarOpen: (isOpen) => set({ isSidebarOpen: isOpen }),
+    setIsSearchOpen: (isOpen) => set({ isSearchOpen: isOpen }),
+    setIsMobile: (isMobile) => set({ isMobile }),
     toggleSidebar: () =>
-      set(state => ({ isSidebarOpen: !state.isSidebarOpen })),
-    toggleSearch: () => set(state => ({ isSearchOpen: !state.isSearchOpen })),
+      set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
+    toggleSearch: () => set((state) => ({ isSearchOpen: !state.isSearchOpen })),
 
     // 配置 Actions
-    setTheme: theme => set({ theme }),
-    setLanguage: language => set({ language }),
+    setTheme: (theme) => set({ theme }),
+    setLanguage: (language) => set({ language }),
 
     // 通知 Actions
-    setNotifications: notifications => set({ notifications }),
+    setNotifications: (notifications) => set({ notifications }),
     showNotificationBadge: () =>
-      set(state => ({
+      set((state) => ({
         notifications: {
           ...state.notifications,
           hasUnread: true,
@@ -118,7 +118,7 @@ export const createAppStore = () => {
         },
       }),
     incrementNotificationCount: () =>
-      set(state => ({
+      set((state) => ({
         notifications: {
           ...state.notifications,
           count: state.notifications.count + 1,
@@ -127,9 +127,9 @@ export const createAppStore = () => {
       })),
 
     // 加载 Actions
-    setLoading: (isLoading, message = '') =>
+    setLoading: (isLoading, message = "") =>
       set({ isLoading, loadingMessage: message }),
-    showError: error => set({ error, isLoading: false }),
+    showError: (error) => set({ error, isLoading: false }),
     clearError: () => set({ error: null }),
 
     // 重置 Actions
@@ -140,8 +140,8 @@ export const createAppStore = () => {
         isSearchOpen: false,
         error: null,
       }),
-  }))
-}
+  }));
+};
 
 // 默认导出store实例
-export const useAppStore = createAppStore()
+export const useAppStore = createAppStore();

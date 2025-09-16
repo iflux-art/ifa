@@ -14,6 +14,6 @@ export {
   SITE_URL,
   VIEWPORT_CONFIG,
   WINDOWS_CONFIG,
-} from './metadata'
+} from "./metadata";
 
 // 页面元数据配置已移除，相关元数据已内联到对应的页面文件中

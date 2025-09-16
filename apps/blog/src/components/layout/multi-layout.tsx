@@ -1,29 +1,29 @@
-import type { ReactNode } from 'react'
-import { THREE_COLUMN_LAYOUT_CONFIG } from '@/lib/layout/layout-utils'
-import type { PageLayoutType, SidebarConfig } from '@/types'
-import { PageContainer } from './page-container'
+import type { ReactNode } from "react";
+import { THREE_COLUMN_LAYOUT_CONFIG } from "@/lib/layout/layout-utils";
+import type { PageLayoutType, SidebarConfig } from "@/types";
+import { PageContainer } from "./page-container";
 
 interface MultiLayoutProps {
   /**
    * 左侧边栏内容
    */
-  leftSidebar?: ReactNode
+  leftSidebar?: ReactNode;
   /**
    * 主内容
    */
-  children: ReactNode
+  children: ReactNode;
   /**
    * 右侧边栏内容
    */
-  rightSidebar?: ReactNode
+  rightSidebar?: ReactNode;
   /**
    * 布局类型
    */
-  layout?: PageLayoutType
+  layout?: PageLayoutType;
   /**
    * 自定义类名
    */
-  className?: string
+  className?: string;
 }
 
 /**
@@ -38,27 +38,27 @@ export const MultiLayout = ({
   leftSidebar,
   children,
   rightSidebar,
-  layout = 'double-sidebar',
-  className = '',
+  layout = "double-sidebar",
+  className = "",
 }: MultiLayoutProps) => {
-  const sidebars: SidebarConfig[] = []
+  const sidebars: SidebarConfig[] = [];
 
   // 左侧边栏配置 - 只在双侧栏布局中添加
-  if (leftSidebar && layout === 'double-sidebar') {
+  if (leftSidebar && layout === "double-sidebar") {
     sidebars.push({
       content: leftSidebar,
-      position: 'left',
+      position: "left",
       ...THREE_COLUMN_LAYOUT_CONFIG.leftSidebar,
-    })
+    });
   }
 
   // 右侧边栏配置 - 只在双侧栏布局中添加
-  if (rightSidebar && layout === 'double-sidebar') {
+  if (rightSidebar && layout === "double-sidebar") {
     sidebars.push({
       content: rightSidebar,
-      position: 'right',
+      position: "right",
       ...THREE_COLUMN_LAYOUT_CONFIG.rightSidebar,
-    })
+    });
   }
 
   return (
@@ -69,5 +69,5 @@ export const MultiLayout = ({
     >
       {children}
     </PageContainer>
-  )
-}
+  );
+};

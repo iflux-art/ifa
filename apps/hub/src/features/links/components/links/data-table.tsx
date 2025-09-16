@@ -1,23 +1,23 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type {
   DataTableAction,
   DataTableColumn,
   DataTablePagination,
   DataTableProps,
-} from '@/features/admin/types' // 导入通用类型
+} from "@/features/admin/types"; // 导入通用类型
 
 // 获取对齐类名函数
-function getAlignClass(align?: 'left' | 'center' | 'right'): string {
-  if (align === 'center') return 'text-center'
-  if (align === 'right') return 'text-right'
-  return 'text-left'
+function getAlignClass(align?: "left" | "center" | "right"): string {
+  if (align === "center") return "text-center";
+  if (align === "right") return "text-right";
+  return "text-left";
 }
 
 // 表格头部组件
 interface TableHeaderProps<T> {
-  columns: DataTableColumn<T>[]
-  hasActions: boolean
+  columns: DataTableColumn<T>[];
+  hasActions: boolean;
 }
 
 const TableHeader = <T extends object>({
@@ -40,13 +40,13 @@ const TableHeader = <T extends object>({
       )}
     </tr>
   </thead>
-)
+);
 
 // 表格单元格组件
 interface TableCellProps<T> {
-  column: DataTableColumn<T>
-  record: T
-  recordIndex: number
+  column: DataTableColumn<T>;
+  record: T;
+  recordIndex: number;
 }
 
 const TableCell = <T extends object>({
@@ -59,13 +59,13 @@ const TableCell = <T extends object>({
       ? column.render(record[column.key], record, recordIndex)
       : String(record[column.key])}
   </td>
-)
+);
 
 // 操作列组件
 interface ActionsColumnProps<T> {
-  actions: DataTableAction<T>[]
-  record: T
-  recordIndex: number
+  actions: DataTableAction<T>[];
+  record: T;
+  recordIndex: number;
 }
 
 const ActionsColumn = <T extends object>({
@@ -76,12 +76,12 @@ const ActionsColumn = <T extends object>({
   <td className="px-4 py-3 text-center">
     <div className="flex items-center justify-center gap-2">
       {actions.map((action, _actionIndex) => {
-        const IconComponent = action.icon
-        const isDisabled = action.disabled?.(record) ?? false
+        const IconComponent = action.icon;
+        const isDisabled = action.disabled?.(record) ?? false;
         return (
           <Button
             key={action.label}
-            variant={action.variant ?? 'outline'}
+            variant={action.variant ?? "outline"}
             size="sm"
             onClick={() => action.onClick(record, recordIndex)}
             disabled={isDisabled}
@@ -90,18 +90,18 @@ const ActionsColumn = <T extends object>({
             {IconComponent && <IconComponent className="h-3 w-3" />}
             {action.label}
           </Button>
-        )
+        );
       })}
     </div>
   </td>
-)
+);
 
 // 表格行组件
 interface TableRowProps<T> {
-  record: T
-  recordIndex: number
-  columns: DataTableColumn<T>[]
-  actions?: DataTableAction<T>[]
+  record: T;
+  recordIndex: number;
+  columns: DataTableColumn<T>[];
+  actions?: DataTableAction<T>[];
 }
 
 const TableRow = <T extends object>({
@@ -111,9 +111,9 @@ const TableRow = <T extends object>({
   actions,
 }: TableRowProps<T>) => {
   const recordKey =
-    'id' in record && typeof record.id === 'string'
+    "id" in record && typeof record.id === "string"
       ? record.id
-      : `record-${recordIndex}`
+      : `record-${recordIndex}`;
 
   return (
     <tr key={recordKey} className="border-b hover:bg-muted/50">
@@ -133,20 +133,20 @@ const TableRow = <T extends object>({
         />
       )}
     </tr>
-  )
-}
+  );
+};
 
 // 分页组件
 interface PaginationProps {
-  pagination: DataTablePagination
+  pagination: DataTablePagination;
 }
 
 const Pagination = ({ pagination }: PaginationProps) => {
   if (pagination.total <= pagination.pageSize) {
-    return null
+    return null;
   }
 
-  const totalPages = Math.ceil(pagination.total / pagination.pageSize)
+  const totalPages = Math.ceil(pagination.total / pagination.pageSize);
 
   return (
     <div className="flex items-center justify-between border-t px-4 py-3">
@@ -175,8 +175,8 @@ const Pagination = ({ pagination }: PaginationProps) => {
         </Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const DataTable = <T extends object>({
   title,
@@ -185,7 +185,7 @@ export const DataTable = <T extends object>({
   actions,
   pagination,
 }: DataTableProps<T>) => {
-  const hasActions = Boolean(actions && actions.length > 0)
+  const hasActions = Boolean(actions && actions.length > 0);
 
   return (
     <Card>
@@ -204,7 +204,7 @@ export const DataTable = <T extends object>({
                 : data.map((record, recordIndex) => (
                     <TableRow
                       key={
-                        'id' in record && typeof record.id === 'string'
+                        "id" in record && typeof record.id === "string"
                           ? record.id
                           : `record-${recordIndex}`
                       }
@@ -220,5 +220,5 @@ export const DataTable = <T extends object>({
         {pagination && <Pagination pagination={pagination} />}
       </CardContent>
     </Card>
-  )
-}
+  );
+};

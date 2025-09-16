@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { ArrowLeft } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 /**
  * 客户端返回上页按钮组件
@@ -12,4 +12,4 @@ export const BackButton = () => (
     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
     返回上页
   </Button>
-)
+);

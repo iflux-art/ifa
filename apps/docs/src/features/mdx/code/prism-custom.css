@@ -18,19 +18,10 @@ pre[class*="language-"] {
   border-radius: 0.5rem;
   overflow: auto;
   max-height: 600px;
-  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "Roboto Mono", monospace;
+  font-family:
+    "JetBrains Mono", "Fira Code", "Cascadia Code", "Roboto Mono", monospace;
   position: relative;
   z-index: 10;
-}
-
-/* 深色模式强制样式 */
-.dark pre[class*="language-"],
-.dark code[class*="language-"],
-pre[class*="language-"],
-code[class*="language-"] {
-  text-shadow: none;
-  color: #e3e3e3;
-  background-color: transparent;
 }
 
 /* 浅色模式下的代码颜色 */
@@ -87,9 +78,7 @@ code[class*="language-"] {
   color: #e90;
 }
 
-/* 修复大括号内文字颜色 */
-:root:not(.dark) .token.punctuation,
-:root:not(.dark) code[class*="language-"] {
+:root:not(.dark) .token.punctuation {
   color: #24292e;
 }
 
@@ -103,13 +92,25 @@ code[class*="language-"] {
   color: #5c6166;
 }
 
-/* 确保模板字符串中的变量显示清晰 */
 :root:not(.dark) .token.template-string .token.interpolation {
   color: #953800;
 }
 
 :root:not(.dark) .token.template-string .token.interpolation-punctuation {
   color: #953800;
+}
+
+:root:not(.dark) code[class*="language-"] {
+  color: #24292e;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
 }
 
 /* 深色模式下的代码颜色 */
@@ -166,13 +167,15 @@ code[class*="language-"] {
   color: #d16969;
 }
 
-.token.important,
-.token.bold {
-  font-weight: bold;
+.dark code[class*="language-"] {
+  color: #e3e3e3;
 }
 
-.token.italic {
-  font-style: italic;
+/* 深色模式强制样式 - 放在最后确保优先级 */
+.dark pre[class*="language-"],
+pre[class*="language-"] {
+  text-shadow: none;
+  background-color: transparent;
 }
 
 /* 代码块滚动条样式 */

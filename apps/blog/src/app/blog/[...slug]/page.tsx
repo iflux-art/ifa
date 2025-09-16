@@ -1,35 +1,35 @@
-import { notFound } from 'next/navigation'
-import { LayoutContainer } from '@/components/layout'
+import { notFound } from "next/navigation";
+import { LayoutContainer } from "@/components/layout";
 import {
   BlogCategoryCard,
   LatestPostsCard,
   RelatedPostsCard,
   TagCloudCard,
-} from '@/features/blog/components'
-import { ContentDisplay } from '@/features/blog/components/display'
-import ClientMDXRenderer from '@/features/blog/components/mdx/client-mdx-renderer'
-import { createBlogBreadcrumbs, getBlogContent } from '@/features/blog/lib'
-import { TwikooComment } from '@/features/comment'
-import { TableOfContentsCard } from '@/features/navigation'
-import { handleContentError } from '@/lib/error/error-utils'
+} from "@/features/blog/components";
+import { ContentDisplay } from "@/features/blog/components/display";
+import ClientMDXRenderer from "@/features/blog/components/mdx/client-mdx-renderer";
+import { createBlogBreadcrumbs, getBlogContent } from "@/features/blog/lib";
+import { TwikooComment } from "@/features/comment";
+import { TableOfContentsCard } from "@/features/navigation";
+import { handleContentError } from "@/lib/error/error-utils";
 
 interface BlogPostPageProps {
   params: Promise<{
-    slug: string[]
-  }>
-  searchParams?: Promise<Record<string, string | string[] | undefined>>
+    slug: string[];
+  }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug: slugParam } = await params
+  const { slug: slugParam } = await params;
 
   // Validate slug parameter
   if (!Array.isArray(slugParam) || slugParam.length === 0) {
-    return notFound()
+    return notFound();
   }
 
   try {
-    const resolvedParams = { slug: slugParam }
+    const resolvedParams = { slug: slugParam };
     const {
       slug,
       content,
@@ -39,22 +39,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       latestPosts,
       allTags,
       allCategories,
-    } = await getBlogContent(resolvedParams.slug)
-    const title = frontmatter.title ?? slug.join('/')
+    } = await getBlogContent(resolvedParams.slug);
+    const title = frontmatter.title ?? slug.join("/");
     const date = frontmatter.date
-      ? new Date(frontmatter.date).toLocaleDateString('zh-CN', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
+      ? new Date(frontmatter.date).toLocaleDateString("zh-CN", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
         })
-      : undefined
+      : undefined;
     const updatedAt = frontmatter.update
-      ? new Date(frontmatter.update).toLocaleDateString('zh-CN', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
+      ? new Date(frontmatter.update).toLocaleDateString("zh-CN", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
         })
-      : undefined
+      : undefined;
     // 左侧边栏内容
     const leftSidebar = (
       <>
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           useDefaultRouting
         />
       </>
-    )
+    );
 
     // 右侧边栏内容
     const rightSidebar = (
@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <LatestPostsCard posts={latestPosts} currentSlug={slug.slice(1)} />
         <RelatedPostsCard posts={relatedPosts} currentSlug={slug.slice(1)} />
       </>
-    )
+    );
 
     return (
       <div className="min-h-screen bg-background">
@@ -104,12 +104,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <TwikooComment />
         </LayoutContainer>
       </div>
-    )
+    );
   } catch (error: unknown) {
     // 使用统一的错误处理工具记录错误信息
-    handleContentError(error, 'blog', slugParam.join('/'))
+    handleContentError(error, "blog", slugParam.join("/"));
 
     // 统一使用 notFound() 处理所有 404 错误
-    return notFound()
+    return notFound();
   }
 }

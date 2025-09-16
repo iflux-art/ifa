@@ -12,15 +12,15 @@ export {
   SearchButton,
   SearchDialog,
   SearchResults,
-} from './components'
+} from "./components";
 // Hooks 导出
-export { useSearch } from './hooks/use-search'
-export { useSearchState } from './hooks/use-search-state'
+export { useSearch } from "./hooks/use-search";
+export { useSearchState } from "./hooks/use-search-state";
 // 客户端搜索引擎导出
 export {
   getSearchSuggestions,
   highlightSearchTerm,
   performSearch,
-} from './lib/search-engine'
+} from "./lib/search-engine";
 // 类型导出
-export type { SearchOptions, SearchResponse, SearchResult } from './types'
+export type { SearchOptions, SearchResponse, SearchResult } from "./types";

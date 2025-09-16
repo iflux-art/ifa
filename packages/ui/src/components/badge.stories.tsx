@@ -1,50 +1,50 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Badge } from './badge'
+import type { Meta, StoryObj } from "@storybook/react";
+import { Badge } from "./badge";
 
 const meta = {
-  title: 'Components/Badge',
+  title: "Components/Badge",
   component: Badge,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: { type: 'select' },
-      options: ['default', 'secondary', 'destructive', 'outline'],
+      control: { type: "select" },
+      options: ["default", "secondary", "destructive", "outline"],
     },
   },
-} satisfies Meta<typeof Badge>
+} satisfies Meta<typeof Badge>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'Badge',
+    children: "Badge",
   },
-}
+};
 
 export const Secondary: Story = {
   args: {
-    variant: 'secondary',
-    children: 'Secondary',
+    variant: "secondary",
+    children: "Secondary",
   },
-}
+};
 
 export const Destructive: Story = {
   args: {
-    variant: 'destructive',
-    children: 'Destructive',
+    variant: "destructive",
+    children: "Destructive",
   },
-}
+};
 
 export const Outline: Story = {
   args: {
-    variant: 'outline',
-    children: 'Outline',
+    variant: "outline",
+    children: "Outline",
   },
-}
+};
 
 export const Examples: Story = {
   render: () => (
@@ -55,7 +55,7 @@ export const Examples: Story = {
       <Badge variant="outline">Draft</Badge>
     </div>
   ),
-}
+};
 
 export const WithNumbers: Story = {
   render: () => (
@@ -66,7 +66,7 @@ export const WithNumbers: Story = {
       <Badge variant="outline">12</Badge>
     </div>
   ),
-}
+};
 
 export const InContext: Story = {
   render: () => (
@@ -85,4 +85,4 @@ export const InContext: Story = {
       </div>
     </div>
   ),
-}
+};

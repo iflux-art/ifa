@@ -1,69 +1,69 @@
-import { BookOpen, FileText, Link, type LucideIcon } from 'lucide-react'
-import type { BaseNavItem } from '@/features/navbar/types'
+import { BookOpen, FileText, Link, type LucideIcon } from "lucide-react";
+import type { BaseNavItem } from "@/features/navbar/types";
 
 /**
  * 导航配置项接口
  */
 export interface NavConfigItem extends BaseNavItem {
   /** 描述文本 */
-  description: string
+  description: string;
   /** 是否在特定场景下隐藏 */
-  hidden?: boolean
+  hidden?: boolean;
   /** 子菜单项 */
-  children?: readonly NavConfigItem[]
+  children?: readonly NavConfigItem[];
   /** 图标 */
-  icon?: LucideIcon
+  icon?: LucideIcon;
 }
 
 export const NAV_ITEMS = [
   {
-    key: 'blog',
-    label: '博客',
-    description: '阅读最新的文章，了解行业动态和技术趋势',
+    key: "blog",
+    label: "博客",
+    description: "阅读最新的文章，了解行业动态和技术趋势",
     icon: BookOpen,
   },
   {
-    key: 'docs',
-    label: '文档',
-    description: '项目文档和使用指南',
+    key: "docs",
+    label: "文档",
+    description: "项目文档和使用指南",
     icon: FileText,
     external: true,
-    href: 'https://docs.iflux.art/',
+    href: "https://docs.iflux.art/",
   },
   {
-    key: 'nav',
-    label: '导航',
-    description: '网址导航和资源集合',
+    key: "nav",
+    label: "导航",
+    description: "网址导航和资源集合",
     icon: Link,
     external: true,
-    href: 'https://nav.iflux.art/',
+    href: "https://nav.iflux.art/",
   },
   {
-    key: 'friends',
-    label: '友链',
-    description: '探索我们的合作伙伴和友情链接，发现更多优质资源',
+    key: "friends",
+    label: "友链",
+    description: "探索我们的合作伙伴和友情链接，发现更多优质资源",
     icon: Link,
   },
-] as const
+] as const;
 
 // 扁平化所有导航项（包括子项）以便路径映射
 const flattenNavItems = (items: readonly NavConfigItem[]): NavConfigItem[] => {
-  const result: NavConfigItem[] = []
-  items.forEach(item => {
-    result.push(item)
+  const result: NavConfigItem[] = [];
+  items.forEach((item) => {
+    result.push(item);
     if (item.children) {
-      result.push(...item.children)
+      result.push(...item.children);
     }
-  })
-  return result
-}
+  });
+  return result;
+};
 
-const FLAT_NAV_ITEMS: NavConfigItem[] = flattenNavItems(NAV_ITEMS)
+const FLAT_NAV_ITEMS: NavConfigItem[] = flattenNavItems(NAV_ITEMS);
 
 export const NAV_PATHS: Record<string, string> = {
-  blog: '/blog',
-  friends: '/friends',
-} as const
+  blog: "/blog",
+  friends: "/friends",
+} as const;
 
 /**
  * 检查导航配置完整性
@@ -71,5 +71,5 @@ export const NAV_PATHS: Record<string, string> = {
 // Navigation configuration validation removed for production
 
 export const NAV_DESCRIPTIONS = Object.fromEntries(
-  FLAT_NAV_ITEMS.map(item => [item.key, item.description])
-) as Record<string, string>
+  FLAT_NAV_ITEMS.map((item) => [item.key, item.description]),
+) as Record<string, string>;

@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import { Sparkles } from 'lucide-react'
-import { HOME_CONFIG } from '@/features/home/config'
+import { Sparkles } from "lucide-react";
+import { HOME_CONFIG } from "@/features/home/config";
 
 // 背景装饰组件的属性类型
 interface HeroDecorationProps {
-  className?: string
-  style?: React.CSSProperties
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 // 背景装饰组件
@@ -16,18 +16,18 @@ const BackgroundDecorations = (_props: HeroDecorationProps) => (
     <div className="absolute top-1/4 left-1/2 h-[1000px] w-[1000px] -translate-x-1/2 animate-pulse rounded-full bg-gradient-to-r from-primary/30 via-transparent to-primary/30 dark:from-primary/20 dark:to-primary/20 opacity-30 dark:opacity-20 blur-3xl" />
     <div
       className="absolute top-20 left-20 h-20 w-20 animate-bounce rounded-full bg-primary/25 dark:bg-primary/10 blur-xl"
-      style={{ animationDelay: '0s', animationDuration: '3s' }}
+      style={{ animationDelay: "0s", animationDuration: "3s" }}
     />
     <div
       className="absolute top-40 right-32 h-16 w-16 animate-bounce rounded-full bg-purple-500/25 dark:bg-purple-500/10 blur-xl"
-      style={{ animationDelay: '1s', animationDuration: '4s' }}
+      style={{ animationDelay: "1s", animationDuration: "4s" }}
     />
     <div
       className="absolute bottom-32 left-1/4 h-24 w-24 animate-bounce rounded-full bg-blue-500/25 dark:bg-blue-500/10 blur-xl"
-      style={{ animationDelay: '2s', animationDuration: '5s' }}
+      style={{ animationDelay: "2s", animationDuration: "5s" }}
     />
   </>
-)
+);
 
 export const HeroSection = () => {
   return (
@@ -55,5 +55,5 @@ export const HeroSection = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

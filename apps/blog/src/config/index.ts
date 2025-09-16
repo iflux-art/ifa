@@ -14,4 +14,4 @@ export {
   SITE_URL,
   VIEWPORT_CONFIG,
   WINDOWS_CONFIG,
-} from './metadata'
+} from "./metadata";

@@ -1,5 +1,5 @@
-import { useCallback, useEffect } from 'react'
-import { useNavbarStore } from '@/stores'
+import { useCallback, useEffect } from "react";
+import { useNavbarStore } from "@/stores";
 
 /**
  * 导航栏滚动状态管理自定义 Hook
@@ -26,48 +26,48 @@ export function useNavbarScroll() {
     setScrollPosition,
     setPageTitle,
     initialize,
-  } = useNavbarStore()
+  } = useNavbarStore();
 
   // 滚动处理函数 - 带防抖
   const handleScroll = useCallback(() => {
-    const currentScrollY = window.scrollY
+    const currentScrollY = window.scrollY;
 
     // 更新滚动位置
-    setScrollPosition(currentScrollY)
-  }, [setScrollPosition])
+    setScrollPosition(currentScrollY);
+  }, [setScrollPosition]);
 
   // 页面标题显示逻辑
-  const shouldShowPageTitle = showTitle && direction === 'up' && position > 100
+  const shouldShowPageTitle = showTitle && direction === "up" && position > 100;
 
   // 是否显示导航菜单 - 在顶部或向下滚动时隐藏
-  const showNavMenu = position <= 50 || direction === 'up'
+  const showNavMenu = position <= 50 || direction === "up";
 
   // 滚动到顶部
   const scrollToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [])
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   // 初始化和事件监听
   useEffect(() => {
     // 初始化状态
     if (!isInitialized) {
-      initialize()
+      initialize();
     }
 
     // 设置页面标题
-    const titleElement = document.querySelector('h1')
+    const titleElement = document.querySelector("h1");
     if (titleElement) {
-      setPageTitle(titleElement.textContent || document.title)
+      setPageTitle(titleElement.textContent || document.title);
     }
 
     // 添加滚动事件监听器
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // 清理函数
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [isInitialized, initialize, setPageTitle, handleScroll])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isInitialized, initialize, setPageTitle, handleScroll]);
 
   return {
     direction,
@@ -77,5 +77,5 @@ export function useNavbarScroll() {
     scrollToTop,
     shouldShowPageTitle,
     showNavMenu,
-  }
+  };
 }

@@ -13,10 +13,10 @@
  */
 export function isValidUrl(urlString: string): boolean {
   try {
-    const url = new URL(urlString)
-    return ['http:', 'https:'].includes(url.protocol)
+    const url = new URL(urlString);
+    return ["http:", "https:"].includes(url.protocol);
   } catch {
-    return false
+    return false;
   }
 }
 
@@ -28,19 +28,19 @@ export function isValidUrl(urlString: string): boolean {
  */
 export function validateRequiredFields(
   data: Record<string, unknown>,
-  requiredFields: string[]
+  requiredFields: string[],
 ): string[] {
-  const missingFields: string[] = []
+  const missingFields: string[] = [];
 
   for (const field of requiredFields) {
     // 检查字段是否存在且不为空
     if (
       !data[field] ||
-      (typeof data[field] === 'string' && !data[field]?.toString().trim())
+      (typeof data[field] === "string" && !data[field]?.toString().trim())
     ) {
-      missingFields.push(field)
+      missingFields.push(field);
     }
   }
 
-  return missingFields
+  return missingFields;
 }

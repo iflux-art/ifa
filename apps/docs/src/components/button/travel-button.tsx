@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { TramFront } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { TramFront } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const TRAVEL_URL = 'https://www.travellings.cn/go.html'
+const TRAVEL_URL = "https://www.travellings.cn/go.html";
 
 export const TravelButton = () => {
   const handleClick = () => {
-    window.open(TRAVEL_URL, '_blank', 'noopener,noreferrer')
-  }
+    window.open(TRAVEL_URL, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <Button
@@ -22,5 +22,5 @@ export const TravelButton = () => {
       <TramFront className="h-4 w-4" />
       <span className="sr-only">开往</span>
     </Button>
-  )
-}
+  );
+};

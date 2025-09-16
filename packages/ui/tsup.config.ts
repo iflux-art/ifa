@@ -1,13 +1,13 @@
-import { defineConfig } from 'tsup'
+import { defineConfig } from "tsup";
 
-export default defineConfig(options => ({
-  entry: ['src/index.ts'],
-  format: ['esm'], // 只生成 ESM 格式
+export default defineConfig((options) => ({
+  entry: ["src/index.ts"],
+  format: ["esm"], // 只生成 ESM 格式
   dts: !options.watch, // Skip DTS generation in watch mode for faster rebuilds
   splitting: false,
   sourcemap: true,
   clean: !options.watch, // Skip cleaning in watch mode for faster rebuilds
-  external: ['react', 'react-dom'],
+  external: ["react", "react-dom"],
   banner: {
     js: '"use client"',
   },
@@ -22,4 +22,4 @@ export default defineConfig(options => ({
     minify: false, // Keep readable for debugging
     treeshake: true,
   }),
-}))
+}));

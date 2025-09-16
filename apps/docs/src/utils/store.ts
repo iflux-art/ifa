@@ -12,5 +12,5 @@
  * @returns 重置函数
  */
 export const createResetFunction = <T>(initialState: T) => {
-  return () => initialState
-}
+  return () => initialState;
+};

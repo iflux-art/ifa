@@ -1,8 +1,8 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from "react";
 
 export interface DocPageLayoutProps {
-  children: ReactNode
-  className?: string
+  children: ReactNode;
+  className?: string;
 }
 
 /**
@@ -11,9 +11,9 @@ export interface DocPageLayoutProps {
  */
 export function DocPageLayout({
   children,
-  className = '',
+  className = "",
 }: DocPageLayoutProps) {
   return (
     <div className={`min-h-screen bg-background ${className}`}>{children}</div>
-  )
+  );
 }

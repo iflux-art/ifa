@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { SignOutButton, useUser } from '@clerk/nextjs'
-import { LogOut, User } from 'lucide-react'
-import type { ReactNode } from 'react'
-import { Button } from '@/components/ui/button'
+import { SignOutButton, useUser } from "@clerk/nextjs";
+import { LogOut, User } from "lucide-react";
+import type { ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 
 interface AdminLayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export const AdminLayout = ({ children }: AdminLayoutProps) => {
-  const { user, isLoaded } = useUser()
+  const { user, isLoaded } = useUser();
 
   if (!isLoaded) {
     return (
@@ -20,7 +20,7 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
           <p className="text-muted-foreground">加载中...</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -53,5 +53,5 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};

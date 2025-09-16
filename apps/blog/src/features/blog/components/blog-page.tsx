@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { LayoutContainer } from '@/components/layout'
+import { LayoutContainer } from "@/components/layout";
 import {
   BlogCategoryCard,
   BlogListContent,
   LatestPostsCard,
   RelatedPostsCard,
   TagCloudCard,
-} from '@/features/blog/components'
-import { useBlogPage } from '@/features/blog/hooks/use-blog-page'
+} from "@/features/blog/components";
+import { useBlogPage } from "@/features/blog/hooks/use-blog-page";
 
 /**
  * Blog页面容器组件
@@ -25,7 +25,7 @@ export const BlogPageContainer = () => {
     tag,
     handleCategoryClick,
     handleTagClick,
-  } = useBlogPage()
+  } = useBlogPage();
 
   // 左侧边栏内容
   const leftSidebar = (
@@ -45,7 +45,7 @@ export const BlogPageContainer = () => {
         onTagClick={handleTagClick}
       />
     </>
-  )
+  );
 
   // 右侧边栏内容
   const rightSidebar = (
@@ -53,7 +53,7 @@ export const BlogPageContainer = () => {
       <LatestPostsCard posts={latestPosts} currentSlug={[]} />
       <RelatedPostsCard posts={relatedPosts} currentSlug={[]} />
     </>
-  )
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -71,7 +71,7 @@ export const BlogPageContainer = () => {
         />
       </LayoutContainer>
     </div>
-  )
-}
+  );
+};
 
-export default BlogPageContainer
+export default BlogPageContainer;

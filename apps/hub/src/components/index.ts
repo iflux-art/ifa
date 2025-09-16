@@ -4,18 +4,18 @@
  */
 
 // 按钮组件
-export { GitHubButton } from './button'
+export { GitHubButton } from "./button";
 
 // 底栏组件
-export { Footer } from './footer'
+export { Footer } from "./footer";
 // 类型导出
-export type { PageContainerProps } from './layout'
+export type { PageContainerProps } from "./layout";
 // 布局组件
 export {
   PageContainer,
   // ProgressBarLoading 组件已合并到全局loading页面，不再导出
   // NotFound 组件已合并到全局404页面，不再导出
-} from './layout'
+} from "./layout";
 // UI 组件
 export {
   AlertDialog,
@@ -60,4 +60,4 @@ export {
   SelectValue,
   Separator,
   Switch,
-} from './ui'
+} from "./ui";

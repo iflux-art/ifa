@@ -5,9 +5,9 @@ export type {
   AsyncOperationResult,
   CacheOptions,
   UseAsyncOptions,
-} from './async-types'
+} from "./async-types";
 // 配置相关类型
-export type { IosConfig, SiteMetadata, WindowsConfig } from './config-types'
+export type { IosConfig, SiteMetadata, WindowsConfig } from "./config-types";
 export type {
   AppGridProps,
   GridColsMap,
@@ -21,9 +21,9 @@ export type {
   PageProps,
   SidebarConfig,
   SidebarWrapperProps,
-} from './layout-types'
+} from "./layout-types";
 // Props相关类型
-export type { TocHeading } from './props-types'
+export type { TocHeading } from "./props-types";
 // SEO相关类型
 export type {
   GenerateMetadataOptions,
@@ -33,4 +33,4 @@ export type {
   SiteConfig,
   SocialConfig,
   VerificationConfig,
-} from './seo-types'
+} from "./seo-types";

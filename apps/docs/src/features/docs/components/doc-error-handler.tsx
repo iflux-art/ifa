@@ -1,19 +1,19 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 /**
  * 文档错误类型
  */
 export type DocErrorType =
-  | 'not-found'
-  | 'building'
-  | 'redirect-loop'
-  | 'content-error'
+  | "not-found"
+  | "building"
+  | "redirect-loop"
+  | "content-error";
 
 interface DocErrorHandlerProps {
-  errorType: DocErrorType
-  slug?: string[]
-  error?: Error
-  className?: string
+  errorType: DocErrorType;
+  slug?: string[];
+  error?: Error;
+  className?: string;
 }
 
 /**
@@ -24,18 +24,18 @@ export const DocErrorHandler = ({
   errorType,
   slug,
   error,
-  className = '',
+  className = "",
 }: DocErrorHandlerProps) => {
-  const requestedPath = slug ? `/${slug.join('/')}` : '/'
+  const requestedPath = slug ? `/${slug.join("/")}` : "/";
 
   // 记录错误信息用于调试
   if (error) {
-    console.error(`Doc error at path: ${requestedPath}`, error)
+    console.error(`Doc error at path: ${requestedPath}`, error);
   }
 
   const renderErrorContent = () => {
     switch (errorType) {
-      case 'building':
+      case "building":
         return (
           <>
             <h1 className="mb-4 text-3xl font-bold">文档建设中</h1>
@@ -47,9 +47,9 @@ export const DocErrorHandler = ({
               <p>我们正在努力完善文档内容</p>
             </div>
           </>
-        )
+        );
 
-      case 'redirect-loop':
+      case "redirect-loop":
         return (
           <>
             <h1 className="mb-4 text-3xl font-bold">页面重定向错误</h1>
@@ -61,9 +61,9 @@ export const DocErrorHandler = ({
               <p>错误类型: 重定向循环</p>
             </div>
           </>
-        )
+        );
 
-      case 'content-error':
+      case "content-error":
         return (
           <>
             <h1 className="mb-4 text-3xl font-bold">内容加载失败</h1>
@@ -75,7 +75,7 @@ export const DocErrorHandler = ({
               {error && <p>错误信息: {error.message}</p>}
             </div>
           </>
-        )
+        );
 
       default:
         return (
@@ -89,9 +89,9 @@ export const DocErrorHandler = ({
               <p>请检查链接是否正确，或从文档首页重新导航</p>
             </div>
           </>
-        )
+        );
     }
-  }
+  };
 
   return (
     <div
@@ -126,5 +126,5 @@ export const DocErrorHandler = ({
         </details>
       )}
     </div>
-  )
-}
+  );
+};

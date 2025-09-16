@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import type { BreadcrumbProps } from '@/features/navigation/types'
-import { cn } from '@/utils'
+import Link from "next/link";
+import type { BreadcrumbProps } from "@/features/navigation/types";
+import { cn } from "@/utils";
 
 /**
  * 面包屑导航组件
@@ -19,21 +19,21 @@ import { cn } from '@/utils'
  */
 export const Breadcrumb = ({
   items,
-  separator = '/',
+  separator = "/",
   className,
 }: BreadcrumbProps) => (
-  <nav className={cn('text-sm font-medium text-muted-foreground', className)}>
+  <nav className={cn("text-sm font-medium text-muted-foreground", className)}>
     <ol className="flex flex-wrap items-center">
       {items.map((item, index) => {
-        const isLast = index === items.length - 1
+        const isLast = index === items.length - 1;
         // 目录 label 优先 _meta.json title
-        const { label } = item
+        const { label } = item;
         // 目录 href 跳转到第一篇文档
-        let { href } = item
+        let { href } = item;
         if (!(isLast || href)) {
           // 移除 getDirectoryTitle, getFirstDocInDirectory 的 import
           // 不再做任何 Node API 调用
-          href = '' // 或者根据实际需求设置一个默认值
+          href = ""; // 或者根据实际需求设置一个默认值
         }
         return (
           <li key={item.label} className="flex items-center">
@@ -51,8 +51,8 @@ export const Breadcrumb = ({
               </Link>
             )}
           </li>
-        )
+        );
       })}
     </ol>
   </nav>
-)
+);

@@ -7,13 +7,13 @@
  */
 export interface TocHeading {
   /** 标题ID */
-  id: string
+  id: string;
   /** 标题文本 */
-  text: string
+  text: string;
   /** 标题内容 */
-  content: string
+  content: string;
   /** 标题级别 */
-  level: number
+  level: number;
 }
 
 /**
@@ -21,15 +21,15 @@ export interface TocHeading {
  */
 export interface TocProps {
   /** 标题列表 */
-  headings: TocHeading[]
+  headings: TocHeading[];
   /** 自定义类名 */
-  className?: string
+  className?: string;
   /** 卡片标题 */
-  title?: string
+  title?: string;
   /** 是否自适应高度 */
-  adaptive?: boolean
+  adaptive?: boolean;
   /** 自适应偏移量 */
-  adaptiveOffset?: number
+  adaptiveOffset?: number;
 }
 
 /**
@@ -37,9 +37,9 @@ export interface TocProps {
  */
 export interface TableOfContentsCardProps {
   /** 标题列表 */
-  headings: TocHeading[]
+  headings: TocHeading[];
   /** 自定义类名 */
-  className?: string
+  className?: string;
   /** 卡片标题 */
-  title?: string
+  title?: string;
 }

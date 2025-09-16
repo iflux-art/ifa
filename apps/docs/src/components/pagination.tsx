@@ -1,27 +1,27 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import Link from 'next/link'
-import { Card, CardContent } from '@/components/ui/card'
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
 
 /** 文档导航基础类型 */
 interface DocNavBase {
-  title: string
-  path: string
+  title: string;
+  path: string;
 }
 
 /** 导航文档项 */
 interface NavDocItem extends DocNavBase {
-  isNext?: boolean
-  [key: string]: unknown
+  isNext?: boolean;
+  [key: string]: unknown;
 }
 
 /** 文档分页属性 */
 interface DocPaginationProps {
-  prevDoc?: NavDocItem | null
-  nextDoc?: NavDocItem | null
+  prevDoc?: NavDocItem | null;
+  nextDoc?: NavDocItem | null;
 }
 
 export const DocPagination = ({ prevDoc, nextDoc }: DocPaginationProps) => {
-  if (!(prevDoc || nextDoc)) return null
+  if (!(prevDoc || nextDoc)) return null;
 
   return (
     <div className="mt-4 flex justify-between gap-4">
@@ -63,5 +63,5 @@ export const DocPagination = ({ prevDoc, nextDoc }: DocPaginationProps) => {
         <div className="max-w-[48%] flex-1" />
       )}
     </div>
-  )
-}
+  );
+};

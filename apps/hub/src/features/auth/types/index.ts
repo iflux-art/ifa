@@ -3,45 +3,45 @@
  */
 export interface UserInfo {
   /** 用户ID */
-  id: string
+  id: string;
   /** 用户名 */
-  username?: string | null
+  username?: string | null;
   /** 名字 */
-  firstName?: string | null
+  firstName?: string | null;
   /** 姓氏 */
-  lastName?: string | null
+  lastName?: string | null;
   /** 头像URL */
-  imageUrl?: string | null
+  imageUrl?: string | null;
   /** 主要邮箱地址 */
   primaryEmailAddress?: {
     /** 邮箱地址 */
-    emailAddress?: string | null
-  } | null
+    emailAddress?: string | null;
+  } | null;
   /** 创建时间 */
-  createdAt?: Date | null
+  createdAt?: Date | null;
   /** 主要邮箱地址ID */
-  primaryEmailAddressId?: string | null
+  primaryEmailAddressId?: string | null;
   /** 邮箱地址列表 */
   emailAddresses?: {
     /** 邮箱ID */
-    id: string
+    id: string;
     /** 邮箱地址 */
-    emailAddress: string
+    emailAddress: string;
     /** 验证信息 */
     verification?: {
       /** 验证状态 */
-      status: string | null
-    } | null
-  }[]
+      status: string | null;
+    } | null;
+  }[];
   /** 外部账户列表 */
   externalAccounts?: {
     /** 账户ID */
-    id: string
+    id: string;
     /** 提供商 */
-    provider: string
+    provider: string;
     /** 邮箱地址 */
-    emailAddress?: string | null
-  }[]
+    emailAddress?: string | null;
+  }[];
 }
 
 /**
@@ -49,11 +49,11 @@ export interface UserInfo {
  */
 export interface UserInfoCardProps {
   /** 用户信息 */
-  user: UserInfo
+  user: UserInfo;
   /** 用户全名 */
-  fullName: string
+  fullName: string;
   /** 用户姓名首字母 */
-  initials: string
+  initials: string;
 }
 
 /**
@@ -61,5 +61,5 @@ export interface UserInfoCardProps {
  */
 export interface AccountDetailsCardProps {
   /** 用户信息 */
-  user: UserInfo
+  user: UserInfo;
 }

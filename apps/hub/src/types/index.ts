@@ -13,13 +13,13 @@ export type {
   SidebarWrapperProps,
   ThreeColumnGridProps,
   ThreeColumnLayoutProps,
-} from './layout-types'
+} from "./layout-types";
 
 // 导航相关类型
 // 搜索相关类型已移除，因为未被使用
 
 // 配置相关类型
-export type { IosConfig, SiteMetadata, WindowsConfig } from './config-types'
+export type { IosConfig, SiteMetadata, WindowsConfig } from "./config-types";
 // SEO相关类型
 export type {
   GenerateMetadataOptions,
@@ -29,7 +29,7 @@ export type {
   SiteConfig,
   SocialConfig,
   VerificationConfig,
-} from './seo-types'
+} from "./seo-types";
 
 // Props相关类型 (已全部迁移到各自的功能模块)
 // CardProps 和 ButtonProps 已迁移到各自使用的地方

@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { gridColsMap, gridGapMap } from '@/lib/layout/responsive-utils'
-import type { AppGridProps } from '@/types'
-import { cn } from '@/utils'
+import { gridColsMap, gridGapMap } from "@/lib/layout/responsive-utils";
+import type { AppGridProps } from "@/types";
+import { cn } from "@/utils";
 
 /**
  * 通用网格布局组件
@@ -19,7 +19,7 @@ export const AppGrid = ({
   children,
   className,
   columns = 3,
-  gap = 'default',
+  gap = "default",
   rowGap,
   columnGap,
 }: AppGridProps) => {
@@ -28,13 +28,13 @@ export const AppGrid = ({
     rowGap || columnGap
       ? cn(
           rowGap && `row-gap-${rowGap}`,
-          columnGap && `column-gap-${columnGap}`
+          columnGap && `column-gap-${columnGap}`,
         )
-      : gridGapMap[gap]
+      : gridGapMap[gap];
 
   return (
-    <div className={cn('grid', gridColsMap[columns], gapClasses, className)}>
+    <div className={cn("grid", gridColsMap[columns], gapClasses, className)}>
       {children}
     </div>
-  )
-}
+  );
+};

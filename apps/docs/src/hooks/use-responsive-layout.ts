@@ -2,10 +2,10 @@
  * 响应式布局 Hook
  */
 
-'use client'
+"use client";
 
-import { useCallback, useEffect, useMemo } from 'react'
-import { useLayoutStore } from '@/features/layout/layout-store.standard'
+import { useCallback, useEffect, useMemo } from "react";
+import { useLayoutStore } from "@/features/layout/layout-store.standard";
 
 /**
  * 响应式布局 Hook
@@ -20,39 +20,39 @@ export function useResponsiveLayout() {
     setIsMobile,
     setIsTablet,
     setIsDesktop,
-  } = useLayoutStore()
+  } = useLayoutStore();
 
   // 处理窗口大小变化
   const handleResize = useCallback(() => {
-    if (typeof window === 'undefined') return
+    if (typeof window === "undefined") return;
 
-    const width = window.innerWidth
-    updateResponsiveState(width)
-  }, [updateResponsiveState])
+    const width = window.innerWidth;
+    updateResponsiveState(width);
+  }, [updateResponsiveState]);
 
   // 初始化响应式状态
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    if (typeof window === "undefined") return;
 
     // 设置初始状态
-    handleResize()
+    handleResize();
 
     // 添加事件监听器
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize);
 
     // 清理事件监听器
     return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [handleResize])
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
 
   // 计算设备类型
   const deviceType = useMemo(() => {
-    if (isMobile) return 'mobile'
-    if (isTablet) return 'tablet'
-    if (isDesktop) return 'desktop'
-    return 'unknown'
-  }, [isMobile, isTablet, isDesktop])
+    if (isMobile) return "mobile";
+    if (isTablet) return "tablet";
+    if (isDesktop) return "desktop";
+    return "unknown";
+  }, [isMobile, isTablet, isDesktop]);
 
   return {
     isMobile,
@@ -62,5 +62,5 @@ export function useResponsiveLayout() {
     setIsMobile,
     setIsTablet,
     setIsDesktop,
-  }
+  };
 }

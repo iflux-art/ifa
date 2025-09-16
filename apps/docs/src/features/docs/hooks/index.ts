@@ -3,14 +3,14 @@
  * @module hooks/use-docs
  */
 
-'use client'
+"use client";
 
-import type { DocCategory, DocItem, DocListItem } from '@/features/docs/types'
-import { API_PATHS } from '@/lib/api/api-paths'
+import type { DocCategory, DocItem, DocListItem } from "@/features/docs/types";
+import { API_PATHS } from "@/lib/api/api-paths";
 import {
   type HookResult,
   useContentData,
-} from '../../../hooks/use-content-data'
+} from "../../../hooks/use-content-data";
 
 /**
  * 使用文档分类
@@ -19,12 +19,12 @@ import {
  */
 export function useDocCategories(): HookResult<DocCategory[]> {
   return useContentData<DocCategory[]>({
-    type: 'docs',
+    type: "docs",
     path: API_PATHS.content.DocCategories,
     disableCache: false, // 启用缓存
-    params: { cache: 'force-cache' }, // 使用服务器缓存
+    params: { cache: "force-cache" }, // 使用服务器缓存
     forceRefresh: false, // 禁用强制刷新
-  })
+  });
 }
 
 /**
@@ -35,24 +35,24 @@ export function useDocCategories(): HookResult<DocCategory[]> {
  */
 export function useDocMeta(path: string): HookResult<Record<string, unknown>> {
   return useContentData<Record<string, unknown>>({
-    type: 'docs',
+    type: "docs",
     path: API_PATHS.content.Doc(path),
-  })
+  });
 }
 
 // 导出类型
-export type { DocItem, DocCategory, DocListItem }
+export type { DocItem, DocCategory, DocListItem };
 
 /**
  * 获取所有文档
  * @returns 所有文档列表
  */
 export async function getAllDocs(): Promise<DocListItem[]> {
-  const response = await fetch(API_PATHS.content.DocList)
+  const response = await fetch(API_PATHS.content.DocList);
   if (!response.ok) {
-    throw new Error('获取文档列表失败')
+    throw new Error("获取文档列表失败");
   }
-  return response.json() as Promise<DocListItem[]>
+  return response.json() as Promise<DocListItem[]>;
 }
 
 /**
@@ -63,7 +63,7 @@ export async function getAllDocs(): Promise<DocListItem[]> {
  */
 export function useDocContent(path: string): HookResult<DocItem> {
   return useContentData<DocItem>({
-    type: 'docs',
+    type: "docs",
     path: API_PATHS.content.Doc(path),
-  })
+  });
 }

@@ -5,23 +5,23 @@
 
 // API响应类型
 export interface ApiResponse<T> {
-  data: T
-  error?: string
-  message?: string
+  data: T;
+  error?: string;
+  message?: string;
 }
 
 // HTTP方法类型
-type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
 // 请求选项
 interface RequestOptions {
-  method?: HttpMethod
-  headers?: Record<string, string>
-  body?: unknown
-  cache?: RequestCache
+  method?: HttpMethod;
+  headers?: Record<string, string>;
+  body?: unknown;
+  cache?: RequestCache;
   next?: {
-    revalidate?: number
-  }
+    revalidate?: number;
+  };
 }
 
 /**
@@ -32,39 +32,39 @@ interface RequestOptions {
  */
 export async function apiRequest<T>(
   url: string,
-  options: RequestOptions = {}
+  options: RequestOptions = {},
 ): Promise<ApiResponse<T>> {
   const {
-    method = 'GET',
+    method = "GET",
     headers = {},
     body,
-    cache = 'force-cache',
+    cache = "force-cache",
     next,
-  } = options
+  } = options;
 
   try {
     const response = await fetch(url, {
       method,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         ...headers,
       },
       body: body ? JSON.stringify(body) : undefined,
       cache,
       next,
-    })
+    });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json()
-    return { data }
+    const data = await response.json();
+    return { data };
   } catch (error) {
     return {
       data: undefined as unknown as T,
-      error: error instanceof Error ? error.message : 'Unknown error',
-    }
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
   }
 }
 
@@ -73,9 +73,9 @@ export async function apiRequest<T>(
  */
 export function get<T>(
   url: string,
-  options: Omit<RequestOptions, 'method' | 'body'> = {}
+  options: Omit<RequestOptions, "method" | "body"> = {},
 ) {
-  return apiRequest<T>(url, { ...options, method: 'GET' })
+  return apiRequest<T>(url, { ...options, method: "GET" });
 }
 
 /**
@@ -84,9 +84,9 @@ export function get<T>(
 export function post<T>(
   url: string,
   body?: unknown,
-  options: Omit<RequestOptions, 'method'> = {}
+  options: Omit<RequestOptions, "method"> = {},
 ) {
-  return apiRequest<T>(url, { ...options, method: 'POST', body })
+  return apiRequest<T>(url, { ...options, method: "POST", body });
 }
 
 /**
@@ -95,9 +95,9 @@ export function post<T>(
 export function put<T>(
   url: string,
   body?: unknown,
-  options: Omit<RequestOptions, 'method'> = {}
+  options: Omit<RequestOptions, "method"> = {},
 ) {
-  return apiRequest<T>(url, { ...options, method: 'PUT', body })
+  return apiRequest<T>(url, { ...options, method: "PUT", body });
 }
 
 /**
@@ -105,7 +105,7 @@ export function put<T>(
  */
 export function del<T>(
   url: string,
-  options: Omit<RequestOptions, 'method' | 'body'> = {}
+  options: Omit<RequestOptions, "method" | "body"> = {},
 ) {
-  return apiRequest<T>(url, { ...options, method: 'DELETE' })
+  return apiRequest<T>(url, { ...options, method: "DELETE" });
 }

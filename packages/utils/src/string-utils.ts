@@ -13,9 +13,9 @@
  */
 export function toKebabCase(str: string): string {
   return str
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/[\s_]+/g, '-')
-    .toLowerCase()
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .replace(/[\s_]+/g, "-")
+    .toLowerCase();
 }
 
 /**
@@ -33,8 +33,8 @@ export function toKebabCase(str: string): string {
  */
 export function toCamelCase(str: string): string {
   return str
-    .replace(/[-_\s]+(.)?/g, (_, char) => (char ? char.toUpperCase() : ''))
-    .replace(/^[A-Z]/, char => char.toLowerCase())
+    .replace(/[-_\s]+(.)?/g, (_, char) => (char ? char.toUpperCase() : ""))
+    .replace(/^[A-Z]/, (char) => char.toLowerCase());
 }
 
 /**
@@ -52,8 +52,8 @@ export function toCamelCase(str: string): string {
  */
 export function toPascalCase(str: string): string {
   return str
-    .replace(/[-_\s]+(.)?/g, (_, char) => (char ? char.toUpperCase() : ''))
-    .replace(/^[a-z]/, char => char.toUpperCase())
+    .replace(/[-_\s]+(.)?/g, (_, char) => (char ? char.toUpperCase() : ""))
+    .replace(/^[a-z]/, (char) => char.toUpperCase());
 }
 
 /**
@@ -71,9 +71,9 @@ export function toPascalCase(str: string): string {
  */
 export function toSnakeCase(str: string): string {
   return str
-    .replace(/([a-z])([A-Z])/g, '$1_$2')
-    .replace(/[-\s]+/g, '_')
-    .toLowerCase()
+    .replace(/([a-z])([A-Z])/g, "$1_$2")
+    .replace(/[-\s]+/g, "_")
+    .toLowerCase();
 }
 
 /**
@@ -89,8 +89,8 @@ export function toSnakeCase(str: string): string {
  * ```
  */
 export function capitalize(str: string): string {
-  if (!str) return str
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+  if (!str) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
 /**
@@ -108,9 +108,9 @@ export function capitalize(str: string): string {
  * truncate('Hi', 5) // Returns: 'Hi'
  * ```
  */
-export function truncate(str: string, length: number, suffix = '...'): string {
-  if (str.length <= length) return str
-  return str.slice(0, length - suffix.length) + suffix
+export function truncate(str: string, length: number, suffix = "..."): string {
+  if (str.length <= length) return str;
+  return str.slice(0, length - suffix.length) + suffix;
 }
 
 /**
@@ -128,13 +128,13 @@ export function truncate(str: string, length: number, suffix = '...'): string {
  */
 export function randomString(
   length: number,
-  charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
 ): string {
-  let result = ''
+  let result = "";
   for (let i = 0; i < length; i++) {
-    result += charset.charAt(Math.floor(Math.random() * charset.length))
+    result += charset.charAt(Math.floor(Math.random() * charset.length));
   }
-  return result
+  return result;
 }
 
 /**
@@ -149,7 +149,7 @@ export function randomString(
  * ```
  */
 export function stripHtml(str: string): string {
-  return str.replace(/<[^>]*>/g, '')
+  return str.replace(/<[^>]*>/g, "");
 }
 
 /**
@@ -166,12 +166,12 @@ export function stripHtml(str: string): string {
  */
 export function escapeHtml(str: string): string {
   const htmlEscapes: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-  }
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  };
 
-  return str.replace(/[&<>"']/g, char => htmlEscapes[char])
+  return str.replace(/[&<>"']/g, (char) => htmlEscapes[char]);
 }

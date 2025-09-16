@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 /**
  * 用于避免 SSR 水合错误的 Hook
@@ -22,11 +22,11 @@ import { useEffect, useState } from 'react'
  * @returns boolean - 组件是否已在客户端挂载
  */
 export function useMounted(): boolean {
-  const [isMounted, setIsMounted] = useState(false)
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    setIsMounted(true);
+  }, []);
 
-  return isMounted
+  return isMounted;
 }

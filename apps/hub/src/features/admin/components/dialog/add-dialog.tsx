@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
-import type { AddDialogProps } from '@/features/admin/types'
-import { LinksForm } from '@/features/links/components'
-import type { LinksFormData, LinksItem } from '@/features/links/types'
+} from "@/components/ui/dialog";
+import type { AddDialogProps } from "@/features/admin/types";
+import { LinksForm } from "@/features/links/components";
+import type { LinksFormData, LinksItem } from "@/features/links/types";
 
 export const AddDialog = ({
   open,
@@ -17,37 +17,37 @@ export const AddDialog = ({
   onSuccess,
   onError,
 }: AddDialogProps) => {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (formData: LinksFormData) => {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     try {
-      const response = await fetch('/api/links', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/links", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      })
+      });
 
       if (!response.ok) {
         const errorData: { error?: string } = (await response.json()) as {
-          error?: string
-        }
-        throw new Error(errorData.error ?? 'Failed to add item')
+          error?: string;
+        };
+        throw new Error(errorData.error ?? "Failed to add item");
       }
 
-      const newItem: LinksItem = (await response.json()) as LinksItem
-      onSuccess(newItem)
-      onOpenChange(false)
+      const newItem: LinksItem = (await response.json()) as LinksItem;
+      onSuccess(newItem);
+      onOpenChange(false);
     } catch (error) {
-      if (error instanceof Error && error.message === 'URL already exists') {
-        onError('该网址已存在')
+      if (error instanceof Error && error.message === "URL already exists") {
+        onError("该网址已存在");
       } else {
-        onError('添加网址失败')
+        onError("添加网址失败");
       }
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -64,5 +64,5 @@ export const AddDialog = ({
         />
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

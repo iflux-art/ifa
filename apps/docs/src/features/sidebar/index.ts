@@ -8,11 +8,11 @@
 export {
   // 侧边栏组件
   Sidebar,
-} from './sidebar'
+} from "./sidebar";
 export {
   // 侧边栏包装组件
   SidebarWrapper,
-} from './sidebar-wrapper'
+} from "./sidebar-wrapper";
 // 类型导出
 export type {
   // 布局相关类型
@@ -21,4 +21,4 @@ export type {
   SidebarItem,
   SidebarProps,
   SidebarWrapperProps,
-} from './types'
+} from "./types";
