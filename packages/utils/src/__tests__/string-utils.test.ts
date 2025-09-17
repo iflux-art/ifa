@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import {
   capitalize,
   escapeHtml,
@@ -9,7 +10,6 @@ import {
   toSnakeCase,
   truncate,
 } from "../string-utils";
-import { describe, expect, it } from "vitest";
 
 describe("string utilities", () => {
   describe("toKebabCase", () => {

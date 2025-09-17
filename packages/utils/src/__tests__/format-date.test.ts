@@ -1,5 +1,5 @@
-import { formatDate, formatRelativeTime } from "../format-date";
 import { describe, expect, it } from "vitest";
+import { formatDate, formatRelativeTime } from "../format-date";
 
 describe("formatDate", () => {
   const testDate = new Date("2023-12-25T14:30:00Z");

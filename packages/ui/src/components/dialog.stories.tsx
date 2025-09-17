@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useId } from "react";
 import { Button } from "./button";
 import {
   Dialog,
@@ -10,7 +11,6 @@ import {
   DialogTrigger,
 } from "./dialog";
 import { Input } from "./input";
-import { useId } from "react";
 
 const meta = {
   title: "Components/Dialog",

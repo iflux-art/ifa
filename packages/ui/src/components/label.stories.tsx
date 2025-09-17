@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useId } from "react";
 import { Input } from "./input";
 import { Label } from "./label";
-import { useId } from "react";
 
 const meta = {
   title: "Components/Label",

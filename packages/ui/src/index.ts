@@ -1,25 +1,25 @@
 // Components
-export { Badge, badgeVariants, type BadgeProps } from "./components/badge";
-export { Button, buttonVariants, type ButtonProps } from "./components/button";
+export { Badge, type BadgeProps, badgeVariants } from "./components/badge";
+export { Button, type ButtonProps, buttonVariants } from "./components/button";
 export {
   Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
   CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "./components/card";
 export {
   Dialog,
-  DialogPortal,
-  DialogOverlay,
   DialogClose,
-  DialogTrigger,
   DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
   DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
 } from "./components/dialog";
 export { Input, type InputProps } from "./components/input";
 export { Label } from "./components/label";

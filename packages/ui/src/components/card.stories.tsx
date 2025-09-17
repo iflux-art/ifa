@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Bell, Check } from "lucide-react";
-
+import { useId } from "react";
 import { Button } from "./button";
 import {
   Card,
@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "./card";
-import { useId } from "react";
 
 const meta = {
   title: "Components/Card",

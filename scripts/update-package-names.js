@@ -6,14 +6,14 @@
  * 此脚本用于将所有 @repo/* 包重命名为 @iflux-art/* 包
  */
 
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 // 获取当前脚本的目录
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const projectRoot = path.join(__dirname, '..')
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.join(__dirname, "..");
 
 console.log('开始更新包名称...\n')
 

@@ -8,7 +8,7 @@
 - Docs (文档)
 - Hub (书签管理器)
 
-每个子应用都可以独立部署到 Vercel。
+每个子应用都可以独立部署到 Vercel，采用完全独立的部署方案，不依赖共享的 UI 组件包。
 
 ## 部署配置
 
@@ -18,6 +18,7 @@
 2. 保留了 `packageManager` 字段为 `pnpm@9.11.0`，这样在本地开发时仍会使用高版本
 3. 为每个子应用添加了 [vercel.json](file://c:\project\ifa\apps\blog\vercel.json) 配置文件，确保部署时的正确配置
 4. 更新了根目录的 [package.json](file://c:\project\ifa\package.json) 以保持一致性
+5. 移除了所有子应用中未使用的 workspace 依赖，使子应用完全独立，无需任何额外脚本
 
 ## 部署步骤
 

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import * as React from "react";
 import { describe, expect, it } from "vitest";
 import { Button } from "../components/button";
 import {
@@ -11,7 +12,6 @@ import {
 } from "../components/dialog";
 import { Input } from "../components/input";
 import { Label } from "../components/label";
-import * as React from "react";
 
 // Component to use useId hook safely
 function FormTestComponent() {
@@ -60,14 +60,14 @@ describe("Accessibility Tests", () => {
   describe("Form Accessibility", () => {
     it("associates labels with inputs correctly", () => {
       render(<FormTestComponent />);
-      
+
       const label = screen.getByText("Test Label");
       const input = screen.getByRole("textbox");
 
       // Check that both elements have the same ID
       const labelFor = label.getAttribute("for");
       const inputId = input.getAttribute("id");
-      
+
       expect(labelFor).toBeTruthy();
       expect(inputId).toBeTruthy();
       expect(labelFor).toBe(inputId);
@@ -75,7 +75,7 @@ describe("Accessibility Tests", () => {
 
     it("supports required field indication", () => {
       render(<RequiredFieldTestComponent />);
-      
+
       const input = screen.getByRole("textbox");
       expect(input).toHaveAttribute("required");
     });

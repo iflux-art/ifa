@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
+import * as React from "react";
 import { describe, expect, it } from "vitest";
 import { Label } from "../components/label";
-import * as React from "react";
 
 // Component to use useId hook safely
 function LabelTestComponent() {
@@ -51,7 +51,7 @@ describe("Label", () => {
     // Check that both elements have the same ID
     const labelFor = label.getAttribute("for");
     const inputId = input.getAttribute("id");
-    
+
     expect(labelFor).toBeTruthy();
     expect(inputId).toBeTruthy();
     expect(labelFor).toBe(inputId);

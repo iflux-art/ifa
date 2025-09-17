@@ -98,12 +98,6 @@ importers:
       '@radix-ui/react-switch':
         specifier: ^1.2.6
         version: 1.2.6(@types/react-dom@19.1.9(@types/react@19.1.12))(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@repo/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
       '@types/prismjs':
         specifier: ^1.26.5
         version: 1.26.5
@@ -243,12 +237,6 @@ importers:
       '@radix-ui/react-switch':
         specifier: ^1.2.6
         version: 1.2.6(@types/react-dom@19.1.9(@types/react@19.1.12))(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@repo/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
       '@types/prismjs':
         specifier: ^1.26.5
         version: 1.26.5
@@ -388,12 +376,6 @@ importers:
       '@radix-ui/react-switch':
         specifier: ^1.2.6
         version: 1.2.6(@types/react-dom@19.1.9(@types/react@19.1.12))(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@repo/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
       '@types/ws':
         specifier: ^8.18.1
         version: 8.18.1
@@ -533,12 +515,6 @@ importers:
       '@radix-ui/react-switch':
         specifier: ^1.2.6
         version: 1.2.6(@types/react-dom@19.1.9(@types/react@19.1.12))(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@repo/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -7000,7 +6976,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.14
       tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.3.1)(@vitest/ui@3.2.4)(jsdom@23.2.0)(lightningcss@1.30.1)
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.3.1)(@vitest/ui@3.2.4)(jsdom@26.1.0)(lightningcss@1.30.1)
 
   '@vitest/utils@1.6.1':
     dependencies:

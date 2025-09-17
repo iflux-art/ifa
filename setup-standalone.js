@@ -1,21 +1,20 @@
 #!/usr/bin/env node
 
 /**
- * 根目录独立部署设置脚本
+ * 根目录独立部署信息脚本
  *
- * 此脚本用于为所有应用设置独立部署环境
+ * 此脚本用于显示所有应用的独立部署信息
  */
 
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import { spawn } from "child_process";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 // 获取当前脚本的目录
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log("设置所有应用的独立部署环境...\n");
+console.log("所有应用均已完全独立，无需运行任何脚本即可直接部署到 Vercel\n");
 
 // 获取 apps 目录下的所有应用
 const appsDir = path.join(__dirname, "apps");
@@ -23,49 +22,21 @@ const apps = fs
   .readdirSync(appsDir)
   .filter((file) => fs.statSync(path.join(appsDir, file)).isDirectory());
 
-console.log(`发现 ${apps.length} 个应用: ${apps.join(", ")}\n`);
+console.log(`发现 ${apps.length} 个完全独立的应用: ${apps.join(", ")}\n`);
 
-// 为每个应用运行独立部署设置脚本
+console.log("部署说明：");
+console.log("1. 所有应用都不依赖任何 workspace 包，可直接部署");
+console.log("2. 确保各应用 package.json 中的依赖版本与 Vercel 环境兼容");
+console.log("3. 可直接推送到 GitHub 并在 Vercel 上部署");
+
+console.log("\nVercel 部署步骤：");
+console.log("1. 登录 Vercel 控制台");
+console.log("2. 点击 'Add New Project'");
+console.log("3. 选择你的 GitHub 仓库");
+console.log("4. 在项目设置中选择对应的应用目录：");
 for (const app of apps) {
-  console.log(`处理应用: ${app}`);
-
-  const appPath = path.join(appsDir, app);
-  const setupScriptPath = path.join(appPath, "setup-standalone.js");
-
-  // 检查应用是否有独立部署脚本
-  if (fs.existsSync(setupScriptPath)) {
-    console.log(`  运行 ${app} 的独立部署脚本...`);
-
-    try {
-      // 运行应用的独立部署脚本
-      const setupProcess = spawn("node", ["setup-standalone.js"], {
-        cwd: appPath,
-        stdio: "inherit",
-      });
-
-      // 等待脚本执行完成
-      await new Promise((resolve, reject) => {
-        setupProcess.on("close", (code) => {
-          if (code === 0) {
-            console.log(`  ✓ ${app} 独立部署设置完成\n`);
-            resolve();
-          } else {
-            console.log(`  ✗ ${app} 独立部署设置失败\n`);
-            reject(new Error(`Setup script failed with code ${code}`));
-          }
-        });
-      });
-    } catch (error) {
-      console.log(`  ✗ 运行 ${app} 的独立部署脚本时出错: ${error.message}\n`);
-    }
-  } else {
-    console.log(`  ! ${app} 没有独立部署脚本，跳过...\n`);
-  }
+  console.log(`   - ${app}: apps/${app}`);
 }
-
-console.log("所有应用的独立部署环境设置完成！");
-console.log("\n接下来的步骤：");
-console.log("1. 进入特定应用目录");
-console.log('2. 运行 "pnpm install" 安装依赖');
-console.log('3. 运行 "pnpm dev" 开始开发');
-console.log("\n注意：确保 @iflux-art/* 包已发布到 npm");
+console.log("5. 设置构建命令: next build");
+console.log("6. 设置输出目录: .next");
+console.log("7. 点击 'Deploy'");
