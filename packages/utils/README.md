@@ -2,33 +2,9 @@
 
 Shared utility functions for the monorepo. A comprehensive collection of type-safe utility functions for common programming tasks.
 
-## Installation
+## Usage within this monorepo
 
-This package is part of the monorepo and should be installed via the workspace.
-
-```bash
-pnpm add @repo/utils
-```
-
-## Usage
-
-```ts
-import { cn, formatDate, debounce, unique } from '@repo/utils'
-
-// Merge class names
-const className = cn('px-4 py-2', 'bg-blue-500', { 'text-white': true })
-
-// Format dates
-const formatted = formatDate(new Date(), { includeTime: true })
-
-// Debounce functions
-const debouncedSearch = debounce((query: string) => {
-  console.log('Searching:', query)
-}, 300)
-
-// Remove duplicates from arrays
-const uniqueItems = unique([1, 2, 2, 3, 3, 4])
-```
+This package is used internally within this monorepo project. The utilities are automatically available to all apps in the monorepo through the pnpm workspace setup.
 
 ## API Reference
 

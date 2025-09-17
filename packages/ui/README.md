@@ -12,36 +12,9 @@ A modern React UI component library built with shadcn/ui design system, Radix UI
 - 📦 Tree-shakable ESM and CJS builds
 - 🎨 Tailwind CSS styling with CSS variables for theming
 
-## Installation
+## Usage within this monorepo
 
-```bash
-# Install the package
-pnpm add @repo/ui
-
-# Install peer dependencies
-pnpm add react react-dom
-```
-
-## Usage
-
-```tsx
-import { Button, Card, CardContent, CardHeader, CardTitle } from '@repo/ui'
-
-function App() {
-  return (
-    <Card className="w-96">
-      <CardHeader>
-        <CardTitle>Welcome</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <Button onClick={() => console.log('Hello!')}>
-          Click me
-        </Button>
-      </CardContent>
-    </Card>
-  )
-}
-```
+This package is used internally within this monorepo project. The components are automatically available to all apps in the monorepo through the pnpm workspace setup.
 
 ## Components
 

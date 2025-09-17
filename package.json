@@ -14,9 +14,6 @@
     "dev:ui": "turbo run dev --filter=@repo/ui --parallel",
     "dev:with-deps": "turbo run build --filter=./packages/* && turbo run dev --parallel",
     "dev:watch": "turbo run dev --parallel --continue",
-    "dev:setup": "node scripts/dev-setup.js",
-    "dev:setup:fast": "node scripts/dev-setup.js --fast",
-    "dev:watch-packages": "node scripts/watch-packages.js",
     "build": "turbo run build",
     "build:packages": "turbo run build --filter=./packages/*",
     "start": "turbo run start --parallel",
@@ -41,9 +38,6 @@
     "ci": "turbo run lint type-check test build",
     "ci:build": "turbo run build --filter=!@repo/ui",
     "ci:test": "turbo run test:coverage",
-    "quality-check": "node scripts/quality-check.js",
-    "quality-check:fix": "node scripts/quality-check.js --fix",
-    "type-check:all": "node scripts/type-check.js",
     "reset": "turbo run clean && rm -rf node_modules && pnpm install",
     "setup": "pnpm install && turbo run build --filter=./packages/*"
   },
@@ -53,7 +47,7 @@
     "@testing-library/jest-dom": "^6.8.0",
     "@turbo/gen": "^1.13.4",
     "@types/lodash.debounce": "^4.0.9",
-    "@types/node": "^20.19.16",
+    "@types/node": "^22.10.10",
     "@vitest/ui": "^1.6.1",
     "autoprefixer": "^10.4.21",
     "chokidar": "^3.6.0",
@@ -68,7 +62,7 @@
   },
   "packageManager": "pnpm@9.11.0",
   "engines": {
-    "node": ">=20.x",
-    "pnpm": ">=8.0.0"
+    "node": "22.x",
+    "pnpm": "9.11.0"
   }
 }

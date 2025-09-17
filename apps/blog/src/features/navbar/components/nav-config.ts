@@ -31,12 +31,12 @@ export const NAV_ITEMS = [
     href: "https://docs.iflux.art/",
   },
   {
-    key: "nav",
+    key: "hub",
     label: "导航",
     description: "网址导航和资源集合",
     icon: Link,
     external: true,
-    href: "https://nav.iflux.art/",
+    href: "https://hub.iflux.art/",
   },
   {
     key: "friends",

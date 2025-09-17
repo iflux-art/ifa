@@ -32,11 +32,11 @@ export const NAV_ITEMS = [
     href: "/", // 修改为指向首页
   },
   {
-    key: "nav",
+    key: "hub",
     label: "导航",
     description: "查看网站导航和资源聚合",
     icon: MapPin,
-    href: "https://nav.iflux.art/",
+    href: "https://hub.iflux.art/",
     external: true,
   },
   {
