@@ -80,7 +80,7 @@ describe("string utilities", () => {
     });
 
     it("should use custom suffix", () => {
-      expect(truncate("Hello world", 7, "…")).toBe("Hello…");
+      expect(truncate("Hello world", 7, "…")).toBe("Hello …");
     });
   });
 

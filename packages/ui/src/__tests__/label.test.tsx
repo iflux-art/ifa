@@ -1,7 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { Label } from "../components/label";
-import { useId } from "react";
+import * as React from "react";
+
+// Component to use useId hook safely
+function LabelTestComponent() {
+  const testId = React.useId();
+  return (
+    <div>
+      <Label htmlFor={testId}>Test Label</Label>
+      <input id={testId} />
+    </div>
+  );
+}
 
 describe("Label", () => {
   it("renders correctly", () => {
@@ -32,19 +43,18 @@ describe("Label", () => {
   });
 
   it("can be associated with form controls", () => {
-    const testId = useId();
-    render(
-      <div>
-        <Label htmlFor={testId}>Test Label</Label>
-        <input id={testId} />
-      </div>,
-    );
+    render(<LabelTestComponent />);
 
     const label = screen.getByText("Test Label");
     const input = screen.getByRole("textbox");
 
-    expect(label).toHaveAttribute("for", testId);
-    expect(input).toHaveAttribute("id", testId);
+    // Check that both elements have the same ID
+    const labelFor = label.getAttribute("for");
+    const inputId = input.getAttribute("id");
+    
+    expect(labelFor).toBeTruthy();
+    expect(inputId).toBeTruthy();
+    expect(labelFor).toBe(inputId);
   });
 
   it("forwards ref correctly", () => {
