@@ -53,7 +53,7 @@
     "@testing-library/jest-dom": "^6.8.0",
     "@turbo/gen": "^1.13.4",
     "@types/lodash.debounce": "^4.0.9",
-    "@types/node": "^20.19.13",
+    "@types/node": "^20.19.16",
     "@vitest/ui": "^1.6.1",
     "autoprefixer": "^10.4.21",
     "chokidar": "^3.6.0",
@@ -61,14 +61,14 @@
     "postcss": "^8.5.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "tailwindcss": "^4.1.12",
+    "tailwindcss": "^4.1.13",
     "turbo": "^1.13.4",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
   "packageManager": "pnpm@9.11.0",
   "engines": {
-    "node": "20.x",
+    "node": ">=20.x",
     "pnpm": ">=8.0.0"
   }
 }
