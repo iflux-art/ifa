@@ -5,8 +5,8 @@
   "type": "module",
   "packageManager": "pnpm@9.11.0",
   "engines": {
-    "node": ">=22.x",
-    "pnpm": ">=9.11.0"
+    "node": ">=18.x",
+    "pnpm": ">=8.0.0"
   },
   "scripts": {
     "dev": "next dev",
