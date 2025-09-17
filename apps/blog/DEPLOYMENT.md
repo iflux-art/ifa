@@ -38,10 +38,28 @@ Got: 8.15.0
    - Output Directory: `.next`
 6. 点击 "Deploy"
 
+## 部署警告说明
+
+部署成功后，你可能会看到以下警告信息：
+
+### 1. `builds` 配置警告
+```
+WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply.
+```
+
+这是正常的，因为我们使用了自定义的 [vercel.json](file://c:\project\ifa\apps\blog\vercel.json) 配置文件来确保部署的正确性。这个警告不会影响应用的功能。
+
+### 2. Node.js 版本警告
+```
+Warning: Detected "engines": { "node": "20.x" } in your [package.json](file://c:\project\ifa\apps\website\package.json)
+```
+
+这个警告提示我们指定了 Node.js 版本为 `20.x`。我们使用 Node.js 20.x 版本以利用其新特性和性能改进，同时保持与 Vercel 环境的兼容性。
+
 ## 本地开发与部署的版本差异
 
-- **本地开发**：使用 pnpm 9.11.0 和 Node.js 22.x
-- **Vercel 部署**：使用 pnpm 8.15.0 和 Node.js 18.x
+- **本地开发**：使用 pnpm 9.11.0 和 Node.js 20.x
+- **Vercel 部署**：使用 pnpm 8.15.0 和 Node.js 20.x
 
 这种配置确保了：
 1. 本地开发时可以使用最新的工具特性
