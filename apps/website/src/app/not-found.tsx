@@ -1,4 +1,4 @@
-import { ArrowLeft, Home } from "lucide-react";
+import { Home } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { useId } from "react";
