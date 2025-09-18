@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import { useLayoutStore } from "./layout-store.standard";
 import type { PageContainerProps, SidebarConfig } from "./layout-types";
 import { getContainerClassName } from "./layout-utils";

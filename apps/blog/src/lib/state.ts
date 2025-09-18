@@ -4,7 +4,7 @@
  */
 
 import type { UseAsyncOptions } from "@/types";
-import { executeAsyncOperation } from "@/utils/async";
+import { executeAsyncOperation } from "@/lib/utils/async";
 
 /**
  * 创建标准化的状态操作函数

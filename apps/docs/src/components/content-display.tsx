@@ -1,7 +1,7 @@
 import { Calculator, Calendar, Clock } from "lucide-react";
 import type React from "react";
 import { Breadcrumb } from "@/components/breadcrumb";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 /** 内容显示类型 */
 export type ContentType = "docs";

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { createResetFunction } from "@/utils/store";
+import { createResetFunction } from "@/lib/utils/store";
 
 // 状态接口
 export interface AppUIState {

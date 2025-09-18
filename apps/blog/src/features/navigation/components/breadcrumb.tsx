@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { BreadcrumbProps } from "@/features/navigation/types";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 /**
  * 面包屑导航组件

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { formatDate, formatNumber } from "@/features/blog/lib/client-utils";
 import type { ContentItem } from "@/features/blog/types";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 export interface ContentCardProps {
   /** 内容项 */

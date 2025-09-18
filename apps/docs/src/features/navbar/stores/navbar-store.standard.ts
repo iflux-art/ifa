@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { debounceSync } from "@/utils/helpers";
-import { createResetFunction } from "@/utils/store";
+import { debounceSync } from "@/lib/utils/helpers";
+import { createResetFunction } from "@/lib/utils/store";
 
 // 状态接口
 export interface NavbarState {

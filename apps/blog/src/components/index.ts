@@ -19,6 +19,7 @@ export {
 
 // ==================== 业务按钮组件 ====================
 export { GitHubButton } from "./button/github-button";
+export { SearchButton } from "./button/search-button";
 export { TravelButton } from "./button/travel-button";
 
 // ==================== 卡片组件 ====================

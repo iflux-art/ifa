@@ -3,7 +3,7 @@ import {
   DEFAULT_SIDEBAR_CONFIG,
   getResponsiveClasses,
 } from "@/lib/layout/layout-utils";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 /**
  * 侧边栏包装组件

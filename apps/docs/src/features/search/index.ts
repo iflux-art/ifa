@@ -9,7 +9,6 @@
 // 组件导出
 export {
   SearchBar,
-  SearchButton,
   SearchDialog,
   SearchResults,
 } from "./components";

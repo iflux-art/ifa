@@ -5,7 +5,7 @@ import {
   type StateStorage,
 } from "zustand/middleware";
 import type { CustomStorageApi } from "@/lib/storage/index";
-import { createResetFunction as sharedCreateResetFunction } from "@/utils/store";
+import { createResetFunction as sharedCreateResetFunction } from "@/lib/utils/store";
 
 // 状态接口
 export interface State {

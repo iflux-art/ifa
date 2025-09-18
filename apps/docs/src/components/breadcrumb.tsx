@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 /** 面包屑导航项 */
 export interface BreadcrumbItem {

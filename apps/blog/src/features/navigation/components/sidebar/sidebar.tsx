@@ -9,7 +9,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import type { SidebarItem, SidebarProps } from "@/features/navigation/types";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 // 检查是否在客户端环境
 const isBrowser = typeof window !== "undefined";

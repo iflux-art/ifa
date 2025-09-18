@@ -220,7 +220,7 @@ function sortPostsByDate(posts: BlogPost[]): BlogPost[] {
  * @returns 所有博客文章数组
  */
 export function getAllPosts(): BlogPost[] {
-  const blogDir = path.join(process.cwd(), "src", "content", "blog");
+  const blogDir = path.join(process.cwd(), "src", "content");
   if (!fs.existsSync(blogDir)) return [];
 
   const posts: BlogPost[] = [];
@@ -246,7 +246,7 @@ function collectTagsFromFile(itemPath: string, allTags: Set<string>): void {
  * @returns 所有标签数组
  */
 export function getAllTags(): string[] {
-  const blogDir = path.join(process.cwd(), "src", "content", "blog");
+  const blogDir = path.join(process.cwd(), "src", "content");
   if (!fs.existsSync(blogDir)) return [];
 
   const allTags = new Set<string>();
@@ -291,7 +291,7 @@ function countTagsFromFile(
  * @returns 标签及其文章数量的记录
  */
 export function getAllTagsWithCount(): Record<string, number> {
-  const blogDir = path.join(process.cwd(), "src", "content", "blog");
+  const blogDir = path.join(process.cwd(), "src", "content");
   if (!fs.existsSync(blogDir)) return {};
 
   const tagCounts: Record<string, number> = {};
@@ -348,7 +348,7 @@ function processPostFile(
  * @returns 文章数组
  */
 export function getPostsByTag(tag: string): BlogPost[] {
-  const blogDir = path.join(process.cwd(), "src", "content", "blog");
+  const blogDir = path.join(process.cwd(), "src", "content");
   if (!fs.existsSync(blogDir)) return [];
 
   const posts: BlogPost[] = [];
@@ -487,7 +487,7 @@ const sortPostsByYear = (postsByYear: Record<string, BlogPost[]>): void => {
  * 获取所有博客文章并按年份分组
  */
 export function getPostsByYear(): Record<string, BlogPost[]> {
-  const blogDir = path.join(process.cwd(), "src", "content", "blog");
+  const blogDir = path.join(process.cwd(), "src", "content");
   if (!fs.existsSync(blogDir)) return {};
 
   const postsByYear: Record<string, BlogPost[]> = {};

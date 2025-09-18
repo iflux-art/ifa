@@ -1,3 +1,5 @@
+import createMDX from '@next/mdx'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
@@ -30,4 +32,11 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+const withMDX = createMDX({
+  // Add providerImportSource configuration if needed
+  // options: {
+  //   providerImportSource: "@mdx-js/react",
+  // },
+})
+
+export default withMDX(nextConfig)

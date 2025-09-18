@@ -2,7 +2,7 @@
 
 import { Folder } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import { DocsSidebarWrapper } from "./docs-sidebar-wrapper";
 
 export interface DocsSidebarCardProps {

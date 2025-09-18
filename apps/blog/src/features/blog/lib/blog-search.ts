@@ -46,7 +46,7 @@ async function getAllFiles(dirPath: string): Promise<string[]> {
  * 读取博客内容
  */
 async function getBlogPosts(): Promise<BlogPost[]> {
-  const blogDir = path.join(process.cwd(), "src/content/blog");
+  const blogDir = path.join(process.cwd(), "src/content");
   const files = await getAllFiles(blogDir);
 
   const posts = await Promise.all(

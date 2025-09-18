@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/collapsible";
 import type { SidebarItem } from "@/features/docs/types";
 import { NavLink } from "@/features/navbar/components/nav-link";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import type { DocCategoryWithDocs, GlobalDocsStructure } from "./global-docs";
 
 // 检查是否在客户端环境

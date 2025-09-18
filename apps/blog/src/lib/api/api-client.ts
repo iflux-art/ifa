@@ -4,8 +4,8 @@
  */
 
 import type { UseAsyncOptions } from "@/types";
-import { executeAsyncOperation, executeWithRetry } from "@/utils/async";
-import { classifyError, handleNetworkError, logError } from "@/utils/error";
+import { executeAsyncOperation, executeWithRetry } from "@/lib/utils/async";
+import { classifyError, handleNetworkError, logError } from "@/lib/utils/error";
 
 // API配置接口
 interface ApiClientConfig {

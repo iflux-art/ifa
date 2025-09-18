@@ -52,7 +52,7 @@ export function scanContentDirectory(options: {
 
 export function generateBlogPaths(): ContentItem[] {
   return scanContentDirectory({
-    contentDir: path.join(process.cwd(), "src", "content", "blog"),
+    contentDir: path.join(process.cwd(), "src", "content"),
     excludePrefix: "_",
     filter: (itemPath) => {
       const fileContent = fs.readFileSync(itemPath, "utf8");

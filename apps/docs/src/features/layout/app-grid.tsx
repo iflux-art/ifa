@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import type { AppGridProps } from "./layout-types";
 import { gridColsMap, gridGapMap } from "./responsive-utils";
 

@@ -4,7 +4,7 @@ import { Check, Copy } from "lucide-react";
 import Prism from "prismjs";
 import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import "prismjs/themes/prism-tomorrow.css"; // 使用暗色主题
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-tsx";

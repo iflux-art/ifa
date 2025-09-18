@@ -4,7 +4,7 @@
  */
 
 import type { UseAsyncOptions } from "@/types";
-import { classifyError, handleContentError, logError } from "@/utils/error";
+import { classifyError, handleContentError, logError } from "./error";
 
 /**
  * 异步操作执行器
@@ -61,11 +61,7 @@ export async function executeAsyncOperation<T>(
 
     // 使用专门的错误处理工具
     if (contentType) {
-      const errorInfo = handleContentError(
-        error,
-        contentType as "docs" | "links",
-        contentId,
-      );
+      const errorInfo = handleContentError(error, contentType, contentId);
       errorMessage = errorInfo.message;
     } else {
       const errorInfo = {

@@ -6,7 +6,7 @@
 
 "use client";
 
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import { DocsSidebar } from "./docs-sidebar";
 import { useGlobalDocs } from "./use-global-docs";
 

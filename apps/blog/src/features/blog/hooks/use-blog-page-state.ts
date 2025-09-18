@@ -6,7 +6,7 @@ import { getAllPosts } from "@/features/blog/hooks/index";
 import type { BlogPost, CategoryWithCount } from "@/features/blog/types";
 import { useBlogPageStore } from "@/stores";
 // 导入新的异步操作工具
-import { executeAsyncOperation } from "@/utils/async";
+import { executeAsyncOperation } from "@/lib/utils/async";
 
 export interface UseBlogPageStateReturn {
   // 数据状态

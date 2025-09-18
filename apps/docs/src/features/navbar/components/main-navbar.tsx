@@ -1,20 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useNavbarScroll } from "@/features/navbar/hooks/use-navbar-scroll";
 import { ThemeToggle } from "@/features/theme";
 import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
-import { GitHubButton, TravelButton } from "@/components/button";
-
-// 动态导入搜索按钮组件
-const SearchButton = dynamic(
-  () =>
-    import("@/features/search/components/search-button").then(
-      (mod) => mod.SearchButton,
-    ),
-  { ssr: false },
-);
+import { GitHubButton, SearchButton, TravelButton } from "@/components/button";
 
 export const MainNavbar = ({ className = "" }: { className?: string }) => {
   const {

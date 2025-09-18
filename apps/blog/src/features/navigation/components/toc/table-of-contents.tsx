@@ -4,7 +4,7 @@ import { Text } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { TocHeading, TocProps } from "@/features/navigation/types";
 import { useHeadingObserver } from "@/hooks/use-heading-observer";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 // ====== 迁移自 src/config/layout.ts ======
 /**

@@ -8,7 +8,7 @@ import type {
   TocHeading,
 } from "@/features/navigation/types";
 import { useHeadingObserver } from "@/hooks/use-heading-observer";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 // ====== 迁移自 src/config/layout.ts ======
 /**

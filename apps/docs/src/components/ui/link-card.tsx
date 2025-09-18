@@ -11,7 +11,7 @@ import Link from "next/link";
 import type * as React from "react";
 import { forwardRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 interface LinkCardProps {
   /** 标题 */

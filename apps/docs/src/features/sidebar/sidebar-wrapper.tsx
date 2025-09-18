@@ -3,7 +3,7 @@ import {
   getResponsiveClasses,
 } from "@/features/layout/layout-utils";
 import type { SidebarWrapperProps } from "@/features/sidebar/types";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 /**
  * 侧边栏包装组件

@@ -17,7 +17,7 @@ import {
   createConfigManager,
   createFilteredStateManager,
   createStandardStateActions,
-} from "@/utils/state";
+} from "@/lib/utils/state";
 
 export interface UseFriendsStateReturn {
   // 数据状态

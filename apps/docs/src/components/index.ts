@@ -26,6 +26,7 @@ export { ThemeProvider } from "@/features/theme";
 export { Breadcrumb } from "./breadcrumb";
 // ==================== 业务按钮组件 ====================
 export { GitHubButton } from "./button/github-button";
+export { SearchButton } from "./button/search-button";
 export { TravelButton } from "./button/travel-button";
 export type { ContentDisplayProps, ContentType } from "./content-display";
 // ==================== 内容展示组件 ====================

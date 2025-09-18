@@ -3,9 +3,9 @@
  */
 
 // 异步操作工具
-export { executeAsyncOperation, executeWithRetry } from "@/utils/async";
+export { executeAsyncOperation, executeWithRetry } from "@/lib/utils/async";
 // 错误处理工具
-export type { ErrorInfo, LogOptions } from "@/utils/error";
+export type { ErrorInfo, LogOptions } from "@/lib/utils/error";
 export {
   classifyError,
   getUserFriendlyMessage,
@@ -13,13 +13,13 @@ export {
   handleContentError,
   handleNetworkError,
   logError,
-} from "@/utils/error";
+} from "@/lib/utils/error";
 // 状态管理工具
 export {
   createConfigManager,
   createFilteredStateManager,
   createStandardStateActions,
-} from "@/utils/state";
+} from "@/lib/utils/state";
 // API工具
 export {
   createApiSuccess,

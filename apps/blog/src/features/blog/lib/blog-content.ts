@@ -126,7 +126,7 @@ export function getBlogContent(slug: string[]): {
 }
 
 function findBlogFile(slug: string[]): string | null {
-  const blogDir = path.join(process.cwd(), "src", "content", "blog");
+  const blogDir = path.join(process.cwd(), "src", "content");
   const relativePath = path.join(...slug);
 
   // Check for direct file matches
@@ -150,7 +150,7 @@ export function getAllBlogMeta(): {
   slug: string[];
   frontmatter: BlogFrontmatter;
 }[] {
-  const blogDir = path.join(process.cwd(), "src", "content", "blog");
+  const blogDir = path.join(process.cwd(), "src", "content");
   if (!fs.existsSync(blogDir)) return [];
 
   const files: string[] = [];

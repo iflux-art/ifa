@@ -4,7 +4,7 @@
  */
 
 import type { UseAsyncOptions } from "@/types";
-import { classifyError, handleContentError, logError } from "@/utils/error";
+import { classifyError, handleContentError, logError } from "@/lib/utils/error";
 
 /**
  * 异步操作执行器

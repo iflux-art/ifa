@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { CategoryWithCount } from "@/features/blog/types";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 export interface BlogCategoryCardProps {
   categories?: CategoryWithCount[];

@@ -3,7 +3,7 @@
  */
 
 // 从 utils/validation 导出
-export { isValidUrl, validateRequiredFields } from "@/utils/validation";
+export { isValidUrl, validateRequiredFields } from "@/lib/utils/validation";
 // 从 api-client 导出
 // 导出便捷函数
 export {

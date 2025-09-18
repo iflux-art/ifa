@@ -19,7 +19,7 @@ import {
   createConfigManager,
   createFilteredStateManager,
   createStandardStateActions,
-} from "@/utils/state";
+} from "@/lib/utils/state";
 
 export interface UseFriendsStateV2Return {
   // 数据状态
