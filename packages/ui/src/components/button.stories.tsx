@@ -1,11 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
-import { Mail } from "lucide-react";
-
+import type { Meta, StoryObj } from "@storybook/nextjs";
+import { Settings } from "lucide-react";
 import { Button } from "./button";
 
 const meta = {
-  title: "Components/Button",
+  title: "UI/Button",
   component: Button,
   parameters: {
     layout: "centered",
@@ -28,13 +26,9 @@ const meta = {
       options: ["default", "sm", "lg", "icon"],
     },
     asChild: {
-      control: { type: "boolean" },
-    },
-    disabled: {
-      control: { type: "boolean" },
+      control: "boolean",
     },
   },
-  args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -43,63 +37,72 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: "Button",
+    variant: "default",
+    size: "default",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    variant: "secondary",
     children: "Secondary",
+    variant: "secondary",
+    size: "default",
   },
 };
 
 export const Destructive: Story = {
   args: {
-    variant: "destructive",
     children: "Destructive",
+    variant: "destructive",
+    size: "default",
   },
 };
 
 export const Outline: Story = {
   args: {
-    variant: "outline",
     children: "Outline",
+    variant: "outline",
+    size: "default",
   },
 };
 
 export const Ghost: Story = {
   args: {
-    variant: "ghost",
     children: "Ghost",
+    variant: "ghost",
+    size: "default",
   },
 };
 
 export const Link: Story = {
   args: {
-    variant: "link",
     children: "Link",
+    variant: "link",
+    size: "default",
   },
 };
 
 export const Small: Story = {
   args: {
-    size: "sm",
     children: "Small",
+    variant: "default",
+    size: "sm",
   },
 };
 
 export const Large: Story = {
   args: {
-    size: "lg",
     children: "Large",
+    variant: "default",
+    size: "lg",
   },
 };
 
 export const Icon: Story = {
   args: {
-    variant: "outline",
+    children: <Settings />,
+    variant: "default",
     size: "icon",
-    children: <Mail className="h-4 w-4" />,
   },
 };
 
@@ -107,28 +110,20 @@ export const WithIcon: Story = {
   args: {
     children: (
       <>
-        <Mail className="mr-2 h-4 w-4" />
-        Login with Email
+        <Settings />
+        Settings
       </>
     ),
+    variant: "default",
+    size: "default",
   },
 };
 
 export const Disabled: Story = {
   args: {
-    disabled: true,
     children: "Disabled",
-  },
-};
-
-export const Loading: Story = {
-  args: {
+    variant: "default",
+    size: "default",
     disabled: true,
-    children: (
-      <>
-        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-        Please wait
-      </>
-    ),
   },
 };

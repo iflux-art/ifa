@@ -4,6 +4,16 @@
 
 // 异步操作工具
 export { executeAsyncOperation, executeWithRetry } from "@/utils/async";
+// 错误处理工具
+export type { ErrorInfo, LogOptions } from "@/utils/error";
+export {
+  classifyError,
+  getUserFriendlyMessage,
+  handleComponentError,
+  handleContentError,
+  handleNetworkError,
+  logError,
+} from "@/utils/error";
 // 状态管理工具
 export {
   createConfigManager,
@@ -55,16 +65,6 @@ export {
   createApiError,
   withErrorHandling as apiWithErrorHandling,
 } from "./api/api-utils";
-// 错误处理工具
-export type { ErrorInfo, LogOptions } from "./error";
-export {
-  classifyError,
-  getUserFriendlyMessage,
-  handleComponentError,
-  handleContentError,
-  handleNetworkError,
-  logError,
-} from "./error";
 // 布局工具
 export { getContainerClassName } from "./layout/layout-utils";
 // ==================== 元数据和SEO工具函数 ====================

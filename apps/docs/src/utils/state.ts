@@ -3,8 +3,7 @@
  * 提供统一的状态管理操作，减少重复代码
  */
 
-import type { UseAsyncOptions } from "@/types";
-import { executeAsyncOperation } from "@/utils/async";
+import { executeAsyncOperation } from "./async";
 
 /**
  * 创建标准化的状态操作函数
@@ -20,7 +19,10 @@ export function createStandardStateActions<T>(
      */
     loadData: async (
       fetchFn: () => Promise<T>,
-      options: Omit<UseAsyncOptions<T>, "setLoading" | "setError"> = {},
+      options: {
+        onSuccess?: (result: T) => void;
+        onError?: (error: unknown) => void;
+      } = {},
     ): Promise<T | null> => {
       return await executeAsyncOperation(fetchFn, {
         setLoading,
@@ -35,7 +37,10 @@ export function createStandardStateActions<T>(
      */
     updateData: async (
       updateFn: () => Promise<T>,
-      options: Omit<UseAsyncOptions<T>, "setLoading" | "setError"> = {},
+      options: {
+        onSuccess?: (result: T) => void;
+        onError?: (error: unknown) => void;
+      } = {},
     ): Promise<T | null> => {
       return await executeAsyncOperation(updateFn, {
         setLoading,

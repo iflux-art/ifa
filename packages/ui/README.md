@@ -18,22 +18,6 @@ This package is used internally within this monorepo project. The components are
 
 ## Components
 
-### Badge
-
-A small status indicator component with multiple variants.
-
-```tsx
-import { Badge } from '@repo/ui'
-
-// Basic usage
-<Badge>New</Badge>
-
-// With variants
-<Badge variant="secondary">Beta</Badge>
-<Badge variant="destructive">Error</Badge>
-<Badge variant="outline">Draft</Badge>
-```
-
 ### Button
 
 A versatile button component with multiple variants and sizes.
@@ -58,91 +42,6 @@ import { Button } from '@repo/ui'
 <Button asChild>
   <a href="/link">Link Button</a>
 </Button>
-```
-
-### Card
-
-A flexible card component for displaying content.
-
-```tsx
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
-} from '@repo/ui'
-
-<Card>
-  <CardHeader>
-    <CardTitle>Card Title</CardTitle>
-    <CardDescription>Card description</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>Card content</p>
-  </CardContent>
-  <CardFooter>
-    <Button>Action</Button>
-  </CardFooter>
-</Card>
-```
-
-### Dialog (Modal)
-
-A modal dialog component built with Radix UI.
-
-```tsx
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogDescription, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogTrigger 
-} from '@repo/ui'
-
-<Dialog>
-  <DialogTrigger asChild>
-    <Button>Open Dialog</Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Dialog Title</DialogTitle>
-      <DialogDescription>
-        Dialog description goes here.
-      </DialogDescription>
-    </DialogHeader>
-    <p>Dialog content</p>
-  </DialogContent>
-</Dialog>
-```
-
-### Input
-
-A styled input component with focus states.
-
-```tsx
-import { Input } from '@repo/ui'
-
-<Input 
-  type="email" 
-  placeholder="Enter your email" 
-  className="w-full"
-/>
-```
-
-### Label
-
-A form label component that works with form controls.
-
-```tsx
-import { Label, Input } from '@repo/ui'
-
-<div className="grid w-full max-w-sm items-center gap-1.5">
-  <Label htmlFor="email">Email</Label>
-  <Input type="email" id="email" placeholder="Email" />
-</div>
 ```
 
 ## Development
@@ -173,6 +72,16 @@ pnpm lint
 pnpm format
 ```
 
+## Storybook
+
+This package includes Storybook for component development and documentation. To start Storybook:
+
+```bash
+pnpm storybook
+```
+
+Storybook will be available at http://localhost:6006/
+
 ## Styling
 
 This package uses Tailwind CSS with CSS variables for theming. Make sure to include the Tailwind configuration and CSS variables in your project.
@@ -187,4 +96,3 @@ import type { ButtonProps } from '@repo/ui'
 const MyButton: React.FC<ButtonProps> = (props) => {
   return <Button {...props} />
 }
-```

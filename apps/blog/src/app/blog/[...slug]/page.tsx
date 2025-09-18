@@ -11,7 +11,7 @@ import ClientMDXRenderer from "@/features/blog/components/mdx/client-mdx-rendere
 import { createBlogBreadcrumbs, getBlogContent } from "@/features/blog/lib";
 import { TwikooComment } from "@/features/comment";
 import { TableOfContentsCard } from "@/features/navigation";
-import { handleContentError } from "@/lib/error/error-utils";
+import { handleContentError } from "@/utils/error";
 
 interface BlogPostPageProps {
   params: Promise<{

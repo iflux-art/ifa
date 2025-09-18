@@ -3,8 +3,8 @@
  * 提供统一的异步操作处理，包括错误处理和加载状态管理
  */
 
-import { classifyError, handleContentError, logError } from "@/lib/error";
 import type { UseAsyncOptions } from "@/types";
+import { classifyError, handleContentError, logError } from "@/utils/error";
 
 /**
  * 异步操作执行器

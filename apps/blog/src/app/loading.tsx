@@ -2,18 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-interface ProgressBarLoadingProps {
-  /**
-   * 最小显示时间（毫秒），避免快速闪烁
-   */
-  minDisplayTime?: number;
-}
-
 /**
- * 进度条加载状态组件
+ * 全局加载状态页面
  * 显示进度条加载状态
  */
-const ProgressBarLoading = (_props: ProgressBarLoadingProps) => {
+const Loading = () => {
   const [progress, setProgress] = useState(0);
   const [opacity, setOpacity] = useState(0.8);
 
@@ -47,34 +40,26 @@ const ProgressBarLoading = (_props: ProgressBarLoadingProps) => {
 
   // 显示进度条
   return (
-    <div className="fixed top-16 right-0 left-0 z-50">
-      <div className="h-1 w-full overflow-hidden bg-gray-200 dark:bg-gray-800">
-        <div
-          className="h-full bg-primary dark:bg-primary"
-          style={{
-            width: `${progress}%`,
-            opacity,
-            transition: "width 300ms ease-out",
-            transform: "translateZ(0)",
-            boxShadow:
-              "0 0 12px color-mix(in srgb, var(--color-primary) 70%, transparent)",
-          }}
-        />
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-6 lg:py-8">
+        <div className="fixed top-16 right-0 left-0 z-50">
+          <div className="h-1 w-full overflow-hidden bg-gray-200 dark:bg-gray-800">
+            <div
+              className="h-full bg-primary dark:bg-primary"
+              style={{
+                width: `${progress}%`,
+                opacity,
+                transition: "width 300ms ease-out",
+                transform: "translateZ(0)",
+                boxShadow:
+                  "0 0 12px color-mix(in srgb, var(--color-primary) 70%, transparent)",
+              }}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
 };
-
-/**
- * 全局加载状态页面
- * 显示进度条加载状态
- */
-const Loading = () => (
-  <div className="min-h-screen bg-background">
-    <div className="container mx-auto px-4 py-6 lg:py-8">
-      <ProgressBarLoading />
-    </div>
-  </div>
-);
 
 export default Loading;

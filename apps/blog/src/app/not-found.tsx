@@ -1,10 +1,10 @@
-import { AlertCircle, Home, Search } from "lucide-react";
+import { ArrowLeft, Home } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { useId } from "react";
-import { BackButton, Button } from "@/components";
+import { BackButton } from "@/components/ui/back-button";
+import { Button } from "@/components/ui/button";
 import { PageContainer } from "@/components/layout";
-import type { NotFoundProps } from "@/types";
 
 export const metadata: Metadata = {
   title: "404 - 页面未找到",
@@ -16,40 +16,26 @@ const DEFAULT_TEXTS = {
   title: "页面未找到",
   description: "抱歉，您访问的页面不存在或已被移除。",
   buttonText: "返回首页",
-  backUrl: "/",
+  backUrl: "https://www.iflux.art/",
 } as const;
 
 /**
  * 全局404页面
  * 符合404页面设计规范，使用通用的布局和组件
  */
-const NotFoundPage = ({
-  code = DEFAULT_TEXTS.code,
-  title = DEFAULT_TEXTS.title,
-  description = DEFAULT_TEXTS.description,
-  buttonText = DEFAULT_TEXTS.buttonText,
-  backUrl = DEFAULT_TEXTS.backUrl,
-  className = "",
-  showIcon = true,
-}: NotFoundProps) => {
+export default function NotFoundPage() {
   const errorTitleId = useId();
+  const code = DEFAULT_TEXTS.code;
+  const title = DEFAULT_TEXTS.title;
+  const description = DEFAULT_TEXTS.description;
+  const buttonText = DEFAULT_TEXTS.buttonText;
+  const backUrl = DEFAULT_TEXTS.backUrl;
 
   return (
     <PageContainer config={{ layout: "full-width" }}>
-      <main
-        className={`flex min-h-[70vh] items-center justify-center text-center ${className}`}
-      >
+      <main className="flex min-h-[70vh] items-center justify-center text-center">
         <section aria-labelledby={errorTitleId} className="w-full max-w-4xl">
           <div className="flex flex-col items-center space-y-8">
-            {showIcon && (
-              <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-primary/10">
-                <AlertCircle
-                  className="h-12 w-12 text-primary"
-                  aria-hidden="true"
-                />
-              </div>
-            )}
-
             <h1 id={errorTitleId} className="text-9xl font-bold text-primary">
               {code}
             </h1>
@@ -72,26 +58,10 @@ const NotFoundPage = ({
               </Button>
 
               <BackButton />
-
-              <Button asChild variant="outline" size="lg">
-                <Link href="/search" className="flex items-center gap-2">
-                  <Search className="h-4 w-4" aria-hidden="true" />
-                  全局搜索
-                </Link>
-              </Button>
-            </div>
-
-            {/* 帮助信息 */}
-            <div className="mt-8">
-              <p className="text-sm text-muted-foreground">
-                如果您认为这是一个错误，请联系网站管理员。
-              </p>
             </div>
           </div>
         </section>
       </main>
     </PageContainer>
   );
-};
-
-export default NotFoundPage;
+}

@@ -5,6 +5,7 @@ import { useNavbarScroll } from "@/features/navbar/hooks/use-navbar-scroll";
 import { ThemeToggle } from "@/features/theme";
 import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
+import { GitHubButton, TravelButton } from "@/components/button";
 
 // 动态导入搜索按钮组件
 const SearchButton = dynamic(
@@ -55,6 +56,8 @@ export const MainNavbar = ({ className = "" }: { className?: string }) => {
         <div className="flex items-center gap-2">
           <SearchButton />
           <ThemeToggle />
+          <GitHubButton />
+          <TravelButton />
         </div>
       </div>
     </nav>

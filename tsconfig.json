@@ -22,57 +22,9 @@
     "baseUrl": ".",
     "paths": {
       "@repo/ui": ["./packages/ui/src"],
-      "@repo/utils": ["./packages/utils/src"],
-      "@/components/*": [
-        "./apps/website/src/components/*",
-        "./apps/blog/src/components/*",
-        "./apps/docs/src/components/*",
-        "./apps/hub/src/components/*"
-      ],
-      "@/lib/*": [
-        "./apps/website/src/lib/*",
-        "./apps/blog/src/lib/*",
-        "./apps/docs/src/lib/*",
-        "./apps/hub/src/lib/*"
-      ],
-      "@/utils/*": [
-        "./apps/website/src/utils/*",
-        "./apps/blog/src/utils/*",
-        "./apps/docs/src/utils/*",
-        "./apps/hub/src/utils/*"
-      ],
-      "@/types/*": [
-        "./apps/website/src/types/*",
-        "./apps/blog/src/types/*",
-        "./apps/docs/src/types/*",
-        "./apps/hub/src/types/*"
-      ],
-      "@/hooks/*": [
-        "./apps/website/src/hooks/*",
-        "./apps/blog/src/hooks/*",
-        "./apps/docs/src/hooks/*",
-        "./apps/hub/src/hooks/*"
-      ],
-      "@/config/*": [
-        "./apps/website/src/config/*",
-        "./apps/blog/src/config/*",
-        "./apps/docs/src/config/*",
-        "./apps/hub/src/config/*"
-      ],
-      "@/features/*": [
-        "./apps/website/src/features/*",
-        "./apps/blog/src/features/*",
-        "./apps/docs/src/features/*",
-        "./apps/hub/src/features/*"
-      ],
-      "@/content/*": [
-        "./apps/website/src/content/*",
-        "./apps/blog/src/content/*",
-        "./apps/docs/src/content/*",
-        "./apps/hub/src/content/*"
-      ]
+      "@repo/utils": ["./packages/utils/src"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "apps/**/*", "packages/**/*"]
+  "files": ["tsconfig.json"],
+  "exclude": ["node_modules"]
 }

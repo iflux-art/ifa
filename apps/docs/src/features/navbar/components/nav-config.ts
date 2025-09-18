@@ -1,4 +1,4 @@
-import { FileText, Link, type LucideIcon, MapPin, PenTool } from "lucide-react";
+import { FileText, Home, Link, type LucideIcon, PenTool } from "lucide-react";
 import type { BaseNavItem } from "@/features/navbar/types";
 
 /**
@@ -22,22 +22,20 @@ export const NAV_ITEMS = [
     description: "查看我们的技术博客，了解最新动态和深度文章",
     icon: PenTool,
     href: "https://blog.iflux.art/",
-    external: true,
   },
   {
     key: "docs",
     label: "文档",
     description: "查看详细的文档和指南，了解如何使用我们的产品和服务",
     icon: FileText,
-    href: "/", // 修改为指向首页
+    href: "/",
   },
   {
     key: "hub",
     label: "导航",
     description: "查看网站导航和资源聚合",
-    icon: MapPin,
+    icon: Home,
     href: "https://hub.iflux.art/",
-    external: true,
   },
   {
     key: "friends",
@@ -45,7 +43,6 @@ export const NAV_ITEMS = [
     description: "探索我们的合作伙伴和友情链接，发现更多优质资源",
     icon: Link,
     href: "https://blog.iflux.art/friends/",
-    external: true,
   },
 ] as const;
 

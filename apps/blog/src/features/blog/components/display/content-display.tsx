@@ -85,7 +85,7 @@ export const ContentDisplay = ({
       )}
 
       <header className="mb-8">
-        <h1 className="mb-8 text-4xl font-bold tracking-tight sm:text-5xl">
+        <h1 className="mb-8 text-4xl font-bold tracking-tight sm:text-4xl">
           {title}
         </h1>
         <div className="flex flex-wrap items-center gap-y-2 text-sm font-medium text-muted-foreground">
