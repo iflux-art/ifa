@@ -1,5 +1,7 @@
-// Components
-export { Button } from "./components/button";
+// ==================== 核心导出 ====================
 
-// Utils
-export { cn } from "./utils/core";
+// ==================== 组件导出 ====================
+export { Button, buttonVariants } from "./components/ui/button";
+
+// ==================== 工具函数导出 ====================
+export { cn } from "./lib/utils";
