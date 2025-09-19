@@ -29,9 +29,7 @@
       "@/types/*": ["./src/types/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/config/*": ["./src/config/*"],
-      "@/features/*": ["./src/features/*"],
-      "@repo/ui": ["../../packages/ui/src"],
-      "@repo/utils": ["../../packages/utils/src"]
+      "@/features/*": ["./src/features/*"]
     }
   },
   "include": [

@@ -30,9 +30,7 @@
       "@/hooks/*": ["./src/hooks/*"],
       "@/config/*": ["./src/config/*"],
       "@/features/*": ["./src/features/*"],
-      "@/content/*": ["./src/content/*"],
-      "@repo/ui": ["../../packages/ui/src"],
-      "@repo/utils": ["../../packages/utils/src"]
+      "@/content/*": ["./src/content/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

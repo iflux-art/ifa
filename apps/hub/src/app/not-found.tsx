@@ -1,10 +1,10 @@
-import { Home } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { useId } from "react";
 import { BackButton } from "@/components/ui";
 import { Button } from "@/components/ui";
 import { PageContainer } from "@/components/layout";
+import { Home } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "404 - 页面未找到",
@@ -16,7 +16,7 @@ const DEFAULT_TEXTS = {
   title: "页面未找到",
   description: "抱歉，您访问的页面不存在或已被移除。",
   buttonText: "返回首页",
-  backUrl: "https://www.iflux.art/",
+  backUrl: "/",
 } as const;
 
 /**
