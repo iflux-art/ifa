@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ["www.google.com", "favicon.yandex.net", "icons.duckduckgo.com"],
-  },
-
   // Development optimizations
   ...(process.env.NODE_ENV === "development" && {
     // Enable fast refresh
@@ -16,9 +12,9 @@ const nextConfig = {
     // Turbopack handles compression automatically in Next.js 15+
   }),
 
-  // Enable Turbopack for faster builds
+  // Enable React Compiler
   experimental: {
-    // Move turbo config to turbopack
+    reactCompiler: true,
   },
 
   // Turbopack configuration (replaces experimental.turbo)

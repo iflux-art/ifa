@@ -38,7 +38,24 @@ declare global {
 
 import type * as React from "react";
 import { useEffect, useId, useState } from "react";
-import { getRandomGreeting } from "@/features/comment/lib";
+import { getGreeting } from "../lib/greetings";
+import type { TimeSlot } from "../types";
+
+/**
+ * 获取随机问候语
+ * @returns 随机问候语
+ */
+const getRandomGreeting = (): string => {
+  const timeSlots: TimeSlot[] = [
+    "morning",
+    "noon",
+    "afternoon",
+    "evening",
+    "lateNight",
+  ];
+  const randomSlot = timeSlots[Math.floor(Math.random() * timeSlots.length)];
+  return getGreeting(randomSlot);
+};
 
 /**
  * Twikoo 评论组件

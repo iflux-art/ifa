@@ -1,35 +1,33 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { getRandomGreeting } from "@/features/comment/lib";
-import type { GreetingProps } from "@/features/comment/types";
+import { useState, useEffect } from "react";
+import type { GreetingProps, TimeSlot } from "../types";
+import { getGreeting } from "../lib/greetings";
 
-/**
- * 问候语组件
- * 根据当前时间显示不同的问候语
- */
-export const Greeting = ({ className }: GreetingProps) => {
+export function Greeting({ className = "" }: GreetingProps) {
+  const [_timeSlot, setTimeSlot] = useState<TimeSlot>("morning");
   const [greeting, setGreeting] = useState("");
 
-  // 刷新问候语的函数
-  const refreshGreeting = useCallback(() => {
-    setGreeting(getRandomGreeting());
+  useEffect(() => {
+    // 获取当前时间段
+    const hour = new Date().getHours();
+    let slot: TimeSlot = "morning";
+
+    if (hour >= 5 && hour < 11) {
+      slot = "morning";
+    } else if (hour >= 11 && hour < 13) {
+      slot = "noon";
+    } else if (hour >= 13 && hour < 18) {
+      slot = "afternoon";
+    } else if (hour >= 18 && hour < 22) {
+      slot = "evening";
+    } else {
+      slot = "lateNight";
+    }
+
+    setTimeSlot(slot);
+    setGreeting(getGreeting(slot));
   }, []);
 
-  // 在组件挂载时设置随机问候语
-  useEffect(() => {
-    refreshGreeting();
-  }, [refreshGreeting]);
-
-  return (
-    <button
-      className={`mb-5 cursor-pointer text-xl font-normal text-muted-foreground transition-colors hover:text-muted-foreground/70 md:text-2xl ${className ?? ""}`}
-      onClick={refreshGreeting}
-      onKeyDown={(e) => e.key === "Enter" && refreshGreeting()}
-      title="点击刷新问候语"
-      type="button"
-    >
-      {greeting}
-    </button>
-  );
-};
+  return <div className={`text-lg font-medium ${className}`}>{greeting}</div>;
+}
