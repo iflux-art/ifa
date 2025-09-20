@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "es6"],
+    "target": "ES2024",
+    "lib": ["dom", "dom.iterable", "es2024"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -22,7 +22,13 @@
     "baseUrl": ".",
     "paths": {
       "@repo/ui": ["./packages/ui/src"],
-      "@repo/utils": ["./packages/utils/src"]
+      "@repo/utils": ["./packages/utils/src"],
+      "@iflux-art/ui": ["./packages/ui/src"],
+      "@iflux-art/ui/theme-provider": ["./packages/ui/src/components/theme/theme-provider.tsx"],
+      "@iflux-art/ui/components/theme/theme-toggle": ["./packages/ui/src/components/theme/theme-toggle.tsx"],
+      "@iflux-art/ui/components/ui/button/github-button": ["./packages/ui/src/components/ui/button/github-button.tsx"],
+      "@iflux-art/ui/components/ui/button/search-button": ["./packages/ui/src/components/ui/button/search-button.tsx"],
+      "@iflux-art/ui/components/ui/button/travel-button": ["./packages/ui/src/components/ui/button/travel-button.tsx"]
     }
   },
   "files": ["tsconfig.json"],

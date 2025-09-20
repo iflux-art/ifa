@@ -11,17 +11,17 @@
     "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 80
+    "lineWidth": 80,
+    "lineEnding": "lf"
   },
   "files": {
     "maxSize": 10485760,
     "ignoreUnknown": true,
     "includes": [
-      "apps/*/src/**/*",
-      "packages/*/src/**/*",
-      "*.js",
-      "*.ts",
-      "*.json"
+      "**",
+      "!packages/ui/src/test-setup.ts",
+      "!packages/ui/src/index.test.ts",
+      "!packages/utils/src/index.test.ts"
     ]
   },
   "overrides": [

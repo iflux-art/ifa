@@ -1,108 +1,114 @@
 {
   "name": "@iflux-art/ui",
-  "version": "0.1.5",
-  "private": false,
-  "description": "Shared UI components library based on shadcn/ui",
+  "version": "0.1.6",
+  "description": "A modern React UI component library based on shadcn/ui design system",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
+    "src",
+    "components.json",
     "README.md",
     "LICENSE"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/iflux-art/ui.git"
-  },
-  "keywords": [
-    "react",
-    "ui",
-    "components",
-    "shadcn",
-    "tailwindcss",
-    "radix-ui"
-  ],
-  "author": "iflux-art",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/iflux-art/ui/issues"
-  },
-  "homepage": "https://github.com/iflux-art/ui#readme",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch --sourcemap",
-    "dev:fast": "tsup --watch --sourcemap --no-dts",
-    "lint": "biome lint .",
-    "format": "biome format .",
-    "check": "biome check .",
-    "type-check": "tsc --noEmit",
+    "dev": "tsup --watch",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "storybook": "storybook dev -p 6006 --no-open",
-    "storybook:open": "storybook dev -p 6006",
+    "lint": "biome lint .",
+    "format": "biome format .",
+    "check": "biome check .",
+    "type-check": "tsc --noEmit",
+    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "clean": "rm -rf dist node_modules/.cache storybook-static",
-    "prepublishOnly": "pnpm build"
+    "chromatic": "chromatic"
   },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "shadcn",
+    "radix-ui",
+    "tailwindcss"
+  ],
+  "author": "Bowie <admin@iflux.art>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iflux-art/ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iflux-art/ui/issues"
+  },
+  "homepage": "https://github.com/iflux-art/ui#readme",
   "dependencies": {
-    "@radix-ui/react-accordion": "^1.2.0",
-    "@radix-ui/react-alert-dialog": "^1.1.15",
-    "@radix-ui/react-avatar": "^1.1.10",
-    "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-label": "^2.1.7",
-    "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-select": "^2.2.6",
-    "@radix-ui/react-separator": "^1.1.7",
-    "@radix-ui/react-slot": "^1.2.3",
-    "@radix-ui/react-switch": "^1.2.6",
-    "@radix-ui/react-tabs": "^1.1.0",
-    "@radix-ui/react-toast": "^1.2.6",
-    "@radix-ui/react-tooltip": "^1.1.2",
+    "@radix-ui/react-slot": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.525.0",
-    "next-themes": "^0.4.6",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.4",
+    "@chromatic-com/storybook": "^4.1.1",
+    "@storybook/addon-essentials": "^9.0.0-alpha.12",
+    "@storybook/addon-interactions": "^9.0.0-alpha.10",
+    "@storybook/addon-links": "^9.1.6",
+    "@storybook/addon-onboarding": "^9.1.6",
+    "@storybook/blocks": "^9.0.0-alpha.17",
+    "@storybook/nextjs": "^9.1.7",
+    "@storybook/react": "^9.1.6",
+    "@storybook/react-vite": "^9.0.0-alpha.12",
+    "@storybook/test": "^9.0.0-alpha.2",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^22.10.10",
+    "@types/react": "^19.1.1",
+    "@types/react-dom": "^19.1.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "chromatic": "^13.2.0",
+    "jsdom": "^23.0.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "storybook": "^9.1.6",
+    "tailwindcss": "^3.4.17",
+    "tsup": "^8.0.1",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.6",
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
-  "devDependencies": {
-    "@biomejs/biome": "^2.2.4",
-    "@radix-ui/react-collapsible": "^1.1.12",
-    "@storybook/nextjs": "9.1.6",
-    "@tailwindcss/postcss": "^4.1.13",
-    "@testing-library/jest-dom": "^6.8.0",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^24.5.1",
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.9",
-    "@vitest/coverage-v8": "^3.2.4",
-    "jsdom": "^23.0.1",
-    "next": "^15.5.3",
-    "next-themes": "^0.4.6",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "storybook": "9.1.6",
-    "tailwindcss": "^4.1.13",
-    "tailwindcss-animate": "^1.0.7",
-    "tsup": "^8.0.1",
-    "vitest": "^3.2.4"
+  "engines": {
+    "node": "22.x",
+    "pnpm": "9.15.9"
   },
+  "packageManager": "pnpm@9.15.9",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./theme-provider": {
+      "types": "./dist/components/theme/theme-provider.d.ts",
+      "import": "./dist/components/theme/theme-provider.js"
+    },
+    "./user-button": {
+      "types": "./dist/components/ui/button/user-button.d.ts",
+      "import": "./dist/components/ui/button/user-button.js"
     }
   }
 }

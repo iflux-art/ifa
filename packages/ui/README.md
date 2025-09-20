@@ -9,6 +9,7 @@
 - 🎯 完整的 TypeScript 支持和类型安全
 - 🎪 集成 Storybook 用于组件开发
 - 🧪 使用 Jest 和 Testing Library 进行全面测试
+- 👁️ 集成 Chromatic 进行视觉回归测试
 - 📦 支持 Tree-shaking 的 ESM 构建
 - 🎨 使用 Tailwind CSS 和 CSS 变量进行主题定制
 
@@ -70,6 +71,32 @@ module.exports = {
 @import "@iflux-art/ui/styles.css";
 ```
 
+## 开发
+
+### 启动 Storybook
+
+```bash
+pnpm storybook
+```
+
+### 运行测试
+
+```bash
+pnpm test
+```
+
+### 构建
+
+```bash
+pnpm build
+```
+
+### 视觉测试 (Chromatic)
+
+```bash
+pnpm chromatic
+```
+
 ## 组件
 
 ### Button（按钮）
@@ -83,41 +110,3 @@ module.exports = {
 ### Input（输入框）
 
 一个样式化的输入框组件。
-
-### Label（标签）
-
-一个样式化的标签组件。
-
-### ThemeToggle（主题切换）
-
-一个用于在浅色和深色主题之间切换的组件。使用 next-themes 库实现主题管理，并带有平滑的动画过渡效果。
-
-## 在 Monorepo 中开发
-
-该包在 iflux-art Monorepo 项目中内部使用。通过 pnpm workspace 设置，组件可自动供 Monorepo 中的所有应用程序使用。
-
-## Storybook
-
-该包包含 Storybook 用于组件开发和文档。启动 Storybook：
-
-```bash
-pnpm storybook
-```
-
-Storybook 将在 http://localhost:6006/ 可用
-
-## TypeScript
-
-所有组件都使用 TypeScript 进行了完整的类型化。包导出了所有必要的属性和组件引用类型。
-
-```tsx
-import type { ButtonProps } from '@iflux-art/ui'
-
-const MyButton: React.FC<ButtonProps> = (props) => {
-  return <Button {...props} />
-}
-```
-
-## 许可证
-
-MIT

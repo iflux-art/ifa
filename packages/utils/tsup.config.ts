@@ -3,6 +3,7 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   entry: ["src/index.ts"],
   format: ["esm"], // 只生成 ESM 格式
+  target: "es2024", // 使用最新的 ECMAScript 2024 标准
   dts: {
     resolve: true,
   },

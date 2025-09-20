@@ -1,0 +1,11 @@
+{
+  "projectId": "YOUR_PROJECT_ID",
+  "buildScriptName": "build-storybook",
+  "storybookBaseDir": ".",
+  "storybookConfigDir": ".storybook",
+  "onlyChanged": true,
+  "externals": [
+    "public/**"
+  ],
+  "ignoreLastBuildOnBranch": "develop"
+}
