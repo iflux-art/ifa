@@ -1,8 +1,5 @@
-import { Button, ThemeToggle } from "@iflux-art/ui";
+import { Button, GitHubButton, SearchButton, ThemeToggle, TravelButton } from "@iflux-art/ui";
 import type { Metadata } from "next";
-import { GitHubButton } from "@/components/github-button";
-import { SearchButton } from "@/components/search-button";
-import { TravelButton } from "@/components/travel-button";
 
 // 页面元数据
 export const metadata: Metadata = {

@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GitHubButton } from "@/components/button";
-import { TravelButton } from "@/components/button/travel-button";
+import { GitHubButton, TravelButton } from "@iflux-art/ui";
 import { ThemeToggle } from "@iflux-art/ui";
 import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
