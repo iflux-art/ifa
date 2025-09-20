@@ -3,7 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import type React from "react";
 import { Footer } from "@/components/layout";
 import { MainNavbar } from "@/features/navbar/components/main-navbar";
-import { ThemeProvider } from "@/features/theme";
+import { ThemeProvider } from "@iflux-art/ui";
 
 /**
  * 导入集中管理的元数据配置

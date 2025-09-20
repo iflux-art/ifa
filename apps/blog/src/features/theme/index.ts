@@ -3,4 +3,4 @@
 
 // 导出所有主题相关的 components
 export { ThemeProvider } from "./theme-provider";
-export { ThemeToggle } from "./theme-toggle";
+export { ThemeToggle } from "@iflux-art/ui";

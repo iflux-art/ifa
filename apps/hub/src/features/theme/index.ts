@@ -5,4 +5,4 @@
 
 // 主题组件
 export { ThemeProvider } from "./theme-provider";
-export { ThemeToggle } from "./theme-toggle";
+export { ThemeToggle } from "@iflux-art/ui";

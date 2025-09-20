@@ -4,7 +4,7 @@
 
 ## 🚀 应用程序
 
-- **Website** - 公司官方网站
+- **Web** - 公司官方网站
 - **Blog** - 基于 Markdown 的博客系统
 - **Docs** - 带搜索功能的技术文档
 - **Hub** - 书签管理系统
@@ -62,7 +62,7 @@ pnpm init
 
 ```bash
 # 运行特定应用
-pnpm --filter website dev
+pnpm --filter web dev
 pnpm --filter blog build
 ```
 

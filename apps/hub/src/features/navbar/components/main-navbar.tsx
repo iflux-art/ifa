@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { GitHubButton, TravelButton } from "@/components/button";
 import { AuthButtons } from "@/features/auth/components/auth-buttons";
 import { useNavbarScroll } from "@/features/navbar/hooks/use-navbar-scroll";
-import { ThemeToggle } from "@/features/theme";
+import { ThemeToggle } from "@iflux-art/ui";
 import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
 
