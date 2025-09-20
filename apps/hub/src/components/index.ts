@@ -3,8 +3,8 @@
  * 按功能模块组织导出，便于按需导入
  */
 
-// 按钮组件
-export { GitHubButton } from "./button";
+// 布局组件
+export { ClientLayout } from "./client-layout";
 
 // 底栏组件
 export { Footer } from "./footer";

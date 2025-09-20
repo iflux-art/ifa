@@ -19,15 +19,13 @@ export type { CodeBlockProps } from "@/features/mdx/code";
 export { CodeBlock } from "@/features/mdx/code";
 
 // ==================== 主题提供者 ====================
-// 已移动到 src/features/theme 目录下集中管理
-export { ThemeProvider } from "@/features/theme";
+export { ThemeProvider } from "@iflux-art/ui/theme-provider";
+
+// ==================== 布局组件 ====================
+export { ClientLayout } from "./client-layout";
 
 // ==================== 面包屑组件 ====================
 export { Breadcrumb } from "./breadcrumb";
-// ==================== 业务按钮组件 ====================
-export { GitHubButton } from "./button/github-button";
-export { SearchButton } from "./button/search-button";
-export { TravelButton } from "./button/travel-button";
 export type { ContentDisplayProps, ContentType } from "./content-display";
 // ==================== 内容展示组件 ====================
 export { ContentDisplay } from "./content-display";

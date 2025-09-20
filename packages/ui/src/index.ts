@@ -4,7 +4,6 @@
 export { ThemeToggle } from "./components/theme/theme-toggle";
 export { Button, buttonVariants } from "./components/ui/button/button";
 export { GitHubButton } from "./components/ui/button/github-button";
-export { SearchButton } from "./components/ui/button/search-button";
 export { TravelButton } from "./components/ui/button/travel-button";
 export { UserButton } from "./components/ui/button/user-button";
 

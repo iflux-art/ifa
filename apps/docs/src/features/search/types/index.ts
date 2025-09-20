@@ -2,8 +2,6 @@
  * 搜索功能相关类型定义
  */
 
-import type { Url } from "@/features/content/types";
-
 // ==================== 搜索结果类型 ====================
 
 /** 搜索结果基础接口 */
@@ -15,15 +13,11 @@ export interface BaseSearchResult {
   /** 结果描述 */
   description?: string;
   /** 结果类型 */
-  type: "link" | "doc" | "tool" | "command" | "navigation" | "history";
-  /** 结果链接 */
-  url?: string;
+  type: "doc";
   /** 结果路径 */
   path?: string;
   /** 结果标签 */
   tags?: string[];
-  /** 是否为外部链接 */
-  external?: boolean;
 }
 
 /** 搜索结果接口 */
@@ -41,7 +35,7 @@ export interface SearchResult extends BaseSearchResult {
 /** 搜索选项接口 */
 export interface SearchOptions {
   /** 搜索类型 */
-  type?: "all" | "links" | "doc" | "docs";
+  type?: "doc";
   /** 结果限制数量 */
   limit?: number;
   /** 是否包含内容 */
@@ -120,26 +114,4 @@ export interface SearchSuggestion {
   weight: number;
   /** 建议类型 */
   type: "query" | "tag" | "category";
-}
-
-// ==================== 链接数据类型 ====================
-
-/** 链接数据接口 */
-export interface LinkData {
-  /** 链接唯一标识 */
-  id: string;
-  /** 链接标题 */
-  title: string;
-  /** 链接描述 */
-  description?: string;
-  /** 链接地址 */
-  url: Url;
-  /** 链接标签 */
-  tags?: string[];
-  /** 链接分类 */
-  category?: string;
-  /** 是否为外部链接 */
-  external?: boolean;
-  /** 链接图标 */
-  icon?: string;
 }

@@ -106,6 +106,14 @@
       "types": "./dist/components/theme/theme-provider.d.ts",
       "import": "./dist/components/theme/theme-provider.js"
     },
+    "./github-button": {
+      "types": "./dist/components/ui/button/github-button.d.ts",
+      "import": "./dist/components/ui/button/github-button.js"
+    },
+    "./travel-button": {
+      "types": "./dist/components/ui/button/travel-button.d.ts",
+      "import": "./dist/components/ui/button/travel-button.js"
+    },
     "./user-button": {
       "types": "./dist/components/ui/button/user-button.d.ts",
       "import": "./dist/components/ui/button/user-button.js"

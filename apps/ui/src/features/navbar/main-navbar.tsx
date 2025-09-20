@@ -42,7 +42,7 @@ export const MainNavbar = ({ className = "" }: { className?: string }) => {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <GitHubButton />
+          <GitHubButton url="https://github.com/iflux-art/ui" />
           <TravelButton />
         </div>
       </div>

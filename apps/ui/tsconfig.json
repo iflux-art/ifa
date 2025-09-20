@@ -36,7 +36,6 @@
       "@iflux-art/ui/theme-provider": ["../../packages/ui/src/components/theme/theme-provider"],
       "@iflux-art/ui/components/theme/theme-toggle": ["../../packages/ui/src/components/theme/theme-toggle"],
       "@iflux-art/ui/components/ui/button/github-button": ["../../packages/ui/src/components/ui/button/github-button"],
-      "@iflux-art/ui/components/ui/button/search-button": ["../../packages/ui/src/components/ui/button/search-button"],
       "@iflux-art/ui/components/ui/button/travel-button": ["../../packages/ui/src/components/ui/button/travel-button"]
     }
   },

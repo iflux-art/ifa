@@ -19,11 +19,10 @@ export interface SearchFilterProps<T> {
 }
 
 export interface SearchResult {
-  type: "link" | "tool" | "command" | "navigation" | "history";
+  type: "link";
   title: string;
   description?: string;
   url?: string;
-  path?: string;
   tags?: string[];
   /** 摘要（用于高级搜索结果） */
   excerpt?: string;
@@ -39,7 +38,7 @@ export interface SearchResult {
 }
 
 export interface SearchOptions {
-  type?: "all" | "links";
+  type?: "link";
   limit?: number;
   includeContent?: boolean;
   useCache?: boolean;

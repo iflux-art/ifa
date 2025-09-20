@@ -1,21 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { GitHubButton, TravelButton } from "@/components/button";
 import { AuthButtons } from "@/features/auth/components/auth-buttons";
 import { useNavbarScroll } from "@/features/navbar/hooks/use-navbar-scroll";
-import { ThemeToggle } from "@iflux-art/ui";
+import { ThemeToggle, GitHubButton, TravelButton } from "@iflux-art/ui";
+import { SearchButton } from "@/features/search/components/search-button";
 import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
-
-// 动态导入搜索按钮组件
-const SearchButton = dynamic(
-  () =>
-    import("@/features/search/components/search-button").then(
-      (mod) => mod.SearchButton,
-    ),
-  { ssr: false },
-);
 
 export const MainNavbar = ({ className = "" }: { className?: string }) => {
   const {
@@ -58,7 +48,7 @@ export const MainNavbar = ({ className = "" }: { className?: string }) => {
           <SearchButton />
           <ThemeToggle />
           <AuthButtons />
-          <GitHubButton />
+          <GitHubButton url="https://github.com/iflux-art/hub" />
           <TravelButton />
         </div>
       </div>

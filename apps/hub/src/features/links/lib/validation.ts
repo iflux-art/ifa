@@ -10,13 +10,59 @@ import {
 
 const validCategories = [
   "ai",
-  "development",
-  "design",
   "audio",
-  "video",
+  "design",
+  "development",
   "office",
-  "productivity",
   "operation",
+  "productivity",
+  "video",
+  // AI 子分类
+  "ai/agents",
+  "ai/api",
+  "ai/chat",
+  "ai/creative",
+  "ai/models",
+  "ai/platforms",
+  "ai/resources",
+  "ai/services",
+  "ai/tools",
+  // 音频子分类
+  "audio/daw",
+  "audio/distribution",
+  "audio/processing",
+  // 设计子分类
+  "design/colors",
+  "design/fonts",
+  "design/image-processing",
+  "design/tools",
+  // 开发子分类
+  "development/apis",
+  "development/cloud",
+  "development/containers",
+  "development/databases",
+  "development/frameworks",
+  "development/git",
+  "development/hosting",
+  "development/monitoring",
+  "development/security",
+  "development/tools",
+  // 办公子分类
+  "office/documents",
+  "office/pdf",
+  // 运营子分类
+  "operation/ecommerce",
+  "operation/marketing",
+  // 效率子分类
+  "productivity/browsers",
+  "productivity/cloud-storage",
+  "productivity/documents",
+  "productivity/email",
+  "productivity/pdf",
+  "productivity/search",
+  "productivity/system-tools",
+  // 视频子分类
+  "video/editing",
 ] as const;
 
 /**

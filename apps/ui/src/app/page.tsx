@@ -1,4 +1,4 @@
-import { Button, GitHubButton, SearchButton, ThemeToggle, TravelButton } from "@iflux-art/ui";
+import { Button, GitHubButton, ThemeToggle, TravelButton } from "@iflux-art/ui";
 import type { Metadata } from "next";
 
 // 页面元数据
@@ -57,7 +57,6 @@ export default function Home() {
           <div className="flex flex-wrap gap-4">
             <GitHubButton />
             <TravelButton />
-            <SearchButton />
             <ThemeToggle />
           </div>
         </div>

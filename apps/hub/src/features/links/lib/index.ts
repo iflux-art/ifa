@@ -10,49 +10,41 @@ const categoryStructure = {
     name: "人工智能",
     children: {
       // 修复文件路径，确保它们与实际文件夹结构匹配
+      agents: {
+        name: "智能体",
+        file: () => safeImport(() => import("@/content/ai/agents.json")),
+      },
       api: {
         name: "API",
-        file: () =>
-          safeImport(() => import("@/content/links/category/ai/api.json")),
+        file: () => safeImport(() => import("@/content/ai/api.json")),
       },
       chat: {
         name: "聊天",
-        file: () =>
-          safeImport(() => import("@/content/links/category/ai/chat.json")),
+        file: () => safeImport(() => import("@/content/ai/chat.json")),
       },
       creative: {
         name: "创意",
-        file: () =>
-          safeImport(() => import("@/content/links/category/ai/creative.json")),
+        file: () => safeImport(() => import("@/content/ai/creative.json")),
       },
       models: {
         name: "模型",
-        file: () =>
-          safeImport(() => import("@/content/links/category/ai/models.json")),
+        file: () => safeImport(() => import("@/content/ai/models.json")),
       },
       platforms: {
         name: "平台",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/ai/platforms.json"),
-          ),
+        file: () => safeImport(() => import("@/content/ai/platforms.json")),
       },
       resources: {
         name: "资源",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/ai/resources.json"),
-          ),
+        file: () => safeImport(() => import("@/content/ai/resources.json")),
       },
       services: {
         name: "服务",
-        file: () =>
-          safeImport(() => import("@/content/links/category/ai/services.json")),
+        file: () => safeImport(() => import("@/content/ai/services.json")),
       },
       tools: {
         name: "工具",
-        file: () =>
-          safeImport(() => import("@/content/links/category/ai/tools.json")),
+        file: () => safeImport(() => import("@/content/ai/tools.json")),
       },
     },
   },
@@ -61,22 +53,16 @@ const categoryStructure = {
     children: {
       daw: {
         name: "数字音频工作站",
-        file: () =>
-          safeImport(() => import("@/content/links/category/audio/daw.json")),
+        file: () => safeImport(() => import("@/content/audio/daw.json")),
       },
       distribution: {
         name: "音乐发行",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/audio/distribution.json"),
-          ),
+          safeImport(() => import("@/content/audio/distribution.json")),
       },
       processing: {
         name: "音频处理",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/audio/processing.json"),
-          ),
+        file: () => safeImport(() => import("@/content/audio/processing.json")),
       },
     },
   },
@@ -85,32 +71,20 @@ const categoryStructure = {
     children: {
       colors: {
         name: "配色工具",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/design/colors.json"),
-          ),
+        file: () => safeImport(() => import("@/content/design/colors.json")),
       },
       fonts: {
         name: "字体资源",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/design/fonts.json"),
-          ),
+        file: () => safeImport(() => import("@/content/design/fonts.json")),
       },
       "image-processing": {
         name: "图像处理",
         file: () =>
-          safeImport(
-            () =>
-              import("@/content/links/category/design/image-processing.json"),
-          ),
+          safeImport(() => import("@/content/design/image-processing.json")),
       },
       tools: {
         name: "设计工具",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/design/tools.json"),
-          ),
+        file: () => safeImport(() => import("@/content/design/tools.json")),
       },
     },
   },
@@ -119,86 +93,51 @@ const categoryStructure = {
     children: {
       apis: {
         name: "API",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/development/apis.json"),
-          ),
+        file: () => safeImport(() => import("@/content/development/apis.json")),
       },
       cloud: {
         name: "云服务",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/development/cloud.json"),
-          ),
+          safeImport(() => import("@/content/development/cloud.json")),
       },
       containers: {
         name: "容器化",
         file: () =>
-          safeImport(
-            () =>
-              import("@/content/links/category/development/containers.json"),
-          ),
+          safeImport(() => import("@/content/development/containers.json")),
       },
       databases: {
         name: "数据库",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/development/databases.json"),
-          ),
+          safeImport(() => import("@/content/development/databases.json")),
       },
       frameworks: {
         name: "开发框架",
         file: () =>
-          safeImport(
-            () =>
-              import("@/content/links/category/development/frameworks.json"),
-          ),
+          safeImport(() => import("@/content/development/frameworks.json")),
       },
       git: {
         name: "版本控制",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/development/git.json"),
-          ),
+        file: () => safeImport(() => import("@/content/development/git.json")),
       },
       hosting: {
         name: "托管服务",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/development/hosting.json"),
-          ),
+          safeImport(() => import("@/content/development/hosting.json")),
       },
       monitoring: {
         name: "监控工具",
         file: () =>
-          safeImport(
-            () =>
-              import("@/content/links/category/development/monitoring.json"),
-          ),
+          safeImport(() => import("@/content/development/monitoring.json")),
       },
       security: {
         name: "安全工具",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/development/security.json"),
-          ),
+          safeImport(() => import("@/content/development/security.json")),
       },
       tools: {
         name: "开发工具",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/development/tools.json"),
-          ),
-      },
-    },
-  },
-  media: {
-    name: "媒体处理",
-    children: {
-      audio: {
-        name: "音频处理",
-        file: () =>
-          safeImport(() => import("@/content/links/category/media/audio.json")),
+          safeImport(() => import("@/content/development/tools.json")),
       },
     },
   },
@@ -207,15 +146,11 @@ const categoryStructure = {
     children: {
       documents: {
         name: "文档处理",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/office/documents.json"),
-          ),
+        file: () => safeImport(() => import("@/content/office/documents.json")),
       },
       pdf: {
         name: "PDF 工具",
-        file: () =>
-          safeImport(() => import("@/content/links/category/office/pdf.json")),
+        file: () => safeImport(() => import("@/content/office/pdf.json")),
       },
     },
   },
@@ -225,16 +160,12 @@ const categoryStructure = {
       ecommerce: {
         name: "电商工具",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/operation/ecommerce.json"),
-          ),
+          safeImport(() => import("@/content/operation/ecommerce.json")),
       },
       marketing: {
         name: "营销工具",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/operation/marketing.json"),
-          ),
+          safeImport(() => import("@/content/operation/marketing.json")),
       },
     },
   },
@@ -244,56 +175,36 @@ const categoryStructure = {
       browsers: {
         name: "浏览器",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/productivity/browsers.json"),
-          ),
+          safeImport(() => import("@/content/productivity/browsers.json")),
       },
       "cloud-storage": {
         name: "云存储",
         file: () =>
-          safeImport(
-            () =>
-              import(
-                "@/content/links/category/productivity/cloud-storage.json"
-              ),
-          ),
+          safeImport(() => import("@/content/productivity/cloud-storage.json")),
       },
       documents: {
         name: "文档处理",
         file: () =>
-          safeImport(
-            () =>
-              import("@/content/links/category/productivity/documents.json"),
-          ),
+          safeImport(() => import("@/content/productivity/documents.json")),
       },
       email: {
         name: "邮箱服务",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/productivity/email.json"),
-          ),
+          safeImport(() => import("@/content/productivity/email.json")),
       },
       pdf: {
         name: "PDF 工具",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/productivity/pdf.json"),
-          ),
+        file: () => safeImport(() => import("@/content/productivity/pdf.json")),
       },
       search: {
         name: "搜索引擎",
         file: () =>
-          safeImport(
-            () => import("@/content/links/category/productivity/search.json"),
-          ),
+          safeImport(() => import("@/content/productivity/search.json")),
       },
       "system-tools": {
         name: "系统工具",
         file: () =>
-          safeImport(
-            () =>
-              import("@/content/links/category/productivity/system-tools.json"),
-          ),
+          safeImport(() => import("@/content/productivity/system-tools.json")),
       },
     },
   },
@@ -302,10 +213,7 @@ const categoryStructure = {
     children: {
       editing: {
         name: "视频编辑",
-        file: () =>
-          safeImport(
-            () => import("@/content/links/category/video/editing.json"),
-          ),
+        file: () => safeImport(() => import("@/content/video/editing.json")),
       },
     },
   },

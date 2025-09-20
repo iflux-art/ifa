@@ -32,9 +32,10 @@ const CATEGORY_DISPLAY_NAMES: { [key: string]: string } = {
   video: "视频处理",
 
   // AI 子分类
+  agents: "智能体",
   chat: "AI 对话",
   models: "AI 模型",
-  tools: "工具平台",
+  "ai-tools": "工具平台",
   platforms: "综合平台",
   api: "API 服务",
   services: "在线服务",
@@ -50,30 +51,35 @@ const CATEGORY_DISPLAY_NAMES: { [key: string]: string } = {
   fonts: "字体资源",
   colors: "配色工具",
   "image-processing": "图像处理",
+  "design-tools": "设计工具",
 
   // 开发子分类
+  apis: "API",
+  cloud: "云服务",
+  containers: "容器化",
+  databases: "数据库",
   frameworks: "开发框架",
+  git: "版本控制",
+  hosting: "托管服务",
+  monitoring: "监控工具",
+  security: "安全工具",
+  "dev-tools": "开发工具",
 
   // 办公子分类
-  documents: "文档处理",
-  notes: "笔记工具",
-  mindmaps: "思维导图",
-  presentation: "演示文稿",
-  pdf: "PDF 工具",
-  ocr: "OCR 识别",
+  "office-documents": "文档处理",
+  "office-pdf": "PDF 工具",
 
   // 运营子分类
-  "social-media": "社交媒体",
-  "video-platforms": "视频平台",
   ecommerce: "电商工具",
   marketing: "营销工具",
 
   // 效率子分类
-  search: "搜索引擎",
   browsers: "浏览器",
   "cloud-storage": "云存储",
+  "productivity-documents": "文档处理",
   email: "邮箱服务",
-  translation: "翻译工具",
+  "productivity-pdf": "PDF 工具",
+  search: "搜索引擎",
   "system-tools": "系统工具",
 
   // 视频子分类
@@ -91,34 +97,12 @@ export function getCategoryDisplayName(categoryId: string): string {
  * 处理根目录下的 JSON 文件
  */
 async function processRootFiles(
-  linksDir: string,
+  contentDir: string,
   categories: LinkCategory[],
 ): Promise<void> {
   try {
-    const entries = await fs.readdir(linksDir, { withFileTypes: true });
-    const jsonFiles = entries.filter(
-      (entry) =>
-        entry.isFile() &&
-        entry.name.endsWith(".json") &&
-        entry.name !== "friends.json",
-    );
-
-    for (const file of jsonFiles) {
-      try {
-        const filePath = path.join(linksDir, file.name);
-        const fileContent = await fs.readFile(filePath, "utf-8");
-        const items: LinksItem[] = JSON.parse(fileContent);
-        const categoryId = path.basename(file.name, ".json");
-
-        categories.push({
-          id: categoryId,
-          name: getCategoryDisplayName(categoryId),
-          count: items.length,
-        });
-      } catch (error) {
-        console.error(`Error processing file ${file.name}:`, error);
-      }
-    }
+    // 不再处理根目录下的 JSON 文件，因为所有文件都在子目录中
+    console.log("Skipping root files processing as all files are in subdirectories");
   } catch (error) {
     console.error("Error reading root directory:", error);
   }
@@ -129,9 +113,9 @@ async function processRootFiles(
  */
 async function processSubdirectory(
   dir: Dirent,
-  linksDir: string,
+  contentDir: string,
 ): Promise<LinkCategory | null> {
-  const subDirPath = path.join(linksDir, dir.name);
+  const subDirPath = path.join(contentDir, dir.name);
   const subEntries = await fs.readdir(subDirPath, { withFileTypes: true });
   const jsonFiles = subEntries.filter(
     (entry) => entry.isFile() && entry.name.endsWith(".json"),
@@ -173,14 +157,14 @@ async function processSubdirectory(
  * 处理子文件夹中的分类
  */
 async function processSubdirectories(
-  linksDir: string,
+  contentDir: string,
   categories: LinkCategory[],
 ): Promise<void> {
-  const entries = await fs.readdir(linksDir, { withFileTypes: true });
+  const entries = await fs.readdir(contentDir, { withFileTypes: true });
   const directories = entries.filter((entry) => entry.isDirectory());
 
   for (const dir of directories) {
-    const category = await processSubdirectory(dir, linksDir);
+    const category = await processSubdirectory(dir, contentDir);
     if (category) {
       categories.push(category);
     }
@@ -191,15 +175,12 @@ async function processSubdirectories(
  * 基于文件夹结构生成分类数据
  */
 export async function generateCategoriesFromFiles(): Promise<LinkCategory[]> {
-  const linksDir = path.join(process.cwd(), "src/content/links");
+  const contentDir = path.join(process.cwd(), "src/content");
   const categories: LinkCategory[] = [];
 
   try {
-    // 读取根目录下的 JSON 文件（如 friends.json）
-    await processRootFiles(linksDir, categories);
-
     // 读取子文件夹中的分类
-    await processSubdirectories(linksDir, categories);
+    await processSubdirectories(contentDir, categories);
 
     return categories;
   } catch (error) {

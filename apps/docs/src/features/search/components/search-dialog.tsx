@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, ExternalLink, Link, Search } from "lucide-react";
+import { BookOpen, Search } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -26,17 +26,6 @@ const SearchResultItem = ({
   index,
   onResultClick,
 }: SearchResultItemProps) => {
-  const getIcon = (type: string) => {
-    switch (type) {
-      case "link":
-        return <Link className="h-4 w-4" />;
-      case "doc":
-        return <BookOpen className="h-4 w-4" />;
-      default:
-        return <ExternalLink className="h-4 w-4" />;
-    }
-  };
-
   return (
     <button
       type="button"
@@ -45,12 +34,14 @@ const SearchResultItem = ({
       onClick={() => onResultClick(result)}
     >
       <div className="flex items-start gap-3">
-        <div className="mt-1 text-muted-foreground">{getIcon(result.type)}</div>
+        <div className="mt-1 text-muted-foreground">
+          <BookOpen className="h-4 w-4" />
+        </div>
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex items-center gap-2">
             <h4 className="truncate text-sm font-medium">{result.title}</h4>
             <Badge variant="secondary" className="text-xs">
-              {result.type}
+              文档
             </Badge>
           </div>
           {result.description && (
@@ -129,7 +120,7 @@ const SearchInput = ({ query, onChange }: SearchInputProps) => (
   <div className="relative mb-4">
     <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
     <Input
-      placeholder="搜索链接、文章、文档..."
+      placeholder="搜索文档..."
       value={query}
       onChange={(e) => onChange(e.target.value)}
       className="pl-10"
@@ -178,7 +169,8 @@ export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
         return;
       }
 
-      search(searchQuery).catch((error) => {
+      // 只搜索文档
+      search(searchQuery, { type: "doc" }).catch((error) => {
         showError(error instanceof Error ? error.message : "搜索失败");
       });
     };
@@ -199,9 +191,7 @@ export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
   }, [query, performSearch, resetSearch]);
 
   const handleResultClick = (result: SearchResult) => {
-    if (result.url) {
-      window.open(result.url, "_blank");
-    } else if (result.path) {
+    if (result.path) {
       window.location.href = result.path;
     }
     onOpenChange(false);
@@ -211,7 +201,7 @@ export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="flex max-h-[80vh] flex-col overflow-hidden sm:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle>搜索</DialogTitle>
+          <DialogTitle>搜索文档</DialogTitle>
         </DialogHeader>
 
         <SearchInput query={query} onChange={setSearchTerm} />

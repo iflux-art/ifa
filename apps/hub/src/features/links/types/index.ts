@@ -6,6 +6,7 @@
 export type CategoryId =
   // AI 分类
   | "ai"
+  | "ai/agents"
   | "ai/api"
   | "ai/chat"
   | "ai/creative"
@@ -49,7 +50,9 @@ export type CategoryId =
   | "productivity"
   | "productivity/browsers"
   | "productivity/cloud-storage"
+  | "productivity/documents"
   | "productivity/email"
+  | "productivity/pdf"
   | "productivity/search"
   | "productivity/system-tools"
   // 视频分类

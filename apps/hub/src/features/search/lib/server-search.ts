@@ -103,7 +103,7 @@ export async function getCachedContent() {
  */
 export async function performServerSearch(
   query: string,
-  type = "all",
+  type = "link",
   limit = 10,
 ): Promise<{ results: SearchResult[]; total: number }> {
   if (!query.trim()) {
@@ -114,8 +114,8 @@ export async function performServerSearch(
   const results: SearchResult[] = [];
   const queryLower = query.toLowerCase();
 
-  // 搜索链接
-  if (type === "all" || type === "links") {
+  // 只搜索链接
+  if (type === "all" || type === "link") {
     const linkResults = links
       .filter((link) => {
         const searchText =

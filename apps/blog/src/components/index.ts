@@ -15,12 +15,10 @@ export {
 } from "@/features/blog/components/mdx";
 
 // ==================== 主题提供者 ====================
-// 主题组件已移动到 features/theme 目录
+export { ThemeProvider } from "@iflux-art/ui/theme-provider";
 
-// ==================== 业务按钮组件 ====================
-export { GitHubButton } from "./button/github-button";
-export { SearchButton } from "./button/search-button";
-export { TravelButton } from "./button/travel-button";
+// ==================== 布局组件 ====================
+export { ClientLayout } from "./client-layout";
 
 // ==================== 卡片组件 ====================
 // 通用卡片组件目录

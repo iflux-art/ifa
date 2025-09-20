@@ -15,7 +15,7 @@ export async function performSearch(
   query: string,
   options: SearchOptions = {},
 ): Promise<SearchResponse> {
-  const { type = "all", limit = 10 } = options;
+  const { type = "link", limit = 10 } = options;
 
   if (!query.trim()) {
     return {

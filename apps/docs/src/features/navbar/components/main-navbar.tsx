@@ -1,10 +1,10 @@
 "use client";
 
 import { useNavbarScroll } from "@/features/navbar/hooks/use-navbar-scroll";
-import { ThemeToggle } from "@iflux-art/ui";
+import { ThemeToggle, GitHubButton, TravelButton } from "@iflux-art/ui";
+import { SearchButton } from "@/features/search/components/search-button";
 import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
-import { GitHubButton, SearchButton, TravelButton } from "@/components/button";
 
 export const MainNavbar = ({ className = "" }: { className?: string }) => {
   const {
@@ -46,7 +46,7 @@ export const MainNavbar = ({ className = "" }: { className?: string }) => {
         <div className="flex items-center gap-2">
           <SearchButton />
           <ThemeToggle />
-          <GitHubButton />
+          <GitHubButton url="https://github.com/iflux-art/docs" />
           <TravelButton />
         </div>
       </div>

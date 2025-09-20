@@ -4,6 +4,7 @@ import type React from "react";
 import { Footer } from "@/components/layout";
 import { MainNavbar } from "@/features/navbar/components/main-navbar";
 import { ThemeProvider } from "@iflux-art/ui";
+import { ClientLayout } from "@/components/client-layout";
 
 /**
  * 导入集中管理的元数据配置
@@ -17,32 +18,37 @@ import { generateMetadata, generateViewport } from "@/lib/metadata";
 export const metadata = generateMetadata();
 export const viewport = generateViewport();
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <ClerkProvider>
-    <html
-      lang="zh-CN"
-      // 禁用hydration warning提示 - next-themes要求
-      suppressHydrationWarning
-    >
-      <head />
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {/* 页面主体布局容器 */}
-          <div className="flex flex-col">
-            <MainNavbar className="flex-shrink-0" />
-            {/* 主内容区域 */}
-            <main>{children}</main>
-            <Footer />
-          </div>
-        </ThemeProvider>
-      </body>
-    </html>
-  </ClerkProvider>
-);
-
-export default RootLayout;
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <ClerkProvider>
+      <html
+        lang="zh-CN"
+        // 禁用hydration warning提示 - next-themes要求
+        suppressHydrationWarning
+      >
+        <head />
+        <body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {/* 页面主体布局容器 */}
+            <div className="flex flex-col">
+              <MainNavbar className="flex-shrink-0" />
+              {/* 主内容区域 */}
+              <main>{children}</main>
+              <Footer />
+            </div>
+            <ClientLayout />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
+  );
+}

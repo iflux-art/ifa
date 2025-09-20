@@ -27,8 +27,8 @@
       "@iflux-art/ui/theme-provider": ["./packages/ui/src/components/theme/theme-provider.tsx"],
       "@iflux-art/ui/components/theme/theme-toggle": ["./packages/ui/src/components/theme/theme-toggle.tsx"],
       "@iflux-art/ui/components/ui/button/github-button": ["./packages/ui/src/components/ui/button/github-button.tsx"],
-      "@iflux-art/ui/components/ui/button/search-button": ["./packages/ui/src/components/ui/button/search-button.tsx"],
-      "@iflux-art/ui/components/ui/button/travel-button": ["./packages/ui/src/components/ui/button/travel-button.tsx"]
+      "@iflux-art/ui/components/ui/button/travel-button": ["./packages/ui/src/components/ui/button/travel-button.tsx"],
+      "@iflux-art/ui/components/ui/button/user-button": ["./packages/ui/src/components/ui/button/user-button.tsx"]
     }
   },
   "files": ["tsconfig.json"],

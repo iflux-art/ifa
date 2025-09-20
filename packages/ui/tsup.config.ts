@@ -8,7 +8,6 @@ export default defineConfig((options) => ({
     "src/components/theme/theme-provider.tsx",
     "src/components/theme/theme-toggle.tsx",
     "src/components/ui/button/github-button.tsx",
-    "src/components/ui/button/search-button.tsx",
     "src/components/ui/button/travel-button.tsx",
     "src/components/ui/button/user-button.tsx"
   ],
@@ -47,7 +46,6 @@ export default defineConfig((options) => ({
     const filesToAddUseClient = [
       "dist/components/theme/theme-toggle.js",
       "dist/components/ui/button/github-button.js",
-      "dist/components/ui/button/search-button.js",
       "dist/components/ui/button/travel-button.js"
     ];
     
