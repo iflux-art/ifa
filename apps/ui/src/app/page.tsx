@@ -1,4 +1,11 @@
-import { Button, GitHubButton, ThemeToggle, TravelButton, Footer, COPYRIGHT_TEXT } from "@iflux-art/ui";
+import {
+  Button,
+  GitHubButton,
+  ThemeToggle,
+  TravelButton,
+  Footer,
+  COPYRIGHT_TEXT,
+} from "@iflux-art/ui";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { useId } from "react";
@@ -139,7 +146,10 @@ export default function Home() {
           <div>
             <h3 className="text-lg font-medium mb-3">版权文本测试页面</h3>
             <div className="flex flex-wrap gap-4">
-              <Link href="/copyright-test" className="text-primary hover:underline">
+              <Link
+                href="/copyright-test"
+                className="text-primary hover:underline"
+              >
                 前往版权文本测试页面
               </Link>
             </div>

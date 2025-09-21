@@ -55,9 +55,7 @@ export default function CopyrightTestPage() {
         <div className="mb-6 p-4 bg-muted rounded-lg">
           <footer className="w-full py-4 md:py-6 border-t border-border/30 bg-transparent">
             <div className="container mx-auto flex items-center justify-center px-4">
-              <div className="text-sm text-muted-foreground">
-                {displayText}
-              </div>
+              <div className="text-sm text-muted-foreground">{displayText}</div>
             </div>
           </footer>
         </div>

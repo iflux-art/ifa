@@ -42,7 +42,7 @@ export const Logo: React.FC<LogoProps> = ({
 }) => {
   // 默认 ARIA 标签
   const defaultAriaLabel = ariaLabel || `${text} - 返回首页`;
-  
+
   // 根据是否外部链接决定使用哪种标签
   if (isExternal) {
     return (

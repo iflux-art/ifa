@@ -1,6 +1,6 @@
 {
   "name": "@iflux-art/ui",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "A modern React UI component library based on shadcn/ui design system",
   "type": "module",
   "main": "dist/index.js",
@@ -33,16 +33,16 @@
     "radix-ui",
     "tailwindcss"
   ],
-  "author": "Bowie <admin@iflux.art>",
+  "author": "Bowie <hello@iflux.art>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iflux-art/ui.git"
+    "url": "https://github.com/iflux-art/ifa.git"
   },
   "bugs": {
-    "url": "https://github.com/iflux-art/ui/issues"
+    "url": "https://github.com/iflux-art/ifa/issues"
   },
-  "homepage": "https://github.com/iflux-art/ui#readme",
+  "homepage": "https://github.com/iflux-art/ifa#readme",
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-dropdown-menu": "^2.1.16",

@@ -18,9 +18,7 @@ export const Footer = () => (
     )}
   >
     <div className="container mx-auto flex items-center justify-center px-4">
-      <div className="text-sm text-muted-foreground">
-        {COPYRIGHT_TEXT}
-      </div>
+      <div className="text-sm text-muted-foreground">{COPYRIGHT_TEXT}</div>
     </div>
   </footer>
 );

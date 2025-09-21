@@ -36,7 +36,7 @@
     "url": "https://github.com/iflux-art/ui.git"
   },
   "dependencies": {
-    "@iflux-art/ui": "0.1.6",
+    "@iflux-art/ui": "^0.1.9",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-collapsible": "^1.1.12",

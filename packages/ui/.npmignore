@@ -13,9 +13,8 @@ dist/**/*.map
 .editorconfig
 
 # Development files
-src/
 .storybook/
-**/*.stories.tsx
+**/*.stories.@(js|jsx|mjs|ts|tsx)
 **/*.test.tsx
 **/*.spec.tsx
 tsconfig.json
