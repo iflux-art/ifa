@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { BreadcrumbProps } from "@/features/navigation/types";
+import type { BreadcrumbProps } from "@/features/breadcrumb/types";
 import { cn } from "@/lib/utils";
 
 /**

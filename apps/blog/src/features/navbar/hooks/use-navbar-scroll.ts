@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo } from "react";
 
-import { useNavbarStore } from "@/stores";
+import { useNavbarStore } from "@/features/navbar/stores";
 
 /**
  * 节流滚动事件处理函数类型（带 cancel 方法）

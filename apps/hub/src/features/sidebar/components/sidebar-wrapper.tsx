@@ -2,8 +2,8 @@ import {
   DEFAULT_SIDEBAR_CONFIG,
   getResponsiveClasses,
 } from "@/lib/layout/layout-utils";
-import type { SidebarWrapperProps } from "@/types";
 import { cn } from "@/lib/utils";
+import type { SidebarWrapperProps } from "@/types";
 
 /**
  * 侧边栏包装组件

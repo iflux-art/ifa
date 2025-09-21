@@ -4,7 +4,6 @@
 
 // 组件导出
 export { FriendLinkApplication } from "./components/friend-link-application";
-export { FriendsPageContainer } from "./components/friends-page-container";
 // 工具函数导出
 export {
   DEFAULT_FRIENDS_CONFIG,

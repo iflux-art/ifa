@@ -8,7 +8,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import type { SidebarItem, SidebarProps } from "@/features/navigation/types";
+import type { SidebarItem, SidebarProps } from "@/features/sidebar/types";
 import { cn } from "@/lib/utils";
 
 // 检查是否在客户端环境

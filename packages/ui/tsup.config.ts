@@ -9,7 +9,8 @@ export default defineConfig((options) => ({
     "src/components/theme/theme-toggle.tsx",
     "src/components/ui/button/github-button.tsx",
     "src/components/ui/button/travel-button.tsx",
-    "src/components/ui/button/user-button.tsx"
+    "src/components/ui/button/user-button.tsx",
+    "src/components/ui/footer.tsx"
   ],
   format: ["esm"], // 只生成 ESM 格式
   target: "es2024", // 使用最新的 ECMAScript 2024 标准
@@ -46,7 +47,8 @@ export default defineConfig((options) => ({
     const filesToAddUseClient = [
       "dist/components/theme/theme-toggle.js",
       "dist/components/ui/button/github-button.js",
-      "dist/components/ui/button/travel-button.js"
+      "dist/components/ui/button/travel-button.js",
+      "dist/components/ui/footer.js"
     ];
     
     for (const file of filesToAddUseClient) {

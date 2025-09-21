@@ -1,10 +1,10 @@
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@iflux-art/ui";
 import type React from "react";
+import { ClientLayout } from "@/components/client-layout";
 import { Footer } from "@/components/layout";
 import { MainNavbar } from "@/features/navbar/components/main-navbar";
-import { ThemeProvider } from "@iflux-art/ui";
-import { ClientLayout } from "@/components/client-layout";
 
 /**
  * 导入集中管理的元数据配置

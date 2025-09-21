@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type {
   TableOfContentsCardProps,
   TocHeading,
-} from "@/features/navigation/types";
+} from "@/features/toc/types";
 import { useHeadingObserver } from "@/hooks/use-heading-observer";
 import { cn } from "@/lib/utils";
 

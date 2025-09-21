@@ -5,8 +5,8 @@
 
 import type { Metadata } from "next";
 import { SITE_METADATA } from "@/config";
-import type { GenerateMetadataOptions } from "@/types";
 import { filterUndefinedValues } from "@/lib/utils/helpers";
+import type { GenerateMetadataOptions } from "@/types";
 
 /**
  * 生成视口配置

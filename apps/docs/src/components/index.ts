@@ -4,6 +4,8 @@
  * 业务相关组件已移动到对应的 features 目录中
  */
 
+// ==================== 主题提供者 ====================
+export { ThemeProvider } from "@iflux-art/ui/theme-provider";
 // MDX 组件导出
 export {
   ClientMDXRenderer,
@@ -17,15 +19,10 @@ export {
 export type { CodeBlockProps } from "@/features/mdx/code";
 // 代码高亮组件导出
 export { CodeBlock } from "@/features/mdx/code";
-
-// ==================== 主题提供者 ====================
-export { ThemeProvider } from "@iflux-art/ui/theme-provider";
-
-// ==================== 布局组件 ====================
-export { ClientLayout } from "./client-layout";
-
 // ==================== 面包屑组件 ====================
 export { Breadcrumb } from "./breadcrumb";
+// ==================== 布局组件 ====================
+export { ClientLayout } from "./client-layout";
 export type { ContentDisplayProps, ContentType } from "./content-display";
 // ==================== 内容展示组件 ====================
 export { ContentDisplay } from "./content-display";

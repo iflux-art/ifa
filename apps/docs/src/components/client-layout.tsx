@@ -1,7 +1,7 @@
 "use client";
 
-import { useAppStore } from "@/stores";
 import { SearchDialog } from "@/features/search/components/search-dialog";
+import { useAppStore } from "@/stores";
 
 export const ClientLayout = () => {
   const { isSearchOpen, setIsSearchOpen } = useAppStore();

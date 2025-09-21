@@ -5,8 +5,19 @@ export { ThemeToggle } from "./components/theme/theme-toggle";
 export { Button, buttonVariants } from "./components/ui/button/button";
 export { GitHubButton } from "./components/ui/button/github-button";
 export { TravelButton } from "./components/ui/button/travel-button";
-export { UserButton } from "./components/ui/button/user-button";
-
+export type {
+  GridLayoutProps,
+  PageLayoutType,
+  SidebarConfig,
+  SidebarPosition,
+} from "./components/ui/layout/grid-layout";
+export {
+  GridLayout,
+  getMainContentClasses,
+  getSidebarClasses,
+} from "./components/ui/layout/grid-layout";
+// ==================== 页脚组件导出 ====================
+export { Footer, COPYRIGHT_TEXT } from "./components/ui/footer";
 // ==================== 工具函数导出 ====================
 export { cn } from "./lib/utils";
 

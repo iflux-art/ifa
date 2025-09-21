@@ -16,20 +16,20 @@ export { RelatedPostsCard } from "./related-posts-card";
 export { TagCloudCard } from "./tag-cloud-card";
 
 // MDX组件
-import ClientMDXRenderer from "./mdx/client-mdx-renderer";
-export { ClientMDXRenderer };
+export { ClientMDXRenderer } from "@/features/mdx";
 
 // 页面组件
 export { BlogPageContainer } from "./blog-page";
 export type { CodeBlockProps } from "./code/code-block";
 export type { ContentCardProps } from "./content-card";
 export type { ContentListProps } from "./content-list";
-export { MDXBlockquote } from "./mdx/mdx-blockquote";
-export { MDXCode } from "./mdx/mdx-code";
-export { MDXComponents } from "./mdx/mdx-components";
-export { MDXImg } from "./mdx/mdx-img";
-export { MDXLink } from "./mdx/mdx-link";
-export { MDXPre } from "./mdx/mdx-pre";
+export {
+  MDXBlockquote,
+  MDXCode,
+  MDXImg,
+  MDXLink,
+  MDXPre,
+} from "@/features/mdx";
 // 导出类型
 export type { RelatedPost } from "./related-posts-card";
 

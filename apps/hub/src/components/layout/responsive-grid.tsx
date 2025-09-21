@@ -4,9 +4,9 @@ import {
   getMainContentClasses,
   getSidebarClasses,
 } from "@/lib/layout/layout-utils";
+import { cn } from "@/lib/utils";
 import { useLayoutStore } from "@/stores";
 import type { PageLayoutType, SidebarConfig } from "@/types";
-import { cn } from "@/lib/utils";
 
 interface ResponsiveGridProps {
   /**

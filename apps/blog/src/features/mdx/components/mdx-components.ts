@@ -3,11 +3,11 @@
  * 合并静态和交互组件配置
  */
 
-import { MDXBlockquote } from "@/features/blog/components/mdx/mdx-blockquote";
-import { MDXCode } from "@/features/blog/components/mdx/mdx-code";
-import { MDXImg } from "@/features/blog/components/mdx/mdx-img";
-import { MDXLink } from "@/features/blog/components/mdx/mdx-link";
-import { MDXPre } from "@/features/blog/components/mdx/mdx-pre";
+import { MDXBlockquote } from "./mdx-blockquote";
+import { MDXCode } from "./mdx-code";
+import { MDXImg } from "./mdx-img";
+import { MDXLink } from "./mdx-link";
+import { MDXPre } from "./mdx-pre";
 
 export const MDXComponents = {
   a: MDXLink,

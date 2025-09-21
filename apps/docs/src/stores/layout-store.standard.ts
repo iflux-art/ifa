@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import type { PageLayoutType, SidebarConfig } from "@/types";
 import { createResetFunction } from "@/lib/utils/store";
+import type { PageLayoutType, SidebarConfig } from "@/types";
 
 // 状态接口
 export interface LayoutState {

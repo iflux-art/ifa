@@ -1,9 +1,9 @@
 import "./globals.css";
+import { ThemeProvider } from "@iflux-art/ui";
 import { Footer } from "@/components";
+import { ClientLayout } from "@/components/client-layout";
 import { MainNavbar } from "@/features/navbar/components";
 import { generateMetadata, generateViewport } from "@/features/seo";
-import { ThemeProvider } from "@iflux-art/ui";
-import { ClientLayout } from "@/components/client-layout";
 
 // 导出元数据配置 - Next.js会在构建时处理这些导出
 export const metadata = generateMetadata();

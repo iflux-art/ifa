@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
-import { SidebarWrapper } from "@/features/navigation";
+import { SidebarWrapper } from "@/features/sidebar";
 import {
   getMainContentClasses,
   getSidebarClasses,
 } from "@/lib/layout/layout-utils";
+import { cn } from "@/lib/utils";
 import { useLayoutStore } from "@/stores";
 import type { PageLayoutType, SidebarConfig } from "@/types";
-import { cn } from "@/lib/utils";
 
 interface ResponsiveGridProps {
   /**

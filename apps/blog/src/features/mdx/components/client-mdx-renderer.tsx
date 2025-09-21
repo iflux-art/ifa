@@ -6,7 +6,7 @@ import matter from "gray-matter";
 import { useMemo } from "react";
 import * as runtime from "react/jsx-runtime";
 import remarkGfm from "remark-gfm";
-import { useMDXComponents } from "@/features/blog/components/mdx/mdx-components";
+import { useMDXComponents } from "./mdx-components";
 
 interface Props {
   content: string;

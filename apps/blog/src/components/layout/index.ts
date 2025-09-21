@@ -9,7 +9,9 @@ export {
   NAV_ITEMS,
   NAV_PATHS,
 } from "@/features/navbar/components/nav-config";
-export { Breadcrumb, Sidebar, SidebarWrapper } from "@/features/navigation";
+export { Breadcrumb } from "@/features/breadcrumb";
+export { Sidebar, SidebarWrapper } from "@/features/sidebar";
+export { TableOfContents, TableOfContentsCard } from "@/features/toc";
 // 布局结构组件
 export { AppGrid } from "./app-grid";
 // 导航相关组件

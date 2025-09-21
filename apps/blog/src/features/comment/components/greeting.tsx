@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import type { GreetingProps, TimeSlot } from "../types";
+import { useEffect, useState } from "react";
 import { getGreeting } from "../lib/greetings";
+import type { GreetingProps, TimeSlot } from "../types";
 
 export function Greeting({ className = "" }: GreetingProps) {
   const [_timeSlot, setTimeSlot] = useState<TimeSlot>("morning");

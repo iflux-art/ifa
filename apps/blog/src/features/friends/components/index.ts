@@ -4,4 +4,3 @@
 
 export { FriendLinkApplication } from "./friend-link-application";
 export { FriendLinkCard } from "./friend-link-card";
-export { FriendsPageContainer } from "./friends-page-container";

@@ -117,6 +117,10 @@
     "./user-button": {
       "types": "./dist/components/ui/button/user-button.d.ts",
       "import": "./dist/components/ui/button/user-button.js"
+    },
+    "./footer": {
+      "types": "./dist/components/ui/footer.d.ts",
+      "import": "./dist/components/ui/footer.js"
     }
   }
 }

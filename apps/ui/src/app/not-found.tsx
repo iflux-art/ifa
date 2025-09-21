@@ -1,9 +1,9 @@
+import { Home } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { useId } from "react";
 import { BackButton } from "@/components/ui/back-button";
 import { Button } from "@/components/ui/button";
-import { Home } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "404 - 页面未找到",

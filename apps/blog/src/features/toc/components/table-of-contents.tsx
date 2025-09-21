@@ -2,7 +2,7 @@
 
 import { Text } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import type { TocHeading, TocProps } from "@/features/navigation/types";
+import type { TocHeading, TocProps } from "@/features/toc/types";
 import { useHeadingObserver } from "@/hooks/use-heading-observer";
 import { cn } from "@/lib/utils";
 

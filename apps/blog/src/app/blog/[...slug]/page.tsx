@@ -7,10 +7,10 @@ import {
   TagCloudCard,
 } from "@/features/blog/components";
 import { ContentDisplay } from "@/features/blog/components/display";
-import ClientMDXRenderer from "@/features/blog/components/mdx/client-mdx-renderer";
+import ClientMDXRenderer from "@/features/mdx/components/client-mdx-renderer";
 import { createBlogBreadcrumbs, getBlogContent } from "@/features/blog/lib";
 import { TwikooComment } from "@/features/comment";
-import { TableOfContentsCard } from "@/features/navigation";
+import { TableOfContentsCard } from "@/features/toc";
 import { handleContentError } from "@/lib/utils/error";
 
 interface BlogPostPageProps {

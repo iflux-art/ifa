@@ -4,6 +4,8 @@
  * 业务相关组件已移动到对应的 features 目录中
  */
 
+// ==================== 主题提供者 ====================
+export { ThemeProvider } from "@iflux-art/ui/theme-provider";
 // ==================== MDX 组件 ====================
 export {
   ClientMDXRenderer,
@@ -12,17 +14,12 @@ export {
   MDXComponents,
   MDXImg,
   MDXLink,
-} from "@/features/blog/components/mdx";
-
-// ==================== 主题提供者 ====================
-export { ThemeProvider } from "@iflux-art/ui/theme-provider";
-
-// ==================== 布局组件 ====================
-export { ClientLayout } from "./client-layout";
-
+} from "@/features/mdx/components";
 // ==================== 卡片组件 ====================
 // 通用卡片组件目录
 export {} from "./cards";
+// ==================== 布局组件 ====================
+export { ClientLayout } from "./client-layout";
 export { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 export {
   AlertDialog,

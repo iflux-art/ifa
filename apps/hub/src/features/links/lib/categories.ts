@@ -96,13 +96,15 @@ export function getCategoryDisplayName(categoryId: string): string {
 /**
  * 处理根目录下的 JSON 文件
  */
-async function processRootFiles(
-  contentDir: string,
-  categories: LinkCategory[],
+async function _processRootFiles(
+  _contentDir: string,
+  _categories: LinkCategory[],
 ): Promise<void> {
   try {
     // 不再处理根目录下的 JSON 文件，因为所有文件都在子目录中
-    console.log("Skipping root files processing as all files are in subdirectories");
+    console.log(
+      "Skipping root files processing as all files are in subdirectories",
+    );
   } catch (error) {
     console.error("Error reading root directory:", error);
   }

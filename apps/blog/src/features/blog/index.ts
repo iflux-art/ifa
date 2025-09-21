@@ -7,21 +7,25 @@ export {
   BlogCard,
   BlogCategoryCard,
   BlogListContent,
-  ClientMDXRenderer,
   CodeBlock,
   ContentCard,
   ContentDisplay,
   ContentList,
   LatestPostsCard,
+  RelatedPostsCard,
+  TagCloudCard,
+} from "./components";
+
+// MDX组件导出
+export {
+  ClientMDXRenderer,
   MDXBlockquote,
   MDXCode,
   MDXComponents,
   MDXImg,
   MDXLink,
   MDXPre,
-  RelatedPostsCard,
-  TagCloudCard,
-} from "./components";
+} from "@/features/mdx";
 
 // Hooks 导出
 export {

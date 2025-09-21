@@ -1,4 +1,4 @@
-import type { SidebarWrapperProps } from "@/features/navigation/types";
+import type { SidebarWrapperProps } from "@/features/sidebar/types";
 import {
   DEFAULT_SIDEBAR_CONFIG,
   getResponsiveClasses,

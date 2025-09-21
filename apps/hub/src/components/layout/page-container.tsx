@@ -2,9 +2,9 @@
 
 import { useEffect } from "react";
 import { getContainerClassName } from "@/lib/layout/layout-utils";
+import { cn } from "@/lib/utils";
 import { useLayoutStore } from "@/stores";
 import type { PageContainerProps } from "@/types";
-import { cn } from "@/lib/utils";
 import { ResponsiveGrid } from "./responsive-grid";
 
 /**
