@@ -5,6 +5,8 @@ export { ThemeToggle } from "./components/theme/theme-toggle";
 export { Button, buttonVariants } from "./components/ui/button/button";
 export { GitHubButton } from "./components/ui/button/github-button";
 export { TravelButton } from "./components/ui/button/travel-button";
+export { Logo } from "./components/ui/logo";
+export type { LogoProps } from "./components/ui/logo";
 export type {
   GridLayoutProps,
   PageLayoutType,

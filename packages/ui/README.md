@@ -110,3 +110,23 @@ pnpm chromatic
 ### Input（输入框）
 
 一个样式化的输入框组件。
+
+### Logo（标识）
+
+一个通用的品牌标识组件，可用于各个子应用中。
+
+```tsx
+import { Logo } from '@iflux-art/ui'
+
+// 基本用法
+<Logo />
+
+// 自定义文本
+<Logo text="我的应用" />
+
+// 自定义链接
+<Logo href="/dashboard" />
+
+// 外部链接
+<Logo href="https://www.iflux.art/" isExternal />
+```

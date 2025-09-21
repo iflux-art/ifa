@@ -4,6 +4,8 @@ export { ThemeToggle } from "./theme/theme-toggle";
 export { Button, buttonVariants } from "./ui/button/button";
 export { GitHubButton } from "./ui/button/github-button";
 export { TravelButton } from "./ui/button/travel-button";
+export { Logo } from "./ui/logo";
+export type { LogoProps } from "./ui/logo";
 export type {
   GridLayoutProps,
   PageLayoutType,
