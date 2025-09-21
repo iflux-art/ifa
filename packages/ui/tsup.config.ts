@@ -19,8 +19,17 @@ export default defineConfig((options) => ({
   splitting: false,
   sourcemap: true,
   clean: !options.watch, // Skip cleaning in watch mode for faster rebuilds
-  external: ["react", "react-dom", "react/jsx-runtime"],
-  jsx: "transform", // 使用 transform 模式处理 JSX
+  external: [
+    "react", 
+    "react-dom", 
+    "react/jsx-runtime",
+    // 添加其他需要外部化的依赖
+    "lucide-react",
+    "next/link",
+    "next-themes"
+  ],
+  // 移除 jsx: "transform" 配置，让 Next.js 和 React 19 自动处理 JSX 转换
+  // jsx: "transform", // 使用 transform 模式处理 JSX
   // 在构建完成后添加 "use client" 指令
   onSuccess: async () => {
     // 为 index.js 添加 "use client" 指令
