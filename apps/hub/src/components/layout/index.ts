@@ -4,7 +4,7 @@
  */
 
 // 导航相关组件
-export { Footer } from "@/components/footer";
+export { Footer } from "@iflux-art/ui";
 // 配置信息
 export {
   ADMIN_MENU_ITEMS,

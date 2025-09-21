@@ -7,7 +7,7 @@
 export { ClientLayout } from "./client-layout";
 
 // 底栏组件
-export { Footer } from "./footer";
+export { Footer } from "@iflux-art/ui";
 // 类型导出
 export type { PageContainerProps } from "./layout";
 // 布局组件

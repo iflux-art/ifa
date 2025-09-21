@@ -5,11 +5,11 @@ import { resolve } from "path";
 export default defineConfig((options) => ({
   entry: [
     "src/index.ts", 
-    "src/components/theme/theme-provider.tsx",
+    "src/components/client.ts",
+    // 独立组件导出，支持按需导入
     "src/components/theme/theme-toggle.tsx",
     "src/components/ui/button/github-button.tsx",
     "src/components/ui/button/travel-button.tsx",
-    "src/components/ui/button/user-button.tsx",
     "src/components/ui/footer.tsx",
     "src/components/ui/logo.tsx"
   ],
@@ -19,7 +19,8 @@ export default defineConfig((options) => ({
   splitting: false,
   sourcemap: true,
   clean: !options.watch, // Skip cleaning in watch mode for faster rebuilds
-  external: ["react", "react-dom"],
+  external: ["react", "react-dom", "react/jsx-runtime"],
+  jsx: "transform", // 使用 transform 模式处理 JSX
   // 在构建完成后添加 "use client" 指令
   onSuccess: async () => {
     // 为 index.js 添加 "use client" 指令
@@ -31,17 +32,17 @@ export default defineConfig((options) => ({
       console.log("✅ Added 'use client' directive to dist/index.js");
     }
     
-    // 为 theme-provider.js 添加 "use client" 指令（如果需要）
-    const themeProviderPath = resolve(__dirname, "dist/components/theme/theme-provider.js");
+    // 为 client.js 添加 "use client" 指令
+    const clientIndexPath = resolve(__dirname, "dist/components/client.js");
     try {
-      let themeProviderContent = readFileSync(themeProviderPath, "utf-8");
-      if (!themeProviderContent.startsWith('"use client";')) {
-        themeProviderContent = '"use client";\n' + themeProviderContent;
-        writeFileSync(themeProviderPath, themeProviderContent);
-        console.log("✅ Added 'use client' directive to dist/components/theme/theme-provider.js");
+      let clientIndexContent = readFileSync(clientIndexPath, "utf-8");
+      if (!clientIndexContent.startsWith('"use client";')) {
+        clientIndexContent = '"use client";\n' + clientIndexContent;
+        writeFileSync(clientIndexPath, clientIndexContent);
+        console.log("✅ Added 'use client' directive to dist/components/client.js");
       }
     } catch (error) {
-      // theme-provider.js 可能不存在，忽略错误
+      // client.js 可能不存在，忽略错误
     }
     
     // 为其他需要 "use client" 指令的文件添加指令

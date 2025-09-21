@@ -1,6 +1,6 @@
 {
   "name": "@iflux-art/ui",
-  "version": "0.1.10",
+  "version": "0.1.17",
   "description": "A modern React UI component library based on shadcn/ui design system",
   "type": "module",
   "main": "dist/index.js",
@@ -100,9 +100,13 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./theme-provider": {
-      "types": "./dist/components/theme/theme-provider.d.ts",
-      "import": "./dist/components/theme/theme-provider.js"
+    "./client": {
+      "types": "./dist/components/client.d.ts",
+      "import": "./dist/components/client.js"
+    },
+    "./theme-toggle": {
+      "types": "./dist/components/theme/theme-toggle.d.ts",
+      "import": "./dist/components/theme/theme-toggle.js"
     },
     "./github-button": {
       "types": "./dist/components/ui/button/github-button.d.ts",
@@ -111,10 +115,6 @@
     "./travel-button": {
       "types": "./dist/components/ui/button/travel-button.d.ts",
       "import": "./dist/components/ui/button/travel-button.js"
-    },
-    "./user-button": {
-      "types": "./dist/components/ui/button/user-button.d.ts",
-      "import": "./dist/components/ui/button/user-button.js"
     },
     "./footer": {
       "types": "./dist/components/ui/footer.d.ts",

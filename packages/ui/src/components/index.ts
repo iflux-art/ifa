@@ -1,11 +1,7 @@
 // ==================== UI组件导出 ====================
-export { ThemeProvider } from "./theme/theme-provider";
-export { ThemeToggle } from "./theme/theme-toggle";
+// 注意：客户端组件（需要"use client"指令的组件）不应在此导出
+// 客户端组件应在 ./client.ts 中导出
 export { Button, buttonVariants } from "./ui/button/button";
-export { GitHubButton } from "./ui/button/github-button";
-export { TravelButton } from "./ui/button/travel-button";
-export { Logo } from "./ui/logo";
-export type { LogoProps } from "./ui/logo";
 export type {
   GridLayoutProps,
   PageLayoutType,
@@ -18,5 +14,5 @@ export {
   getMainContentClasses,
   getSidebarClasses,
 } from "./ui/layout/grid-layout";
-// ==================== 页脚组件导出 ====================
-export { Footer, COPYRIGHT_TEXT } from "./ui/footer";
+export type { LogoProps } from "./ui/logo";
+export { Logo } from "./ui/logo";

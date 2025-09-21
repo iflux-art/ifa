@@ -15,7 +15,7 @@ export { TableOfContents, TableOfContentsCard } from "@/features/toc";
 // 布局结构组件
 export { AppGrid } from "./app-grid";
 // 导航相关组件
-export { Footer } from "./footer";
+export { Footer } from "@iflux-art/ui";
 export { LayoutContainer, type LayoutContainerProps } from "./layout-container";
 export { MultiLayout } from "./multi-layout";
 export { PageContainer, type PageContainerProps } from "./page-container";

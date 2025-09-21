@@ -27,7 +27,7 @@ export type { ContentDisplayProps, ContentType } from "./content-display";
 // ==================== 内容展示组件 ====================
 export { ContentDisplay } from "./content-display";
 // ==================== 页脚组件 ====================
-export { Footer } from "./footer";
+export { Footer } from "@iflux-art/ui";
 // ==================== 分页组件 ====================
 export { DocPagination } from "./pagination";
 export { Alert, AlertDescription, AlertTitle } from "./ui/alert";

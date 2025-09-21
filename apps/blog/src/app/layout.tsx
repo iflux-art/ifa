@@ -1,8 +1,8 @@
 import "./globals.css";
 import { ThemeProvider } from "@iflux-art/ui";
+import { Footer } from "@iflux-art/ui";
 import type React from "react";
 import { ClientLayout } from "@/components/client-layout";
-import { Footer } from "@/components/layout";
 import { MainNavbar } from "@/features/navbar/components/main-navbar";
 
 /**
