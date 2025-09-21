@@ -66,8 +66,8 @@ importers:
   apps/blog:
     dependencies:
       '@iflux-art/ui':
-        specifier: ^0.1.15
-        version: 0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
+        specifier: ^0.1.18
+        version: 0.1.18(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
       '@mdx-js/mdx':
         specifier: ^3.1.1
         version: 3.1.1
@@ -214,8 +214,8 @@ importers:
   apps/docs:
     dependencies:
       '@iflux-art/ui':
-        specifier: ^0.1.15
-        version: 0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
+        specifier: ^0.1.18
+        version: 0.1.18(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
       '@mdx-js/mdx':
         specifier: ^3.1.1
         version: 3.1.1
@@ -368,8 +368,8 @@ importers:
         specifier: ^4.86.0
         version: 4.86.0
       '@iflux-art/ui':
-        specifier: ^0.1.15
-        version: 0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
+        specifier: ^0.1.18
+        version: 0.1.18(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -513,8 +513,8 @@ importers:
   apps/ui:
     dependencies:
       '@iflux-art/ui':
-        specifier: ^0.1.15
-        version: 0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
+        specifier: ^0.1.18
+        version: 0.1.18(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -631,8 +631,8 @@ importers:
   apps/web:
     dependencies:
       '@iflux-art/ui':
-        specifier: ^0.1.15
-        version: 0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
+        specifier: ^0.1.18
+        version: 0.1.18(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
       '@radix-ui/react-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -745,6 +745,15 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      lucide-react:
+        specifier: ^0.525.0
+        version: 0.525.0(react@19.1.1)
+      next:
+        specifier: ^15.5.3
+        version: 15.5.3(@babel/core@7.28.4)(@playwright/test@1.55.0)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       tailwind-merge:
         specifier: ^2.5.5
         version: 2.6.0
@@ -1934,8 +1943,8 @@ packages:
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
-  '@iflux-art/ui@0.1.15':
-    resolution: {integrity: sha512-JFftb3N00qGDNVxaxuGBx6Cc9tHJPImsBxLzatuBkVCKPehp6PcQto0OLEtjeb5+Xz/r2xTbUCp/7kpRrBKDfg==}
+  '@iflux-art/ui@0.1.18':
+    resolution: {integrity: sha512-AO9Wr0xqz6+hanWyh76tZZcQl778pzs+wncv4eYMAonQZHoC3mF7P6jGidBp+EDt3LMZfWMxDfvRDTU+aXRM6Q==}
     engines: {node: 22.x, pnpm: 9.15.9}
     peerDependencies:
       react: ^19.1.1
@@ -8399,7 +8408,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
-  '@iflux-art/ui@0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)':
+  '@iflux-art/ui@0.1.18(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)':
     dependencies:
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@radix-ui/react-dropdown-menu': 2.1.16(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -9877,6 +9886,14 @@ snapshots:
     optionalDependencies:
       vite: 7.1.6(@types/node@22.18.6)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)(yaml@2.8.1)
 
+  '@vitest/mocker@3.2.4(vite@7.1.6(@types/node@24.5.1)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)(yaml@2.8.1))':
+    dependencies:
+      '@vitest/spy': 3.2.4
+      estree-walker: 3.0.3
+      magic-string: 0.30.19
+    optionalDependencies:
+      vite: 7.1.6(@types/node@24.5.1)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)(yaml@2.8.1)
+
   '@vitest/pretty-format@2.0.5':
     dependencies:
       tinyrainbow: 1.2.0
@@ -9925,7 +9942,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.14
       tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.5.1)(@vitest/ui@3.2.4)(jiti@2.5.1)(jsdom@26.1.0)(lightningcss@1.30.1)(terser@5.44.0)(yaml@2.8.1)
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@22.18.6)(@vitest/ui@3.2.4)(jiti@2.5.1)(jsdom@23.2.0)(lightningcss@1.30.1)(terser@5.44.0)(yaml@2.8.1)
 
   '@vitest/utils@1.6.1':
     dependencies:
@@ -14454,7 +14471,7 @@ snapshots:
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.1.6(@types/node@22.18.6)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)(yaml@2.8.1))
+      '@vitest/mocker': 3.2.4(vite@7.1.6(@types/node@24.5.1)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)(yaml@2.8.1))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -14498,7 +14515,7 @@ snapshots:
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.1.6(@types/node@22.18.6)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)(yaml@2.8.1))
+      '@vitest/mocker': 3.2.4(vite@7.1.6(@types/node@24.5.1)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)(yaml@2.8.1))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4

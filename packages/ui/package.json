@@ -1,6 +1,6 @@
 {
   "name": "@iflux-art/ui",
-  "version": "0.1.19"
+  "version": "0.1.19",
   "description": "A modern React UI component library based on shadcn/ui design system",
   "type": "module",
   "main": "dist/index.js",
