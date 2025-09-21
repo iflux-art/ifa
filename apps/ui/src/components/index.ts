@@ -1,7 +1,7 @@
 // ==================== 核心组件导出 ====================
 
 // ==================== 主题组件导出 ====================
-export { ThemeProvider } from "@iflux-art/ui/theme-provider";
+export { ThemeProvider } from "@iflux-art/ui/client";
 
 // ThemeToggle 已经通过 @iflux-art/ui 包导出，避免重复导出
 

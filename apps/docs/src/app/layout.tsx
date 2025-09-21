@@ -1,6 +1,6 @@
 import "./globals.css";
-import { ThemeProvider } from "@iflux-art/ui";
-import { Footer } from "@iflux-art/ui";
+import { ThemeProvider } from "@iflux-art/ui/client";
+import { Footer } from "@iflux-art/ui/footer";
 import { ClientLayout } from "@/components/client-layout";
 import { MainNavbar } from "@/features/navbar/components";
 import { generateMetadata, generateViewport } from "@/features/seo";

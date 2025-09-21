@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@iflux-art/ui/theme-provider";
+import { ThemeProvider } from "@iflux-art/ui/client";
 import { Footer } from "@/components";
 import { SITE_METADATA } from "@/config";
 import { MainNavbar } from "@/features/navbar";

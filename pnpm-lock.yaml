@@ -66,8 +66,8 @@ importers:
   apps/blog:
     dependencies:
       '@iflux-art/ui':
-        specifier: ^0.1.10
-        version: 0.1.10(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
+        specifier: ^0.1.15
+        version: 0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
       '@mdx-js/mdx':
         specifier: ^3.1.1
         version: 3.1.1
@@ -214,8 +214,8 @@ importers:
   apps/docs:
     dependencies:
       '@iflux-art/ui':
-        specifier: ^0.1.10
-        version: 0.1.10(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
+        specifier: ^0.1.15
+        version: 0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
       '@mdx-js/mdx':
         specifier: ^3.1.1
         version: 3.1.1
@@ -368,8 +368,8 @@ importers:
         specifier: ^4.86.0
         version: 4.86.0
       '@iflux-art/ui':
-        specifier: ^0.1.10
-        version: 0.1.10(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
+        specifier: ^0.1.15
+        version: 0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -513,8 +513,8 @@ importers:
   apps/ui:
     dependencies:
       '@iflux-art/ui':
-        specifier: ^0.1.10
-        version: 0.1.10(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
+        specifier: ^0.1.15
+        version: 0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -631,8 +631,8 @@ importers:
   apps/web:
     dependencies:
       '@iflux-art/ui':
-        specifier: ^0.1.10
-        version: 0.1.10(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
+        specifier: ^0.1.15
+        version: 0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)
       '@radix-ui/react-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1934,8 +1934,8 @@ packages:
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
-  '@iflux-art/ui@0.1.10':
-    resolution: {integrity: sha512-hUUw43k5/dB8XmlY11ULDkebX6e1YPZjdrpA9pZIdWCukgDIrDPDi3BnP6SR7Yx5erv7shQyr6tqBQJvVG/UBQ==}
+  '@iflux-art/ui@0.1.15':
+    resolution: {integrity: sha512-JFftb3N00qGDNVxaxuGBx6Cc9tHJPImsBxLzatuBkVCKPehp6PcQto0OLEtjeb5+Xz/r2xTbUCp/7kpRrBKDfg==}
     engines: {node: 22.x, pnpm: 9.15.9}
     peerDependencies:
       react: ^19.1.1
@@ -8399,7 +8399,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
-  '@iflux-art/ui@0.1.10(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)':
+  '@iflux-art/ui@0.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(tailwindcss@4.1.13)':
     dependencies:
       '@radix-ui/react-dialog': 1.1.15(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@radix-ui/react-dropdown-menu': 2.1.16(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
