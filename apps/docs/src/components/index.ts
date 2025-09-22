@@ -5,7 +5,7 @@
  */
 
 // ==================== 主题提供者 ====================
-export { ThemeProvider } from "@iflux-art/ui/theme-provider";
+export { ThemeProvider } from "@iflux-art/ui/client";
 // MDX 组件导出
 export {
   ClientMDXRenderer,
@@ -15,10 +15,13 @@ export {
   MDXImg,
   MDXLink,
   MDXPre,
-} from "@/features/mdx";
-export type { CodeBlockProps } from "@/features/mdx/code";
+} from "@/components/mdx";
+export type { CodeBlockProps } from "@/components/mdx/code";
 // 代码高亮组件导出
-export { CodeBlock } from "@/features/mdx/code";
+export { CodeBlock } from "@/components/mdx/code";
+// ==================== 评论组件 ====================
+export { Greeting, TwikooComment } from "./comment";
+export type { GreetingProps } from "./comment/types";
 // ==================== 面包屑组件 ====================
 export { Breadcrumb } from "./breadcrumb";
 // ==================== 布局组件 ====================
@@ -27,7 +30,7 @@ export type { ContentDisplayProps, ContentType } from "./content-display";
 // ==================== 内容展示组件 ====================
 export { ContentDisplay } from "./content-display";
 // ==================== 页脚组件 ====================
-export { Footer } from "@iflux-art/ui";
+export { Footer } from "@iflux-art/ui/footer";
 // ==================== 分页组件 ====================
 export { DocPagination } from "./pagination";
 export { Alert, AlertDescription, AlertTitle } from "./ui/alert";

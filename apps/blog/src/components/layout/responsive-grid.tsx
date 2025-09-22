@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { SidebarWrapper } from "@/features/sidebar";
+import { SidebarWrapper } from "@/components/sidebar";
 import {
   getMainContentClasses,
   getSidebarClasses,

@@ -12,7 +12,7 @@ import {
   isRedirectLoop,
   resolveDocPath,
 } from "@/features/docs/lib";
-import { generateDocsMetadata } from "@/features/seo";
+import { generateDocsMetadata } from "@/components/seo";
 
 interface DocPageParams {
   slug: string[];

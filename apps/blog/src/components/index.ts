@@ -5,7 +5,7 @@
  */
 
 // ==================== 主题提供者 ====================
-export { ThemeProvider } from "@iflux-art/ui/theme-provider";
+export { ThemeProvider } from "@iflux-art/ui/client";
 // ==================== MDX 组件 ====================
 export {
   ClientMDXRenderer,
@@ -14,7 +14,7 @@ export {
   MDXComponents,
   MDXImg,
   MDXLink,
-} from "@/features/mdx/components";
+} from "@/components/mdx";
 // ==================== 卡片组件 ====================
 // 通用卡片组件目录
 export {} from "./cards";

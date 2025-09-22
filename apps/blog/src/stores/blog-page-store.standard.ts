@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { BlogPost } from "@/features/blog/types";
+import type { BlogPost } from "@/components/blog/types";
 
 // 状态接口
 export interface BlogPageState {
@@ -95,7 +95,7 @@ export const createBlogPageStore = () => {
       const state = get();
       const tagsCount: Record<string, number> = {};
       state.posts.forEach((post) => {
-        post.tags?.forEach((tag) => {
+        post.tags?.forEach((tag: string) => {
           tagsCount[tag] = (tagsCount[tag] || 0) + 1;
         });
       });

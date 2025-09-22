@@ -2,13 +2,13 @@ import { DocPagination } from "@/components";
 import type { BreadcrumbItem } from "@/components/breadcrumb";
 import { Breadcrumb } from "@/components/breadcrumb";
 import { ContentDisplay } from "@/components/content-display";
-import { TwikooComment } from "@/features/comment";
+import { TwikooComment } from "@/components/comment";
 import { DocsSidebarCard } from "@/features/docs/components";
 import { createDocBreadcrumbsServer } from "@/features/docs/lib";
 import type { Heading, NavDocItem } from "@/features/docs/types";
 import { ThreeColumnLayout } from "@/features/layout";
-import { ClientMDXRenderer } from "@/features/mdx";
-import { TableOfContentsCard } from "@/features/toc";
+import { ClientMDXRenderer } from "@/components/mdx";
+import { TableOfContentsCard } from "@/components/toc";
 
 interface DocPageContainerProps {
   doc: {

@@ -13,10 +13,10 @@ export {
   MDXImg,
   MDXLink,
   MDXPre,
-} from "@/features/mdx";
-export type { CodeBlockProps } from "@/features/mdx/code";
+} from "@/components/mdx";
+export type { CodeBlockProps } from "@/components/mdx/code";
 // 代码高亮组件
-export { CodeBlock } from "@/features/mdx/code";
+export { CodeBlock } from "@/components/mdx/code";
 export type { ContentCardProps } from "./content-card";
 // 原有内容组件
 export { ContentCard } from "./content-card";

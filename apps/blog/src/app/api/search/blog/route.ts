@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { searchBlogPosts } from "@/features/blog/lib/blog-search";
-import type { BlogSearchResult } from "@/features/blog/types";
+import { searchBlogPosts } from "@/components/blog/lib/blog-search";
+import type { BlogSearchResult } from "@/components/blog/types";
 
 export async function GET(request: NextRequest) {
   try {

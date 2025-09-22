@@ -4,7 +4,7 @@
  * 内联所有相关类型和逻辑，避免外部依赖
  */
 
-import type { TocHeading } from "@/features/toc/types";
+import type { TocHeading } from "@/components/toc/types";
 
 /**
  * 转义正则表达式特殊字符

@@ -1,6 +1,6 @@
 "use client";
 
-import { SearchDialog } from "@/features/search/components/search-dialog";
+import { SearchDialog } from "@/features/search/search-dialog";
 import { useAppStore } from "@/stores";
 
 export const ClientLayout = () => {

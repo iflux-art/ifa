@@ -35,8 +35,6 @@ export interface AddDialogProps {
  * 编辑对话框 Props
  */
 export interface EditDialogProps {
-  /** 是否打开 */
-  open: boolean;
   /** 要编辑的项 */
   item: LinksItem | null;
   /** 打开状态变化回调 */

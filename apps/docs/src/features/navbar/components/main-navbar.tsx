@@ -1,8 +1,8 @@
 "use client";
 
-import { GitHubButton, ThemeToggle, TravelButton } from "@iflux-art/ui";
+import { GitHubButton, ThemeToggle, TravelButton } from "@iflux-art/ui/client";
 import { useNavbarScroll } from "@/features/navbar/hooks/use-navbar-scroll";
-import { SearchButton } from "@/features/search/components/search-button";
+import { SearchButton } from "@/features/search/search-button";
 import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
 

@@ -1,28 +1,117 @@
 /**
- * 搜索功能统一导出
- * 集中管理所有搜索相关的功能
- *
- * 注意：为避免客户端导入服务端代码，不再导出search-api.ts
- * 服务端 API 函数请直接从 './lib/search-api' 导入
+ * 搜索功能相关类型定义
  */
 
-// 组件导出
-export {
-  SearchBar,
-  SearchDialog,
-  SearchResults,
-} from "./components";
-// Hooks 导出
-export { useSearch } from "./hooks/use-search";
-export { useSearchState } from "./hooks/use-search-state";
-// 客户端搜索引擎导出
-export {
-  getSearchSuggestions,
-  highlightSearchTerm,
-  performSearch,
-} from "./lib/search-engine";
+// ==================== 搜索结果类型 ====================
 
-// Store 导出
-export { useSearchStore } from "./stores/search-store.standard";
-// 类型导出
-export type { SearchOptions, SearchResponse, SearchResult } from "./types";
+/** 搜索结果基础接口 */
+export interface BaseSearchResult {
+  /** 结果唯一标识 */
+  id: string;
+  /** 结果标题 */
+  title: string;
+  /** 结果描述 */
+  description?: string;
+  /** 结果类型 */
+  type: "doc";
+  /** 结果路径 */
+  path?: string;
+  /** 结果标签 */
+  tags?: string[];
+}
+
+/** 搜索结果接口 */
+export interface SearchResult extends BaseSearchResult {
+  /** 结果分类 */
+  category?: string;
+  /** 结果图标 */
+  icon?: string;
+  /** 结果权重 */
+  weight?: number;
+}
+
+// ==================== 搜索参数类型 ====================
+
+/** 搜索选项接口 */
+export interface SearchOptions {
+  /** 搜索类型 */
+  type?: "doc";
+  /** 结果限制数量 */
+  limit?: number;
+  /** 是否包含内容 */
+  includeContent?: boolean;
+}
+
+/** 搜索参数接口 */
+export interface SearchParams {
+  /** 搜索查询 */
+  query: string;
+  /** 搜索选项 */
+  options?: SearchOptions;
+}
+
+// ==================== 搜索响应类型 ====================
+
+/** 搜索响应接口 */
+export interface SearchResponse {
+  /** 搜索结果 */
+  results: SearchResult[];
+  /** 结果总数 */
+  total: number;
+  /** 搜索查询 */
+  query: string;
+  /** 搜索类型 */
+  type: string;
+}
+
+// ==================== 搜索状态类型 ====================
+
+/** 搜索状态接口 */
+export interface SearchState {
+  /** 搜索结果 */
+  results: SearchResult[];
+  /** 搜索查询 */
+  query: string;
+  /** 是否正在加载 */
+  loading: boolean;
+  /** 错误信息 */
+  error: string | null;
+  /** 结果总数 */
+  total: number;
+}
+
+/** 搜索操作接口 */
+export interface SearchActions {
+  /** 执行搜索 */
+  search: (query: string, options?: SearchOptions) => Promise<void>;
+  /** 清除搜索结果 */
+  clear: () => void;
+  /** 设置加载状态 */
+  setLoading: (loading: boolean) => void;
+  /** 设置错误信息 */
+  setError: (error: string | null) => void;
+}
+
+/** 搜索派生状态类型 */
+export interface SearchDerivedState {
+  // 派生状态将在组件中计算，不在store中存储
+  // 例如：是否有搜索结果、是否显示建议等
+  hasResults?: boolean;
+  showSuggestions?: boolean;
+  filteredResults?: SearchResult[];
+}
+
+/** 搜索完整store接口 */
+export interface SearchStore extends SearchState, SearchActions {}
+
+// ==================== 搜索建议类型 ====================
+
+/** 搜索建议接口 */
+export interface SearchSuggestion {
+  /** 建议文本 */
+  text: string;
+  /** 建议权重 */
+  weight: number;
+  /** 建议类型 */
+  type: "query" | "tag" | "category";
+}

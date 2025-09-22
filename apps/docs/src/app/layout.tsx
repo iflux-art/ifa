@@ -3,7 +3,7 @@ import { ThemeProvider } from "@iflux-art/ui/client";
 import { Footer } from "@iflux-art/ui/footer";
 import { ClientLayout } from "@/components/client-layout";
 import { MainNavbar } from "@/features/navbar/components";
-import { generateMetadata, generateViewport } from "@/features/seo";
+import { generateMetadata, generateViewport } from "@/components/seo";
 
 // 导出元数据配置 - Next.js会在构建时处理这些导出
 export const metadata = generateMetadata();

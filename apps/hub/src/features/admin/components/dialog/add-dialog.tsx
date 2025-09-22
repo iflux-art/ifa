@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import type { AddDialogProps } from "@/features/admin/types";
-import { LinksForm } from "@/features/links/components";
+import { LinksForm } from "@/components";
 import type { LinksFormData, LinksItem } from "@/features/links/types";
 
 export const AddDialog = ({

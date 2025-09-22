@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { SidebarWrapper } from "@/features/sidebar";
+import { SidebarWrapper } from "@/components/sidebar";
 import { cn } from "@/lib/utils";
 import { useLayoutStore } from "./layout-store.standard";
 import type { PageLayoutType, SidebarConfig } from "./layout-types";

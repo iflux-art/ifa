@@ -5,12 +5,12 @@ import {
   LatestPostsCard,
   RelatedPostsCard,
   TagCloudCard,
-} from "@/features/blog/components";
-import { ContentDisplay } from "@/features/blog/components/display";
-import ClientMDXRenderer from "@/features/mdx/components/client-mdx-renderer";
-import { createBlogBreadcrumbs, getBlogContent } from "@/features/blog/lib";
-import { TwikooComment } from "@/features/comment";
-import { TableOfContentsCard } from "@/features/toc";
+} from "@/components/blog/components";
+import { ContentDisplay } from "@/components/blog/components/display";
+import ClientMDXRenderer from "@/components/mdx/client-mdx-renderer";
+import { createBlogBreadcrumbs, getBlogContent } from "@/components/blog/lib";
+import { TwikooComment } from "@/components/comment";
+import { TableOfContentsCard } from "@/components/toc";
 import { handleContentError } from "@/lib/utils/error";
 
 interface BlogPostPageProps {
@@ -48,13 +48,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           day: "numeric",
         })
       : undefined;
-    const updatedAt = frontmatter.update
-      ? new Date(frontmatter.update).toLocaleDateString("zh-CN", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
-      : undefined;
+    const updatedAt =
+      frontmatter.update && typeof frontmatter.update === "string"
+        ? new Date(frontmatter.update).toLocaleDateString("zh-CN", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        : undefined;
     // 左侧边栏内容
     const leftSidebar = (
       <>

@@ -37,19 +37,13 @@ export type {
   LinkDataService,
   LinkService,
   LinksCategory,
-  LinksContentProps,
   LinksFormData,
   LinksItem,
-  LinksSidebarProps,
   LinksSubCategory,
 } from "./links";
-// Links 功能模块 - 使用具体导出避免冲突
+// ==================== 链接导航功能模块 ====================
+// 链接组件和 hooks
 export {
-  categoryStructure,
-  clearCategoryCache,
-  DataTable,
-  generateCategoriesData,
-  getPageActions,
   getTableActions,
   getTableColumns,
   LinkCard,
@@ -57,7 +51,6 @@ export {
   LinksForm,
   LinksPageContainer,
   LinksSidebar,
-  LinksSidebarCard,
   linkDataService,
   linkService,
   loadAllLinksData,

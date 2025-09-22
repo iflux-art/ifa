@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import type { NavConfigItem } from "@/features/navbar/types/nav-config";
-import { ADMIN_MENU_ITEMS } from "@/features/navbar/types/nav-config";
+import type { NavConfigItem } from "@/components/navbar/nav-config";
+import { ADMIN_MENU_ITEMS } from "@/components/navbar/nav-config";
 import { cn } from "@/lib/utils";
 
 interface AdminSidebarProps {

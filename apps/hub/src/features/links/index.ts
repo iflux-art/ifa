@@ -2,10 +2,6 @@
  * 链接功能模块导出
  */
 
-export type {
-  LinksContentProps,
-  LinksSidebarProps,
-} from "./components";
 // 从 components 导出
 export {
   DataTable,
@@ -17,8 +13,7 @@ export {
   LinksForm,
   LinksPageContainer,
   LinksSidebar,
-  LinksSidebarCard,
-} from "./components";
+} from "@/components";
 
 // 从 hooks 导出
 export {

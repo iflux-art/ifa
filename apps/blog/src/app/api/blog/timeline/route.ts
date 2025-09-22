@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getPostsByYear } from "@/features/blog/lib";
+import { getPostsByYear } from "@/components/blog/lib";
 
 /**
  * GET 处理程序

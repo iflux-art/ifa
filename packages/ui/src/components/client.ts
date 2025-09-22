@@ -8,4 +8,4 @@ export { ThemeToggle } from "./theme/theme-toggle";
 // UI组件
 export { GitHubButton } from "./ui/button/github-button";
 export { TravelButton } from "./ui/button/travel-button";
-export { Footer } from "./ui/footer";
+export { Footer, COPYRIGHT_TEXT } from "./ui/footer";

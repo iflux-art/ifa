@@ -4,7 +4,7 @@ import { ThemeProvider } from "@iflux-art/ui/client";
 import type React from "react";
 import { ClientLayout } from "@/components/client-layout";
 import { Footer } from "@iflux-art/ui/footer";
-import { MainNavbar } from "@/features/navbar/components/main-navbar";
+import { MainNavbar } from "@/components/navbar";
 
 /**
  * 导入集中管理的元数据配置
