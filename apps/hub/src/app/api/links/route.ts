@@ -1,7 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { linkService } from "@/features/links/services/link-service";
-import type { LinksItem } from "@/features/links/types";
-import { setCacheHeaders } from "@/lib/api/cache-utils";
+import { linkService } from "@/components/links/link-service";
+import type { LinksItem } from "@/components/links/types";
 
 // 添加缓存变量
 let cachedLinksData: LinksItem[] | null = null;
@@ -25,7 +24,9 @@ export async function GET() {
     cacheTimestamp = now;
 
     // 设置缓存控制头
-    const headers = setCacheHeaders("semiStatic");
+    const headers = {
+      "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+    };
     return NextResponse.json(items, { headers });
   } catch (error) {
     console.error("Error in links API:", error);
@@ -43,8 +44,11 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // 通过服务层创建新链接
+    // 通过服务层添加新链接
     const newItem = await linkService.addLink(body);
+
+    // 清除缓存
+    cachedLinksData = null;
 
     return NextResponse.json(newItem, { status: 201 });
   } catch (error) {
@@ -88,6 +92,9 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Item not found" }, { status: 404 });
     }
 
+    // 清除缓存
+    cachedLinksData = null;
+
     return NextResponse.json(updatedItem);
   } catch (error) {
     console.error("Error updating item:", error);
@@ -127,6 +134,9 @@ export async function DELETE(request: NextRequest) {
     if (!success) {
       return NextResponse.json({ error: "Item not found" }, { status: 404 });
     }
+
+    // 清除缓存
+    cachedLinksData = null;
 
     return NextResponse.json({ success: true });
   } catch (error) {

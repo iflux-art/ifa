@@ -2,20 +2,6 @@
  * 博客功能模块统一导出
  */
 
-// 组件导出
-export {
-  BlogCard,
-  BlogCategoryCard,
-  BlogListContent,
-  CodeBlock,
-  ContentCard,
-  ContentDisplay,
-  ContentList,
-  LatestPostsCard,
-  RelatedPostsCard,
-  TagCloudCard,
-} from "./components";
-
 // MDX组件导出
 export {
   ClientMDXRenderer,
@@ -26,60 +12,55 @@ export {
   MDXLink,
   MDXPre,
 } from "@/components/mdx";
-
-// Hooks 导出
+// 从 widgets 目录导出 BlogCategoryCard
+export { BlogCategoryCard } from "@/components/widgets/blog-category-card";
+export type { RelatedPost as BlogRelatedPost } from "@/components/widgets/related-posts-card";
+// 从组件文件导出的类型
+export type { BlogPost } from "./blog-list-content";
+// 组件导出
 export {
-  getAllPosts,
-  useBlogPage,
-  useBlogPosts,
-  useContentFilter,
-  useContentPagination,
-  useContentSearch,
-  useTagCounts,
-  useTimelinePosts,
-} from "./hooks";
-
+  BlogCard,
+  BlogListContent,
+} from "./blog-list-content";
+export { BlogPageContainer } from "./blog-page";
 // 工具函数导出
 export {
   calculateReadingTime,
-  createBlogBreadcrumbs,
   debounce,
   extractHeadings,
   formatDate,
   formatNumber,
-  generateBreadcrumbs,
-  getAllPosts as getAllBlogPosts,
-  getAllTags,
-  getAllTagsWithCount,
-  getBlogContent,
-  getPostsByTag,
-  getPostsByYear,
   groupByCategory,
   groupByTag,
   sortContent,
   throttle,
-} from "./lib";
+} from "./client-utils";
+export { ContentDisplay } from "./content-display";
+export type { ContentItem, ContentListProps } from "./content-list";
+export { ContentList } from "./content-list";
+// Hooks 导出
+export { useBlogPage } from "./use-blog-page";
+// 移除了依赖 Node.js 模块的导出，这些函数现在应该通过 API 路由调用
+// export {
+//   getBlogContent,
+//   getAllBlogMeta,
+// } from "./blog-content";
+// export { searchBlogPosts } from "./blog-search";
+// export { generateBlogPaths } from "./blog-paths";
 
 // 类型导出
-export type {
-  BlogFrontmatter,
-  BlogSearchParams,
-  BlogSearchResult,
-  CategoryWithCount,
-  // 内容相关类型
-  ContentPageState,
-  ContentSearchParams,
-  TagCount as BlogTagCount,
-  // Hooks相关类型
-  TagCount as HookTagCount,
-  // 工具函数相关类型
-  TocHeading,
-} from "./types";
-
-// 从组件文件导出的类型
-export type { BlogPost } from "./components/blog-list-content";
-export type { ContentItem } from "./components/content-list";
-export type { RelatedPost as BlogRelatedPost } from "@/components/cards/related-posts-card";
-
-// 注意：已移除 DocPagination 组件的导出，因为翻页功能不再需要
-// 注意：已移除未使用的类型导出（ContentCategory, ContentSearchResult, ContentStats, Url, BaseFrontmatter, BaseContent, BaseCategory）
+// 暂时移除类型导出以解决编译问题
+// export type {
+//   BlogFrontmatter,
+//   BlogSearchParams,
+//   BlogSearchResult,
+//   CategoryWithCount,
+//   // 内容相关类型
+//   ContentPageState,
+//   ContentSearchParams,
+//   TagCount as BlogTagCount,
+//   // Hooks相关类型
+//   TagCount as HookTagCount,
+//   // 工具函数相关类型
+//   TocHeading,
+// } from "./types";

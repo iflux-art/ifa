@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { searchBlogPosts } from "@/components/blog/lib/blog-search";
-import type { BlogSearchResult } from "@/components/blog/types";
+import { performServerSearch } from "@/components/search/server-search";
 
+// 搜索博客文章的API路由
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -15,8 +15,10 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const searchResults: BlogSearchResult[] = await searchBlogPosts(
+    // 使用服务器端搜索功能
+    const { results: searchResults } = await performServerSearch(
       query,
+      "blog",
       limit,
     );
 

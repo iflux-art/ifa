@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getDocCategories } from "@/features/docs/lib";
+import { getDocCategories } from "@/components/content/docs-lib";
 import { setCacheHeaders } from "@/lib/api/cache-utils";
 
 /**

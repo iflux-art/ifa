@@ -1,7 +1,7 @@
 import {
   DEFAULT_SIDEBAR_CONFIG,
   getResponsiveClasses,
-} from "@/features/layout/layout-utils";
+} from "@/components/layout/layout-utils";
 import type { SidebarWrapperProps } from "@/components/sidebar/types";
 import { cn } from "@/lib/utils";
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { formatDate, formatNumber } from "@/components/blog/client-utils";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -9,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { formatDate, formatNumber } from "@/components/blog/lib/client-utils";
 import { cn } from "@/lib/utils";
 
 // 内联 ContentItem 类型定义
@@ -80,7 +80,7 @@ export function ContentCard({
       <CardHeader className="pb-3">
         <CardTitle className="text-lg leading-tight">
           <Link
-            href={item.slug}
+            href={`/posts/${item.slug}`} // 更新为新的basePath
             className="hover:text-primary transition-colors"
             onClick={(e) => e.stopPropagation()}
           >

@@ -1,9 +1,9 @@
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@iflux-art/ui/client";
+import { Footer } from "@iflux-art/ui/footer";
 import type React from "react";
 import { ClientLayout } from "@/components/client-layout";
-import { Footer } from "@iflux-art/ui/footer";
 import { MainNavbar } from "@/components/navbar";
 
 /**
@@ -40,12 +40,12 @@ export default function RootLayout({
           >
             {/* 页面主体布局容器 */}
             <div className="flex flex-col">
-              <MainNavbar className="flex-shrink-0" />
+              <MainNavbar />
               {/* 主内容区域 */}
               <main>{children}</main>
               <Footer />
             </div>
-            <ClientLayout />
+            <ClientLayout>{null}</ClientLayout>
           </ThemeProvider>
         </body>
       </html>

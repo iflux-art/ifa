@@ -2,7 +2,7 @@
 // 标准化store实现（重构完成）
 
 // export { useFriendsStore } from "./friends-store.standard";  // 已移除友链版块
-export { useLayoutStore } from "@/features/layout/layout-store.standard";
+export { useLayoutStore } from "@/components/layout/layout-store.standard";
 // 已移动到 src/features/navbar 目录下集中管理
 // export { useNavbarStore } from "./navbar-store.standard";
 // 已移动到 src/features/search 目录下集中管理

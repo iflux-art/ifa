@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getAllTagsWithCount } from "@/components/blog/lib";
+import { getAllTagsWithCount } from "@/lib/server-utils";
 
 /**
  * 获取所有标签及其计数的 API 路由
@@ -11,8 +11,8 @@ export function GET() {
   try {
     const tagsWithCount = getAllTagsWithCount();
     // 转换为TagCount数组
-    const tagCounts = Object.entries(tagsWithCount).map(([tag, count]) => ({
-      tag,
+    const tagCounts = tagsWithCount.map(({ name, count }) => ({
+      tag: name,
       count,
     }));
     return NextResponse.json(tagCounts);

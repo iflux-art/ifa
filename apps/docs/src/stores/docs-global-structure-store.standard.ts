@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { GlobalDocsStructure } from "@/features/docs/components/global-docs";
+import type { GlobalDocsStructure } from "@/components/content/global-docs";
 
 // 状态接口
 export interface DocsGlobalStructureState {

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { DocCategory, DocItem } from "@/features/docs/types";
+import type { DocCategory, DocItem } from "@/components/content/docs-types";
 
 // 状态接口
 export interface DocsState {

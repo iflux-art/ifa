@@ -2,6 +2,7 @@
 
 import { FileText, Search } from "lucide-react";
 import { useEffect, useMemo } from "react";
+import type { SearchResult } from "@/components/search/types";
 import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
@@ -10,7 +11,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import type { SearchResult } from "@/components/search/types";
 import { useAppStore } from "@/stores";
 import { useSearchState } from "./use-search-state";
 

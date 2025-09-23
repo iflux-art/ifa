@@ -10,8 +10,8 @@
 
 import { Edit, ExternalLink, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
+import type { LinksItem } from "@/components/links/types";
 import { Badge } from "@/components/ui/badge";
-import type { LinksItem } from "@/features/links/types";
 
 // 内联 TableColumn 类型定义
 export interface TableColumn<T> {

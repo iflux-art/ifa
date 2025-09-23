@@ -14,10 +14,7 @@ export const metadata: Metadata = {
 
 // 动态导入博客页面容器组件
 const BlogPageContainer = dynamic(
-  () =>
-    import("@/components/blog/components/blog-page").then(
-      (mod) => mod.BlogPageContainer,
-    ),
+  () => import("@/components/blog").then((mod) => mod.BlogPageContainer),
   {
     ssr: true,
     // 移除自定义加载动画，使用全局的加载状态

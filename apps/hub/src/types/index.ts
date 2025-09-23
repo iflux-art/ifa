@@ -30,11 +30,3 @@ export type {
   SocialConfig,
   VerificationConfig,
 } from "./seo-types";
-
-// Props相关类型 (已全部迁移到各自的功能模块)
-// CardProps 和 ButtonProps 已迁移到各自使用的地方
-// PageHeaderProps 已迁移到 src/features/layout/types
-// SearchFilterProps 已迁移到 src/features/search/types
-// DataTableColumn, DataTableAction, DataTablePagination, DataTableProps 已迁移到 src/features/admin/types
-// UserInfo, UserInfoCardProps, AccountDetailsCardProps 已迁移到 src/features/auth/types
-// TocHeading, TableOfContentsCardProps 已迁移到 src/features/navbar/types

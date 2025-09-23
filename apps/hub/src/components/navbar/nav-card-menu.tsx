@@ -2,7 +2,6 @@
 
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import { useActiveSection } from "@/components/navbar/use-active-section";
 import type { NavConfigItem } from "@/components/navbar/nav-config";
 import {
   ADMIN_MENU_ITEMS,
@@ -10,6 +9,7 @@ import {
   NAV_ITEMS,
   NAV_PATHS,
 } from "@/components/navbar/nav-config";
+import { useActiveSection } from "@/components/navbar/use-active-section";
 import { cn } from "@/lib/utils";
 
 interface NavProps {

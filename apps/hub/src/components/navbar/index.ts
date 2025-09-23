@@ -6,15 +6,7 @@
 // 组件导出
 export { Logo } from "./logo";
 export { MainNavbar } from "./main-navbar";
-export { NavListMenu } from "./nav-menu";
-export { NavItem, NavItemList } from "./nav-item";
-export { ActiveLink, NavLink } from "./nav-link";
 export { NavCardMenu } from "./nav-card-menu";
-
-// Hooks导出
-export { useNavbarScroll } from "./use-navbar-scroll";
-export { useActiveSection } from "./use-active-section";
-
 // 类型和配置导出
 export type { BaseNavItem, NavConfigItem, NestedNavItem } from "./nav-config";
 export {
@@ -23,3 +15,9 @@ export {
   NAV_ITEMS,
   NAV_PATHS,
 } from "./nav-config";
+export { NavItem, NavItemList } from "./nav-item";
+export { ActiveLink, NavLink } from "./nav-link";
+export { NavListMenu } from "./nav-menu";
+export { useActiveSection } from "./use-active-section";
+// Hooks导出
+export { useNavbarScroll } from "./use-navbar-scroll";

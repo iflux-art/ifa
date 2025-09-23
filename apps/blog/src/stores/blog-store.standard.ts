@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { BlogPost } from "@/components/blog/types";
+import type { BlogPost } from "@/components/blog";
 
 // 状态接口
 export interface BlogState {

@@ -3,7 +3,7 @@ import type { ThreeColumnGridProps } from "@/types";
 
 export type { ThreeColumnGridProps } from "@/types";
 
-import { SidebarWrapper } from "@/features/sidebar/components";
+import { SidebarWrapper } from "@/components/sidebar";
 import {
   getMainContentClasses,
   getSidebarClasses,

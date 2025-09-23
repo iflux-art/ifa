@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@iflux-art/ui/client";
 import { Footer } from "@/components";
+import { MainNavbar } from "@/components/navbar";
 import { SITE_METADATA } from "@/config";
-import { MainNavbar } from "@/features/navbar";
 
 // 转换 SITE_METADATA 为 Next.js Metadata 格式
 export const metadata: Metadata = {

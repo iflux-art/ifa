@@ -3,12 +3,12 @@
 import { ChevronRight, Folder } from "lucide-react";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { SidebarItem, SidebarProps } from "@/components/sidebar/types";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import type { SidebarItem, SidebarProps } from "@/components/sidebar/types";
 import { cn } from "@/lib/utils";
 
 // 检查是否在客户端环境

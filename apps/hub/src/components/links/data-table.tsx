@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type {
   DataTableAction,
   DataTableColumn,
   DataTablePagination,
   DataTableProps,
-} from "@/features/admin/types"; // 导入通用类型
+} from "@/components/admin/types"; // 导入通用类型
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // 获取对齐类名函数
 function getAlignClass(align?: "left" | "center" | "right"): string {

@@ -1,10 +1,10 @@
 import {
   Button,
+  COPYRIGHT_TEXT,
+  Footer,
   GitHubButton,
   ThemeToggle,
   TravelButton,
-  Footer,
-  COPYRIGHT_TEXT,
 } from "@iflux-art/ui";
 import type { Metadata } from "next";
 import Link from "next/link";

@@ -1,8 +1,7 @@
 "use client";
 
 import { GitHubButton, ThemeToggle, TravelButton } from "@iflux-art/ui/client";
-import { AuthButtons } from "@/features/auth/auth-buttons";
-import { SearchButton } from "@/features/search/components/search-button";
+import { SearchButton } from "@/components/search/search-button";
 import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
 import { useNavbarScroll } from "./use-navbar-scroll";
@@ -49,7 +48,6 @@ export const MainNavbar = ({ className = "" }: { className?: string }) => {
           <ThemeToggle />
           <GitHubButton url="https://github.com/iflux-art/hub" />
           <TravelButton />
-          <AuthButtons />
         </div>
       </div>
     </nav>

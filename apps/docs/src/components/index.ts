@@ -6,6 +6,8 @@
 
 // ==================== 主题提供者 ====================
 export { ThemeProvider } from "@iflux-art/ui/client";
+// ==================== 页脚组件 ====================
+export { Footer } from "@iflux-art/ui/footer";
 // MDX 组件导出
 export {
   ClientMDXRenderer,
@@ -19,20 +21,23 @@ export {
 export type { CodeBlockProps } from "@/components/mdx/code";
 // 代码高亮组件导出
 export { CodeBlock } from "@/components/mdx/code";
+// ==================== 面包屑组件 ====================
+export { Breadcrumb } from "./content-header/breadcrumb";
+// ==================== 布局组件 ====================
+export { ClientLayout } from "./client-layout";
 // ==================== 评论组件 ====================
 export { Greeting, TwikooComment } from "./comment";
 export type { GreetingProps } from "./comment/types";
-// ==================== 面包屑组件 ====================
-export { Breadcrumb } from "./breadcrumb";
-// ==================== 布局组件 ====================
-export { ClientLayout } from "./client-layout";
 export type { ContentDisplayProps, ContentType } from "./content-display";
 // ==================== 内容展示组件 ====================
 export { ContentDisplay } from "./content-display";
-// ==================== 页脚组件 ====================
-export { Footer } from "@iflux-art/ui/footer";
 // ==================== 分页组件 ====================
-export { DocPagination } from "./pagination";
+export { DocPagination } from "./widgets/pagination";
+export type { SearchOptions, SearchResponse, SearchResult } from "./search";
+// ==================== 搜索组件 ====================
+export { SearchBar } from "./search/search-bar";
+export { SearchButton } from "./search/search-button";
+export { SearchDialog } from "./search/search-dialog";
 export { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 export {
   AlertDialog,

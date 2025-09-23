@@ -16,7 +16,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import type { LinksCategory, LinksItem } from "@/features/links/types";
+import type { LinksCategory, LinksItem } from "@/components/links/types";
 
 type Category = LinksCategory;
 type Item = LinksItem;

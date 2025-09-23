@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { BlogPost } from "@/components/blog/types";
+import type { BlogPost } from "@/components/blog";
 
 // 状态接口
 export interface BlogPageState {
@@ -105,7 +105,7 @@ export const createBlogPageStore = () => {
       const state = get();
       return state.posts.slice(0, 10).map((post) => ({
         title: post.title,
-        href: `/blog/${post.slug}`,
+        href: `/posts/${post.slug}`,
         category: post.category,
         slug: post.slug.split("/"),
       }));
@@ -117,7 +117,7 @@ export const createBlogPageStore = () => {
         .slice(0, 5)
         .map((post) => ({
           title: post.title,
-          href: `/blog/${post.slug}`,
+          href: `/posts/${post.slug}`,
           date: post.date?.toString(),
           category: post.category,
         }));

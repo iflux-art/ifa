@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import {
+  createDocBreadcrumbsServer,
   DocContentDisplay,
   DocErrorHandler,
-  DocPageLayout,
-} from "@/features/docs/components";
-import {
-  createDocBreadcrumbsServer,
   generateDocPathsFromFeatures,
   getDocContentFromFeatures,
   isRedirectLoop,
   resolveDocPath,
-} from "@/features/docs/lib";
+} from "@/components/content";
 import { generateDocsMetadata } from "@/components/seo";
 
 interface DocPageParams {
@@ -115,13 +112,13 @@ const DocPage = async ({ params }: { params: Promise<DocPageParams> }) => {
     const breadcrumbs = createDocBreadcrumbsServer(slug, doc.frontmatter.title);
 
     return (
-      <DocPageLayout>
+      <div className="min-h-screen bg-background">
         <DocContentDisplay
           doc={doc}
           breadcrumbs={breadcrumbs}
           currentDocPath={`/${slug.join("/")}`}
         />
-      </DocPageLayout>
+      </div>
     );
   } catch (error) {
     console.error("Error in doc page:", error);

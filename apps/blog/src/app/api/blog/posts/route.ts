@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
-import { getAllPosts } from "@/components/blog/lib";
 import { setCacheHeaders } from "@/lib/api/cache-utils";
+import { getAllBlogMeta } from "@/lib/server-utils";
 
 export async function GET() {
   try {
-    const posts = await getAllPosts();
+    const posts = getAllBlogMeta().map((item) => ({
+      ...item.frontmatter,
+      slug: item.slug,
+    }));
     // 设置缓存控制头
     const headers = setCacheHeaders("semiStatic");
     return NextResponse.json(posts, { headers });

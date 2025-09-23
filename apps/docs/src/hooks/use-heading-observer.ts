@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Heading } from "@/features/docs/types";
+import type { Heading } from "@/components/content/docs-types";
 
 export function useHeadingObserver(
   headings: Heading[],

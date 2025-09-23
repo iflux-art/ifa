@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { searchDocs } from "@/features/docs/lib/doc-search";
-import type { DocSearchResult } from "@/features/docs/types";
+import { searchDocs } from "@/components/content/doc-search";
+import type { DocSearchResult } from "@/components/content/docs-types";
 
 export async function GET(request: NextRequest) {
   try {

@@ -13,7 +13,7 @@ export type {
   SidebarWrapperProps,
   ThreeColumnGridProps,
   ThreeColumnLayoutProps,
-} from "@/features/layout/layout-types";
+} from "@/components/layout/layout-types";
 
 // 新增异步操作相关类型
 export type { CacheOptions, UseAsyncOptions } from "./async-types";

@@ -3,6 +3,12 @@
 import { AlertCircle, CheckCircle, Loader2, Plus, X } from "lucide-react";
 import type React from "react";
 import { useEffect, useId, useState } from "react";
+import type {
+  LinksCategory,
+  LinksFormData,
+  LinksSubCategory,
+} from "@/components/links/types";
+import { useCategories } from "@/components/links/use-categories";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,9 +23,7 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { useCategories } from "@/features/links/hooks/use-categories";
-import type { LinksCategory, LinksFormData } from "@/features/links/types";
-import { useWebsiteParser } from "@/features/website-parser/hooks/use-website-parser";
+import { useWebsiteParser } from "@/components/website-parser";
 import { isValidUrl } from "@/lib/utils/validation";
 
 // 表单状态管理hook
@@ -57,7 +61,7 @@ function useLinksFormState(initialData?: Partial<LinksFormData>) {
     field: keyof LinksFormData,
     value: LinksFormData[keyof LinksFormData],
   ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev: LinksFormData) => ({ ...prev, [field]: value }));
 
     // 清除解析状态
     if (field === "url") {
@@ -280,7 +284,7 @@ const CategorySection = ({
               {/* 子分类 */}
               {category.children &&
                 Array.isArray(category.children) &&
-                category.children.map((subCategory) => (
+                category.children.map((subCategory: LinksSubCategory) => (
                   <SelectItem
                     key={subCategory.id}
                     value={subCategory.id}
@@ -324,7 +328,7 @@ const TagsSection = ({
   const handleRemoveTag = (tagToRemove: string) => {
     onInputChange(
       "tags",
-      formData.tags.filter((tag) => tag !== tagToRemove),
+      formData.tags.filter((tag: string) => tag !== tagToRemove),
     );
   };
 
@@ -349,7 +353,7 @@ const TagsSection = ({
       </div>
       {formData.tags.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          {formData.tags.map((tag) => (
+          {formData.tags.map((tag: string) => (
             <Badge
               key={tag}
               variant="secondary"
@@ -406,7 +410,7 @@ export const LinksForm = ({
 
     void parseWebsite(formData.url).then((metadata) => {
       if (metadata) {
-        setFormData((prev) => ({
+        setFormData((prev: LinksFormData) => ({
           ...prev,
           title: metadata.title ?? prev.title,
           description: metadata.description ?? prev.description,

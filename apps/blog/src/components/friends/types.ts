@@ -7,8 +7,6 @@
  * 独立的友链类型定义，替代对 LinksItem 的依赖
  */
 export interface FriendLink {
-  /** 唯一标识符 */
-  id: string;
   /** 友链标题 */
   title: string;
   /** 友链URL */
@@ -32,8 +30,6 @@ export interface FriendLink {
  * 用于关于页面的个人资料链接展示
  */
 export interface ProfileLink {
-  /** 唯一标识符 */
-  id: string;
   /** 链接标题 */
   title: string;
   /** 链接URL */

@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
-import { AppGrid, PageContainer } from "@/components/layout";
 import { TwikooComment } from "@/components/comment";
-import {
-  FriendLinkApplication,
-  FriendLinkCard,
-} from "@/components/friends/components";
+import { FriendLinkApplication, FriendLinkCard } from "@/components/friends";
 import friendsData from "@/components/friends/friends.json";
 import {
   DEFAULT_FRIENDS_CONFIG,
@@ -12,6 +8,7 @@ import {
   processFriendsData,
 } from "@/components/friends/lib";
 import type { FriendLink } from "@/components/friends/types";
+import { AppGrid, PageContainer } from "@/components/layout";
 
 export const metadata: Metadata = {
   title: "友情链接",
@@ -60,7 +57,7 @@ const FriendsPage = () => {
         <AppGrid columns={4} className="items-stretch">
           {friendsItems.map((item) => (
             <FriendLinkCard
-              key={item.id}
+              key={item.url}
               title={item.title}
               description={item.description || item.url}
               href={item.url}

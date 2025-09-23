@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
+import { DocsSidebarCard, getAllDocsStructure } from "@/components/content";
+import { ThreeColumnLayout } from "@/components/layout";
 import { LinkCard } from "@/components/ui/link-card";
-import {
-  DocPageLayout,
-  DocsSidebarCard,
-  getAllDocsStructure,
-} from "@/features/docs/components";
-import { ThreeColumnLayout } from "@/features/layout";
 
 /**
  * 首页元数据配置
@@ -38,7 +34,7 @@ export default function HomePage() {
   const leftSidebar = <DocsSidebarCard showHeader={false} />;
 
   return (
-    <DocPageLayout>
+    <div className="min-h-screen bg-background">
       <ThreeColumnLayout leftSidebar={leftSidebar}>
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -54,6 +50,6 @@ export default function HomePage() {
           </div>
         </div>
       </ThreeColumnLayout>
-    </DocPageLayout>
+    </div>
   );
 }

@@ -2,7 +2,7 @@ import "./globals.css";
 import { ThemeProvider } from "@iflux-art/ui/client";
 import { Footer } from "@iflux-art/ui/footer";
 import type React from "react";
-import { ClientLayout } from "@/components/client-layout";
+import { ClientLayout } from "@/components/layout";
 import { MainNavbar } from "@/components/navbar/main-navbar";
 
 /**

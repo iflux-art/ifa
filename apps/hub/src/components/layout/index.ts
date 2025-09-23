@@ -12,7 +12,7 @@ export {
   NAV_ITEMS,
   NAV_PATHS,
 } from "@/components/navbar/nav-config";
-export { Sidebar, SidebarWrapper } from "@/features/sidebar/components";
+export { Sidebar, SidebarWrapper } from "@/components/sidebar";
 // 布局结构组件
 export { AppGrid } from "./app-grid";
 // 新增的多布局组件和响应式网格组件

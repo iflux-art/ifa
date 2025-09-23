@@ -18,8 +18,10 @@ export {
 // ==================== 卡片组件 ====================
 // 通用卡片组件目录
 export {} from "./cards";
+// ==================== 导航组件 ====================
+export { Breadcrumb } from "./content-header/breadcrumb";
 // ==================== 布局组件 ====================
-export { ClientLayout } from "./client-layout";
+export { ClientLayout } from "./layout";
 export { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 export {
   AlertDialog,

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllDocsStructure } from "@/features/docs/components/global-docs";
+import { getAllDocsStructure } from "@/components/content/global-docs";
 import { setCacheHeaders } from "@/lib/api/cache-utils";
 
 /**

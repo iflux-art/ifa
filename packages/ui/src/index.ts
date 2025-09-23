@@ -1,12 +1,12 @@
 // ==================== 核心导出 ====================
 
-// ==================== 组件导出 ====================
-export { Button, buttonVariants } from "./components/ui/button/button";
-export { TravelButton } from "./components/ui/button/travel-button";
-export { GitHubButton } from "./components/ui/button/github-button";
-export { Footer, COPYRIGHT_TEXT } from "./components/ui/footer";
 // ==================== 主题组件导出 ====================
 export { ThemeProvider, ThemeToggle } from "./components/client";
+// ==================== 组件导出 ====================
+export { Button, buttonVariants } from "./components/ui/button/button";
+export { GitHubButton } from "./components/ui/button/github-button";
+export { TravelButton } from "./components/ui/button/travel-button";
+export { COPYRIGHT_TEXT, Footer } from "./components/ui/footer";
 // ==================== 页脚组件导出 ====================
 export type {
   GridLayoutProps,

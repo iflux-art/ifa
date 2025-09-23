@@ -1,9 +1,9 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { SimpleLayout } from "@/components/layout";
 import { LinksContent, LinksSidebar } from "@/components";
-import { useLinksData } from "@/features/links/hooks";
+import { SimpleLayout } from "@/components/layout";
+import { useLinksData } from "@/components/links";
+import { Card, CardContent } from "@/components/ui/card";
 
 /**
  * 链接导航页面容器组件（客户端）
@@ -16,7 +16,7 @@ export const LinksPageContainer = () => {
     filteredItems,
     handleCategoryClick,
     error,
-    refreshData,
+    loading,
   } = useLinksData();
 
   // 左侧边栏内容
@@ -45,7 +45,8 @@ export const LinksPageContainer = () => {
             <button
               type="button"
               onClick={() => {
-                refreshData();
+                // 重新加载页面来刷新数据
+                window.location.reload();
               }}
               className="mt-2 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
             >
@@ -57,8 +58,22 @@ export const LinksPageContainer = () => {
     );
   }
 
-  // 如果没有数据，显示空状态
+  // 如果没有数据且不在加载状态，显示空状态
   if (!filteredItems || filteredItems.length === 0) {
+    if (loading) {
+      return (
+        <div className="min-h-screen bg-background">
+          <div className="flex items-center justify-center py-24">
+            <div className="text-center max-w-md">
+              <h3 className="mb-2 text-lg font-medium text-muted-foreground">
+                加载中...
+              </h3>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="min-h-screen bg-background">
         <div className="flex items-center justify-center py-24">

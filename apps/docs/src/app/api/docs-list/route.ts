@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import {
   getDocCategories,
   getDocDirectoryStructure,
-} from "@/features/docs/lib";
-import type { DocListItem, SidebarItem } from "@/features/docs/types";
+} from "@/components/content/docs-lib";
+import type { DocListItem, SidebarItem } from "@/components/content/docs-types";
 import { setCacheHeaders } from "@/lib/api/cache-utils";
 
 /**

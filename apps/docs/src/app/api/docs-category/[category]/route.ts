@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { getDocSidebar } from "@/features/docs/lib";
-import type { DocListItem } from "@/features/docs/types";
+import { getDocSidebar } from "@/components/content/docs-lib";
+import type { DocListItem } from "@/components/content/docs-types";
 
 interface SidebarNavItem {
   type?: "menu" | "separator" | "page" | "item" | "category";
