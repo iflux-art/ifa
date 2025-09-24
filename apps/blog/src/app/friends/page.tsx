@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GridLayout } from "@iflux-art/ui/layout";
 import { TwikooComment } from "@/components/comment";
 import { FriendLinkApplication, FriendLinkCard } from "@/components/friends";
 import friendsData from "@/components/friends/friends.json";
@@ -8,7 +9,6 @@ import {
   processFriendsData,
 } from "@/components/friends/lib";
 import type { FriendLink } from "@/components/friends/types";
-import { AppGrid, PageContainer } from "@/components/layout";
 
 export const metadata: Metadata = {
   title: "友情链接",
@@ -29,57 +29,53 @@ const FriendsPage = () => {
   // 如果没有友链数据，显示空状态
   if (!hasFriendsData(friendsItems)) {
     return (
-      <PageContainer config={{ layout: "narrow" }}>
-        <div className="flex min-h-[50vh] items-center justify-center">
-          <div className="text-center">
-            <h1 className="mb-4 text-4xl font-extrabold tracking-tight lg:text-5xl">
-              友情链接
-            </h1>
-            <p className="mb-4 text-muted-foreground">暂无友情链接</p>
-            <a
-              href={config.application.formUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="text-primary hover:underline"
-            >
-              申请友链
-            </a>
-          </div>
+      <GridLayout layoutType="narrow">
+        <div className="flex min-h-[50vh] flex-col items-center justify-center text-center">
+          <h1 className="mb-4 text-4xl font-extrabold tracking-tight lg:text-5xl">
+            友情链接
+          </h1>
+          <p className="mb-4 text-muted-foreground">暂无友情链接</p>
+          <a
+            href={config.application.formUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-primary hover:underline"
+          >
+            申请友链
+          </a>
         </div>
-      </PageContainer>
+      </GridLayout>
     );
   }
 
   return (
-    <PageContainer config={{ layout: "narrow" }}>
-      <div>
-        {/* 友链列表网格 */}
-        <AppGrid columns={4} className="items-stretch">
-          {friendsItems.map((item) => (
-            <FriendLinkCard
-              key={item.url}
-              title={item.title}
-              description={item.description || item.url}
-              href={item.url}
-              icon={item.icon}
-              iconType={item.iconType}
-              isExternal
-              className="h-full"
-            />
-          ))}
-        </AppGrid>
-
-        {/* 友链申请版块 */}
-        <FriendLinkApplication config={config} />
-
-        {/* 评论区 */}
-        {config.showComments && (
-          <div className="mt-8">
-            <TwikooComment />
-          </div>
-        )}
+    <GridLayout layoutType="narrow">
+      {/* 友链列表 - 直接在GridLayout主内容区域中布局 */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
+        {friendsItems.map((item) => (
+          <FriendLinkCard
+            key={item.url}
+            title={item.title}
+            description={item.description || item.url}
+            href={item.url}
+            icon={item.icon}
+            iconType={item.iconType}
+            isExternal
+            className="h-full"
+          />
+        ))}
       </div>
-    </PageContainer>
+
+      {/* 友链申请版块 */}
+      <FriendLinkApplication config={config} />
+
+      {/* 评论区 */}
+      {config.showComments && (
+        <div className="mt-8">
+          <TwikooComment />
+        </div>
+      )}
+    </GridLayout>
   );
 };
 

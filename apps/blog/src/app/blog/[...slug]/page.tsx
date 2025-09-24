@@ -10,9 +10,9 @@
  */
 
 import { notFound } from "next/navigation";
+import { GridLayout } from "@iflux-art/ui/layout";
 import { BlogCategoryCard, ContentDisplay } from "@/components/blog";
 import { TwikooComment } from "@/components/comment";
-import { LayoutContainer } from "@/components/layout";
 import ClientMDXRenderer from "@/components/mdx/client-mdx-renderer";
 // 移除直接导入，改为通过API调用获取数据
 // import { getBlogContent } from "@/components/blog";
@@ -117,8 +117,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             day: "numeric",
           })
         : undefined;
+
     // 左侧边栏内容
-    const leftSidebar = (
+    const leftSidebarContent = (
       <>
         <BlogCategoryCard
           title={frontmatter.category || "未分类"}
@@ -133,7 +134,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     );
 
     // 右侧边栏内容
-    const rightSidebar = (
+    const rightSidebarContent = (
       <>
         <TableOfContentsCard headings={headings} className="prose-sm" />
         <LatestPostsCard
@@ -147,13 +148,37 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </>
     );
 
+    // 定义侧边栏配置
+    const sidebars = [
+      {
+        content: leftSidebarContent,
+        position: "left" as const,
+        sticky: true,
+        stickyTop: "80px",
+        maxHeight: "calc(100vh - 5rem - env(safe-area-inset-bottom))",
+        responsive: {
+          hideOnMobile: true,
+          hideOnTablet: false,
+          hideOnDesktop: false,
+        },
+      },
+      {
+        content: rightSidebarContent,
+        position: "right" as const,
+        sticky: true,
+        stickyTop: "80px",
+        maxHeight: "calc(100vh - 5rem - env(safe-area-inset-bottom))",
+        responsive: {
+          hideOnMobile: true,
+          hideOnTablet: false,
+          hideOnDesktop: false,
+        },
+      },
+    ];
+
     return (
       <div className="min-h-screen bg-background">
-        <LayoutContainer
-          leftSidebar={leftSidebar}
-          rightSidebar={rightSidebar}
-          layout="double-sidebar"
-        >
+        <GridLayout layoutType="three-column" sidebars={sidebars}>
           <ContentDisplay
             contentType="blog"
             title={title}
@@ -165,7 +190,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <ClientMDXRenderer content={content} />
           </ContentDisplay>
           <TwikooComment />
-        </LayoutContainer>
+        </GridLayout>
       </div>
     );
   } catch (error: unknown) {

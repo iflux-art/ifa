@@ -85,8 +85,8 @@
     "type-check": {
       "dependsOn": ["^build"],
       "inputs": [
-        "src/**/*.{ts,tsx}",
-        "*.{ts,tsx}",
+        "src/**/*.{ts,tsx,js,jsx}",
+        "*.{ts,tsx,js,jsx}",
         "package.json",
         "tsconfig.json"
       ],
@@ -134,12 +134,6 @@
       "dependsOn": ["build"],
       "inputs": ["e2e/**/*.{ts,js}", "playwright.config.*", "package.json"],
       "outputs": ["test-results/**", "playwright-report/**"],
-      "env": ["NODE_ENV", "NEXT_PUBLIC_*"]
-    },
-    "test:e2e:ui": {
-      "dependsOn": ["build"],
-      "cache": false,
-      "persistent": true,
       "env": ["NODE_ENV", "NEXT_PUBLIC_*"]
     },
     "storybook": {

@@ -1,6 +1,6 @@
-# Docs 应用
+# Website 应用
 
-这是斐流艺创（iFluxArt）项目中的文档应用，基于 Next.js 15.4 + React 19 + TypeScript 5.9 构建，采用 App Router 架构，提供技术文档搜索和导航功能。
+这是斐流艺创（iFluxArt）项目中的官方网站应用，基于 Next.js 15.4 + React 19 + TypeScript 5.9 构建，采用 App Router 架构。
 
 ## 🚀 快速开始
 
@@ -40,9 +40,7 @@ pnpm start
 ├── src/                  # 源代码
 │   ├── app/              # Next.js 应用路由
 │   ├── components/       # 共享组件
-│   ├── content/          # MDX 内容
 │   ├── features/         # 功能模块
-│   ├── lib/              # 工具函数
 │   ├── middleware.ts     # 中间件
 │   └── styles/           # 全局样式
 ├── public/               # 静态资源

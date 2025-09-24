@@ -1,7 +1,7 @@
+import type React from "react";
 import "./globals.css";
 import { ThemeProvider } from "@iflux-art/ui/client";
 import { Footer } from "@iflux-art/ui/footer";
-import type React from "react";
 import { ClientLayout } from "@/components/layout";
 import { MainNavbar } from "@/components/navbar/main-navbar";
 
@@ -36,11 +36,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* 页面主体布局容器 */}
-          <div className="flex flex-col">
+          <div className="flex flex-col min-h-screen">
             <MainNavbar className="flex-shrink-0" />
-            {/* 主内容区域 */}
-            <main>{children}</main>
+            <main className="flex-1">{children}</main>
             <Footer />
           </div>
           <ClientLayout />

@@ -2,7 +2,7 @@ import { Home } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { useId } from "react";
-import { PageContainer } from "@/components/layout";
+import { GridLayout } from "@iflux-art/ui/layout";
 import { BackButton } from "@/components/ui/back-button";
 import { Button } from "@/components/ui/button";
 
@@ -32,7 +32,7 @@ export default function NotFoundPage() {
   const backUrl = DEFAULT_TEXTS.backUrl;
 
   return (
-    <PageContainer config={{ layout: "full-width" }}>
+    <GridLayout layoutType="full-width">
       <main className="flex min-h-[70vh] items-center justify-center text-center">
         <section aria-labelledby={errorTitleId} className="w-full max-w-4xl">
           <div className="flex flex-col items-center space-y-8">
@@ -62,6 +62,6 @@ export default function NotFoundPage() {
           </div>
         </section>
       </main>
-    </PageContainer>
+    </GridLayout>
   );
 }

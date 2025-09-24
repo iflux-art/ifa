@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { DocsSidebarCard, getAllDocsStructure } from "@/components/content";
-import { ThreeColumnLayout } from "@/components/layout";
+import { GridLayout } from "@iflux-art/ui/layout";
+import { getAllDocsStructure } from "@/components/content";
 import { LinkCard } from "@/components/ui/link-card";
 
 /**
@@ -30,26 +30,21 @@ export default function HomePage() {
   // 过滤掉index页面，只保留分类
   const categories = structure.categories;
 
-  // 左侧边栏内容 - 文档导航
-  const leftSidebar = <DocsSidebarCard showHeader={false} />;
-
   return (
     <div className="min-h-screen bg-background">
-      <ThreeColumnLayout leftSidebar={leftSidebar}>
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {categories.map((category) => (
-              <LinkCard
-                key={category.id}
-                title={category.title}
-                description={category.description}
-                href={`/${category.id}`}
-                isExternal={false}
-              />
-            ))}
-          </div>
+      <GridLayout layoutType="narrow">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {categories.map((category) => (
+            <LinkCard
+              key={category.id}
+              title={category.title}
+              description={category.description}
+              href={`/${category.id}`}
+              isExternal={false}
+            />
+          ))}
         </div>
-      </ThreeColumnLayout>
+      </GridLayout>
     </div>
   );
 }

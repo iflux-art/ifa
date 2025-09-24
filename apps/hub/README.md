@@ -70,18 +70,6 @@ pnpm test
 pnpm type-check
 ```
 
-## 🚀 独立部署
-
-此应用可以独立部署，无需下载整个项目。
-
-### 使用 npm 包（推荐）
-
-1. 克隆或下载 `apps/hub` 目录
-2. 运行独立部署脚本：`node setup-standalone.js`
-3. 运行 `pnpm install` 安装依赖
-4. 运行 `pnpm build` 构建应用
-5. 运行 `pnpm start` 启动应用
-
 ## 📄 许可证
 
 MIT License - 详见根目录 LICENSE 文件

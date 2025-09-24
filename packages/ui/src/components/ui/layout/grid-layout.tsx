@@ -46,6 +46,7 @@ export interface SidebarConfig {
     hideOnMobile?: boolean;
     hideOnTablet?: boolean;
     hideOnDesktop?: boolean;
+    hideOnLargeScreen?: boolean;
   };
 }
 
@@ -71,28 +72,40 @@ export interface GridLayoutProps {
 
 /**
  * 获取主内容区域的响应式类名
+ * 移动优先设计：
+ * - 默认（移动设备）：1列
+ * - sm（小平板）：8列居中
+ * - md（平板）：8列居中
+ * - lg（PC）：根据布局类型调整
+ * - xl（大屏）：根据布局类型调整
  */
 export function getMainContentClasses(layout: PageLayoutType): string {
   const baseClasses = "min-w-0";
 
   switch (layout) {
     case "narrow":
-      // 窄布局：主内容占8列，居中显示
-      return `${baseClasses} md:col-span-8 lg:col-span-8 xl:col-span-8 md:col-start-3 lg:col-start-3 xl:col-start-3`;
+      // 窄布局：移动端1列，平板及以上8列居中
+      return `${baseClasses} col-span-1 sm:col-span-8 sm:col-start-3 md:col-span-8 md:col-start-3 lg:col-span-8 lg:col-start-3 xl:col-span-8 xl:col-start-3`;
     case "three-column":
-      // 三栏布局：主内容占8列，居中显示
-      return `${baseClasses} md:col-span-8 lg:col-span-8 xl:col-span-8 md:col-start-3 lg:col-start-3 xl:col-start-3`;
+      // 三栏布局：移动端1列，平板及以上8列居中
+      return `${baseClasses} col-span-1 sm:col-span-8 sm:col-start-3 md:col-span-8 md:col-start-3 lg:col-span-8 lg:col-start-3 xl:col-span-8 xl:col-start-3`;
     case "two-column":
-      // 双栏布局：主内容占10列
-      return `${baseClasses} md:col-span-10 lg:col-span-10 xl:col-span-10 md:col-start-3 lg:col-start-3 xl:col-start-3`;
+      // 双栏布局：移动端1列，平板及以上10列
+      return `${baseClasses} col-span-1 sm:col-span-10 sm:col-start-2 md:col-span-10 md:col-start-2 lg:col-span-10 lg:col-start-2 xl:col-span-10 xl:col-start-2`;
     default:
-      // 宽布局：主内容占满12列
-      return `${baseClasses} md:col-span-12 lg:col-span-12 xl:col-span-12`;
+      // 宽布局：移动端1列，平板及以上12列
+      return `${baseClasses} col-span-1 sm:col-span-12 md:col-span-12 lg:col-span-12 xl:col-span-12`;
   }
 }
 
 /**
  * 获取侧边栏的响应式类名
+ * 移动优先设计：
+ * - 默认（移动设备）：隐藏
+ * - sm（小平板）：根据布局类型显示
+ * - md（平板）：根据布局类型显示
+ * - lg（PC）：根据布局类型显示
+ * - xl（大屏）：根据布局类型显示
  */
 export function getSidebarClasses(
   position: SidebarPosition,
@@ -103,16 +116,16 @@ export function getSidebarClasses(
       // 窄布局不显示侧边栏
       return "hidden";
     case "three-column":
-      // 三栏布局：左右侧栏各占2列
+      // 三栏布局：移动端隐藏，平板及以上显示
       if (position === "left") {
-        return "md:col-span-2 lg:col-span-2 xl:col-span-2 md:col-start-1 lg:col-start-1 xl:col-start-1";
+        return "hidden sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-1 lg:col-span-2 lg:col-start-1 xl:col-span-2 xl:col-start-1";
       } else {
-        return "md:col-span-2 lg:col-span-2 xl:col-span-2 md:col-start-11 lg:col-start-11 xl:col-start-11";
+        return "hidden sm:col-span-2 sm:col-start-11 md:col-span-2 md:col-start-11 lg:col-span-2 lg:col-start-11 xl:col-span-2 xl:col-start-11";
       }
     case "two-column":
-      // 双栏布局：左侧栏占2列
+      // 双栏布局：移动端隐藏，平板及以上显示
       if (position === "left") {
-        return "md:col-span-2 lg:col-span-2 xl:col-span-2 md:col-start-1 lg:col-start-1 xl:col-start-1";
+        return "hidden sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-1 lg:col-span-2 lg:col-start-1 xl:col-span-2 xl:col-start-1";
       }
       // 右侧栏在双栏布局中不显示
       return "hidden";
@@ -142,10 +155,12 @@ const SidebarWrapper = ({
   // 响应式类名
   let responsiveClasses = "";
   if (responsive) {
-    const { hideOnMobile, hideOnTablet, hideOnDesktop } = responsive;
-    if (hideOnMobile) responsiveClasses += " md:hidden";
-    if (hideOnTablet) responsiveClasses += " lg:hidden";
-    if (hideOnDesktop) responsiveClasses += " xl:hidden";
+    const { hideOnMobile, hideOnTablet, hideOnDesktop, hideOnLargeScreen } =
+      responsive;
+    if (hideOnMobile) responsiveClasses += " max-sm:hidden";
+    if (hideOnTablet) responsiveClasses += " sm:max-md:hidden";
+    if (hideOnDesktop) responsiveClasses += " md:max-lg:hidden";
+    if (hideOnLargeScreen) responsiveClasses += " lg:max-xl:hidden";
   }
 
   return (
@@ -170,6 +185,13 @@ const SidebarWrapper = ({
  * 2. narrow: 窄布局，主内容占8列，居中显示
  * 3. three-column: 三栏布局，左右侧栏各占2列，主内容占8列
  * 4. two-column: 双栏布局，左侧栏占2列，主内容占10列
+ *
+ * 响应式断点设计：
+ * - 默认（移动设备）：< 640px
+ * - sm（小平板）：≥ 640px
+ * - md（平板）：≥ 768px
+ * - lg（PC）：≥ 1024px
+ * - xl（大屏）：≥ 1280px
  */
 export const GridLayout = ({
   children,
@@ -183,9 +205,7 @@ export const GridLayout = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-12 md:gap-6 lg:gap-8 xl:gap-10",
-        // 根据布局类型设置内边距
-        layoutType === "narrow" ? "py-4 lg:py-6" : "py-6 lg:py-8",
+        "container mx-auto grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-12 md:gap-6 lg:gap-8 xl:gap-10 px-4 py-6 lg:py-8",
         className,
       )}
     >
