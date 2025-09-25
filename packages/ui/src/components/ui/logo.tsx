@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type React from "react";
+import { cn } from "@/lib/utils";
 
 export interface LogoProps {
   /**
@@ -40,35 +41,31 @@ export const Logo: React.FC<LogoProps> = ({
   className = "",
   ariaLabel,
 }) => {
-  // 默认 ARIA 标签
   const defaultAriaLabel = ariaLabel || `${text} - 返回首页`;
+  const textClasses =
+    "text-lg sm:text-xl md:text-2xl font-bold tracking-wide transition-colors hover:text-primary";
 
-  // 根据是否外部链接决定使用哪种标签
   if (isExternal) {
     return (
       <a
-        href={href}
-        className={`inline-block ${className}`}
+        className={cn("inline-block", className)}
         aria-label={defaultAriaLabel}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <h2 className="sm:text-xl text-lg font-bold tracking-wide transition-colors hover:text-primary md:text-2xl">
-          {text}
-        </h2>
+        <h2 className={textClasses}>{text}</h2>
       </a>
     );
   }
 
   return (
     <Link
-      href={href}
-      className={`inline-block ${className}`}
+      className={cn("inline-block", className)}
       aria-label={defaultAriaLabel}
+      href={href}
     >
-      <h2 className="sm:text-xl text-lg font-bold tracking-wide transition-colors hover:text-primary md:text-2xl">
-        {text}
-      </h2>
+      <h2 className={textClasses}>{text}</h2>
     </Link>
   );
 };

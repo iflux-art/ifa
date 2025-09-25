@@ -35,7 +35,6 @@ export {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 // ==================== UI 组件库 ====================
-export { BackButton } from "./ui/back-button";
 export { Badge } from "./ui/badge";
 export { Button, buttonVariants } from "./ui/button";
 export {

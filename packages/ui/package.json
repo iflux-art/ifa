@@ -130,6 +130,14 @@
     "./layout": {
       "types": "./dist/components/ui/layout/grid-layout.d.ts",
       "import": "./dist/components/ui/layout/grid-layout.js"
+    },
+    "./comment": {
+      "types": "./dist/components/twikoo-comment.d.ts",
+      "import": "./dist/components/twikoo-comment.js"
+    },
+    "./back-button": {
+      "types": "./dist/components/ui/back-button.d.ts",
+      "import": "./dist/components/ui/back-button.js"
     }
   }
 }

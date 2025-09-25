@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { GridLayout } from "@iflux-art/ui/layout";
-import { TwikooComment } from "@/components/comment";
+import { TwikooComment } from "@iflux-art/ui/client";
 import { FriendLinkApplication, FriendLinkCard } from "@/components/friends";
 import friendsData from "@/components/friends/friends.json";
 import {

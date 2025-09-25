@@ -2,7 +2,6 @@
  * Navbar 功能模块统一导出
  */
 
-export { Logo } from "./logo";
 export { MainNavbar } from "./main-navbar";
 // 配置和类型导出
 export type { NavConfigItem } from "./nav-config";

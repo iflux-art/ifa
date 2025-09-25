@@ -26,8 +26,7 @@ export { Breadcrumb } from "./content-header/breadcrumb";
 // ==================== 布局组件 ====================
 export { ClientLayout } from "./client-layout";
 // ==================== 评论组件 ====================
-export { Greeting, TwikooComment } from "./comment";
-export type { GreetingProps } from "./comment/types";
+export { TwikooComment } from "@iflux-art/ui/client";
 export type { ContentDisplayProps, ContentType } from "./content-display";
 // ==================== 内容展示组件 ====================
 export { ContentDisplay } from "./content-display";
@@ -51,7 +50,6 @@ export {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 // ==================== UI 组件库 ====================
-export { BackButton } from "./ui/back-button";
 export { Badge } from "./ui/badge";
 export { Button, buttonVariants } from "./ui/button";
 export {

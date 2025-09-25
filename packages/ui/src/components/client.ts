@@ -6,6 +6,9 @@ export { ThemeProvider } from "./theme/theme-provider";
 export { ThemeToggle } from "./theme/theme-toggle";
 
 // UI组件
+export { Button } from "./ui/button/button";
+export { BackButton } from "./ui/back-button";
 export { GitHubButton } from "./ui/button/github-button";
 export { TravelButton } from "./ui/button/travel-button";
 export { COPYRIGHT_TEXT, Footer } from "./ui/footer";
+export { TwikooComment } from "./twikoo-comment";

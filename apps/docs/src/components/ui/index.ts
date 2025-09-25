@@ -11,7 +11,6 @@ export {
   AlertDialogTrigger,
 } from "./alert-dialog";
 export { Avatar, AvatarFallback, AvatarImage } from "./avatar";
-export { BackButton } from "./back-button";
 export { Badge, badgeVariants } from "./badge";
 export { Button, buttonVariants } from "./button";
 export {

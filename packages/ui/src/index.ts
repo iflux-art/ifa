@@ -6,6 +6,7 @@ export { ThemeProvider, ThemeToggle } from "./components/client";
 export { Button, buttonVariants } from "./components/ui/button/button";
 export { GitHubButton } from "./components/ui/button/github-button";
 export { TravelButton } from "./components/ui/button/travel-button";
+export { BackButton } from "./components/ui/back-button";
 export { COPYRIGHT_TEXT, Footer } from "./components/ui/footer";
 // ==================== 页脚组件导出 ====================
 export type {

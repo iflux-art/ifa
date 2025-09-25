@@ -14,19 +14,32 @@ export async function GET(
     // 首先解码URL编码的slug
     const decodedSlug = decodeURIComponent(slugPath);
 
-    // 处理可能包含逗号的slug（这是Next.js动态路由的一个特殊情况）
+    // 处理可能包含逗号或斜杠的slug（这是Next.js动态路由的一个特殊情况）
     // 如果slug包含逗号，说明它实际上应该是一个路径数组
     let slugArray: string[];
     if (decodedSlug.includes(",")) {
       // 处理Next.js的特殊数组参数格式
       slugArray = decodedSlug.split(",");
-    } else {
+    } else if (decodedSlug.includes("/")) {
       // 按斜杠分割
       slugArray = decodedSlug.split("/");
+    } else if (decodedSlug.includes("%2F")) {
+      // 处理URL编码的斜杠
+      slugArray = decodedSlug.split("%2F");
+    } else {
+      // 单个slug段
+      slugArray = [decodedSlug];
     }
 
+    // 进一步处理可能仍然包含编码字符的slug段
+    // 确保每个段都被正确解码
+    const properlyDecodedSlugArray = slugArray.map(segment => {
+      // 对每个段再次解码，处理可能的嵌套编码
+      return decodeURIComponent(segment);
+    });
+
     // 使用服务器端工具函数获取文章
-    const post = getBlogPostBySlug(slugArray);
+    const post = getBlogPostBySlug(properlyDecodedSlugArray);
 
     if (!post) {
       return NextResponse.json({ error: "文章未找到" }, { status: 404 });
@@ -72,7 +85,7 @@ export async function GET(
     const relatedPosts = getAllBlogMeta()
       .filter(
         (item) =>
-          item.slug.join("/") !== slugArray.join("/") &&
+          item.slug.join("/") !== properlyDecodedSlugArray.join("/") &&
           item.frontmatter.tags?.some((tag) =>
             post.frontmatter.tags?.includes(tag),
           ),

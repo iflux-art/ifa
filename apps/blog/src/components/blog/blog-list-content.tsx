@@ -1,6 +1,7 @@
 "use client";
 
 import { BlogCard } from "@/components/cards/blog-card";
+import { formatDate } from "@/components/blog/client-utils";
 
 // 博客文章类型定义
 export interface BlogPost {
@@ -38,30 +39,7 @@ export interface BlogPost {
   likes?: number;
 }
 
-// ====== 迁移自 src/utils/date.ts ======
-/**
- * 格式化日期
- * @param date 日期字符串或Date对象
- * @param format 可选格式 (支持 'MM月dd日')
- * @returns 格式化后的日期字符串
- */
-function formatDate(date: string | Date | undefined, format?: string): string {
-  if (!date) return "";
-
-  const d = new Date(date);
-  if (Number.isNaN(d.getTime())) return "";
-
-  if (format === "MM月dd日") {
-    return `${d.getMonth() + 1}月${d.getDate()}日`;
-  }
-
-  return d.toLocaleDateString("zh-CN", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
-// ====== END ======
+// 删除重复的 formatDate 函数实现
 
 export interface BlogListContentProps {
   posts: BlogPost[];
@@ -122,7 +100,7 @@ export const BlogListContent = ({
           category={post.category}
           cover={post.image}
           tags={post.tags}
-          date={formatDate(post.date?.toString())}
+          date={post.date ? formatDate(post.date) : ""}
           author={post.author}
           onCategoryClick={onCategoryClick}
           onTagClick={onTagClick}

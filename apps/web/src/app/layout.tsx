@@ -1,7 +1,6 @@
+import type { Metadata } from "next";
 import { ThemeProvider } from "@iflux-art/ui/client";
 import { Footer } from "@iflux-art/ui/footer";
-import { GridLayout } from "@iflux-art/ui/layout";
-import type { Metadata } from "next";
 import { MainNavbar } from "@/components/navbar";
 import { SITE_METADATA } from "@/config";
 import "./globals.css";
@@ -56,10 +55,7 @@ export default function RootLayout({
         >
           <div className="flex flex-col min-h-screen">
             <MainNavbar className="flex-shrink-0" />
-            <GridLayout layoutType="full-width" className="flex-1">
-              {/* 主内容区域 */}
-              <main className="w-full">{children}</main>
-            </GridLayout>
+            <main className="flex-1">{children}</main>
             <Footer />
           </div>
         </ThemeProvider>

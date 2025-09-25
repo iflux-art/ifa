@@ -4,7 +4,6 @@
  */
 
 // 组件导出
-export { Logo } from "./logo";
 export { MainNavbar } from "./main-navbar";
 export { NavCardMenu } from "./nav-card-menu";
 // 类型和配置导出

@@ -4,7 +4,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS, NAV_PATHS } from "./navbar-config";
-import type { BaseNavItem } from "./navbar-types";
+import type { ComponentType, ReactNode } from "react";
+
+/** 基础导航项 */
+interface BaseNavItem {
+  /** 导航项标识 */
+  key: string;
+  /** 显示标签 */
+  label: string;
+  /** 链接地址 */
+  href?: string;
+  /** 图标 */
+  icon?: ComponentType<{ className?: string }> | ReactNode;
+  /** 是否为外部链接 */
+  external?: boolean;
+  /** 是否禁用 */
+  disabled?: boolean;
+}
 
 interface NavListMenuProps {
   className?: string;

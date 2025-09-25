@@ -12,7 +12,9 @@ export default defineConfig((options) => ({
     "src/components/ui/button/travel-button.tsx",
     "src/components/ui/footer.tsx",
     "src/components/ui/logo.tsx",
-    "src/components/ui/layout/grid-layout.tsx"
+    "src/components/ui/layout/grid-layout.tsx",
+    "src/components/ui/back-button.tsx",
+    "src/components/twikoo-comment.tsx"
   ],
   format: ["esm"], // 只生成 ESM 格式
   target: "es2024", // 使用最新的 ECMAScript 2024 标准
@@ -62,14 +64,17 @@ export default defineConfig((options) => ({
       "dist/components/ui/button/travel-button.js",
       "dist/components/ui/footer.js",
       "dist/components/ui/logo.js",
-      "dist/components/ui/layout/grid-layout.js"
+      "dist/components/ui/layout/grid-layout.js",
+      "dist/components/ui/back-button.js",
+      "dist/components/twikoo-comment.js"
     ];
     
     for (const file of filesToAddUseClient) {
       const filePath = resolve(__dirname, file);
       try {
         let fileContent = readFileSync(filePath, "utf-8");
-        if (!fileContent.startsWith('"use client";') && fileContent.includes("use client")) {
+        // 总是为这些文件添加 "use client" 指令，因为它们包含客户端组件
+        if (!fileContent.startsWith('"use client";')) {
           fileContent = '"use client";\n' + fileContent;
           writeFileSync(filePath, fileContent);
           console.log(`✅ Added 'use client' directive to ${file}`);

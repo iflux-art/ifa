@@ -1,5 +1,8 @@
 "use client";
 
+import type * as React from "react";
+import { useEffect, useId } from "react";
+
 /**
  * Twikoo 初始化选项接口
  * 包含初始化评论系统所需的基本配置
@@ -36,25 +39,14 @@ declare global {
   }
 }
 
-import type * as React from "react";
-import { useEffect, useId, useState } from "react";
-import { getRandomGreeting } from "./greetings";
-
 /**
  * Twikoo 评论组件
  * 提供基于 Twikoo 的评论系统集成
  * @returns React 组件
  */
 export const TwikooComment: React.FC = () => {
-  /** 问候语状态 */
-  const [greeting, setGreeting] = useState("");
   /** 评论区域唯一 ID */
   const commentId = useId();
-
-  // 组件挂载时设置随机问候语
-  useEffect(() => {
-    setGreeting(getRandomGreeting());
-  }, []);
 
   // 初始化 Twikoo 评论系统
   useEffect(() => {
@@ -110,19 +102,6 @@ export const TwikooComment: React.FC = () => {
 
   return (
     <div className="mt-4 rounded-xl border bg-card p-6">
-      <div className="mb-4 flex justify-center">
-        <button
-          className="cursor-pointer text-center text-base text-muted-foreground transition-colors hover:text-muted-foreground/70"
-          title="点击刷新问候语"
-          onClick={() => setGreeting(getRandomGreeting())}
-          type="button"
-          onKeyDown={(e) =>
-            e.key === "Enter" && setGreeting(getRandomGreeting())
-          }
-        >
-          {greeting}
-        </button>
-      </div>
       <div id={commentId} className="relative" />
     </div>
   );

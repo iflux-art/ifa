@@ -1,8 +1,8 @@
 "use client";
 
 import { GitHubButton, ThemeToggle, TravelButton } from "@iflux-art/ui/client";
+import { Logo } from "@iflux-art/ui";
 import { useEffect, useState } from "react";
-import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
 
 export const MainNavbar = ({ className = "" }: { className?: string }) => {
@@ -32,7 +32,11 @@ export const MainNavbar = ({ className = "" }: { className?: string }) => {
     >
       <div className="container mx-auto flex h-full items-center justify-between px-4">
         <div className="flex items-center opacity-100">
-          <Logo />
+          <Logo
+            href="https://www.iflux.art/"
+            isExternal
+            ariaLabel="iFluxArt - 访问官网"
+          />
         </div>
 
         <div className="hidden items-center justify-center gap-8 opacity-100 lg:flex">

@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { BlogPost } from "@/components/blog";
+import type { CategoryWithCount } from "@/components/blog/types";
 
 // 分页配置
 const PAGE_SIZE = 10;
@@ -45,12 +46,6 @@ export interface UseBlogPageReturn {
 
   // 刷新数据
   refreshData: () => Promise<void>;
-}
-
-// 从类型文件中导入 CategoryWithCount 类型
-interface CategoryWithCount {
-  name: string;
-  count: number;
 }
 
 /**

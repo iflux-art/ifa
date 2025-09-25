@@ -2,9 +2,9 @@ import { Home } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { useId } from "react";
+import { Button } from "@iflux-art/ui";
+import { BackButton } from "@iflux-art/ui/client";
 import { GridLayout } from "@iflux-art/ui/layout";
-import { BackButton } from "@/components/ui/back-button";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "404 - 页面未找到",

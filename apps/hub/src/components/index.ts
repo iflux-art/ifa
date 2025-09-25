@@ -37,7 +37,6 @@ export {
   Avatar,
   AvatarFallback,
   AvatarImage,
-  BackButton,
   Button,
   Card,
   CardContent,

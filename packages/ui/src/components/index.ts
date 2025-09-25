@@ -16,3 +16,6 @@ export {
 } from "./ui/layout/grid-layout";
 export type { LogoProps } from "./ui/logo";
 export { Logo } from "./ui/logo";
+
+// ==================== 评论组件导出 ====================
+export { TwikooComment } from "./twikoo-comment";

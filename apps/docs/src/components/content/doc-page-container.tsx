@@ -1,7 +1,7 @@
 import { DocPagination } from "@/components";
 import type { BreadcrumbItem } from "@/components/content-header/breadcrumb";
 import { Breadcrumb } from "@/components/content-header/breadcrumb";
-import { TwikooComment } from "@/components/comment";
+import { TwikooComment } from "@iflux-art/ui/client";
 import { createDocBreadcrumbsServer } from "@/components/content/docs-lib";
 import type { Heading, NavDocItem } from "@/components/content/docs-types";
 import { ContentDisplay } from "@/components/content-display";
