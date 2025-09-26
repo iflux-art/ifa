@@ -5,7 +5,7 @@
 
 import { type Dirent, promises as fs } from "node:fs";
 import path from "node:path";
-import type { CategoryId, LinksItem } from "./types";
+import type { CategoryId, LinksItem } from "../types";
 
 /**
  * 链接分类接口

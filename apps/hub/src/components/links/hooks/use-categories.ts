@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { CategoryId, LinksCategory } from "./types";
+import type { CategoryId, LinksCategory } from "../types";
 
 /**
  * 获取链接分类数据的 Hook

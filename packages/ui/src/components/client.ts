@@ -12,3 +12,5 @@ export { GitHubButton } from "./ui/button/github-button";
 export { TravelButton } from "./ui/button/travel-button";
 export { COPYRIGHT_TEXT, Footer } from "./ui/footer";
 export { TwikooComment } from "./twikoo-comment";
+export { LinkCard } from "./ui/card/link-card";
+export type { LinkCardProps } from "./ui/card/link-card";

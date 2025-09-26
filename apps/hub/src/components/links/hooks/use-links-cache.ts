@@ -4,7 +4,7 @@
  */
 
 import { useCallback } from "react";
-import type { CategoryId } from "./types";
+import type { CategoryId } from "../types";
 
 /**
  * 链接数据缓存管理 Hook 返回值接口

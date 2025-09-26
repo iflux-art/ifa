@@ -5,11 +5,7 @@ import { SimpleLayout } from "@/components/layout";
 import { useLinksData } from "@/components/links";
 import { Card, CardContent } from "@/components/ui/card";
 
-/**
- * 链接导航页面容器组件（客户端）
- * 处理链接数据获取和交互逻辑
- */
-export const LinksPageContainer = () => {
+export default function LinksPageClient() {
   const {
     categories,
     selectedCategory,
@@ -59,21 +55,11 @@ export const LinksPageContainer = () => {
   }
 
   // 如果没有数据且不在加载状态，显示空状态
-  if (!filteredItems || filteredItems.length === 0) {
-    if (loading) {
-      return (
-        <div className="min-h-screen bg-background">
-          <div className="flex items-center justify-center py-24">
-            <div className="text-center max-w-md">
-              <h3 className="mb-2 text-lg font-medium text-muted-foreground">
-                加载中...
-              </h3>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
+  // 根据加载状态与空状态分离规范，只有在数据加载完成且为空数组时，才显示'暂无数据'类空状态
+  if (
+    (!loading && !filteredItems) ||
+    (filteredItems && filteredItems.length === 0)
+  ) {
     return (
       <div className="min-h-screen bg-background">
         <div className="flex items-center justify-center py-24">
@@ -102,4 +88,4 @@ export const LinksPageContainer = () => {
       </SimpleLayout>
     </div>
   );
-};
+}

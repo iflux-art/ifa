@@ -20,6 +20,17 @@ export {
   getMainContentClasses,
   getSidebarClasses,
 } from "./components/ui/layout/grid-layout";
+// ==================== 卡片组件导出 ====================
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardAction,
+} from "./components/ui/card";
+// LinkCard is now exported from ./components/ui/card
 export type { LogoProps } from "./components/ui/logo";
 export { Logo } from "./components/ui/logo";
 // ==================== 工具函数导出 ====================

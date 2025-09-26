@@ -5,7 +5,7 @@
 
 import { del, get, post, put } from "@/lib/api/api-client";
 import { CONTENT_API_PATHS } from "@/lib/api/api-paths";
-import type { LinksItem } from "./types";
+import type { LinksItem } from "../types";
 
 // 链接数据服务接口
 export interface LinkDataService {

@@ -9,7 +9,7 @@ import { useAdminData } from "@/components/admin/use-admin-data";
 import {
   getTableActions,
   getTableColumns,
-} from "@/components/links/table-config";
+} from "@/components/links/tables/table-config";
 import type { LinksItem } from "@/components/links/types";
 import { Button } from "@/components/ui/button";
 

@@ -8,7 +8,7 @@ import type {
   LinksFormData,
   LinksSubCategory,
 } from "@/components/links/types";
-import { useCategories } from "@/components/links/use-categories";
+import { useCategories } from "@/components/links/hooks/use-categories";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

@@ -17,12 +17,13 @@ export {
   getPageActions,
   getTableActions,
   getTableColumns,
-  LinkCard,
   LinksContent,
   LinksForm,
-  LinksPageContainer,
   LinksSidebar,
 } from "./links";
+// LinkCard组件从packages/ui中导入
+export { LinkCard } from "@iflux-art/ui/link-card";
+export type { LinkCardProps } from "@iflux-art/ui/link-card";
 // UI 组件
 export {
   AlertDialog,

@@ -4,9 +4,9 @@ import { useEffect, useMemo } from "react";
 // import { loadAllLinksData } from "./categories";  // 移除Node.js模块的导入
 import type { LinksItem } from "@/components/links/types"; // 导入LinksItem类型
 // import type { LinksDataStore } from "@/stores/links-data-store.standard"; // 已删除
-import type { LinksDataStore } from "./links-data-store"; // 使用新的store类型
+import type { LinksDataStore } from "../stores/links-data-store"; // 使用新的store类型
 // import { useLinksDataStore } from "@/stores"; // 已删除
-import { useLinksDataStore } from "./links-data-store"; // 使用新的store实现
+import { useLinksDataStore } from "../stores/links-data-store"; // 使用新的store实现
 import { useCategories } from "./use-categories";
 import { useFilterState } from "./use-filter-state";
 

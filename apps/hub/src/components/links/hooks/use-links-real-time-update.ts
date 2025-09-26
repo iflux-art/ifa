@@ -6,10 +6,10 @@ import {
   type LinkDataMessage,
   LinkDataMessageType,
   linkDataSocket,
-} from "./link-data-socket";
+} from "../link-data-socket";
 // import { useLinksDataStore } from "@/stores"; // 已删除
-import { useLinksDataStore } from "./links-data-store"; // 使用新的store实现
-import type { LinksItem } from "./types";
+import { useLinksDataStore } from "../stores/links-data-store"; // 使用新的store实现
+import type { LinksItem } from "../types";
 
 // 定义消息负载接口
 interface UpdatePayload {

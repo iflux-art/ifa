@@ -32,7 +32,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <GridLayout layoutType="narrow">
+      <GridLayout layoutType="centered">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {categories.map((category) => (
             <LinkCard

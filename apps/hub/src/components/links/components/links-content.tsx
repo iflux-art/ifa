@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { LinkCard } from "@/components";
+import { LinkCard } from "@repo/ui/components/ui/card";
 import type { LinksItem } from "@/components/links/types";
 
 export interface LinksContentProps {

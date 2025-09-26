@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { generateCategoriesFromFiles } from "@/components/links/categories";
+import { generateCategoriesFromFiles } from "@/components/links/utils/categories";
 
 export async function GET() {
   try {

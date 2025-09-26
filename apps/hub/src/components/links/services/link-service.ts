@@ -3,8 +3,8 @@
  * 提供统一的链接数据访问接口
  */
 
-import { loadAllLinksData } from "./categories";
-import type { LinksItem } from "./types";
+import { loadAllLinksData } from "@/components/links/utils/categories";
+import type { LinksItem } from "../types";
 
 // 服务层接口定义
 export interface LinkService {

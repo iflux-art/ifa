@@ -7,4 +7,3 @@
 export { HeroSection } from "./hero-section";
 // 导出配置和数据
 export { HOME_CONFIG } from "./home-config";
-export { LinkCard, FeaturedLinks } from "./link-card";

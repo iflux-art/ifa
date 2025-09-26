@@ -13,6 +13,8 @@ export default defineConfig((options) => ({
     "src/components/ui/footer.tsx",
     "src/components/ui/logo.tsx",
     "src/components/ui/layout/grid-layout.tsx",
+    "src/components/ui/card/card.tsx",
+    "src/components/ui/card/link-card.tsx",
     "src/components/ui/back-button.tsx",
     "src/components/twikoo-comment.tsx"
   ],
@@ -65,6 +67,8 @@ export default defineConfig((options) => ({
       "dist/components/ui/footer.js",
       "dist/components/ui/logo.js",
       "dist/components/ui/layout/grid-layout.js",
+      "dist/components/ui/card/card.js",
+      "dist/components/ui/card/link-card.js",
       "dist/components/ui/back-button.js",
       "dist/components/twikoo-comment.js"
     ];

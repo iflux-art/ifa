@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import type { Server as HttpServer } from "node:http";
 import type { WebSocket } from "ws";
 import { WebSocketServer } from "ws";
-import { loadAllLinksData } from "@/components/links/categories";
+import { loadAllLinksData } from "@/components/links/utils/categories";
 import type { LinksItem } from "./types";
 
 // 消息类型接口

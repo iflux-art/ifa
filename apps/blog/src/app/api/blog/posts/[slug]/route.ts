@@ -33,7 +33,7 @@ export async function GET(
 
     // 进一步处理可能仍然包含编码字符的slug段
     // 确保每个段都被正确解码
-    const properlyDecodedSlugArray = slugArray.map(segment => {
+    const properlyDecodedSlugArray = slugArray.map((segment) => {
       // 对每个段再次解码，处理可能的嵌套编码
       return decodeURIComponent(segment);
     });

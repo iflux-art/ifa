@@ -1,12 +1,10 @@
 /**
  * 链接卡片组件
  * 通用链接卡片组件，可用于友链、导航链接等场景
- * 样式与 LinkCard 保持一致
  */
 
 "use client";
 
-import { AppGrid } from "@/components/app-grid";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,18 +13,7 @@ import { forwardRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-// 定义个人资料链接类型
-export interface ProfileLink {
-  title: string;
-  url: string;
-  description?: string;
-  icon?: string;
-  iconType?: "image" | "text";
-  category?: string;
-  tags?: string[];
-}
-
-interface LinkCardProps {
+export interface LinkCardProps {
   /** 链接标题 */
   title: string;
   /** 链接描述 */
@@ -34,7 +21,7 @@ interface LinkCardProps {
   /** 链接URL */
   href: string;
   /** 链接图标 */
-  icon?: React.ReactNode;
+  icon?: React.ReactNode | string;
   /** 图标类型 */
   iconType?: "image" | "text";
   /** 是否为外部链接 */
@@ -45,13 +32,6 @@ interface LinkCardProps {
   className?: string;
   /** 子元素 */
   children?: React.ReactNode;
-}
-
-interface FeaturedLinksProps {
-  profileData: ProfileLink[];
-  title?: string;
-  subtitle?: string;
-  className?: string;
 }
 
 /**
@@ -176,49 +156,3 @@ export const LinkCard = forwardRef<HTMLAnchorElement, LinkCardProps>(
 );
 
 LinkCard.displayName = "LinkCard";
-
-/**
- * 特色链接组件
- * 用于展示个人资料链接列表
- */
-export const FeaturedLinks = ({
-  profileData,
-  title = "关注我们",
-  subtitle = "在以下平台关注我们，获取最新动态",
-  className,
-}: FeaturedLinksProps) => {
-  // 处理个人资料数据，转换为 ProfileLink 格式
-  const profileItems: ProfileLink[] = profileData.map((item) => {
-    return {
-      ...item,
-      iconType: item.iconType ?? "image",
-    };
-  });
-
-  return (
-    <section className={cn("py-12 bg-background", className)}>
-      <div className="container mx-auto px-4">
-        <h2 className="mb-8 text-center text-3xl font-bold">{title}</h2>
-        <p className="mb-12 text-center text-lg text-muted-foreground">
-          {subtitle}
-        </p>
-
-        {profileItems.length > 0 && (
-          <AppGrid columns={5} className="items-stretch">
-            {profileItems.map((item) => (
-              <LinkCard
-                key={item.url}
-                title={item.title}
-                description={item.description || item.url}
-                href={item.url}
-                icon={item.icon}
-                iconType={item.iconType}
-                isExternal={true}
-              />
-            ))}
-          </AppGrid>
-        )}
-      </div>
-    </section>
-  );
-};

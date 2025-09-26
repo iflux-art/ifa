@@ -131,6 +131,14 @@
       "types": "./dist/components/ui/layout/grid-layout.d.ts",
       "import": "./dist/components/ui/layout/grid-layout.js"
     },
+    "./card": {
+      "types": "./dist/components/ui/card/card.d.ts",
+      "import": "./dist/components/ui/card/card.js"
+    },
+    "./link-card": {
+      "types": "./dist/components/ui/card/link-card.d.ts",
+      "import": "./dist/components/ui/card/link-card.js"
+    },
     "./comment": {
       "types": "./dist/components/twikoo-comment.d.ts",
       "import": "./dist/components/twikoo-comment.js"

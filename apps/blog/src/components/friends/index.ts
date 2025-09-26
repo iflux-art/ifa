@@ -4,7 +4,6 @@
 
 // 组件导出
 export { FriendLinkApplication } from "./friend-link-application";
-export { FriendLinkCard } from "./friend-link-card";
 // 工具函数导出
 export {
   DEFAULT_FRIENDS_CONFIG,

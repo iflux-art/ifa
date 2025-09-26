@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { LinksPageContainer } from "@/components";
 import { LINKS_PAGE_METADATA } from "@/config";
 
 /**
@@ -12,6 +11,8 @@ export const metadata: Metadata = LINKS_PAGE_METADATA;
  * 首页组件
  * 直接渲染链接页面内容，而不是重定向到登录页面
  */
+import LinksPageClient from "./links-page-client";
+
 export default function Home() {
-  return <LinksPageContainer />;
+  return <LinksPageClient />;
 }
