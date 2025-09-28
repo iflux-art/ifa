@@ -6,7 +6,74 @@
 import type { Metadata } from "next";
 import { SITE_METADATA } from "@/config";
 import { filterUndefinedValues } from "@/lib/utils/helpers";
-import type { GenerateMetadataOptions } from "@/types";
+
+/**
+ * 图标配置接口
+ */
+interface IconConfig {
+  icon?: string;
+  shortcut?: string;
+  apple?: string;
+  mask?: string;
+  manifest?: string;
+}
+
+/**
+ * 验证配置接口
+ */
+interface VerificationConfig {
+  google?: string;
+  yandex?: string;
+  yahoo?: string;
+  other?: Record<string, string[]>;
+}
+
+/**
+ * JSON-LD配置接口
+ */
+interface JsonLdConfig {
+  type: string;
+  name?: string;
+  description?: string;
+  url?: string;
+  image?: string;
+  author?: string;
+  datePublished?: string;
+  dateModified?: string;
+  [key: string]: string | undefined;
+}
+
+/**
+ * 社交配置接口
+ */
+interface SocialConfig {
+  twitter?: string;
+  facebook?: string;
+  linkedin?: string;
+  instagram?: string;
+}
+
+/**
+ * 生成元数据选项接口
+ */
+interface GenerateMetadataOptions {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  image?: string;
+  type?: "website" | "article" | "profile";
+  author?: string;
+  date?: string;
+  modified?: string;
+  locale?: string;
+  url?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  icons?: IconConfig;
+  verification?: VerificationConfig;
+  jsonLd?: JsonLdConfig;
+  social?: SocialConfig;
+}
 
 /**
  * 生成视口配置

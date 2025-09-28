@@ -28,5 +28,11 @@ export {
 export type { LogoProps } from "./ui/logo";
 export { Logo } from "./ui/logo";
 
+// ==================== 徽章组件导出 ====================
+export { Badge, badgeVariants } from "./ui/badge";
+
 // ==================== 评论组件导出 ====================
 export { TwikooComment } from "./twikoo-comment";
+
+// ==================== MDX 组件导出 ====================
+export * from "./mdx";

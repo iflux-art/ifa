@@ -7,7 +7,7 @@ import type { Heading, NavDocItem } from "@/components/content/docs-types";
 import { ContentDisplay } from "@/components/content-display";
 import { DocsSidebarCard } from "@/components/docs-sidebar";
 import { ThreeColumnLayout } from "@/components/layout";
-import { ClientMDXRenderer } from "@/components/mdx";
+import { ClientMDXWrapper } from "@/components/content/client-mdx-wrapper";
 import { TableOfContentsCard } from "@/components/widgets/table-of-contents-card";
 
 interface DocPageContainerProps {
@@ -72,7 +72,7 @@ export function DocPageContainer({
           updatedAt={doc.update ?? undefined}
           wordCount={doc.wordCount}
         >
-          <ClientMDXRenderer content={doc.content} />
+          <ClientMDXWrapper content={doc.content} />
         </ContentDisplay>
 
         {/* 文档分页导航 */}

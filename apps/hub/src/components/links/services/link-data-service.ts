@@ -3,7 +3,7 @@
  * 提供客户端链接数据访问接口
  */
 
-import { del, get, post, put } from "@/lib/api/api-client";
+import { del, get, post, put } from "@/lib/api";
 import { CONTENT_API_PATHS } from "@/lib/api/api-paths";
 import type { LinksItem } from "../types";
 
@@ -23,15 +23,14 @@ class LinkDataServiceImpl implements LinkDataService {
    * 获取所有链接
    */
   async fetchLinks(): Promise<LinksItem[]> {
-    const { data, error } = await get<LinksItem[]>(CONTENT_API_PATHS.Links, {
-      next: { revalidate: 300 }, // 5分钟重新验证
-    });
-
-    if (error) {
-      throw new Error(error);
+    try {
+      const data = await get<LinksItem[]>(CONTENT_API_PATHS.Links, {
+        // 5分钟重新验证
+      });
+      return data;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return data;
   }
 
   /**
@@ -40,47 +39,39 @@ class LinkDataServiceImpl implements LinkDataService {
   async createLink(
     data: Omit<LinksItem, "id" | "createdAt" | "updatedAt">,
   ): Promise<LinksItem> {
-    const { data: newItem, error } = await post<LinksItem>(
-      CONTENT_API_PATHS.Links,
-      data,
-    );
-
-    if (error) {
-      throw new Error(error);
+    try {
+      const newItem = await post<LinksItem>(CONTENT_API_PATHS.Links, data);
+      return newItem;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return newItem;
   }
 
   /**
    * 更新链接
    */
   async updateLink(id: string, data: Partial<LinksItem>): Promise<LinksItem> {
-    const { data: updatedItem, error } = await put<LinksItem>(
-      CONTENT_API_PATHS.Link(id),
-      data,
-    );
-
-    if (error) {
-      throw new Error(error);
+    try {
+      const updatedItem = await put<LinksItem>(
+        CONTENT_API_PATHS.Link(id),
+        data,
+      );
+      return updatedItem;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return updatedItem;
   }
 
   /**
    * 删除链接
    */
   async deleteLink(id: string): Promise<boolean> {
-    const { data, error } = await del<{ success: boolean }>(
-      CONTENT_API_PATHS.Link(id),
-    );
-
-    if (error) {
-      throw new Error(error);
+    try {
+      await del<{ success: boolean }>(CONTENT_API_PATHS.Link(id));
+      return true;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return data.success;
   }
 }
 

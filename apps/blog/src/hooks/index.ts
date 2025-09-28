@@ -10,4 +10,4 @@ export { useContentData } from "./use-content-data";
 export { useHeadingObserver } from "./use-heading-observer";
 // 核心Hooks
 export { useMounted } from "./use-mounted";
-export { useResponsiveLayout } from "./use-responsive-layout";
+// useResponsiveLayout hook 已删除，因其未被使用且功能已被GridLayout组件替代

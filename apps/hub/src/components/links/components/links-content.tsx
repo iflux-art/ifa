@@ -33,11 +33,12 @@ export const LinksContent = ({
         <LinkCard
           key={item.id}
           title={item.title}
-          description={item.description}
+          description={item.description || item.url}
           href={item.url}
-          isExternal={!item.url.startsWith("/")}
+          isExternal={true}
           icon={item.icon}
           iconType={item.iconType}
+          className="h-full"
         />
       ))}
     </div>

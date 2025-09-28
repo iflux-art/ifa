@@ -107,7 +107,7 @@ export const createBlogPageStore = () => {
         title: post.title,
         href: `/posts/${post.slug}`,
         category: post.category,
-        slug: post.slug.split("/"),
+        slug: Array.isArray(post.slug) ? post.slug : post.slug.split("/"),
       }));
     },
     get latestPosts() {

@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
 import { forwardRef } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "./card";
 import { cn } from "@/lib/utils";
 
 export interface LinkCardProps {
@@ -124,10 +124,7 @@ export const LinkCard = forwardRef<HTMLAnchorElement, LinkCardProps>(
               )}
             </div>
             {description && (
-              <p
-                className="truncate text-sm text-muted-foreground"
-                title={description}
-              >
+              <p className="truncate text-sm text-muted-foreground">
                 {description}
               </p>
             )}

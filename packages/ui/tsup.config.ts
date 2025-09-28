@@ -16,10 +16,15 @@ export default defineConfig((options) => ({
     "src/components/ui/card/card.tsx",
     "src/components/ui/card/link-card.tsx",
     "src/components/ui/back-button.tsx",
-    "src/components/twikoo-comment.tsx"
+    "src/components/ui/badge.tsx",
+    "src/components/twikoo-comment.tsx",
+    // MDX 组件导出
+    "src/components/mdx/index.ts",
+    "src/components/mdx/client-mdx-renderer.tsx",
+    "src/components/mdx/server.ts"
   ],
   format: ["esm"], // 只生成 ESM 格式
-  target: "es2024", // 使用最新的 ECMAScript 2024 标准
+  target: "esnext", // 使用最新的 ECMAScript 2024 标准
   dts: !options.watch, // Skip DTS generation in watch mode for faster rebuilds
   splitting: false,
   sourcemap: true,
@@ -31,8 +36,14 @@ export default defineConfig((options) => ({
     // 添加其他需要外部化的依赖
     "lucide-react",
     "next/link",
-    "next-themes"
+    "next-themes",
+    "@mdx-js/mdx",
+    "@mdx-js/react",
+    "gray-matter",
+    "remark-gfm"
   ],
+  // 忽略特定的构建警告
+  silent: true,
   // 移除 jsx: "transform" 配置，让 Next.js 和 React 19 自动处理 JSX 转换
   // jsx: "transform", // 使用 transform 模式处理 JSX
   // 在构建完成后添加 "use client" 指令
@@ -70,7 +81,9 @@ export default defineConfig((options) => ({
       "dist/components/ui/card/card.js",
       "dist/components/ui/card/link-card.js",
       "dist/components/ui/back-button.js",
-      "dist/components/twikoo-comment.js"
+      "dist/components/ui/badge.js",
+      "dist/components/twikoo-comment.js",
+      "dist/components/mdx/client-mdx-renderer.js"
     ];
     
     for (const file of filesToAddUseClient) {

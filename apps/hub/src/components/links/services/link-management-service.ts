@@ -3,7 +3,7 @@
  * 提供与链接管理API交互的客户端接口
  */
 
-import { del, get, post, put } from "@/lib/api/api-client";
+import { del, get, post, put } from "@/lib/api";
 import { CONTENT_API_PATHS } from "@/lib/api/api-paths";
 import type { LinksCategory, LinksItem } from "../types";
 
@@ -35,46 +35,43 @@ class LinkManagementServiceImpl implements LinkManagementService {
     categories: LinksCategory[];
     items: LinksItem[];
   }> {
-    const { data, error } = await get<{
-      categories: LinksCategory[];
-      items: LinksItem[];
-    }>(`${CONTENT_API_PATHS.Links}/manage?action=data`);
-
-    if (error) {
-      throw new Error(error);
+    try {
+      const data = await get<{
+        categories: LinksCategory[];
+        items: LinksItem[];
+      }>(`${CONTENT_API_PATHS.Links}/manage?action=data`);
+      return data;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return data;
   }
 
   /**
    * 获取分类数据
    */
   async fetchCategories(): Promise<LinksCategory[]> {
-    const { data, error } = await get<LinksCategory[]>(
-      `${CONTENT_API_PATHS.Links}/manage?action=categories`,
-    );
-
-    if (error) {
-      throw new Error(error);
+    try {
+      const data = await get<LinksCategory[]>(
+        `${CONTENT_API_PATHS.Links}/manage?action=categories`,
+      );
+      return data;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return data;
   }
 
   /**
    * 获取所有标签
    */
   async fetchTags(): Promise<string[]> {
-    const { data, error } = await get<string[]>(
-      `${CONTENT_API_PATHS.Links}/manage?action=tags`,
-    );
-
-    if (error) {
-      throw new Error(error);
+    try {
+      const data = await get<string[]>(
+        `${CONTENT_API_PATHS.Links}/manage?action=tags`,
+      );
+      return data;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return data;
   }
 
   /**
@@ -83,47 +80,42 @@ class LinkManagementServiceImpl implements LinkManagementService {
   async createLink(
     data: Omit<LinksItem, "id" | "createdAt" | "updatedAt">,
   ): Promise<LinksItem> {
-    const { data: newItem, error } = await post<LinksItem>(
-      `${CONTENT_API_PATHS.Links}/manage`,
-      { action: "add", data },
-    );
-
-    if (error) {
-      throw new Error(error);
+    try {
+      const newItem = await post<LinksItem>(
+        `${CONTENT_API_PATHS.Links}/manage`,
+        { action: "add", data },
+      );
+      return newItem;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return newItem;
   }
 
   /**
    * 更新链接
    */
   async updateLink(id: string, data: Partial<LinksItem>): Promise<LinksItem> {
-    const { data: updatedItem, error } = await put<LinksItem>(
-      `${CONTENT_API_PATHS.Link(id)}?id=${id}`,
-      data,
-    );
-
-    if (error) {
-      throw new Error(error);
+    try {
+      const updatedItem = await put<LinksItem>(
+        `${CONTENT_API_PATHS.Link(id)}?id=${id}`,
+        data,
+      );
+      return updatedItem;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return updatedItem;
   }
 
   /**
    * 删除链接
    */
   async deleteLink(id: string): Promise<boolean> {
-    const { data, error } = await del<{ success: boolean }>(
-      `${CONTENT_API_PATHS.Link(id)}?id=${id}`,
-    );
-
-    if (error) {
-      throw new Error(error);
+    try {
+      await del<{ success: boolean }>(`${CONTENT_API_PATHS.Link(id)}?id=${id}`);
+      return true;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return data.success;
   }
 
   /**
@@ -133,13 +125,13 @@ class LinkManagementServiceImpl implements LinkManagementService {
     categories: LinksCategory[];
     items: LinksItem[];
   }): Promise<void> {
-    const { error } = await post(`${CONTENT_API_PATHS.Links}/manage`, {
-      action: "write",
-      data,
-    });
-
-    if (error) {
-      throw new Error(error);
+    try {
+      await post(`${CONTENT_API_PATHS.Links}/manage`, {
+        action: "write",
+        data,
+      });
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
   }
 }

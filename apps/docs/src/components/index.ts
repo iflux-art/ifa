@@ -9,18 +9,16 @@ export { ThemeProvider } from "@iflux-art/ui/client";
 // ==================== 页脚组件 ====================
 export { Footer } from "@iflux-art/ui/footer";
 // MDX 组件导出
+export { MDXImg } from "@iflux-art/ui/server-mdx";
 export {
-  ClientMDXRenderer,
   MDXBlockquote,
   MDXCode,
   MDXComponents,
-  MDXImg,
   MDXLink,
-  MDXPre,
-} from "@/components/mdx";
-export type { CodeBlockProps } from "@/components/mdx/code";
+} from "@iflux-art/ui/client";
 // 代码高亮组件导出
-export { CodeBlock } from "@/components/mdx/code";
+export type { CodeBlockProps } from "@iflux-art/ui/server-mdx";
+export { CodeBlock } from "@iflux-art/ui/client";
 // ==================== 面包屑组件 ====================
 export { Breadcrumb } from "./content-header/breadcrumb";
 // ==================== 布局组件 ====================

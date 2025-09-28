@@ -8,4 +8,4 @@ export {
   generateProfileMetadata,
   generateViewport,
 } from "./metadata";
-export { generateDocsMetadata, generateSEOMetadata } from "./seo-utils";
+export { generateSEOMetadata } from "./seo-utils";

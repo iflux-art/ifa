@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 :root {
@@ -157,5 +158,33 @@
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
     /* Chrome/Safari/Webkit */
+  }
+
+  /* 移除内联代码的反引号 - 使用更具体的选择器 */
+  .prose :where(code):not(:where([class~="not-prose"] *)) {
+    font-family: inherit;
+    position: relative;
+  }
+
+  .prose :where(code):not(:where([class~="not-prose"] *))::before,
+  .prose :where(code):not(:where([class~="not-prose"] *))::after {
+    /* 使用透明颜色隐藏反引号 */
+    color: transparent;
+    font-size: 0;
+    display: none;
+    visibility: hidden;
+  }
+
+  /* 确保我们的自定义内联代码样式优先 */
+  .prose :where(code):not(:where([class~="not-prose"] *)) .code-content::before,
+  .prose :where(code):not(:where([class~="not-prose"] *)) .code-content::after {
+    display: none;
+    content: "";
+  }
+
+  /* 提高选择器特异性来覆盖Typography插件的默认样式 */
+  .prose :where(code):not(:where([class~="not-prose"] *))::before,
+  .prose :where(code):not(:where([class~="not-prose"] *))::after {
+    content: "";
   }
 }

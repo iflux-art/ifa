@@ -59,7 +59,7 @@ const flattenNavItems = (items: readonly NavConfigItem[]): NavConfigItem[] => {
 const FLAT_NAV_ITEMS: NavConfigItem[] = flattenNavItems(NAV_ITEMS);
 
 export const NAV_PATHS: Record<string, string> = {
-  blog: "/posts",
+  blog: "/",
   docs: "https://docs.iflux.art/",
   hub: "https://hub.iflux.art/",
   friends: "/friends",

@@ -10,20 +10,18 @@ export type {
   CodeBlockProps,
 } from "@/components";
 // 组件导出
+export { MDXImg } from "@iflux-art/ui/server-mdx";
 export {
-  // MDX 组件
-  ClientMDXRenderer,
   // 代码高亮组件
   CodeBlock,
-  // 内容展示组件
-  ContentDisplay,
   MDXBlockquote,
   MDXCode,
   MDXComponents,
-  MDXImg,
   MDXLink,
   MDXPre,
-} from "@/components";
+} from "@iflux-art/ui/client";
+// 内容展示组件（本地组件）
+export { ContentDisplay } from "@/components/content-display";
 // 从其他位置导入的组件
 export {
   DocsSidebar,

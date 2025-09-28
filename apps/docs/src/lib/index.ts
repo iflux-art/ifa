@@ -22,24 +22,12 @@ export {
 } from "@/lib/utils/state";
 // API工具
 export {
+  ApiErrors,
+  createApiError,
   createApiSuccess,
   isValidUrl,
-  runMiddleware,
   validateRequiredFields,
-  withErrorHandling,
-  withRateLimit,
-  withValidation,
 } from "./api";
-// 从 api-middleware 导出
-export type {
-  LoggingOptions,
-  MiddlewareResult,
-  ValidationOptions,
-} from "./api/api-middleware";
-export {
-  withLogging,
-  withValidation as apiWithValidation,
-} from "./api/api-middleware";
 // 从 api-paths 导出
 export {
   API_PATHS,
@@ -48,15 +36,9 @@ export {
   SEARCH_API_PATHS,
 } from "./api/api-paths";
 // ==================== API工具函数 ====================
-// 从 api-utils 导出
+// 从简化版API工具导出类型定义
 export type {
   ApiErrorResponse,
   ApiErrorType,
   ApiSuccessResponse,
-  CacheConfig,
-} from "./api/api-utils";
-export {
-  ApiErrors,
-  createApiError,
-  withErrorHandling as apiWithErrorHandling,
-} from "./api/api-utils";
+} from "./api";

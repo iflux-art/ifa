@@ -179,13 +179,9 @@ export function useBlogPage(): UseBlogPageReturn {
     // 重新计算相关文章
     const related = posts.slice(0, 10).map((post) => ({
       title: post.title ?? "",
-      href: `/posts/${Array.isArray(post.slug) ? post.slug.join("/") : (post.slug ?? "")}`, // 更新为新的basePath
+      href: `/posts/${Array.isArray(post.slug) ? post.slug.join("/") : post.slug}`,
       category: post.category,
-      slug: Array.isArray(post.slug)
-        ? post.slug
-        : post.slug
-          ? post.slug.split("/")
-          : [],
+      slug: Array.isArray(post.slug) ? post.slug : post.slug ? [post.slug] : [],
     }));
 
     // 保存到缓存
@@ -227,7 +223,7 @@ export function useBlogPage(): UseBlogPageReturn {
       .slice(0, 5)
       .map((post) => ({
         title: post.title ?? "",
-        href: `/posts/${Array.isArray(post.slug) ? post.slug.join("/") : (post.slug ?? "")}`, // 更新为新的basePath
+        href: `/posts/${Array.isArray(post.slug) ? post.slug.join("/") : post.slug}`,
         date: post.date?.toString(),
         category: post.category,
       }));

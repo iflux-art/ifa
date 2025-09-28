@@ -1,35 +1,9 @@
 /**
- * API工具函数导出
+ * 简化版API工具函数导出
  */
 
 // 从 utils/validation 导出
 export { isValidUrl, validateRequiredFields } from "@/lib/utils/validation";
-// 从 api-client 导出
-// 导出便捷函数
-export {
-  ApiClient,
-  apiClient,
-  deleteRequest,
-  get,
-  patch,
-  post,
-  put,
-} from "./api-client";
-
-// 从 api-middleware 导出
-export type {
-  LoggingOptions,
-  MiddlewareResult,
-  ValidationOptions,
-} from "./api-middleware";
-export {
-  runMiddleware,
-  withCORS,
-  withLogging,
-  withPublicApi,
-  withRateLimit,
-  withValidation,
-} from "./api-middleware";
 
 // 从 api-paths 导出
 export {
@@ -37,23 +11,12 @@ export {
   API_PATHS,
   BLOG_API_PATHS,
   CONTENT_API_PATHS,
+  FRIENDS_API_PATHS,
   NOTIFICATION_API_PATHS,
   SEARCH_API_PATHS,
   USER_API_PATHS,
 } from "./api-paths";
-// 从 api-utils 导出
-export type {
-  ApiErrorResponse,
-  ApiErrorType,
-  ApiSuccessResponse,
-  CacheConfig,
-} from "./api-utils";
-export {
-  ApiErrors,
-  createApiError,
-  createApiSuccess,
-  withErrorHandling,
-} from "./api-utils";
+
 // 从 cache-utils 导出
 export {
   CACHE_CONFIG,
@@ -61,3 +24,18 @@ export {
   getCacheStrategy,
   setCacheHeaders,
 } from "./cache-utils";
+
+// 从简化版API工具导出
+export {
+  ApiErrors,
+  apiRequest,
+  createApiError,
+  createApiSuccess,
+} from "./simple-api";
+
+// 从简化版API工具导出类型定义
+export type {
+  ApiErrorResponse,
+  ApiErrorType,
+  ApiSuccessResponse,
+} from "./simple-api";

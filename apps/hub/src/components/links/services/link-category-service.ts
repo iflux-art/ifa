@@ -3,7 +3,7 @@
  * 提供与链接分类API交互的客户端接口
  */
 
-import { get } from "@/lib/api/api-client";
+import { get } from "@/lib/api";
 import { CONTENT_API_PATHS } from "@/lib/api/api-paths";
 
 // 链接分类服务接口
@@ -101,15 +101,12 @@ class LinkCategoryServiceImpl implements LinkCategoryService {
    * 获取分类数据
    */
   async fetchCategories(): Promise<LinkCategory[]> {
-    const { data, error } = await get<LinkCategory[]>(
-      CONTENT_API_PATHS.LinkCategories,
-    );
-
-    if (error) {
-      throw new Error(error);
+    try {
+      const data = await get<LinkCategory[]>(CONTENT_API_PATHS.LinkCategories);
+      return data;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-
-    return data;
   }
 }
 

@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { GitHubButton, ThemeToggle, TravelButton } from "@iflux-art/ui/client";
 import { Logo } from "@iflux-art/ui";
-import { useEffect, useState } from "react";
+
 import { NavListMenu } from "./nav-menu";
 
 export const MainNavbar = ({ className = "" }: { className?: string }) => {
@@ -45,7 +46,7 @@ export const MainNavbar = ({ className = "" }: { className?: string }) => {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <GitHubButton url="https://github.com/iflux-art/web" />
+          <GitHubButton url="https://github.com/iflux-art/ifa" />
           <TravelButton />
         </div>
       </div>

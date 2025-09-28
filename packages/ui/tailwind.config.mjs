@@ -160,6 +160,19 @@ export default {
       screens: {
         xs: "475px",
       },
+      // Typography plugin extensions
+      typography: {
+        DEFAULT: {
+          css: {
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+          },
+        },
+      },
     },
   },
   plugins: [

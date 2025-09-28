@@ -68,7 +68,7 @@
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
@@ -165,4 +165,48 @@
     display: none;
     /* Chrome/Safari/Webkit */
   }
+
+  /* 移除内联代码的反引号 */
+  .prose :where(code):not(:where([class~="not-prose"] *)) {
+    font-family: inherit;
+    position: relative;
+  }
+
+  .prose :where(code):not(:where([class~="not-prose"] *))::before,
+  .prose :where(code):not(:where([class~="not-prose"] *))::after {
+    /* 使用透明颜色隐藏反引号 */
+    color: transparent;
+    font-size: 0;
+    display: none;
+    visibility: hidden;
+  }
+
+  /* 确保我们的自定义内联代码样式优先 */
+  .prose :where(code):not(:where([class~="not-prose"] *)) .code-content::before,
+  .prose :where(code):not(:where([class~="not-prose"] *)) .code-content::after {
+    display: none;
+    content: "";
+  }
+}
+
+/* 覆盖 Tailwind Typography 插件的链接样式 */
+.prose a {
+  text-decoration: none;
+}
+
+.prose a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0.125rem; /* 2px */
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-out;
+}
+
+.prose a:hover::after {
+  transform: scaleX(1);
 }

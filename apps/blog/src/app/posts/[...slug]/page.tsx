@@ -11,9 +11,12 @@
 
 import { notFound } from "next/navigation";
 import { GridLayout } from "@iflux-art/ui/layout";
-import { BlogCategoryCard, ContentDisplay } from "@/components/blog";
+import {
+  BlogCategoryCard,
+  ClientMDXWrapper,
+  ContentDisplay,
+} from "@/components/blog";
 import { TwikooComment } from "@iflux-art/ui/client";
-import ClientMDXRenderer from "@/components/mdx/client-mdx-renderer";
 // 移除直接导入，改为通过API调用获取数据
 // import { getBlogContent } from "@/components/blog";
 import { LatestPostsCard } from "@/components/widgets/latest-posts-card";
@@ -187,7 +190,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             wordCount={content.length}
             breadcrumbs={[]}
           >
-            <ClientMDXRenderer content={content} />
+            <ClientMDXWrapper content={content} />
           </ContentDisplay>
           <TwikooComment />
         </GridLayout>

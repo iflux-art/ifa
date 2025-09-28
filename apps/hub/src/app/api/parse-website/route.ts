@@ -1,7 +1,6 @@
 import type { NextRequest } from "next/server";
 import { parseWebsite } from "@/components/website-parser";
-import { withPublicApi } from "@/lib/api/api-middleware";
-import { ApiErrors, createApiSuccess } from "@/lib/api/api-utils";
+import { ApiErrors, createApiSuccess } from "@/lib/api/simple-api";
 import { isValidUrl } from "@/lib/utils/validation";
 
 async function handleParseWebsite(request: NextRequest) {
@@ -21,9 +20,7 @@ async function handleParseWebsite(request: NextRequest) {
   });
 
   if (result.success && result.data) {
-    return createApiSuccess(result.data, undefined, {
-      maxAge: 1800, // 30分钟缓存
-    });
+    return createApiSuccess(result.data, undefined);
   }
 
   // 解析失败但有fallback数据
@@ -34,11 +31,20 @@ async function handleParseWebsite(request: NextRequest) {
   return ApiErrors.internal("Failed to parse website", result.error);
 }
 
-// 应用公共API中间件
-const handler = withPublicApi(handleParseWebsite);
-
 // 添加CORS响应头的包装函数
 export async function GET(request: NextRequest) {
-  const response = await handler(request);
+  const response = await handleParseWebsite(request);
+
+  // 添加CORS头
+  response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS",
+  );
+  response.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization",
+  );
+
   return response;
 }

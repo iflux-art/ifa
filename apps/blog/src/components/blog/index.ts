@@ -3,15 +3,15 @@
  */
 
 // MDX组件导出
+export { MDXImg } from "@iflux-art/ui/server-mdx";
 export {
-  ClientMDXRenderer,
   MDXBlockquote,
   MDXCode,
   MDXComponents,
-  MDXImg,
   MDXLink,
   MDXPre,
-} from "@/components/mdx";
+} from "@iflux-art/ui/client";
+export { default as ClientMDXWrapper } from "@iflux-art/ui/client-mdx";
 // 从 widgets 目录导出 BlogCategoryCard
 export { BlogCategoryCard } from "@/components/widgets/blog-category-card";
 export type { RelatedPost as BlogRelatedPost } from "@/components/widgets/related-posts-card";

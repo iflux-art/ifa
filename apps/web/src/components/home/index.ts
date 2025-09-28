@@ -5,5 +5,4 @@
 
 // 导出组件
 export { HeroSection } from "./hero-section";
-// 导出配置和数据
-export { HOME_CONFIG } from "./home-config";
+export { BackgroundDecorations } from "./background-decorations";

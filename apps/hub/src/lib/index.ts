@@ -14,27 +14,23 @@ export {
   validateRequiredFields,
   validateStringLength,
 } from "@/lib/utils/validation";
-// 从 api-middleware 导出
-export type { MiddlewareResult } from "./api/api-middleware";
-export { withCORS } from "./api/api-middleware";
 // 从 api-paths 导出
 export {
   CONTENT_API_PATHS,
   SEARCH_API_PATHS,
 } from "./api/api-paths";
 // ==================== API工具函数 ====================
-// 从 api-utils 导出
+// 从简化版API工具导出
 export type {
   ApiErrorResponse,
   ApiErrorType,
   ApiSuccessResponse,
-  CacheConfig,
-} from "./api/api-utils";
+} from "./api";
 export {
   ApiErrors,
   createApiError,
   createApiSuccess,
-} from "./api/api-utils";
+} from "./api";
 // ==================== 元数据和SEO工具函数 ====================
 export {
   generateArticleMetadata,

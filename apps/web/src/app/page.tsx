@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { HOME_CONFIG } from "@/components/home";
+import type { LinkCardProps } from "@repo/ui/components/ui/card";
 import { HeroSection } from "@/components/home";
 import profileData from "@/components/home/profile.json";
 import { LinkCard } from "@repo/ui/components/ui/card";
-import type { LinkCardProps } from "@repo/ui/components/ui/card";
 
 // 重新定义 ProfileLink 类型，与 LinkCard 组件保持一致
 type ProfileLink = LinkCardProps & {
@@ -12,28 +11,35 @@ type ProfileLink = LinkCardProps & {
   url: string; // 添加 url 字段以匹配 profile.json 数据结构
 };
 
+// SEO 配置
+const seoConfig = {
+  title: "iFluxArt - 创意与技术的交汇点",
+  description: "探索创意与技术的无限可能，分享前沿开发经验和设计思考",
+  type: "website" as const,
+};
+
 // 页面元数据
 export const metadata: Metadata = {
-  title: HOME_CONFIG.seo.title,
-  description: HOME_CONFIG.seo.description,
+  title: seoConfig.title,
+  description: seoConfig.description,
   openGraph: {
-    title: HOME_CONFIG.seo.title,
-    description: HOME_CONFIG.seo.description,
-    type: HOME_CONFIG.seo.type,
-    url: "https://iflux.art",
+    title: seoConfig.title,
+    description: seoConfig.description,
+    type: seoConfig.type,
+    url: "https://www.iflux.art",
     images: [
       {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: HOME_CONFIG.seo.title,
+        alt: seoConfig.title,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: HOME_CONFIG.seo.title,
-    description: HOME_CONFIG.seo.description,
+    title: seoConfig.title,
+    description: seoConfig.description,
     images: ["/images/og-image.png"],
   },
 };
@@ -64,7 +70,7 @@ export default function Home() {
             在以下平台关注我们，获取最新动态
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 items-stretch">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-stretch">
             {processedProfileData.map((item) => (
               <LinkCard
                 key={item.href}
@@ -74,6 +80,7 @@ export default function Home() {
                 icon={item.icon}
                 iconType={item.iconType}
                 isExternal={true}
+                className="h-full"
               />
             ))}
           </div>

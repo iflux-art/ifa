@@ -6,7 +6,7 @@ import { formatDate } from "@/components/blog/client-utils";
 // 博客文章类型定义
 export interface BlogPost {
   /** 唯一标识（URL路径） */
-  slug: string;
+  slug: string | string[]; // 支持字符串或字符串数组
   /** 标题 */
   title: string;
   /** 描述 */
@@ -38,8 +38,6 @@ export interface BlogPost {
   /** 点赞数 */
   likes?: number;
 }
-
-// 删除重复的 formatDate 函数实现
 
 export interface BlogListContentProps {
   posts: BlogPost[];
@@ -93,10 +91,10 @@ export const BlogListContent = ({
     <div className="space-y-4">
       {posts.map((post: BlogPost) => (
         <BlogCard
-          key={post.slug}
+          key={Array.isArray(post.slug) ? post.slug.join("/") : post.slug}
           title={post.title}
           description={post.description}
-          href={`/posts/${post.slug}`} // 更新为新的basePath
+          href={`/posts/${Array.isArray(post.slug) ? post.slug.join("/") : post.slug}`}
           category={post.category}
           cover={post.image}
           tags={post.tags}

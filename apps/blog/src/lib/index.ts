@@ -22,51 +22,30 @@ export {
 } from "@/lib/utils/state";
 // API工具
 export {
+  ApiErrors,
+  createApiError,
   createApiSuccess,
   isValidUrl,
-  runMiddleware,
   validateRequiredFields,
-  withErrorHandling,
-  withPublicApi,
-  withRateLimit,
-  withValidation,
 } from "./api";
-// 从 api-middleware 导出
-export type {
-  LoggingOptions,
-  MiddlewareResult,
-  ValidationOptions,
-} from "./api/api-middleware";
-export {
-  withCORS,
-  withLogging,
-  withValidation as apiWithValidation,
-} from "./api/api-middleware";
 // 从 api-paths 导出
 export {
   ANALYTICS_API_PATHS,
   API_PATHS,
   BLOG_API_PATHS,
   CONTENT_API_PATHS,
+  FRIENDS_API_PATHS,
   NOTIFICATION_API_PATHS,
   SEARCH_API_PATHS,
   USER_API_PATHS,
 } from "./api/api-paths";
 // ==================== API工具函数 ====================
-// 从 api-utils 导出
+// 从简化版API工具导出类型定义
 export type {
   ApiErrorResponse,
   ApiErrorType,
   ApiSuccessResponse,
-  CacheConfig,
-} from "./api/api-utils";
-export {
-  ApiErrors,
-  createApiError,
-  withErrorHandling as apiWithErrorHandling,
-} from "./api/api-utils";
-// 布局工具
-export { getContainerClassName } from "./layout/layout-utils";
+} from "./api";
 // ==================== 元数据和SEO工具函数 ====================
 export {
   generateArticleMetadata,
@@ -74,7 +53,4 @@ export {
   generateProfileMetadata,
   generateViewport,
 } from "./metadata/metadata";
-export {
-  generateDocsMetadata,
-  generateSEOMetadata,
-} from "./metadata/seo-utils";
+export { generateSEOMetadata } from "./metadata/seo-utils";
