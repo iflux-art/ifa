@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { Loading } from "@iflux-art/ui/client";
 
 // 页面元数据
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ const BlogPageContainer = dynamic(
   () => import("@/components/blog").then((mod) => mod.BlogPageContainer),
   {
     ssr: true,
-    // 移除自定义加载动画，使用全局的加载状态
+    loading: () => <Loading />,
   },
 );
 

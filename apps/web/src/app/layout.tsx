@@ -1,43 +1,11 @@
-import type { Metadata } from "next";
+import "./globals.css";
 import { ThemeProvider } from "@iflux-art/ui/client";
 import { Footer } from "@iflux-art/ui/footer";
 import { MainNavbar } from "@/components/navbar";
-import { SITE_METADATA } from "@/config";
-import "./globals.css";
+import { generateMetadata, generateViewport } from "@/lib/metadata";
 
-// 转换 SITE_METADATA 为 Next.js Metadata 格式
-export const metadata: Metadata = {
-  title: SITE_METADATA.title,
-  description: SITE_METADATA.description,
-  keywords: [...SITE_METADATA.keywords], // 转换为可变数组
-  authors: [{ name: SITE_METADATA.author }],
-  creator: SITE_METADATA.author,
-  publisher: SITE_METADATA.author,
-  metadataBase: new URL(SITE_METADATA.url),
-  openGraph: {
-    type: "website",
-    locale: "zh_CN",
-    url: SITE_METADATA.url,
-    title: SITE_METADATA.title,
-    description: SITE_METADATA.description,
-    siteName: SITE_METADATA.title,
-    images: [
-      {
-        url: SITE_METADATA.image,
-        width: 1200,
-        height: 630,
-        alt: SITE_METADATA.title,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: SITE_METADATA.title,
-    description: SITE_METADATA.description,
-    images: [SITE_METADATA.image],
-    creator: SITE_METADATA.twitter,
-  },
-};
+export const metadata = generateMetadata();
+export const viewport = generateViewport();
 
 export default function RootLayout({
   children,
@@ -46,6 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
+      <head />
       <body>
         <ThemeProvider
           attribute="class"

@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { CodeBlock } from "./code-block";
 import { MermaidDiagram } from "../mermaid";
+import { CodeBlock } from "./code-block";
 
 export interface MDXPreProps extends React.HTMLAttributes<HTMLPreElement> {
   children: React.ReactNode;

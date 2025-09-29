@@ -10,8 +10,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
 import { forwardRef } from "react";
-import { Card, CardContent } from "./card";
 import { cn } from "@/lib/utils";
+import { Card, CardContent } from "./card";
 
 export interface LinkCardProps {
   /** 链接标题 */

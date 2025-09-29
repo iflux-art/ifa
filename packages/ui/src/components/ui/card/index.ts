@@ -1,12 +1,11 @@
 export {
   Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
   CardAction,
-  CardDescription,
   CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "./card";
-
-export { LinkCard } from "./link-card";
 export type { LinkCardProps } from "./link-card";
+export { LinkCard } from "./link-card";

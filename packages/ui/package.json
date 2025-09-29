@@ -90,7 +90,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "storybook": "^9.1.6",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "^4.1.13",
     "tsup": "^8.0.1",
     "typescript": "^5.9.2",
     "vite": "^7.1.6",
@@ -157,6 +157,14 @@
     "./badge": {
       "types": "./dist/components/ui/badge.d.ts",
       "import": "./dist/components/ui/badge.js"
+    },
+    "./not-found": {
+      "types": "./dist/components/ui/not-found.d.ts",
+      "import": "./dist/components/ui/not-found.js"
+    },
+    "./loading": {
+      "types": "./dist/components/ui/loading.d.ts",
+      "import": "./dist/components/ui/loading.js"
     },
     "./mdx": {
       "types": "./dist/components/mdx/index.d.ts",

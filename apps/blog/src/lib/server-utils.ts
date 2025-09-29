@@ -34,7 +34,7 @@ export function getAllBlogMeta(): {
 
   scanDirectory(blogDir);
 
-  return files.map((filePath) => {
+  const posts = files.map((filePath) => {
     const fileContent = fs.readFileSync(filePath, "utf8");
     const { data } = matter(fileContent);
     const relativePath = path.relative(blogDir, filePath);
@@ -48,6 +48,19 @@ export function getAllBlogMeta(): {
       frontmatter: data as BlogFrontmatter,
     };
   });
+
+  // 按日期倒序排序（最新的文章在前面）
+  posts.sort((a, b) => {
+    const dateA = a.frontmatter.date
+      ? new Date(a.frontmatter.date).getTime()
+      : 0;
+    const dateB = b.frontmatter.date
+      ? new Date(b.frontmatter.date).getTime()
+      : 0;
+    return dateB - dateA;
+  });
+
+  return posts;
 }
 
 export function getAllTagsWithCount(): { name: string; count: number }[] {

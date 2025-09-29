@@ -17,6 +17,8 @@ export default defineConfig((options) => ({
     "src/components/ui/card/link-card.tsx",
     "src/components/ui/back-button.tsx",
     "src/components/ui/badge.tsx",
+    "src/components/ui/not-found.tsx",
+    "src/components/ui/loading.tsx",
     "src/components/twikoo-comment.tsx",
     // MDX 组件导出
     "src/components/mdx/index.ts",
@@ -82,6 +84,8 @@ export default defineConfig((options) => ({
       "dist/components/ui/card/link-card.js",
       "dist/components/ui/back-button.js",
       "dist/components/ui/badge.js",
+      "dist/components/ui/not-found.js",
+      "dist/components/ui/loading.js",
       "dist/components/twikoo-comment.js",
       "dist/components/mdx/client-mdx-renderer.js"
     ];
