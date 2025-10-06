@@ -4,7 +4,7 @@
 
 ## 🚀 应用程序
 
-- **Website** - 公司官方网站
+- **Web** - 公司官方网站
 - **Blog** - 基于 Markdown 的博客系统
 - **Docs** - 带搜索功能的技术文档
 - **Hub** - 书签管理系统
@@ -23,16 +23,13 @@
 
 ### 共享包
 
-- `@repo/ui` - 共享 UI 组件
 - `@repo/utils` - 工具函数
-- `@repo/tailwind-config` - Tailwind CSS 配置
-- `@repo/typescript-config` - TypeScript 配置
 
 ### 一键独立部署
 
 要独立部署应用程序：
 
-1. 下载或克隆特定的应用程序目录（例如 `apps/docs`）
+1. 下载或克隆特定的应用程序目录（例如 [apps/web](file:///c:/project/ifa/apps/web)）
 2. 安装依赖并构建应用程序：
    ```bash
    pnpm install
@@ -62,7 +59,7 @@ pnpm init
 
 ```bash
 # 运行特定应用
-pnpm --filter website dev
+pnpm --filter web dev
 pnpm --filter blog build
 ```
 
@@ -71,9 +68,6 @@ pnpm --filter blog build
 ```bash
 # 运行所有测试
 pnpm test
-
-# 运行特定包的测试
-pnpm --filter @repo/ui test
 ```
 
 ## 📝 贡献

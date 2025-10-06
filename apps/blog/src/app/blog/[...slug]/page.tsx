@@ -9,7 +9,7 @@ import {
 import { ContentDisplay } from "@/features/blog/components/display";
 import ClientMDXRenderer from "@/features/blog/components/mdx/client-mdx-renderer";
 import { createBlogBreadcrumbs, getBlogContent } from "@/features/blog/lib";
-import { TwikooComment } from "@/features/comment";
+import { TwikooComment } from "@/components/comment";
 import { TableOfContentsCard } from "@/features/navigation";
 import { handleContentError } from "@/lib/utils/error";
 

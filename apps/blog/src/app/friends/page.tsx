@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { AppGrid, PageContainer } from "@/components/layout";
-import { TwikooComment } from "@/features/comment";
+import { TwikooComment } from "@/components/comment";
 import {
   FriendLinkApplication,
   FriendLinkCard,
-} from "@/features/friends/components";
-import friendsData from "@/features/friends/data/friends.json";
+} from "@/components/friends/components";
+import friendsData from "@/components/friends/data/friends.json";
 import {
   DEFAULT_FRIENDS_CONFIG,
   hasFriendsData,
   processFriendsData,
-} from "@/features/friends/lib";
-import type { FriendLink } from "@/features/friends/types";
+} from "@/components/friends/lib";
+import type { FriendLink } from "@/components/friends/types";
 
 export const metadata: Metadata = {
   title: "友情链接",

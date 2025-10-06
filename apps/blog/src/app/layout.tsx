@@ -2,7 +2,7 @@ import "./globals.css";
 import type React from "react";
 import { Footer } from "@/components/layout";
 import { MainNavbar } from "@/features/navbar/components/main-navbar";
-import { ThemeProvider } from "@/features/theme/theme-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 /**
  * 导入集中管理的元数据配置

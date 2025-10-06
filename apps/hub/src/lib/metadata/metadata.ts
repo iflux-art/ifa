@@ -4,13 +4,21 @@
  */
 
 import type { Metadata, Viewport } from "next";
-import { SITE_METADATA, VIEWPORT_CONFIG } from "@/config/metadata";
+import { SITE_METADATA } from "@/config/metadata";
 
 /**
  * 生成视口配置
  */
 export function generateViewport(): Viewport {
-  return VIEWPORT_CONFIG;
+  return {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 2,
+    themeColor: [
+      { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+      { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    ],
+  };
 }
 
 /**

@@ -53,3 +53,6 @@ export { Input } from "./ui/input";
 export { Label } from "./ui/label";
 export { Switch } from "./ui/switch";
 export { Textarea } from "./ui/textarea";
+
+// ==================== Friends 组件 ====================
+export { FriendLinkApplication, FriendsPageContainer } from "./friends";

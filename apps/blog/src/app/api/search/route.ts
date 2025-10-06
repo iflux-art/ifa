@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { performServerSearch } from "@/features/search/lib/server-search";
+import { performServerSearch } from "@/components/search/lib/server-search";
 import { setCacheHeaders } from "@/lib/api/cache-utils";
 
 export async function GET(request: NextRequest) {

@@ -10,7 +10,7 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -48,6 +48,9 @@ export const LinkCard = forwardRef<HTMLAnchorElement, LinkCardProps>(
     },
     ref,
   ) => {
+    // 添加状态跟踪hover
+    const [isHovered, setIsHovered] = useState(false);
+
     // 内联图标渲染逻辑
     const renderIcon = () => {
       // 获取标题首个字符
@@ -102,10 +105,12 @@ export const LinkCard = forwardRef<HTMLAnchorElement, LinkCardProps>(
     const cardContent = (
       <Card
         className={cn(
-          "group transition-all duration-300 hover:scale-[1.01] hover:border-primary/50",
+          "group transition-all duration-300 hover:scale-[1.01] hover:border-primary/50 relative",
           className,
         )}
         style={cardStyle}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         <CardContent className="flex h-full items-center p-4">
           <div className="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-muted">
@@ -126,6 +131,17 @@ export const LinkCard = forwardRef<HTMLAnchorElement, LinkCardProps>(
             {children && <div className="mt-2">{children}</div>}
           </div>
         </CardContent>
+
+        {/* Hover状态描述tooltip */}
+        {description && isHovered && (
+          <div
+            className="absolute bottom-full left-1/2 mb-2 w-64 -translate-x-1/2 transform rounded-md bg-background p-3 shadow-lg border"
+            style={{ zIndex: 1000 }}
+          >
+            <p className="text-sm text-foreground">{description}</p>
+            <div className="absolute bottom-0 left-1/2 h-2 w-2 -translate-x-1/2 translate-y-1 rotate-45 bg-background border-r border-b"></div>
+          </div>
+        )}
       </Card>
     );
 

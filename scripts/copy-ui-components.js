@@ -6,7 +6,7 @@ const sourceApps = [
   'apps/blog/src/components/ui',
   'apps/docs/src/components/ui',
   'apps/hub/src/components/ui',
-  'apps/website/src/components/ui'
+  'apps/web/src/components/ui'
 ];
 const targetDir = 'packages/ui/src/components';
 

@@ -3,7 +3,7 @@ import type {
   FriendLink,
   FriendLinkRequirement,
   FriendsPageConfig,
-} from "@/features/friends/types";
+} from "@/components/friends/types";
 
 // 状态接口
 export interface FriendsState {

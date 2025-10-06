@@ -1,7 +1,7 @@
 "use client";
 
 import { useNavbarScroll } from "@/features/navbar/hooks/use-navbar-scroll";
-import { ThemeToggle } from "@/features/theme/theme-toggle";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
 import { GitHubButton, SearchButton, TravelButton } from "@/components/button";
