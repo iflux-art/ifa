@@ -1,7 +1,7 @@
 "use client";
 
-import { BookOpen, ExternalLink, FileText, Link, Search } from "lucide-react";
-import { useEffect, useMemo } from "react";
+import { FileText, Search } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
@@ -10,9 +10,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import type { SearchResult } from "@/components/search/types";
+import type { SearchResult } from "@/components/search/search-types";
 import { useAppStore } from "@/stores";
-import { useSearchState } from "./hooks/use-search-state";
+import { useSearchState } from "./use-search-state";
 
 // 搜索结果项组件
 interface SearchResultItemProps {
@@ -26,19 +26,6 @@ const SearchResultItem = ({
   index,
   onResultClick,
 }: SearchResultItemProps) => {
-  const getIcon = (type: string) => {
-    switch (type) {
-      case "link":
-        return <Link className="h-4 w-4" />;
-      case "blog":
-        return <FileText className="h-4 w-4" />;
-      case "doc":
-        return <BookOpen className="h-4 w-4" />;
-      default:
-        return <ExternalLink className="h-4 w-4" />;
-    }
-  };
-
   return (
     <button
       type="button"
@@ -47,12 +34,14 @@ const SearchResultItem = ({
       onClick={() => onResultClick(result)}
     >
       <div className="flex items-start gap-3">
-        <div className="mt-1 text-muted-foreground">{getIcon(result.type)}</div>
+        <div className="mt-1 text-muted-foreground">
+          <FileText className="h-4 w-4" />
+        </div>
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex items-center gap-2">
             <h4 className="truncate text-sm font-medium">{result.title}</h4>
             <Badge variant="secondary" className="text-xs">
-              {result.type}
+              文章
             </Badge>
           </div>
           {result.description && (
@@ -127,17 +116,44 @@ interface SearchInputProps {
   onChange: (value: string) => void;
 }
 
-const SearchInput = ({ query, onChange }: SearchInputProps) => (
-  <div className="relative mb-4">
-    <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
-    <Input
-      placeholder="搜索链接、文章、文档..."
-      value={query}
-      onChange={(e) => onChange(e.target.value)}
-      className="pl-10"
-    />
-  </div>
-);
+const SearchInput = ({ query, onChange }: SearchInputProps) => {
+  // 添加状态来跟踪输入法组合状态
+  const [_isComposing, setIsComposing] = useState(false);
+
+  // 处理输入法组合开始事件
+  const handleCompositionStart = () => {
+    setIsComposing(true);
+  };
+
+  // 处理输入法组合结束事件
+  const handleCompositionEnd = (
+    e: React.CompositionEvent<HTMLInputElement>,
+  ) => {
+    setIsComposing(false);
+    // 在组合结束后触发 onChange 事件
+    onChange(e.currentTarget.value);
+  };
+
+  // 处理输入事件
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // 正常情况下都要触发 onChange 回调来更新状态
+    onChange(e.target.value);
+  };
+
+  return (
+    <div className="relative mb-4">
+      <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
+      <Input
+        placeholder="搜索博客文章..."
+        value={query}
+        onChange={handleChange}
+        onCompositionStart={handleCompositionStart}
+        onCompositionEnd={handleCompositionEnd}
+        className="pl-10"
+      />
+    </div>
+  );
+};
 
 interface SearchDialogProps {
   open: boolean;
@@ -180,7 +196,8 @@ export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
         return;
       }
 
-      search(searchQuery).catch((error) => {
+      // 只搜索博客类型
+      search(searchQuery, { type: "blog" }).catch((error) => {
         showError(error instanceof Error ? error.message : "搜索失败");
       });
     };
@@ -201,9 +218,7 @@ export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
   }, [query, performSearch, resetSearch]);
 
   const handleResultClick = (result: SearchResult) => {
-    if (result.url) {
-      window.open(result.url, "_blank");
-    } else if (result.path) {
+    if (result.path) {
       window.location.href = result.path;
     }
     onOpenChange(false);

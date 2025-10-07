@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { linkService } from "@/features/links/services/link-service";
-import type { LinksItem } from "@/features/links/types";
+import { linkService } from "@/components/links/services/link-service";
+import type { LinksItem } from "@/components/links/types";
 import { setCacheHeaders } from "@/lib/api/cache-utils";
 
 // 添加缓存变量

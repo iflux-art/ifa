@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllPosts } from "@/features/blog/lib";
+import { getAllPosts } from "@/components/posts/lib";
 import { setCacheHeaders } from "@/lib/api/cache-utils";
 
 export async function GET() {

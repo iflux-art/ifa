@@ -3,9 +3,9 @@
  */
 
 // 异步操作工具
-export { executeAsyncOperation, executeWithRetry } from "@/lib/utils/async";
+export { executeAsyncOperation, executeWithRetry } from "./utils/async";
 // 错误处理工具
-export type { ErrorInfo, LogOptions } from "@/lib/utils/error";
+export type { ErrorInfo, LogOptions } from "./utils/error";
 export {
   classifyError,
   getUserFriendlyMessage,
@@ -13,13 +13,7 @@ export {
   handleContentError,
   handleNetworkError,
   logError,
-} from "@/lib/utils/error";
-// 状态管理工具
-export {
-  createConfigManager,
-  createFilteredStateManager,
-  createStandardStateActions,
-} from "@/lib/utils/state";
+} from "./utils/error";
 // API工具
 export {
   createApiSuccess,
@@ -68,13 +62,4 @@ export {
 // 布局工具
 export { getContainerClassName } from "./layout/layout-utils";
 // ==================== 元数据和SEO工具函数 ====================
-export {
-  generateArticleMetadata,
-  generateMetadata,
-  generateProfileMetadata,
-  generateViewport,
-} from "./metadata/metadata";
-export {
-  generateDocsMetadata,
-  generateSEOMetadata,
-} from "./metadata/seo-utils";
+// 移除了 generateMetadata 等工具函数，直接在 layout.tsx 中使用 SITE_METADATA 构建元数据

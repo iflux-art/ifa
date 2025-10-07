@@ -1,12 +1,11 @@
 # Next.js 单体仓库项目
 
-一个基于 Next.js App Router、pnpm workspace 和 Turborepo 构建的现代化单体仓库项目。本项目包含四个可以一起开发或独立部署的独立应用程序。
+一个基于 Next.js App Router、pnpm workspace 和 Turborepo 构建的现代化单体仓库项目。本项目包含三个可以一起开发或独立部署的独立应用程序。
 
 ## 🚀 应用程序
 
 - **Web** - 公司官方网站
 - **Blog** - 基于 Markdown 的博客系统
-- **Docs** - 带搜索功能的技术文档
 - **Hub** - 书签管理系统
 
 ## 🏗️ 架构

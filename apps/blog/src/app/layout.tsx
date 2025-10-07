@@ -1,20 +1,54 @@
 import "./globals.css";
 import type React from "react";
-import { Footer } from "@/components/layout";
-import { MainNavbar } from "@/features/navbar/components/main-navbar";
+import type { Metadata } from "next";
+import { Footer } from "@/components";
+import { MainNavbar } from "@/components/navbar/main-navbar";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { SITE_METADATA } from "@/config";
 
-/**
- * 导入集中管理的元数据配置
- * Next.js要求这些配置必须从layout.tsx中导出，这是一个约定
- * 1. 先从配置文件导入 - 便于集中管理和复用
- * 2. 然后再导出 - 满足Next.js的约定要求
- */
-import { generateMetadata, generateViewport } from "@/lib/metadata";
+// 直接使用 Next.js 的 Metadata API 构建元数据，简化 SEO 配置
+export const metadata: Metadata = {
+  title: SITE_METADATA.title,
+  description: SITE_METADATA.description,
+  keywords: [...SITE_METADATA.keywords],
+  authors: [{ name: SITE_METADATA.author }],
+  creator: SITE_METADATA.author,
+  publisher: SITE_METADATA.author,
+  metadataBase: new URL(SITE_METADATA.url),
+  openGraph: {
+    type: "website",
+    locale: SITE_METADATA.locale,
+    url: SITE_METADATA.url,
+    title: SITE_METADATA.title,
+    description: SITE_METADATA.description,
+    siteName: SITE_METADATA.title,
+    images: [
+      {
+        url: SITE_METADATA.image,
+        width: 1200,
+        height: 630,
+        alt: SITE_METADATA.title,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_METADATA.title,
+    description: SITE_METADATA.description,
+    images: [SITE_METADATA.image],
+    creator: SITE_METADATA.twitter,
+  },
+};
 
-// 导出元数据配置 - Next.js会在构建时处理这些导出
-export const metadata = generateMetadata();
-export const viewport = generateViewport();
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 2,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html

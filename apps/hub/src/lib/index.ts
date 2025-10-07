@@ -1,9 +1,16 @@
 /**
  * 工具函数统一导出
- * 整合所有通用工具函数，避免重复实现
  */
 
-// ==================== 验证工具函数 ====================
+// 从 utils 导出
+export { cn } from "@/lib/utils/core";
+export { classifyError, logError } from "@/lib/utils/error";
+export {
+  debounce,
+  debounceSync,
+  filterUndefinedValues,
+} from "@/lib/utils/helpers";
+export { createResetFunction } from "@/lib/utils/store";
 export {
   isValidCategory,
   isValidUrl,
@@ -14,16 +21,22 @@ export {
   validateRequiredFields,
   validateStringLength,
 } from "@/lib/utils/validation";
-// 从 api-middleware 导出
+
+// 从 api 导出
+export type { ApiResponse } from "./api/api-client";
+export {
+  apiRequest,
+  del,
+  get,
+  post,
+  put,
+} from "./api/api-client";
 export type { MiddlewareResult } from "./api/api-middleware";
 export { withCORS } from "./api/api-middleware";
-// 从 api-paths 导出
 export {
   CONTENT_API_PATHS,
   SEARCH_API_PATHS,
 } from "./api/api-paths";
-// ==================== API工具函数 ====================
-// 从 api-utils 导出
 export type {
   ApiErrorResponse,
   ApiErrorType,
@@ -35,10 +48,9 @@ export {
   createApiError,
   createApiSuccess,
 } from "./api/api-utils";
+
+// 布局工具
+export { getContainerClassName } from "./layout/layout-utils";
+
 // ==================== 元数据和SEO工具函数 ====================
-export {
-  generateArticleMetadata,
-  generateMetadata,
-  generateViewport,
-} from "./metadata/metadata";
-export { generateSEOMetadata } from "./metadata/seo-utils"; // 基础元数据生成函数和SEO工具函数
+// 移除了 generateMetadata 等工具函数，直接在 layout.tsx 中使用 SITE_METADATA 构建元数据

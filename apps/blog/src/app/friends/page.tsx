@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import { AppGrid, PageContainer } from "@/components/layout";
+import { AppGrid, LayoutContainer } from "@/components/layout";
 import { TwikooComment } from "@/components/comment";
-import {
-  FriendLinkApplication,
-  FriendLinkCard,
-} from "@/components/friends/components";
-import friendsData from "@/components/friends/data/friends.json";
+import { FriendLinkApplication } from "@/components/friends/friend-link-application";
+import { FriendLinkCard } from "@/components/friends/link-card";
+import friendsData from "@/components/friends/friends.json";
 import {
   DEFAULT_FRIENDS_CONFIG,
   hasFriendsData,
   processFriendsData,
-} from "@/components/friends/lib";
-import type { FriendLink } from "@/components/friends/types";
+} from "@/components/friends";
+import type { FriendLink } from "@/components/friends";
 
 export const metadata: Metadata = {
   title: "友情链接",
@@ -32,7 +30,7 @@ const FriendsPage = () => {
   // 如果没有友链数据，显示空状态
   if (!hasFriendsData(friendsItems)) {
     return (
-      <PageContainer config={{ layout: "narrow" }}>
+      <LayoutContainer layout="narrow">
         <div className="flex min-h-[50vh] items-center justify-center">
           <div className="text-center">
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight lg:text-5xl">
@@ -49,12 +47,12 @@ const FriendsPage = () => {
             </a>
           </div>
         </div>
-      </PageContainer>
+      </LayoutContainer>
     );
   }
 
   return (
-    <PageContainer config={{ layout: "narrow" }}>
+    <LayoutContainer layout="narrow">
       <div>
         {/* 友链列表网格 */}
         <AppGrid columns={4} className="items-stretch">
@@ -82,7 +80,7 @@ const FriendsPage = () => {
           </div>
         )}
       </div>
-    </PageContainer>
+    </LayoutContainer>
   );
 };
 

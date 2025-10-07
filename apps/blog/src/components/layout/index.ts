@@ -8,13 +8,10 @@ export {
   NAV_DESCRIPTIONS,
   NAV_ITEMS,
   NAV_PATHS,
-} from "@/features/navbar/components/nav-config";
-export { Breadcrumb, Sidebar, SidebarWrapper } from "@/features/navigation";
+} from "@/components/navbar/nav-config";
+export { SidebarWrapper } from "@/components/sidebar";
+export { Breadcrumb } from "@/components/posts";
 // 布局结构组件
 export { AppGrid } from "./app-grid";
 // 导航相关组件
-export { Footer } from "./footer";
 export { LayoutContainer, type LayoutContainerProps } from "./layout-container";
-export { MultiLayout } from "./multi-layout";
-export { PageContainer, type PageContainerProps } from "./page-container";
-export { ResponsiveGrid } from "./responsive-grid";

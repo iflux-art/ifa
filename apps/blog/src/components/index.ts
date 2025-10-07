@@ -12,7 +12,7 @@ export {
   MDXComponents,
   MDXImg,
   MDXLink,
-} from "@/features/blog/components/mdx";
+} from "@/components/mdx";
 
 // ==================== 主题提供者 ====================
 // 主题组件已移动到 features/theme 目录
@@ -21,6 +21,16 @@ export {
 export { GitHubButton } from "./button/github-button";
 export { SearchButton } from "./button/search-button";
 export { TravelButton } from "./button/travel-button";
+
+// ==================== 侧边栏组件 ====================
+export {
+  LatestPostsCard,
+  RelatedPostsCard,
+  TagCloudCard,
+} from "./sidebar";
+
+// ==================== 底栏组件 ====================
+export { Footer } from "./footer";
 
 // ==================== 卡片组件 ====================
 // 通用卡片组件目录
@@ -56,3 +66,24 @@ export { Textarea } from "./ui/textarea";
 
 // ==================== Friends 组件 ====================
 export { FriendLinkApplication, FriendsPageContainer } from "./friends";
+
+// ==================== Navbar 组件 ====================
+export { MainNavbar } from "./navbar";
+export type { NavConfigItem } from "./navbar/nav-config";
+export {
+  NAV_DESCRIPTIONS,
+  NAV_ITEMS,
+  NAV_PATHS,
+} from "./navbar/nav-config";
+export { useActiveSection } from "./navbar/use-active-section";
+export { useNavbarScroll } from "./navbar/use-navbar-scroll";
+export type {
+  BaseNavItem,
+  BaseSearchResult,
+  BreadcrumbItem,
+  Heading,
+  NavbarSearchResult,
+  NestedNavItem,
+  SidebarItem,
+  SidebarProps,
+} from "./navbar/types";

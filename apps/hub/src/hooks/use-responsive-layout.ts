@@ -5,7 +5,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo } from "react";
-import { useLayoutStore } from "@/stores";
+import { useLayoutStore } from "@/components/layout/layout-store";
 
 /**
  * 响应式布局 Hook

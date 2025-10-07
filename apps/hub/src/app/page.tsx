@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LINKS_PAGE_METADATA } from "@/config";
-import { LinksPageContainer } from "@/features/links/components";
+import { LinksPageContainer } from "@/components/links/components";
 
 /**
  * 首页元数据

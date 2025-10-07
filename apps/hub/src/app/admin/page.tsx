@@ -5,7 +5,8 @@ import { PageContainer } from "@/components/layout";
 
 // 使用动态导入来加载网址管理页面组件
 const LinksAdminComponent = dynamicImport(
-  () => import("@/features/admin/components").then((mod) => mod.LinksAdminPage),
+  () =>
+    import("@/components/admin/components").then((mod) => mod.LinksAdminPage),
   {
     ssr: false, // 管理页面不需要服务端渲染
   },

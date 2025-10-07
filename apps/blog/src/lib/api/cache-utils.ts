@@ -73,7 +73,6 @@ export function setCacheHeaders(
 export function getCacheStrategy(contentType: string): CacheStrategy {
   switch (contentType) {
     case "blog-posts":
-    case "docs-structure":
     case "links-data":
       return "semiStatic";
     case "search-results":

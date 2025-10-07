@@ -1,8 +1,20 @@
 "use client";
 
 import { gridColsMap, gridGapMap } from "@/lib/layout/responsive-utils";
-import type { AppGridProps } from "@/types";
 import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
+
+/**
+ * AppGrid 相关类型定义
+ */
+interface AppGridProps {
+  children?: ReactNode;
+  className?: string;
+  columns?: 1 | 2 | 3 | 4 | 5;
+  gap?: "small" | "default" | "large";
+  rowGap?: string; // 新增：行间距
+  columnGap?: string; // 新增：列间距
+}
 
 /**
  * 通用网格布局组件

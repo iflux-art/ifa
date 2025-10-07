@@ -3,12 +3,12 @@ import { cn } from "@/lib/utils";
 
 export type { ThreeColumnGridProps } from "@/types";
 
-import { SidebarWrapper } from "@/features/sidebar/components";
+import { SidebarWrapper } from "@/components/sidebar";
 import {
   getMainContentClasses,
   getSidebarClasses,
 } from "@/lib/layout/layout-utils";
-import { useLayoutStore } from "@/stores";
+import { useLayoutStore } from "./layout-store";
 
 /**
  * 网格布局组件

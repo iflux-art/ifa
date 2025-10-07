@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { LinksItem } from "@/features/links/types";
+import type { LinksItem } from "@/components/links/types";
 
 // 状态接口
 export interface AdminState {

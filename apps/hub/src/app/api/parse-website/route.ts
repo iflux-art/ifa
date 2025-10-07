@@ -1,5 +1,5 @@
 import type { NextRequest } from "next/server";
-import { parseWebsite } from "@/features/website-parser/lib/parser";
+import { parseWebsite } from "@/components/website-parser/parser";
 import { withPublicApi } from "@/lib/api/api-middleware";
 import { ApiErrors, createApiSuccess } from "@/lib/api/api-utils";
 import { isValidUrl } from "@/lib/utils/validation";

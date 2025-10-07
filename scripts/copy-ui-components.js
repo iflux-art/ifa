@@ -4,7 +4,6 @@ const path = require('path');
 // 定义源目录和目标目录
 const sourceApps = [
   'apps/blog/src/components/ui',
-  'apps/docs/src/components/ui',
   'apps/hub/src/components/ui',
   'apps/web/src/components/ui'
 ];

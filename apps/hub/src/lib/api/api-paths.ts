@@ -51,5 +51,4 @@ export const API_PATHS = {
   search: SEARCH_API_PATHS,
   analytics: ANALYTICS_API_PATHS,
   notification: NOTIFICATION_API_PATHS,
-  docs: CONTENT_API_PATHS, // 为文档API提供别名以保持向后兼容性
 } as const;

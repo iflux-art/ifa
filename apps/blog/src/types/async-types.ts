@@ -12,7 +12,7 @@ export interface UseAsyncOptions<T> {
   /** 操作失败时的回调函数 */
   onError?: (error: unknown) => void;
   /** 内容类型（用于错误处理） */
-  contentType?: "blog" | "docs" | "links";
+  contentType?: "blog" | "links";
   /** 内容ID（用于错误处理） */
   contentId?: string;
   /** 数据验证函数 */

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 // 动态导入博客页面容器组件
 const BlogPageContainer = dynamic(
   () =>
-    import("@/features/blog/components/blog-page").then(
+    import("@/components/layout/blog-page").then(
       (mod) => mod.BlogPageContainer,
     ),
   {

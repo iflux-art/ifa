@@ -28,8 +28,7 @@
       "@/utils/*": ["./src/lib/utils/*"],
       "@/types/*": ["./src/types/*"],
       "@/hooks/*": ["./src/hooks/*"],
-      "@/config/*": ["./src/config/*"],
-      "@/features/*": ["./src/features/*"]
+      "@/config/*": ["./src/config/*"]
     }
   },
   "include": [

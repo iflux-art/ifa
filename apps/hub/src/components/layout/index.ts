@@ -33,5 +33,7 @@ export {
   NAV_DESCRIPTIONS,
   NAV_ITEMS,
   NAV_PATHS,
-} from "@/features/navbar/types/nav-config";
-export { Sidebar, SidebarWrapper } from "@/features/sidebar/components";
+} from "@/components/navbar/nav-config";
+export { Sidebar, SidebarWrapper } from "@/components/sidebar";
+// 类型导出
+export type { PageHeaderProps } from "./layout-types";

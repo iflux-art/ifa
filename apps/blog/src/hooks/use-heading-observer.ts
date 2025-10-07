@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Heading } from "@/features/navbar/types";
+
+// 定义 Heading 类型以确保与 TocHeading 兼容
+interface Heading {
+  level: number;
+  text: string;
+  id: string;
+}
 
 export function useHeadingObserver(
   headings: Heading[],
   options = {
-    rootMargin: "-100px 0px -80% 0px",
-    threshold: 0.1,
+    rootMargin: "-20% 0px -80% 0px",
+    threshold: 0.2,
   },
 ) {
   const [activeId, setActiveId] = useState<string>("");

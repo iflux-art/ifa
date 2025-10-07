@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { searchBlogPosts } from "@/features/blog/lib/blog-search";
-import type { BlogSearchResult } from "@/features/blog/types";
+import { performServerSearch } from "@/components/search/server-search";
+import type { BlogSearchResult } from "@/components/posts/blog-types";
+import type { SearchResult } from "@/components/search/search-types";
 
 export async function GET(request: NextRequest) {
   try {
@@ -15,9 +16,20 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const searchResults: BlogSearchResult[] = await searchBlogPosts(
-      query,
-      limit,
+    const searchResponse = await performServerSearch(query, "blog", limit);
+
+    // 转换 SearchResult 到 BlogSearchResult
+    const searchResults: BlogSearchResult[] = searchResponse.results.map(
+      (result: SearchResult, index) => ({
+        id: `search-result-${index}`,
+        title: result.title,
+        description: result.description,
+        category: undefined,
+        tags: result.tags,
+        date: undefined,
+        url: result.path || "",
+        score: result.score,
+      }),
     );
 
     return NextResponse.json(searchResults);

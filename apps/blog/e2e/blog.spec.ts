@@ -13,7 +13,7 @@ test.describe("Blog E2E Tests", () => {
     const firstPostLink = page.getByRole("link", { name: /post/i }).first();
     if (await firstPostLink.isVisible()) {
       await firstPostLink.click();
-      await expect(page.url()).toContain("/blog/");
+      await expect(page.url()).toContain("/posts/");
     }
   });
 });

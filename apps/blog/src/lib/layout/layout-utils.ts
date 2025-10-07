@@ -2,22 +2,38 @@
  * 页面容器和网格布局相关工具函数
  */
 
-import type {
-  GridColsMap,
-  GridGapMap,
-  PageContainerConfig,
-  PageLayoutType,
-} from "@/types";
 import {
   getResponsiveClasses as baseGetResponsiveClasses,
   gridColsMap as baseGridColsMap,
   gridGapMap as baseGridGapMap,
 } from "./responsive-utils";
+import type { LayoutContainerProps } from "@/components/layout/layout-container";
+
+// 从LayoutContainerProps中提取类型
+type PageLayoutType = NonNullable<LayoutContainerProps["layout"]>;
 
 // 重新导出以保持向后兼容性
-export const gridColsMap: GridColsMap = baseGridColsMap;
-export const gridGapMap: GridGapMap = baseGridGapMap;
+export const gridColsMap = baseGridColsMap;
+export const gridGapMap = baseGridGapMap;
 export const getResponsiveClasses = baseGetResponsiveClasses;
+
+/**
+ * 页面容器配置接口
+ */
+export interface PageContainerConfig {
+  /**
+   * 布局类型
+   */
+  layout?: PageLayoutType;
+  /**
+   * 自定义类名
+   */
+  className?: string;
+  /**
+   * 最小高度
+   */
+  minHeight?: string;
+}
 
 /**
  * 获取布局对应的CSS类名
