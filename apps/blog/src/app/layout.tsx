@@ -1,6 +1,6 @@
 import "./globals.css";
-import type React from "react";
 import type { Metadata } from "next";
+import type React from "react";
 import { Footer } from "@/components";
 import { MainNavbar } from "@/components/navbar/main-navbar";
 import { ThemeProvider } from "@/components/theme/theme-provider";
@@ -58,12 +58,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
   >
     <head />
     <body>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         {/* 页面主体布局容器 */}
         <div className="flex flex-col">
           <MainNavbar className="flex-shrink-0" />

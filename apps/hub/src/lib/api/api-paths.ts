@@ -16,39 +16,8 @@ export const SEARCH_API_PATHS = {
   Search: "/api/search",
 } as const;
 
-// 博客API路径
-export const BLOG_API_PATHS = {
-  Posts: "/api/blog/posts",
-  TagsCount: "/api/blog/tags",
-  Timeline: "/api/blog/timeline",
-} as const;
-
-// 用户API路径
-export const USER_API_PATHS = {
-  Profile: "/api/user/profile",
-  Settings: "/api/user/settings",
-  Preferences: "/api/user/preferences",
-} as const;
-
-// 分析API路径
-export const ANALYTICS_API_PATHS = {
-  PageViews: "/api/analytics/page-views",
-  UserActivity: "/api/analytics/user-activity",
-} as const;
-
-// 通知API路径
-export const NOTIFICATION_API_PATHS = {
-  Notifications: "/api/notifications",
-  Notification: (id: string) => `/api/notifications/${id}`,
-  MarkAsRead: "/api/notifications/mark-as-read",
-} as const;
-
 // 导出API_PATHS以保持向后兼容性
 export const API_PATHS = {
-  blog: BLOG_API_PATHS,
   content: CONTENT_API_PATHS,
-  user: USER_API_PATHS,
   search: SEARCH_API_PATHS,
-  analytics: ANALYTICS_API_PATHS,
-  notification: NOTIFICATION_API_PATHS,
 } as const;

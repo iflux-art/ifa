@@ -1,9 +1,12 @@
 import "./globals.css";
-import type React from "react";
-import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import type { Metadata } from "next";
+import type React from "react";
+import { ChunkLoadErrorBoundary } from "@/components/error-boundary";
+import { GlobalErrorHandler } from "@/components/global-error-handler";
 import { Footer } from "@/components/layout";
 import { MainNavbar } from "@/components/navbar/main-navbar";
+import { PerformanceInitializer } from "@/components/performance-initializer";
 import { ThemeProvider } from "@/components/theme";
 import { SITE_METADATA } from "@/config";
 
@@ -66,13 +69,17 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
           enableSystem
           disableTransitionOnChange
         >
-          {/* 页面主体布局容器 */}
-          <div className="flex flex-col">
-            <MainNavbar className="flex-shrink-0" />
-            {/* 主内容区域 */}
-            <main>{children}</main>
-            <Footer />
-          </div>
+          <PerformanceInitializer />
+          <GlobalErrorHandler />
+          <ChunkLoadErrorBoundary>
+            {/* 页面主体布局容器 */}
+            <div className="flex flex-col">
+              <MainNavbar className="flex-shrink-0" />
+              {/* 主内容区域 */}
+              <main>{children}</main>
+              <Footer />
+            </div>
+          </ChunkLoadErrorBoundary>
         </ThemeProvider>
       </body>
     </html>

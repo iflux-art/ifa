@@ -12,17 +12,9 @@ import { classifyError, handleContentError, logError } from "./error";
  */
 export async function executeAsyncOperation<T>(
   operation: () => Promise<T>,
-  options: UseAsyncOptions<T> = {},
+  options: UseAsyncOptions<T> = {}
 ): Promise<T | null> {
-  const {
-    setLoading,
-    setError,
-    onSuccess,
-    onError,
-    contentType,
-    contentId,
-    validator,
-  } = options;
+  const { setLoading, setError, onSuccess, onError, contentType, contentId, validator } = options;
 
   try {
     // 设置加载状态
@@ -103,7 +95,7 @@ export async function executeWithRetry<T>(
   operation: () => Promise<T>,
   maxRetries = 3,
   delay = 1000,
-  options: UseAsyncOptions<T> = {},
+  options: UseAsyncOptions<T> = {}
 ): Promise<T | null> {
   let lastError: unknown;
 

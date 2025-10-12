@@ -49,8 +49,5 @@ export {
   createApiSuccess,
 } from "./api/api-utils";
 
-// 布局工具
-export { getContainerClassName } from "./layout/layout-utils";
-
 // ==================== 元数据和SEO工具函数 ====================
 // 移除了 generateMetadata 等工具函数，直接在 layout.tsx 中使用 SITE_METADATA 构建元数据

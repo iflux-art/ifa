@@ -21,21 +21,47 @@ export {
 export { GitHubButton } from "./button/github-button";
 export { SearchButton } from "./button/search-button";
 export { TravelButton } from "./button/travel-button";
+// ==================== 卡片组件 ====================
+// 通用卡片组件目录
+export {} from "./cards";
 
+// ==================== 底栏组件 ====================
+export { Footer } from "./footer";
+// ==================== Friends 组件 ====================
+export {
+  FriendLinkApplication,
+  FriendsPage,
+} from "./friends";
+// ==================== Navbar 组件 ====================
+export { MainNavbar } from "./navbar";
+export type { NavConfigItem } from "./navbar/nav-config";
+export {
+  NAV_DESCRIPTIONS,
+  NAV_ITEMS,
+  NAV_PATHS,
+} from "./navbar/nav-config";
+export type {
+  BaseNavItem,
+  BaseSearchResult,
+  BreadcrumbItem,
+  Heading,
+  NavbarSearchResult,
+  NestedNavItem,
+  SidebarItem,
+  SidebarProps,
+} from "./navbar/types";
+export { useActiveSection } from "./navbar/use-active-section";
 // ==================== 侧边栏组件 ====================
 export {
   LatestPostsCard,
   RelatedPostsCard,
   TagCloudCard,
 } from "./sidebar";
-
-// ==================== 底栏组件 ====================
-export { Footer } from "./footer";
-
-// ==================== 卡片组件 ====================
-// 通用卡片组件目录
-export {} from "./cards";
-export { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+export {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "./ui/alert";
 export {
   AlertDialog,
   AlertDialogAction,
@@ -50,7 +76,10 @@ export {
 // ==================== UI 组件库 ====================
 export { BackButton } from "./ui/back-button";
 export { Badge } from "./ui/badge";
-export { Button, buttonVariants } from "./ui/button";
+export {
+  Button,
+  buttonVariants,
+} from "./ui/button";
 export {
   Card,
   CardContent,
@@ -63,27 +92,3 @@ export { Input } from "./ui/input";
 export { Label } from "./ui/label";
 export { Switch } from "./ui/switch";
 export { Textarea } from "./ui/textarea";
-
-// ==================== Friends 组件 ====================
-export { FriendLinkApplication, FriendsPageContainer } from "./friends";
-
-// ==================== Navbar 组件 ====================
-export { MainNavbar } from "./navbar";
-export type { NavConfigItem } from "./navbar/nav-config";
-export {
-  NAV_DESCRIPTIONS,
-  NAV_ITEMS,
-  NAV_PATHS,
-} from "./navbar/nav-config";
-export { useActiveSection } from "./navbar/use-active-section";
-export { useNavbarScroll } from "./navbar/use-navbar-scroll";
-export type {
-  BaseNavItem,
-  BaseSearchResult,
-  BreadcrumbItem,
-  Heading,
-  NavbarSearchResult,
-  NestedNavItem,
-  SidebarItem,
-  SidebarProps,
-} from "./navbar/types";

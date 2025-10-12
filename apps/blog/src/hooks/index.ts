@@ -3,7 +3,7 @@
  */
 
 // Navbar相关Hooks
-export { useActiveSection, useNavbarScroll } from "@/components/navbar";
+export { useActiveSection } from "@/components/navbar";
 // 缓存Hooks
 export { useAdvancedCache, useCache } from "./use-advanced-cache";
 export { useContentData } from "./use-content-data";

@@ -8,7 +8,6 @@ export interface AppUIState {
   isMobile: boolean;
 
   // 应用配置
-  theme: "light" | "dark" | "system";
   language: string;
 
   // 通知状态
@@ -35,14 +34,10 @@ export interface AppActions {
   toggleSearch: () => void;
 
   // 配置 Actions
-  setTheme: (theme: "light" | "dark" | "system") => void;
   setLanguage: (language: string) => void;
 
   // 通知 Actions
-  setNotifications: (notifications: {
-    hasUnread: boolean;
-    count: number;
-  }) => void;
+  setNotifications: (notifications: { hasUnread: boolean; count: number }) => void;
   showNotificationBadge: () => void;
   hideNotificationBadge: () => void;
   incrementNotificationCount: () => void;
@@ -68,7 +63,6 @@ export const initialState: AppUIState = {
   isSidebarOpen: false,
   isSearchOpen: false,
   isMobile: false,
-  theme: "system",
   language: "zh-CN",
   notifications: {
     hasUnread: false,
@@ -86,7 +80,6 @@ export const createAppStore = () => {
     isSidebarOpen: false,
     isSearchOpen: false,
     isMobile: false,
-    theme: "system",
     language: "zh-CN",
     notifications: {
       hasUnread: false,
@@ -100,12 +93,10 @@ export const createAppStore = () => {
     setIsSidebarOpen: (isOpen) => set({ isSidebarOpen: isOpen }),
     setIsSearchOpen: (isOpen) => set({ isSearchOpen: isOpen }),
     setIsMobile: (isMobile) => set({ isMobile }),
-    toggleSidebar: () =>
-      set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
+    toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
     toggleSearch: () => set((state) => ({ isSearchOpen: !state.isSearchOpen })),
 
     // 配置 Actions
-    setTheme: (theme) => set({ theme }),
     setLanguage: (language) => set({ language }),
 
     // 通知 Actions
@@ -135,8 +126,7 @@ export const createAppStore = () => {
       })),
 
     // 加载 Actions
-    setLoading: (isLoading, message = "") =>
-      set({ isLoading, loadingMessage: message }),
+    setLoading: (isLoading, message = "") => set({ isLoading, loadingMessage: message }),
     showError: (error) => set({ error, isLoading: false }),
     clearError: () => set({ error: null }),
 
@@ -146,7 +136,6 @@ export const createAppStore = () => {
         isSidebarOpen: false,
         isSearchOpen: false,
         isMobile: false,
-        theme: "system",
         language: "zh-CN",
         notifications: {
           hasUnread: false,

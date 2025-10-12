@@ -1,23 +1,41 @@
-import { resolve } from "node:path";
+import path from "node:path";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    globals: true,
     environment: "jsdom",
-    setupFiles: ["./src/test-setup.ts"],
-    include: ["src/**/*.{test,spec}.{js,ts,tsx}"],
-    exclude: ["e2e/**"],
+    setupFiles: ["./src/test/setup.ts"],
+    globals: true,
+    css: true,
     coverage: {
       provider: "v8",
-      reporter: ["text", "json", "html", "lcov"],
-      include: ["src/**/*.{js,ts,tsx}"],
-      exclude: ["src/**/*.{test,spec}.{js,ts,tsx}", "src/test-setup.ts"],
+      reporter: ["text", "json", "html"],
+      exclude: [
+        "node_modules/",
+        "src/test/",
+        "**/*.d.ts",
+        "**/*.config.*",
+        "**/coverage/**",
+        ".next/**",
+      ],
+      thresholds: {
+        branches: 70,
+        functions: 70,
+        lines: 70,
+        statements: 70,
+      },
     },
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./src"),
+      "@/components": path.resolve(__dirname, "./src/components"),
+      "@/lib": path.resolve(__dirname, "./src/lib"),
+      "@/utils": path.resolve(__dirname, "./src/utils"),
+      "@/hooks": path.resolve(__dirname, "./src/hooks"),
+      "@/stores": path.resolve(__dirname, "./src/stores"),
+      "@/types": path.resolve(__dirname, "./src/types"),
+      "@/config": path.resolve(__dirname, "./src/config"),
     },
   },
 });

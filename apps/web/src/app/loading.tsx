@@ -51,8 +51,7 @@ const Loading = () => {
                 opacity,
                 transition: "width 300ms ease-out",
                 transform: "translateZ(0)",
-                boxShadow:
-                  "0 0 12px color-mix(in srgb, var(--color-primary) 70%, transparent)",
+                boxShadow: "0 0 12px color-mix(in srgb, var(--color-primary) 70%, transparent)",
               }}
             />
           </div>

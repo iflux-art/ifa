@@ -18,8 +18,7 @@ pre[class*="language-"] {
   border-radius: 0.5rem;
   overflow: auto;
   max-height: 600px;
-  font-family:
-    "JetBrains Mono", "Fira Code", "Cascadia Code", "Roboto Mono", monospace;
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "Roboto Mono", monospace;
   position: relative;
   z-index: 10;
 }

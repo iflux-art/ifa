@@ -1,6 +1,6 @@
 "use client";
 
-import { LinkCard } from "@/components/cards";
+import { LinkCard } from "./link-card";
 import profileData from "./profile.json";
 
 // 定义个人资料链接类型
@@ -15,9 +15,7 @@ interface ProfileLink {
 
 export const FeaturedLinks = () => {
   // 处理个人资料数据，转换为 ProfileLink 格式
-  const profileItems: ProfileLink[] = (
-    profileData as unknown as ProfileLink[]
-  ).map((item) => {
+  const profileItems: ProfileLink[] = (profileData as unknown as ProfileLink[]).map((item) => {
     return {
       ...item,
       iconType: item.iconType ?? "image",
@@ -25,24 +23,19 @@ export const FeaturedLinks = () => {
   });
 
   return (
-    <section className="py-12 bg-background">
+    <section className="bg-background py-12">
       <div className="container mx-auto px-4">
-        <h2 className="mb-8 text-center text-3xl font-bold">关注我们</h2>
+        <h2 className="mb-8 text-center font-bold text-3xl">关注我们</h2>
         <p className="mb-12 text-center text-lg text-muted-foreground">
           在以下平台关注我们，获取最新动态
         </p>
 
         {profileItems.length > 0 && (
-          <div className="grid grid-cols-12 gap-4 items-stretch">
+          <div className="grid grid-cols-12 items-stretch gap-4">
             {profileItems.map((item) => (
               <div
                 key={item.id}
-                className="
-                  col-span-12
-                  sm:col-span-6
-                  md:col-span-3
-                  lg:col-span-2
-                "
+                className="col-span-12 sm:col-span-12 md:col-span-4 xl:col-span-3 2xl:col-span-2"
               >
                 <LinkCard
                   title={item.title}
@@ -59,3 +52,4 @@ export const FeaturedLinks = () => {
     </section>
   );
 };
+export default FeaturedLinks;

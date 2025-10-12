@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { LinksItem } from "@/components/links/types";
+import type { LinksItem } from "@/components/links/links-types";
 
 // 状态接口
 export interface LinkFilterState {
@@ -24,9 +24,6 @@ export interface LinkFilterActions {
   resetState: () => void;
 }
 
-// 派生状态接口 (已移除)
-// export type LinkFilterDerivedState = Record<string, never>;
-
 // 完整的Store接口
 export interface LinkFilterStore extends LinkFilterState, LinkFilterActions {}
 
@@ -49,8 +46,7 @@ export const createLinkFilterStore = () => {
     setSelectedTag: (tag) => set({ selectedTag: tag }),
     setFilteredItems: (items) => set({ filteredItems: items }),
     setAvailableTags: (tags) => set({ availableTags: tags }),
-    resetFilters: () =>
-      set({ selectedCategory: "", selectedTag: "", filteredItems: [] }),
+    resetFilters: () => set({ selectedCategory: "", selectedTag: "", filteredItems: [] }),
     resetState: () => set({ ...initialState }),
   }));
 };

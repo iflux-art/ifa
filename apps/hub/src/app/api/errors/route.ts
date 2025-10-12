@@ -19,10 +19,7 @@ export async function POST(request: Request) {
 
     // 验证数据
     if (!(data.message && data.timestamp)) {
-      return NextResponse.json(
-        { error: "Invalid error report" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Invalid error report" }, { status: 400 });
     }
 
     // 添加服务器时间戳
@@ -47,10 +44,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("[Error API] Error:", error);
-    return NextResponse.json(
-      { error: "Failed to process error report" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Failed to process error report" }, { status: 500 });
   }
 }
 
@@ -98,10 +92,7 @@ export function GET() {
     });
   } catch (error) {
     console.error("[Error API] Error:", error);
-    return NextResponse.json(
-      { error: "Failed to retrieve error data" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Failed to retrieve error data" }, { status: 500 });
   }
 }
 
@@ -119,9 +110,6 @@ export function DELETE() {
     });
   } catch (error) {
     console.error("[Error API] Error:", error);
-    return NextResponse.json(
-      { error: "Failed to clear error reports" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Failed to clear error reports" }, { status: 500 });
   }
 }

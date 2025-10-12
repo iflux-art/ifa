@@ -3,6 +3,8 @@
  * 这些函数可以在浏览器环境中安全运行，不依赖Node.js特定模块
  */
 
+import type { BreadcrumbItem } from "@/components/navbar/types";
+
 /**
  * 格式化日期
  * @param date 日期字符串或Date对象
@@ -51,7 +53,7 @@ export function formatNumber(num: number): string {
  */
 export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
-  delay: number,
+  delay: number
 ): (...args: Parameters<T>) => void {
   let timeoutId: NodeJS.Timeout | null;
   return (...args: Parameters<T>) => {
@@ -73,7 +75,7 @@ export function debounce<T extends (...args: unknown[]) => unknown>(
  */
 export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
-  limit: number,
+  limit: number
 ): (...args: Parameters<T>) => void {
   let inThrottle = false;
   return (...args: Parameters<T>) => {
@@ -92,9 +94,7 @@ export function throttle<T extends (...args: unknown[]) => unknown>(
  * @param items 内容项数组
  * @returns 按分类分组的对象
  */
-export function groupByCategory<T extends { category?: string }>(
-  items: T[],
-): Record<string, T[]> {
+export function groupByCategory<T extends { category?: string }>(items: T[]): Record<string, T[]> {
   return items.reduce(
     (acc, item) => {
       const category = item.category || "未分类";
@@ -104,7 +104,7 @@ export function groupByCategory<T extends { category?: string }>(
       acc[category].push(item);
       return acc;
     },
-    {} as Record<string, T[]>,
+    {} as Record<string, T[]>
   );
 }
 
@@ -113,9 +113,7 @@ export function groupByCategory<T extends { category?: string }>(
  * @param items 内容项数组
  * @returns 按标签分组的对象
  */
-export function groupByTag<T extends { tags?: string[] }>(
-  items: T[],
-): Record<string, T[]> {
+export function groupByTag<T extends { tags?: string[] }>(items: T[]): Record<string, T[]> {
   return items.reduce(
     (acc, item) => {
       const tags = item.tags || ["未标签"];
@@ -127,7 +125,7 @@ export function groupByTag<T extends { tags?: string[] }>(
       });
       return acc;
     },
-    {} as Record<string, T[]>,
+    {} as Record<string, T[]>
   );
 }
 
@@ -138,11 +136,7 @@ export function groupByTag<T extends { tags?: string[] }>(
  * @param order 排序顺序
  * @returns 排序后的内容项数组
  */
-export function sortContent<T>(
-  items: T[],
-  sortBy: keyof T,
-  order: "asc" | "desc" = "desc",
-): T[] {
+export function sortContent<T>(items: T[], sortBy: keyof T, order: "asc" | "desc" = "desc"): T[] {
   return [...items].sort((a, b) => {
     const aValue = a[sortBy];
     const bValue = b[sortBy];
@@ -152,9 +146,7 @@ export function sortContent<T>(
     if (bValue == null) return order === "asc" ? 1 : -1;
 
     if (typeof aValue === "string" && typeof bValue === "string") {
-      return order === "asc"
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue);
+      return order === "asc" ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
     }
 
     if (typeof aValue === "number" && typeof bValue === "number") {
@@ -228,11 +220,11 @@ export function extractHeadings(content: string): {
     const escapedText = escapeRegExp(heading.text);
     const headingRegex = new RegExp(
       `^(#{${heading.level}})\\s+(?:\\[[^\\]]+\\]\\([^)]+\\)|${escapedText})(?:\\s*{#[\\w-]+})?$`,
-      "gm",
+      "gm"
     );
     processedContent = processedContent.replace(
       headingRegex,
-      `$1 ${heading.text} {#${heading.id}}`,
+      `$1 ${heading.text} {#${heading.id}}`
     );
   });
 
@@ -250,4 +242,92 @@ export interface TocHeading {
   text: string;
   /** 标题级别 */
   level: number;
+}
+
+/**
+ * 获取博客目录的显示名称
+ * 根据实际的文件夹结构返回友好的显示名称
+ */
+function getBlogDirectoryTitle(segment: string): string {
+  const directoryTitleMap: Record<string, string> = {
+    ai: "人工智能",
+    dev: "开发技术",
+    essays: "随笔感悟",
+    music: "音乐制作",
+    ops: "运维部署",
+    project: "项目经验",
+    software: "软件工具",
+  };
+
+  return directoryTitleMap[segment] || segment;
+}
+
+/**
+ * 生成面包屑导航的通用函数
+ */
+export function generateBreadcrumbs({
+  basePath,
+  slug,
+  currentTitle,
+  startLabel,
+  segmentProcessor,
+}: {
+  basePath: string;
+  slug: string[];
+  currentTitle?: string;
+  startLabel: string;
+  segmentProcessor?: (segment: string, index: number) => string;
+}): BreadcrumbItem[] {
+  const items: BreadcrumbItem[] = [{ label: startLabel, href: `/${basePath}` }];
+  let currentPath = "";
+
+  slug.forEach((segment, index) => {
+    const isLastSegment = index === slug.length - 1;
+    currentPath += `/${segment}`;
+
+    const label = (() => {
+      if (segmentProcessor) {
+        return segmentProcessor(segment, index);
+      }
+      if (isLastSegment && currentTitle) {
+        return currentTitle;
+      }
+      return segment;
+    })();
+
+    if (isLastSegment) {
+      items.push({ label });
+    } else {
+      items.push({ label, href: `/${basePath}${currentPath}` });
+    }
+  });
+
+  return items;
+}
+
+/**
+ * 创建博客面包屑导航
+ */
+export function createBlogBreadcrumbs({
+  slug,
+  title,
+}: {
+  slug: string[];
+  title: string;
+}): BreadcrumbItem[] {
+  return generateBreadcrumbs({
+    basePath: "", // 博客列表页在根路径上
+    slug,
+    currentTitle: title,
+    startLabel: "博客",
+    segmentProcessor: (segment, index) => {
+      // 如果是最后一个段落且有标题，使用标题
+      const isLastSegment = index === slug.length - 1;
+      if (isLastSegment && title) {
+        return title;
+      }
+      // 否则使用目录映射名称
+      return getBlogDirectoryTitle(segment);
+    },
+  });
 }

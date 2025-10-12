@@ -39,23 +39,8 @@ interface FriendLinkCardProps {
  * 友链卡片组件
  * 与 LinkCard 保持一致的样式和交互逻辑
  */
-export const FriendLinkCard = forwardRef<
-  HTMLAnchorElement,
-  FriendLinkCardProps
->(
-  (
-    {
-      title,
-      description,
-      href,
-      isExternal = true,
-      icon,
-      color,
-      className,
-      children,
-    },
-    ref,
-  ) => {
+export const FriendLinkCard = forwardRef<HTMLAnchorElement, FriendLinkCardProps>(
+  ({ title, description, href, isExternal = true, icon, color, className, children }, ref) => {
     // 添加状态跟踪hover
     const [isHovered, setIsHovered] = useState(false);
 
@@ -68,9 +53,7 @@ export const FriendLinkCard = forwardRef<
       if (!icon) {
         return (
           <div className="flex h-full w-full items-center justify-center">
-            <span className="text-lg font-medium text-primary">
-              {firstChar}
-            </span>
+            <span className="font-medium text-lg text-primary">{firstChar}</span>
           </div>
         );
       }
@@ -113,8 +96,8 @@ export const FriendLinkCard = forwardRef<
     const cardContent = (
       <Card
         className={cn(
-          "group transition-all duration-300 hover:scale-[1.01] hover:border-primary/50 relative",
-          className,
+          "group relative transition-all duration-300 hover:scale-[1.01] hover:border-primary/50",
+          className
         )}
         style={cardStyle}
         onMouseEnter={() => setIsHovered(true)}
@@ -126,16 +109,10 @@ export const FriendLinkCard = forwardRef<
           </div>
           <div className="flex min-w-0 flex-1 flex-col">
             <div className="mb-1 flex items-center gap-2">
-              <h3 className="truncate text-lg font-semibold">{title}</h3>
-              {isExternal && (
-                <ExternalLink className="h-4 w-4 text-muted-foreground" />
-              )}
+              <h3 className="truncate font-semibold text-lg">{title}</h3>
+              {isExternal && <ExternalLink className="h-4 w-4 text-muted-foreground" />}
             </div>
-            {description && (
-              <p className="truncate text-sm text-muted-foreground">
-                {description}
-              </p>
-            )}
+            {description && <p className="truncate text-muted-foreground text-sm">{description}</p>}
             {children && <div className="mt-2">{children}</div>}
           </div>
         </CardContent>
@@ -143,11 +120,11 @@ export const FriendLinkCard = forwardRef<
         {/* Hover状态描述tooltip */}
         {description && isHovered && (
           <div
-            className="absolute bottom-full left-1/2 mb-2 w-64 -translate-x-1/2 transform rounded-md bg-background p-3 shadow-lg border"
+            className="-translate-x-1/2 absolute bottom-full left-1/2 mb-2 w-64 transform rounded-md border bg-background p-3 shadow-lg"
             style={{ zIndex: 1000 }}
           >
-            <p className="text-sm text-foreground">{description}</p>
-            <div className="absolute bottom-0 left-1/2 h-2 w-2 -translate-x-1/2 translate-y-1 rotate-45 bg-background border-r border-b"></div>
+            <p className="text-foreground text-sm">{description}</p>
+            <div className="-translate-x-1/2 absolute bottom-0 left-1/2 h-2 w-2 translate-y-1 rotate-45 border-r border-b bg-background"></div>
           </div>
         )}
       </Card>
@@ -168,7 +145,7 @@ export const FriendLinkCard = forwardRef<
     }
 
     return <Link {...commonProps}>{cardContent}</Link>;
-  },
+  }
 );
 
 FriendLinkCard.displayName = "FriendLinkCard";

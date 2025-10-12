@@ -21,7 +21,7 @@
  */
 export function debounce<TArgs extends unknown[], TReturn>(
   func: (...args: TArgs) => Promise<TReturn>,
-  wait: number,
+  wait: number
 ): (...args: TArgs) => Promise<TReturn> {
   let timeoutId: NodeJS.Timeout;
 
@@ -48,10 +48,7 @@ export function debounce<TArgs extends unknown[], TReturn>(
  * @param delay - 延迟时间（毫秒）
  * @returns 防抖后的函数
  */
-export function debounceSync<T extends (...args: never[]) => void>(
-  fn: T,
-  delay: number,
-): T {
+export function debounceSync<T extends (...args: never[]) => void>(fn: T, delay: number): T {
   let timer: NodeJS.Timeout | null = null;
   return ((...args: Parameters<T>) => {
     if (timer) clearTimeout(timer);

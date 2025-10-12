@@ -1,9 +1,5 @@
 import { create } from "zustand";
-import type {
-  FriendLink,
-  FriendLinkRequirement,
-  FriendsPageConfig,
-} from "@/components/friends";
+import type { FriendLink, FriendLinkRequirement, FriendsPageConfig } from "./types";
 
 // 状态接口
 export interface FriendsState {

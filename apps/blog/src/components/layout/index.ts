@@ -9,9 +9,10 @@ export {
   NAV_ITEMS,
   NAV_PATHS,
 } from "@/components/navbar/nav-config";
-export { SidebarWrapper } from "@/components/sidebar";
 export { Breadcrumb } from "@/components/posts";
-// 布局结构组件
-export { AppGrid } from "./app-grid";
+export { SidebarWrapper } from "@/components/sidebar";
 // 导航相关组件
-export { LayoutContainer, type LayoutContainerProps } from "./layout-container";
+
+// 布局结构组件
+
+// 布局工具函数

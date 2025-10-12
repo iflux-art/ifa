@@ -6,7 +6,7 @@ export { GitHubButton } from "./button/github-button";
 // ==================== 布局组件导出 ====================
 export { Footer } from "./footer";
 // ==================== 业务组件导出 ====================
-export { LinkCard } from "./cards";
+export { LinkCard } from "./home/link-card";
 export { BackButton } from "./ui/back-button";
 // ==================== UI组件导出 ====================
 // 只导出项目中实际使用的UI组件

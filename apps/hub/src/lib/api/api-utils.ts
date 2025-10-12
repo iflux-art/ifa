@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { isValidUrl as isValidUrlUtil } from "@/lib/utils/validation";
+
+export { isValidUrl } from "@/lib/utils/validation";
 
 /**
  * API 错误类型
@@ -49,7 +50,7 @@ export function createApiError(
   type: ApiErrorType,
   message: string,
   details?: string,
-  status = 500,
+  status = 500
 ): NextResponse<ApiErrorResponse> {
   const errorResponse: ApiErrorResponse = {
     error: message,
@@ -67,7 +68,7 @@ export function createApiError(
 export function createApiSuccess<T>(
   data: T,
   total?: number,
-  cacheConfig?: CacheConfig,
+  cacheConfig?: CacheConfig
 ): NextResponse<ApiSuccessResponse<T>> {
   const successResponse: ApiSuccessResponse<T> = {
     data,
@@ -88,9 +89,7 @@ export function createApiSuccess<T>(
     }
 
     if (cacheConfig.staleWhileRevalidate !== undefined) {
-      cacheDirectives.push(
-        `stale-while-revalidate=${cacheConfig.staleWhileRevalidate}`,
-      );
+      cacheDirectives.push(`stale-while-revalidate=${cacheConfig.staleWhileRevalidate}`);
     }
 
     if (cacheConfig.mustRevalidate) {
@@ -121,8 +120,7 @@ export const ApiErrors = {
   unauthorized: (message = "Unauthorized access") =>
     createApiError("UNAUTHORIZED", message, undefined, 401),
 
-  forbidden: (message = "Access forbidden") =>
-    createApiError("FORBIDDEN", message, undefined, 403),
+  forbidden: (message = "Access forbidden") => createApiError("FORBIDDEN", message, undefined, 403),
 
   conflict: (message: string, details?: string) =>
     createApiError("CONFLICT", message, details, 409),
@@ -138,13 +136,6 @@ export const ApiErrors = {
       "INVALID_METHOD",
       `Method not allowed. Allowed methods: ${allowedMethods.join(", ")}`,
       undefined,
-      405,
+      405
     ),
 };
-
-/**
- * URL 验证函数
- */
-export function isValidUrl(urlString: string): boolean {
-  return isValidUrlUtil(urlString);
-}

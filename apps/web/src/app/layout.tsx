@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components";
-import { SITE_METADATA } from "@/config";
 import { MainNavbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme";
+import { SITE_METADATA } from "@/config";
 import "./globals.css";
 
 // 转换 SITE_METADATA 为 Next.js Metadata 格式

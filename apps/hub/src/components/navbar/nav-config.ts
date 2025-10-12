@@ -1,5 +1,4 @@
 import { Home, Link, type LucideIcon, PenTool } from "lucide-react";
-import type { ComponentType, ReactNode } from "react";
 
 /** 基础导航项 */
 export interface BaseNavItem {
@@ -9,8 +8,6 @@ export interface BaseNavItem {
   label: string;
   /** 链接地址 */
   href?: string;
-  /** 图标 */
-  icon?: ComponentType<{ className?: string }> | ReactNode;
   /** 是否为外部链接 */
   external?: boolean;
   /** 是否禁用 */
@@ -44,12 +41,7 @@ export const NAV_ITEMS: readonly NavConfigItem[] = [
     href: "https://blog.iflux.art/",
     description: "访问我们的技术博客",
     icon: PenTool,
-  },
-  {
-    key: "hub",
-    label: "导航",
-    description: "网站导航",
-    icon: Home,
+    external: true,
   },
   {
     key: "friends",
@@ -57,6 +49,13 @@ export const NAV_ITEMS: readonly NavConfigItem[] = [
     href: "https://blog.iflux.art/friends/",
     description: "查看我们的友情链接",
     icon: Link,
+    external: true,
+  },
+  {
+    key: "hub",
+    label: "导航",
+    description: "网站导航",
+    icon: Home,
   },
 ] as const;
 
@@ -96,5 +95,5 @@ export const NAV_PATHS: Record<string, string> = {
 // Navigation configuration validation removed for production
 
 export const NAV_DESCRIPTIONS = Object.fromEntries(
-  FLAT_NAV_ITEMS.map((item) => [item.key, item.description]),
+  FLAT_NAV_ITEMS.map((item) => [item.key, item.description])
 ) as Record<string, string>;

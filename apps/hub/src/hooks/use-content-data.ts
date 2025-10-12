@@ -103,8 +103,7 @@ export function useContentData<T>({
 
         // 有条件地添加缓存控制头
         if (forceRefresh) {
-          headerOptions["Cache-Control"] =
-            "no-cache, no-store, must-revalidate";
+          headerOptions["Cache-Control"] = "no-cache, no-store, must-revalidate";
           headerOptions.Pragma = "no-cache";
           headerOptions.Expires = "0";
         }
@@ -139,15 +138,11 @@ export function useContentData<T>({
     return request;
   };
 
-  const { data, error, loading, refetch } = useCache<T>(
-    getCacheKey(),
-    fetchData,
-    {
-      expiry: disableCache || forceRefresh ? 0 : cacheTime,
-      useMemoryCache: !(forceRefresh || disableCache),
-      useLocalStorage: !(forceRefresh || disableCache),
-    },
-  );
+  const { data, error, loading, refetch } = useCache<T>(getCacheKey(), fetchData, {
+    expiry: disableCache || forceRefresh ? 0 : cacheTime,
+    useMemoryCache: !(forceRefresh || disableCache),
+    useLocalStorage: !(forceRefresh || disableCache),
+  });
 
   return {
     data: data ?? null,

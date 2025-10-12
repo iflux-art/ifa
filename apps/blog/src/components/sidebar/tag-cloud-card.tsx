@@ -15,6 +15,7 @@ export interface TagWithCount {
 export interface TagCloudCardProps {
   allTags?: TagWithCount[];
   selectedTag?: string;
+  selectedTags?: string[];
   onTagClick?: (tag: string | null) => void;
   className?: string;
   /**
@@ -34,15 +35,13 @@ export interface TagCloudCardProps {
 export const TagCloudCard = ({
   allTags = [],
   selectedTag,
+  selectedTags,
   onTagClick,
   className,
   useDefaultRouting = false,
 }: TagCloudCardProps) => {
   const router = useRouter();
-  const sortedTags = React.useMemo(
-    () => [...allTags].sort((a, b) => b.count - a.count),
-    [allTags],
-  );
+  const sortedTags = React.useMemo(() => [...allTags].sort((a, b) => b.count - a.count), [allTags]);
 
   // 确保即使 allTags 为 undefined 也能正确处理
   const validTags = allTags || [];
@@ -50,16 +49,21 @@ export const TagCloudCard = ({
   // 如果没有标签，仍然渲染组件但显示空状态
   if (validTags.length === 0) {
     return (
-      <Card className={cn("w-full", className)}>
+      <Card
+        className={cn(
+          "w-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 active:scale-[0.98]",
+          className
+        )}
+      >
         <CardHeader className="pt-4 pb-2">
-          <CardTitle className="flex items-center gap-2 text-sm font-medium text-foreground">
+          <CardTitle className="flex items-center gap-2 font-medium text-foreground text-sm">
             <Tag className="h-3.5 w-3.5 text-primary" />
             标签
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-0 pb-4">
           <div className="hide-scrollbar max-h-[250px] overflow-y-auto sm:max-h-[300px]">
-            <p className="text-sm text-muted-foreground">暂无标签</p>
+            <p className="text-muted-foreground text-sm">暂无标签</p>
           </div>
         </CardContent>
       </Card>
@@ -81,9 +85,14 @@ export const TagCloudCard = ({
   };
 
   return (
-    <Card className={cn("w-full", className)}>
+    <Card
+      className={cn(
+        "w-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10",
+        className
+      )}
+    >
       <CardHeader className="pt-4 pb-2">
-        <CardTitle className="flex items-center gap-2 text-sm font-medium text-foreground">
+        <CardTitle className="flex items-center gap-2 font-medium text-foreground text-sm">
           <Tag className="h-3.5 w-3.5 text-primary" />
           标签
         </CardTitle>
@@ -92,17 +101,23 @@ export const TagCloudCard = ({
         <div className="hide-scrollbar max-h-[250px] overflow-y-auto sm:max-h-[300px]">
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {sortedTags.map((tag) => {
-              const isSelected = selectedTag === tag.name;
+              // 检查标签是否被选中（支持单个标签或多个标签）
+              const isSelected = selectedTag
+                ? selectedTag === tag.name
+                : selectedTags
+                  ? selectedTags.includes(tag.name)
+                  : false;
+
               return (
                 <Badge
                   key={tag.name}
                   variant={isSelected ? "default" : "secondary"}
                   className={cn(
-                    "h-6 min-h-[32px] cursor-pointer touch-manipulation px-2.5 py-1.5 text-sm font-normal transition-all duration-200 sm:h-5 sm:min-h-[20px] sm:px-2 sm:py-0.5 sm:text-[10px]",
-                    "hover:scale-105 hover:shadow-sm active:scale-95",
+                    "h-6 min-h-[32px] cursor-pointer touch-manipulation px-2.5 py-1.5 font-normal text-sm transition-all duration-200 sm:h-5 sm:min-h-[20px] sm:px-2 sm:py-0.5 sm:text-[10px]",
+                    "hover:shadow-sm active:scale-95",
                     isSelected
                       ? "bg-primary text-primary-foreground shadow-sm"
-                      : "border-0 bg-muted/60 text-muted-foreground hover:bg-primary/10 hover:text-primary active:bg-primary/20",
+                      : "border-0 bg-muted/60 text-muted-foreground hover:bg-primary/10 hover:text-primary active:bg-primary/20"
                   )}
                   onClick={() => handleTagClick(tag.name)}
                 >

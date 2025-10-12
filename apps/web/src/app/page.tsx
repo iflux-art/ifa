@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { FeaturedLinks } from "@/components/home/featured-links";
-import { HeroSection } from "@/components/home/hero-section";
+import { LazyFeaturedLinks, LazyHeroSection } from "@/components/home/lazy-components";
 
 // ==================== SEO配置 ====================
 const SEO_CONFIG = {
   title: "首页",
-  description:
-    "iFluxArt · 斐流艺创 - 智能技术与艺术创作的有机融合，探索AI与艺术的无限可能",
+  description: "iFluxArt · 斐流艺创 - 智能技术与艺术创作的有机融合，探索AI与艺术的无限可能",
   type: "website" as const,
 };
 
@@ -39,11 +37,11 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* Hero区域 */}
-      <HeroSection />
+      {/* Hero区域 - 懒加载 */}
+      <LazyHeroSection />
 
-      {/* 特色链接 */}
-      <FeaturedLinks />
+      {/* 特色链接 - 懒加载 */}
+      <LazyFeaturedLinks />
     </>
   );
 }

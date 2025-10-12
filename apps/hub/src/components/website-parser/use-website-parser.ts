@@ -5,16 +5,10 @@
  */
 
 import { useCallback, useState } from "react";
-import type {
-  ParseOptions,
-  WebsiteMetadata,
-} from "@/components/website-parser";
+import type { ParseOptions, WebsiteMetadata } from "@/components/website-parser";
 
 interface UseWebsiteParserReturn {
-  parseWebsite: (
-    url: string,
-    options?: ParseOptions,
-  ) => Promise<WebsiteMetadata | null>;
+  parseWebsite: (url: string, options?: ParseOptions) => Promise<WebsiteMetadata | null>;
   isLoading: boolean;
   error: string | null;
   lastResult: WebsiteMetadata | null;
@@ -26,25 +20,19 @@ export function useWebsiteParser(): UseWebsiteParserReturn {
   const [lastResult, setLastResult] = useState<WebsiteMetadata | null>(null);
 
   const parseWebsite = useCallback(
-    async (
-      url: string,
-      _options?: ParseOptions,
-    ): Promise<WebsiteMetadata | null> => {
+    async (url: string, _options?: ParseOptions): Promise<WebsiteMetadata | null> => {
       setIsLoading(true);
       setError(null);
 
       try {
         // 通过API路由处理网站解析，避免CORS问题
         const searchParams = new URLSearchParams({ url });
-        const response = await fetch(
-          `/api/parse-website?${searchParams.toString()}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
+        const response = await fetch(`/api/parse-website?${searchParams.toString()}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+        });
 
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -65,8 +53,7 @@ export function useWebsiteParser(): UseWebsiteParserReturn {
           return null;
         }
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : "Unknown error";
+        const errorMessage = err instanceof Error ? err.message : "Unknown error";
         setError(errorMessage);
         setLastResult(null);
         return null;
@@ -74,7 +61,7 @@ export function useWebsiteParser(): UseWebsiteParserReturn {
         setIsLoading(false);
       }
     },
-    [],
+    []
   );
 
   return {

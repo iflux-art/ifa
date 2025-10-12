@@ -37,13 +37,9 @@ async function scanContentFiles(contentType: "blog"): Promise<SearchResult[]> {
             type: "blog",
             title: frontmatter.title,
             description:
-              typeof frontmatter.description === "string"
-                ? frontmatter.description
-                : undefined,
+              typeof frontmatter.description === "string" ? frontmatter.description : undefined,
             path: `/${contentType}/${file.replace(/\.mdx$/, "")}`,
-            tags: Array.isArray(frontmatter.tags)
-              ? frontmatter.tags
-              : undefined,
+            tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : undefined,
           });
         }
       } catch {
@@ -78,7 +74,7 @@ export async function getCachedContent() {
 export async function performServerSearch(
   query: string,
   type = "blog",
-  limit = 10,
+  limit = 10
 ): Promise<{ results: SearchResult[]; total: number }> {
   if (!query.trim()) {
     return { results: [], total: 0 };

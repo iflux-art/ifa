@@ -2,18 +2,14 @@
  * 搜索引擎核心功能
  */
 
-import type {
-  SearchOptions,
-  SearchResponse,
-  SearchResult,
-} from "@/components/search/search-types";
+import type { SearchOptions, SearchResponse, SearchResult } from "@/components/search/search-types";
 
 /**
  * 执行搜索
  */
 export async function performSearch(
   query: string,
-  options: SearchOptions = {},
+  options: SearchOptions = {}
 ): Promise<SearchResponse> {
   const { type = "blog", limit = 10 } = options; // 默认只搜索博客类型
 
@@ -36,7 +32,7 @@ export async function performSearch(
     const response = await fetch(`/api/search?${searchParams}`);
 
     if (!response.ok) {
-      throw new Error(`Search failed: ${response.status}`);
+      throw new Error(`搜索失败: ${response.status}`);
     }
 
     const data: { results: SearchResult[] } = (await response.json()) as {
@@ -50,7 +46,7 @@ export async function performSearch(
       type,
     } as SearchResponse;
   } catch (error) {
-    console.error("Search error:", error);
+    console.error("搜索错误:", error);
     return {
       results: [],
       total: 0,
@@ -73,7 +69,7 @@ export function getSearchSuggestions(query: string, _limit = 5): string[] {
     // 暂时返回空数组，后续可以扩展
     return [];
   } catch (error) {
-    console.error("Search suggestions error:", error);
+    console.error("搜索建议错误:", error);
     return [];
   }
 }
@@ -82,7 +78,9 @@ export function getSearchSuggestions(query: string, _limit = 5): string[] {
  * 高亮搜索关键词
  */
 export function highlightSearchTerm(text: string, searchTerm: string): string {
-  if (!searchTerm.trim()) return text;
+  if (!searchTerm.trim()) {
+    return text;
+  }
 
   const regex = new RegExp(`(${escapeRegExp(searchTerm)})`, "gi");
   return text.replace(regex, "<mark>$1</mark>");

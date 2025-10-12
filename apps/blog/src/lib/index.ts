@@ -1,65 +1,43 @@
 /**
- * 工具函数统一导出
+ * 通用工具函数导出
+ * 集中导出所有通用工具函数，便于引用
  */
 
-// 异步操作工具
-export { executeAsyncOperation, executeWithRetry } from "./utils/async";
-// 错误处理工具
-export type { ErrorInfo, LogOptions } from "./utils/error";
+// API 相关工具函数
 export {
-  classifyError,
-  getUserFriendlyMessage,
-  handleComponentError,
+  API_PATHS,
+  // 移除不存在的类型导出
+} from "@/lib/api/api-paths";
+
+// API 缓存工具函数
+export {
+  setCacheHeaders,
+  // 移除不存在的类型导出
+} from "@/lib/api/cache-utils";
+
+// 错误处理工具函数
+export {
   handleContentError,
   handleNetworkError,
-  logError,
-} from "./utils/error";
-// API工具
+  // 移除不存在的导出
+} from "@/lib/utils/error";
+
+// Store 工具函数
+export { createResetFunction } from "@/lib/utils/store";
+
+// URL 工具函数 - 文件不存在，移除导入
+
+// 通用工具函数
 export {
-  createApiSuccess,
+  cn,
+  debounceSync,
+  filterUndefinedValues,
+} from "@/lib/utils";
+
+// 验证工具函数
+export {
   isValidUrl,
-  runMiddleware,
   validateRequiredFields,
-  withErrorHandling,
-  withPublicApi,
-  withRateLimit,
-  withValidation,
-} from "./api";
-// 从 api-middleware 导出
-export type {
-  LoggingOptions,
-  MiddlewareResult,
-  ValidationOptions,
-} from "./api/api-middleware";
-export {
-  withCORS,
-  withLogging,
-  withValidation as apiWithValidation,
-} from "./api/api-middleware";
-// 从 api-paths 导出
-export {
-  ANALYTICS_API_PATHS,
-  API_PATHS,
-  BLOG_API_PATHS,
-  CONTENT_API_PATHS,
-  NOTIFICATION_API_PATHS,
-  SEARCH_API_PATHS,
-  USER_API_PATHS,
-} from "./api/api-paths";
-// ==================== API工具函数 ====================
-// 从 api-utils 导出
-export type {
-  ApiErrorResponse,
-  ApiErrorType,
-  ApiSuccessResponse,
-  CacheConfig,
-} from "./api/api-utils";
-export {
-  ApiErrors,
-  createApiError,
-  withErrorHandling as apiWithErrorHandling,
-} from "./api/api-utils";
-// 布局工具
-export { getContainerClassName } from "./layout/layout-utils";
-// ==================== 元数据和SEO工具函数 ====================
-// 移除了 generateMetadata 等工具函数，直接在 layout.tsx 中使用 SITE_METADATA 构建元数据
+} from "@/lib/utils/validation";
+
+// 布局工具函数 - 已移除未使用的导出

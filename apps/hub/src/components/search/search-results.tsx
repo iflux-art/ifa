@@ -1,6 +1,6 @@
 import { ArrowRight, ExternalLink, Loader2 } from "lucide-react";
-import type { SearchResult } from "./hub-search-types";
 import { cn } from "@/lib/utils";
+import type { SearchResult } from "./hub-search-types";
 
 const TYPE_LABELS = {
   tool: "工具",
@@ -55,7 +55,7 @@ export const SearchResults = ({
             tabIndex={0}
             className={cn(
               "flex cursor-pointer items-start gap-2 px-4 py-3 transition-colors hover:bg-accent/50",
-              selectedIndex === index && "bg-accent",
+              selectedIndex === index && "bg-accent"
             )}
             onMouseEnter={() => setSelectedIndex(index)}
           >
@@ -67,16 +67,13 @@ export const SearchResults = ({
               {result.type === "history" && "📜"}
             </div>
             <div className="min-w-0 flex-1">
-              <h4 className="mb-1 flex items-center gap-1 truncate text-sm font-medium">
+              <h4 className="mb-1 flex items-center gap-1 truncate font-medium text-sm">
                 {result.title}
                 {result.type === "link" && <ExternalLink className="h-3 w-3" />}
               </h4>
-              <p className="line-clamp-2 text-xs text-muted-foreground">
-                {result.description}
-              </p>
-              <div className="mt-1 text-xs text-muted-foreground capitalize">
-                {TYPE_LABELS[result.type as keyof typeof TYPE_LABELS] ||
-                  result.type}
+              <p className="line-clamp-2 text-muted-foreground text-xs">{result.description}</p>
+              <div className="mt-1 text-muted-foreground text-xs capitalize">
+                {TYPE_LABELS[result.type as keyof typeof TYPE_LABELS] || result.type}
               </div>
             </div>
             {result.type === "command" && result.description === "最近搜索" ? (
@@ -102,9 +99,7 @@ export const SearchResults = ({
   if (searchQuery.trim()) {
     return (
       <div className="p-8 text-center">
-        <p className="text-muted-foreground">
-          没有找到与 &quot;{searchQuery}&quot; 相关的结果
-        </p>
+        <p className="text-muted-foreground">没有找到与 &quot;{searchQuery}&quot; 相关的结果</p>
       </div>
     );
   }
@@ -116,7 +111,7 @@ export const SearchResults = ({
         <button
           type="button"
           onClick={onClearHistory}
-          className="mt-2 text-xs text-primary hover:underline"
+          className="mt-2 text-primary text-xs hover:underline"
         >
           清除搜索历史
         </button>

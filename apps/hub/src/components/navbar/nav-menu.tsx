@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 import type { NavConfigItem } from "./nav-config";
 import { NAV_ITEMS, NAV_PATHS } from "./nav-config";
-import { cn } from "@/lib/utils";
 
 interface NavListMenuProps {
   className?: string;
@@ -24,22 +24,20 @@ export const NavListMenu = ({ className = "" }: NavListMenuProps) => {
   }
 
   return (
-    <nav
-      className={cn("flex items-center gap-6", className)}
-      aria-label="主导航"
-    >
+    <nav className={cn("flex items-center gap-6", className)} aria-label="主导航">
       {NAV_ITEMS.map((item: NavConfigItem) => {
-        const href = NAV_PATHS[item.key] || `/${item.key}`;
+        // 处理外部链接
+        const href = item.external ? item.href || "" : NAV_PATHS[item.key] || `/${item.key}`;
         const isActive =
-          pathname === href || (href !== "/" && pathname.startsWith(href));
+          !item.external && (pathname === href || (href !== "/" && pathname.startsWith(href)));
 
         return (
           <Link
             key={item.key}
             href={href}
             className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
-              isActive ? "text-primary" : "text-muted-foreground",
+              "font-medium text-sm transition-colors hover:text-primary",
+              isActive ? "text-primary" : "text-muted-foreground"
             )}
             aria-current={isActive ? "page" : undefined}
           >

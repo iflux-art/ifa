@@ -1,0 +1,38 @@
+{
+  "extends": ["../../biome.json"],
+  "files": {
+    "includes": ["src/**/*", "*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs"],
+    "ignoreUnknown": true
+  },
+  "linter": {
+    "rules": {
+      "correctness": {
+        "useExhaustiveDependencies": "error",
+        "noUnusedImports": "off"
+      },
+      "performance": {
+        "noAccumulatingSpread": "error"
+      },
+      "style": {
+        "noNonNullAssertion": "warn",
+        "noDescendingSpecificity": "off",
+        "useBlockStatements": "off",
+        "noNegationElse": "off"
+      },
+      "complexity": {
+        "noForEach": "off",
+        "noExcessiveCognitiveComplexity": "off",
+        "noVoid": "off",
+        "useSimplifiedLogicExpression": "off"
+      },
+      "suspicious": {
+        "noUnknownAtRules": "off",
+        "useAwait": "off",
+        "noEmptyBlockStatements": "off"
+      },
+      "nursery": {
+        "useSortedClasses": "off"
+      }
+    }
+  }
+}

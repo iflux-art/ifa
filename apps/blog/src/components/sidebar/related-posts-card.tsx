@@ -19,19 +19,16 @@ export interface RelatedPostsCardProps {
 /**
  * 相关文章卡片组件
  */
-export const RelatedPostsCard = ({
-  posts = [],
-  currentSlug,
-}: RelatedPostsCardProps) => {
+export const RelatedPostsCard = ({ posts = [], currentSlug }: RelatedPostsCardProps) => {
   const validPosts = posts || [];
 
   // 即使没有相关文章也渲染组件
   const currentPath = `/blog/${currentSlug.join("/")}`;
 
   return (
-    <Card className="w-full">
+    <Card className="w-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
       <CardHeader className="pt-4 pb-2">
-        <CardTitle className="flex items-center gap-2 text-sm font-medium text-foreground">
+        <CardTitle className="flex items-center gap-2 font-medium text-foreground text-sm">
           <ArrowRightLeft className="h-3.5 w-3.5 text-primary" />
           相关文章
         </CardTitle>
@@ -47,13 +44,13 @@ export const RelatedPostsCard = ({
                 key={uniqueKey}
                 href={post.href}
                 className={cn(
-                  "group flex items-start gap-2 rounded-md p-2 text-xs transition-all duration-200 hover:bg-muted/60",
-                  isActive && "bg-muted font-medium text-primary",
+                  "group flex items-start gap-2 rounded-md p-2 text-xs transition-all duration-200 hover:bg-muted/60 active:scale-[0.98]",
+                  isActive && "bg-muted font-medium text-primary"
                 )}
               >
                 <FileText className="mt-0.5 h-3 w-3 shrink-0 text-muted-foreground/70 group-hover:text-foreground/80" />
                 <div className="min-w-0 flex-1">
-                  <p className="line-clamp-2 leading-relaxed text-muted-foreground group-hover:text-foreground">
+                  <p className="line-clamp-2 text-muted-foreground leading-relaxed group-hover:text-foreground">
                     {post.title}
                   </p>
                 </div>
@@ -61,7 +58,7 @@ export const RelatedPostsCard = ({
             );
           })
         ) : (
-          <p className="text-sm text-muted-foreground">暂无相关文章</p>
+          <p className="text-muted-foreground text-sm">暂无相关文章</p>
         )}
       </CardContent>
     </Card>

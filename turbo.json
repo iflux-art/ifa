@@ -5,12 +5,14 @@
     ".env",
     "tsconfig.json",
     "tailwind.config.*",
-    "postcss.config.*"
+    "postcss.config.*",
+    "biome.json",
+    ".biomejs.json"
   ],
-  "globalEnv": ["NODE_ENV", "NEXT_PUBLIC_*"],
+  "globalEnv": ["NODE_ENV", "NEXT_PUBLIC_*", "CI", "VERCEL", "TURBO_*"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "type-check"],
+      "dependsOn": ["^build"],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx,json,md,mdx}",
         "public/**",
@@ -18,15 +20,21 @@
         "package.json",
         "tsconfig.json",
         "tailwind.config.*",
-        "postcss.config.*"
+        "postcss.config.*",
+        "biome.json",
+        ".biomejs.json"
       ],
       "outputs": [
         ".next/**",
         "!.next/cache/**",
         "dist/**",
-        "storybook-static/**"
+        "storybook-static/**",
+        ".turbo/**"
       ],
-      "env": ["NODE_ENV", "NEXT_PUBLIC_*"]
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*", "CI", "VERCEL"],
+      "cache": true,
+      "persistent": false,
+      "passThroughEnv": ["TURBO_REMOTE_CACHE_SIGNATURE_KEY"]
     },
     "dev": {
       "cache": false,
@@ -40,8 +48,10 @@
         "tsconfig.json",
         "tailwind.config.*",
         "postcss.config.*",
+        "biome.json",
         ".env*"
-      ]
+      ],
+      "outputMode": "new-only"
     },
     "start": {
       "dependsOn": ["build"],
@@ -50,7 +60,7 @@
       "env": ["NODE_ENV", "NEXT_PUBLIC_*"]
     },
     "lint": {
-      "dependsOn": ["^build"],
+      "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx}",
         "*.{ts,tsx,js,jsx}",
@@ -58,7 +68,8 @@
         "biome.json",
         ".biomejs.json"
       ],
-      "outputs": []
+      "outputs": [],
+      "cache": true
     },
     "format": {
       "inputs": [
@@ -72,7 +83,7 @@
       "cache": false
     },
     "check": {
-      "dependsOn": ["^build"],
+      "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx,json,md,mdx}",
         "*.{ts,tsx,js,jsx,json,md,mdx}",
@@ -80,20 +91,22 @@
         "biome.json",
         ".biomejs.json"
       ],
-      "outputs": []
+      "outputs": [],
+      "cache": true
     },
     "type-check": {
-      "dependsOn": ["^build"],
+      "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx}",
         "*.{ts,tsx}",
         "package.json",
         "tsconfig.json"
       ],
-      "outputs": []
+      "outputs": [".tsbuildinfo", "tsconfig.tsbuildinfo"],
+      "cache": true
     },
     "test": {
-      "dependsOn": ["^build"],
+      "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx}",
         "**/*.test.{ts,tsx,js,jsx}",
@@ -103,22 +116,23 @@
         "tsconfig.json"
       ],
       "outputs": ["coverage/**", "test-results/**"],
-      "env": ["NODE_ENV"]
+      "env": ["NODE_ENV"],
+      "cache": true
     },
     "test:watch": {
-      "dependsOn": ["^build"],
+      "dependsOn": [],
       "cache": false,
       "persistent": true,
       "env": ["NODE_ENV"]
     },
     "test:ui": {
-      "dependsOn": ["^build"],
+      "dependsOn": [],
       "cache": false,
       "persistent": true,
       "env": ["NODE_ENV"]
     },
     "test:coverage": {
-      "dependsOn": ["^build"],
+      "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx}",
         "**/*.test.{ts,tsx,js,jsx}",
@@ -128,7 +142,8 @@
         "tsconfig.json"
       ],
       "outputs": ["coverage/**"],
-      "env": ["NODE_ENV"]
+      "env": ["NODE_ENV"],
+      "cache": true
     },
     "test:e2e": {
       "dependsOn": ["build"],
@@ -143,7 +158,7 @@
       "env": ["NODE_ENV", "NEXT_PUBLIC_*"]
     },
     "storybook": {
-      "dependsOn": ["^build"],
+      "dependsOn": [],
       "cache": false,
       "persistent": true,
       "inputs": [
@@ -154,19 +169,45 @@
       ]
     },
     "build-storybook": {
-      "dependsOn": ["^build"],
+      "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx}",
         "**/*.stories.{ts,tsx,js,jsx}",
         ".storybook/**",
         "package.json"
       ],
-      "outputs": ["storybook-static/**"]
+      "outputs": ["storybook-static/**"],
+      "cache": true
     },
     "clean": {
       "cache": false,
       "inputs": [],
       "outputs": []
+    },
+    "prebuild": {
+      "dependsOn": ["type-check", "lint"],
+      "cache": true,
+      "outputs": []
+    },
+    "ci": {
+      "dependsOn": ["lint", "type-check", "test", "build"],
+      "cache": false,
+      "outputs": []
+    },
+    "ci:build": {
+      "dependsOn": ["prebuild", "build"],
+      "cache": false,
+      "outputs": []
+    },
+    "depcheck": {
+      "dependsOn": [],
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "package.json",
+        ".depcheckrc"
+      ],
+      "outputs": [],
+      "cache": true
     }
   },
   "remoteCache": {

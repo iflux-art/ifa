@@ -28,7 +28,7 @@ export default function ClientMDXRenderer({ content }: Props) {
       });
       return mdxModule.default;
     } catch {
-      // MDX compilation failed
+      // MDX 编译失败
       return null;
     }
   }, [content]);

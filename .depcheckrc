@@ -1,0 +1,24 @@
+{
+  "ignores": [
+    "@types/*",
+    "typescript",
+    "@biomejs/biome",
+    "turbo",
+    "vitest",
+    "@playwright/test"
+  ],
+  "skip-missing": true,
+  "ignore-patterns": [
+    "dist",
+    "build",
+    ".next",
+    "node_modules",
+    "coverage"
+  ],
+  "specials": [
+    "bin",
+    "eslint",
+    "webpack",
+    "babel"
+  ]
+}

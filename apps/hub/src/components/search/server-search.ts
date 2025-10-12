@@ -104,7 +104,7 @@ export async function getCachedContent() {
 export async function performServerSearch(
   query: string,
   type = "all",
-  limit = 10,
+  limit = 10
 ): Promise<{ results: SearchResult[]; total: number }> {
   if (!query.trim()) {
     return { results: [], total: 0 };

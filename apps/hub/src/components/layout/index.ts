@@ -1,32 +1,21 @@
 /**
  * 通用布局组件导出
  * 集中导出所有通用布局组件，便于引用
+ *
+ * 注意：为了向后兼容性，这里重新导出了新的组件结构
+ * LinksPage -> HomePage (from @/components/home)
+ * AdminPage -> AdminPage (from @/components/admin)
+ * LinksContent -> LinksContent (from @/components/home)
  */
 
-// 布局结构组件
-export { AppGrid } from "./app-grid";
-// 新增的多布局组件和响应式网格组件
-export {
-  MultiLayout,
-  ThreeColumnLayout as MultiColumnLayout,
-} from "./multi-layout";
-export { PageContainer, type PageContainerProps } from "./page-container";
-export {
-  ResponsiveGrid,
-  ThreeColumnGrid as FlexibleGrid,
-} from "./responsive-grid";
-export {
-  ThreeColumnGrid,
-  type ThreeColumnGridProps,
-} from "./three-column-grid";
-export {
-  type SidebarConfig,
-  ThreeColumnLayout,
-  type ThreeColumnLayoutProps,
-} from "./three-column-layout";
-
+// 向后兼容性导出 - 重新导出新的组件结构
+// 管理页面组件 - 从新的 admin 模块导出
+export { AdminPage } from "@/components/admin";
 // 导航相关组件
 export { Footer } from "@/components/footer";
+// 链接内容组件 - 从新的 home 模块导出
+// 链接页面组件 - 重新导出为 HomePage，保持 LinksPage 别名以兼容现有代码
+export { HomePage as LinksPage, LinksContent } from "@/components/home";
 // 配置信息
 export {
   ADMIN_MENU_ITEMS,
@@ -34,6 +23,3 @@ export {
   NAV_ITEMS,
   NAV_PATHS,
 } from "@/components/navbar/nav-config";
-export { Sidebar, SidebarWrapper } from "@/components/sidebar";
-// 类型导出
-export type { PageHeaderProps } from "./layout-types";

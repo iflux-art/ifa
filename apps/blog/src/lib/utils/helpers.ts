@@ -16,10 +16,7 @@
  * @param delay - 延迟时间（毫秒）
  * @returns 防抖后的函数
  */
-export function debounceSync<T extends (...args: never[]) => void>(
-  fn: T,
-  delay: number,
-): T {
+export function debounceSync<T extends (...args: never[]) => void>(fn: T, delay: number): T {
   let timer: NodeJS.Timeout | null = null;
   return ((...args: Parameters<T>) => {
     if (timer) clearTimeout(timer);

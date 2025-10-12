@@ -12,10 +12,7 @@ import type { CacheOptions } from "@/types";
  * 增强版LRU缓存类
  */
 class EnhancedLRUCache<T> {
-  private cache: Map<
-    string,
-    { data: T; timestamp: number; lastAccessed: number }
-  >;
+  private cache: Map<string, { data: T; timestamp: number; lastAccessed: number }>;
   private maxSize: number;
 
   constructor(maxSize: number) {
@@ -79,9 +76,7 @@ class EnhancedLRUCache<T> {
     newestItemAge: number;
   } {
     const now = Date.now();
-    const timestamps = Array.from(this.cache.values()).map(
-      (item) => item.timestamp,
-    );
+    const timestamps = Array.from(this.cache.values()).map((item) => item.timestamp);
 
     return {
       totalItems: this.cache.size,
@@ -118,7 +113,7 @@ const memoryCache = new EnhancedLRUCache<unknown>(200);
 export function useCache<T>(
   key: string,
   fetchFn: () => Promise<T>,
-  options: EnhancedCacheOptions<T> = {},
+  options: EnhancedCacheOptions<T> = {}
 ) {
   const {
     prefix: optionsPrefix,
@@ -146,22 +141,18 @@ export function useCache<T>(
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  const fullKey = keyGenerator
-    ? keyGenerator(key, undefined)
-    : `${finalPrefix}${key}`;
+  const fullKey = keyGenerator ? keyGenerator(key, undefined) : `${finalPrefix}${key}`;
   const initialLoadDone = useRef(false);
   const retryCount = useRef(0);
 
   // 从内存缓存获取数据
   const getFromMemoryCache = useCallback((): T | null => {
-    if (!finalUseMemoryCache) return null;
+    if (!finalUseMemoryCache) {
+      return null;
+    }
 
     const cached = memoryCache.get(fullKey) as CacheEntry<T> | null;
-    if (
-      cached &&
-      Date.now() - cached.timestamp < finalExpiry &&
-      finalValidator(cached.data)
-    ) {
+    if (cached && Date.now() - cached.timestamp < finalExpiry && finalValidator(cached.data)) {
       return cached.data;
     }
     return null;
@@ -169,20 +160,20 @@ export function useCache<T>(
 
   // 从本地存储获取数据
   const getFromLocalStorage = useCallback((): T | null => {
-    if (!finalUseLocalStorage) return null;
+    if (!finalUseLocalStorage) {
+      return null;
+    }
 
     const stored = localStorage.getItem(fullKey);
-    if (!stored) return null;
+    if (!stored) {
+      return null;
+    }
 
     try {
       const cached = JSON.parse(stored) as CacheEntry<T>;
       const now = Date.now();
 
-      if (
-        cached &&
-        now - cached.timestamp < finalExpiry &&
-        finalValidator(cached.data)
-      ) {
+      if (cached && now - cached.timestamp < finalExpiry && finalValidator(cached.data)) {
         // 更新内存缓存
         if (finalUseMemoryCache) {
           memoryCache.set(fullKey, cached);
@@ -194,13 +185,7 @@ export function useCache<T>(
     }
 
     return null;
-  }, [
-    fullKey,
-    finalExpiry,
-    finalUseLocalStorage,
-    finalUseMemoryCache,
-    finalValidator,
-  ]);
+  }, [fullKey, finalExpiry, finalUseLocalStorage, finalUseMemoryCache, finalValidator]);
 
   // 保存数据到缓存
   const saveToCache = useCallback(
@@ -226,7 +211,7 @@ export function useCache<T>(
         }
       }
     },
-    [fullKey, finalUseMemoryCache, finalUseLocalStorage],
+    [fullKey, finalUseMemoryCache, finalUseLocalStorage]
   );
 
   // 获取数据（根据策略）
@@ -237,7 +222,9 @@ export function useCache<T>(
       case "cache-first": {
         // 先从缓存获取
         cachedData = getFromMemoryCache() || getFromLocalStorage();
-        if (cachedData) return cachedData;
+        if (cachedData) {
+          return cachedData;
+        }
         // 缓存没有则从网络获取
         break;
       }
@@ -255,7 +242,9 @@ export function useCache<T>(
         }
         // 网络获取失败，从缓存获取
         cachedData = getFromMemoryCache() || getFromLocalStorage();
-        if (cachedData) return cachedData;
+        if (cachedData) {
+          return cachedData;
+        }
         break;
       }
 
@@ -283,14 +272,7 @@ export function useCache<T>(
     }
 
     return null;
-  }, [
-    strategy,
-    getFromMemoryCache,
-    getFromLocalStorage,
-    fetchFn,
-    finalValidator,
-    saveToCache,
-  ]);
+  }, [strategy, getFromMemoryCache, getFromLocalStorage, fetchFn, finalValidator, saveToCache]);
 
   // 获取数据（带重试机制）
   const fetchData = useCallback(async (): Promise<T> => {
@@ -315,7 +297,7 @@ export function useCache<T>(
       if (retryCount.current < finalMaxRetries) {
         retryCount.current++;
         await new Promise((resolve) =>
-          setTimeout(resolve, finalRetryDelay * 2 ** (retryCount.current - 1)),
+          setTimeout(resolve, finalRetryDelay * 2 ** (retryCount.current - 1))
         );
         return await fetchData();
       }
@@ -331,7 +313,7 @@ export function useCache<T>(
     try {
       await fetchData();
     } catch {
-      // Failed to refetch data
+      // 重新获取数据失败
     }
   }, [fetchData]);
 
@@ -348,7 +330,9 @@ export function useCache<T>(
 
   // 预取数据
   const prefetchData = useCallback(async () => {
-    if (!prefetch) return;
+    if (!prefetch) {
+      return;
+    }
 
     try {
       const prefetchedData = await prefetch();
@@ -356,7 +340,7 @@ export function useCache<T>(
         saveToCache(prefetchedData);
       }
     } catch (err) {
-      console.warn("Prefetch failed:", err);
+      console.warn("预取失败:", err);
     }
   }, [prefetch, finalValidator, saveToCache]);
 
@@ -370,14 +354,20 @@ export function useCache<T>(
 
   // 初始化加载
   useEffect(() => {
-    if (initialLoadDone.current) return;
+    if (initialLoadDone.current) {
+      return;
+    }
 
     // 如果启用了预取，先进行预取
     if (enablePrefetch && prefetch) {
-      void prefetchData();
+      prefetchData().catch((error) => {
+        console.warn("预取数据时出错:", error);
+      });
     }
 
-    void fetchData();
+    fetchData().catch((error) => {
+      console.warn("获取数据时出错:", error);
+    });
     initialLoadDone.current = true;
   }, [fetchData, prefetchData, enablePrefetch, prefetch]);
 

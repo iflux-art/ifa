@@ -41,11 +41,7 @@ export function classifyError(error: unknown): ErrorInfo["type"] {
       return "ContentNotFound";
     }
 
-    if (
-      message.includes("network") ||
-      message.includes("fetch") ||
-      message.includes("timeout")
-    ) {
+    if (message.includes("network") || message.includes("fetch") || message.includes("timeout")) {
       return "NetworkError";
     }
 
@@ -65,8 +61,7 @@ function buildLogMessage(errorInfo: ErrorInfo) {
     ...errorInfo,
     timestamp: errorInfo.timestamp || new Date(),
     environment: process.env.NODE_ENV,
-    userAgent:
-      typeof window !== "undefined" ? window.navigator.userAgent : "server",
+    userAgent: typeof window !== "undefined" ? window.navigator.userAgent : "server",
   };
 }
 
@@ -149,10 +144,7 @@ function logOtherErrorStack(errorInfo: ErrorInfo): void {
 /**
  * 处理开发环境堆栈信息输出
  */
-function logDevelopmentStack(
-  errorInfo: ErrorInfo,
-  includeStack: boolean,
-): void {
+function logDevelopmentStack(errorInfo: ErrorInfo, includeStack: boolean): void {
   if (!(includeStack && errorInfo.originalError instanceof Error)) {
     return;
   }
@@ -167,10 +159,7 @@ function logDevelopmentStack(
 /**
  * 处理开发环境日志输出
  */
-function logDevelopmentOutput(
-  errorInfo: ErrorInfo,
-  includeStack: boolean,
-): void {
+function logDevelopmentOutput(errorInfo: ErrorInfo, includeStack: boolean): void {
   logDevelopmentError(errorInfo);
   logContextInfo(errorInfo);
   logDevelopmentStack(errorInfo, includeStack);
@@ -181,7 +170,7 @@ function logDevelopmentOutput(
  */
 function logProductionOutput(
   errorInfo: ErrorInfo,
-  logMessage: ReturnType<typeof buildLogMessage>,
+  logMessage: ReturnType<typeof buildLogMessage>
 ): void {
   // 生产环境中只记录简化的错误信息，避免暴露敏感信息
   console.error(`[${errorInfo.type}] ${errorInfo.message}`, {
@@ -192,10 +181,10 @@ function logProductionOutput(
 
 /**
  * 处理外部日志服务
+ * 当前未集成外部日志服务，可在需要时扩展
  */
 function logToExternalService(_errorInfo: ErrorInfo): void {
-  // TODO: 未来可以集成外部日志服务如 Sentry、LogRocket 等
-  // 例如: Sentry.captureException(_errorInfo.originalError, { extra: _errorInfo });
+  // 预留接口，可在需要时集成 Sentry、LogRocket 等服务
 }
 
 /**

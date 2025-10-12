@@ -13,7 +13,7 @@ import type {
  */
 export async function performSearch(
   query: string,
-  options: SearchOptions = {},
+  options: SearchOptions = {}
 ): Promise<SearchResponse> {
   const { type = "all", limit = 10 } = options;
 

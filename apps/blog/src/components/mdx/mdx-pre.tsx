@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
 import { Check, Copy } from "lucide-react";
 import Prism from "prismjs";
+import React, { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import "prismjs/themes/prism-tomorrow.css"; // 使用暗色主题
@@ -41,10 +41,9 @@ function CodeBlock({
   const preRef = useRef<HTMLPreElement>(null);
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [highlighted, setHighlighted] = useState(false);
 
   // 处理语言名称
-  const getLanguage = () => {
+  const getLanguage = React.useCallback(() => {
     const langMap: Record<string, string> = {
       js: "javascript",
       jsx: "jsx",
@@ -60,7 +59,7 @@ function CodeBlock({
     };
 
     return langMap[language.toLowerCase()] || language.toLowerCase();
-  };
+  }, [language]);
 
   // 处理复制代码功能
   const handleCopy = async () => {
@@ -78,31 +77,24 @@ function CodeBlock({
     setMounted(true);
   }, []);
 
-  // 仅在客户端应用高亮，并处理hydration问题
+  // 应用代码高亮
   useEffect(() => {
-    if (mounted && codeRef.current && !highlighted) {
-      // 添加延迟确保DOM已完全稳定
-      const timeoutId = setTimeout(() => {
-        if (codeRef.current) {
-          // 添加额外的 null 检查
+    if (mounted && codeRef.current) {
+      try {
+        const lang = getLanguage();
+        // 检查 Prism 是否支持该语言
+        if (Prism.languages[lang]) {
+          // 应用高亮
           Prism.highlightElement(codeRef.current);
-          setHighlighted(true);
         }
-
-        // 确保移除tabindex属性
-        if (preRef.current?.hasAttribute("tabindex")) {
-          preRef.current.removeAttribute("tabindex");
-        }
-      }, 0);
-
-      return () => clearTimeout(timeoutId);
+      } catch (error) {
+        console.warn("代码高亮处理失败:", error);
+      }
     }
-
-    return undefined;
-  }, [mounted, highlighted]);
+  }, [mounted, getLanguage]);
 
   // 获取语言显示名称
-  const getLanguageDisplayName = () => {
+  const getLanguageDisplayName = React.useCallback(() => {
     const langMap: Record<string, string> = {
       javascript: "JavaScript",
       jsx: "JSX",
@@ -117,11 +109,13 @@ function CodeBlock({
 
     const lang = getLanguage();
     return langMap[lang] || lang.charAt(0).toUpperCase() + lang.slice(1);
-  };
+  }, [getLanguage]);
 
   // 手动创建行高亮标记
-  const renderHighlightedLines = () => {
-    if (!mounted || highlightLines.length === 0) return null;
+  const renderHighlightLines = () => {
+    if (!mounted || highlightLines.length === 0) {
+      return null;
+    }
 
     const lineHeight = 22; // 行高
     const paddingTop = fileName ? 64 : 36; // 上内边距加上标题栏高度
@@ -129,7 +123,7 @@ function CodeBlock({
     return highlightLines.map((lineNumber) => (
       <div
         key={`highlight-${lineNumber}`}
-        className="absolute left-0 right-0 bg-blue-100/40 dark:bg-[#3b3b3b]/80 border-l-2 border-blue-500"
+        className="absolute right-0 left-0 border-blue-500 border-l-2 bg-blue-100/40 dark:bg-[#3b3b3b]/80"
         style={{
           top: `${paddingTop + (lineNumber - 1) * lineHeight}px`,
           height: `${lineHeight}px`,
@@ -142,21 +136,19 @@ function CodeBlock({
   return (
     <div
       className={cn(
-        "relative rounded-md overflow-hidden my-6 bg-muted dark:bg-muted border border-border shadow-lg",
-        className,
+        "relative my-6 overflow-hidden rounded-md border border-border bg-background transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10",
+        className
       )}
     >
       {/* 标题栏 */}
-      <div className="flex items-center justify-between px-4 py-2 bg-muted/80 dark:bg-muted/50 border-b border-border">
+      <div className="flex items-center justify-between border-border border-b bg-muted/80 px-4 py-2 dark:bg-muted/50">
         {/* 左侧语言标签和文件名 */}
         <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="px-2 py-1 text-xs font-medium">
+          <Badge variant="secondary" className="px-2 py-1 font-medium text-xs">
             {getLanguageDisplayName()}
           </Badge>
           {fileName && (
-            <span className="text-xs font-medium text-muted-foreground">
-              {fileName}
-            </span>
+            <span className="font-medium text-muted-foreground text-xs">{fileName}</span>
           )}
         </div>
 
@@ -164,38 +156,30 @@ function CodeBlock({
         <button
           type="button"
           onClick={handleCopy}
-          className="flex items-center justify-center h-8 w-8 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
+          className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary/80 hover:text-foreground"
           title={copied ? "已复制!" : "复制代码"}
           aria-label={copied ? "已复制" : "复制代码"}
         >
-          {copied ? (
-            <Check className="h-4 w-4 text-green-500" />
-          ) : (
-            <Copy className="h-4 w-4" />
-          )}
+          {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
         </button>
       </div>
 
       {/* 代码块 */}
       <div className="relative">
         {/* 自定义高亮行 */}
-        {renderHighlightedLines()}
+        {renderHighlightLines()}
 
         <pre
           ref={preRef}
           className={cn(
-            "relative group p-4 m-0 overflow-auto max-h-[500px] font-mono text-[0.9rem] z-10",
-            showLineNumbers && mounted ? "line-numbers" : "",
+            "group relative z-10 m-0 max-h-[500px] overflow-auto bg-background p-4 font-mono text-[0.9rem]",
+            showLineNumbers && mounted ? "line-numbers" : ""
           )}
           style={{
-            fontFamily:
-              "'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Roboto Mono', monospace",
+            fontFamily: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Roboto Mono', monospace",
           }}
         >
-          <code
-            ref={codeRef}
-            className={mounted ? `language-${getLanguage()}` : undefined}
-          >
+          <code ref={codeRef} className={mounted ? `language-${getLanguage()}` : undefined}>
             {code}
           </code>
         </pre>
@@ -256,11 +240,7 @@ function extractCodeInfo(children: React.ReactNode): {
         }
       }
       // 递归处理子元素
-      if (
-        typeof node.props === "object" &&
-        node.props &&
-        "children" in node.props
-      ) {
+      if (typeof node.props === "object" && node.props && "children" in node.props) {
         return extractText(node.props.children as React.ReactNode);
       }
     }
@@ -279,31 +259,12 @@ function extractCodeInfo(children: React.ReactNode): {
  * 转换 MDX 代码块为 CodeBlock 组件，提供语法高亮和统一样式
  */
 export function MDXPre({ children, className, ...props }: MDXPreProps) {
-  const [isClient, setIsClient] = useState(false);
   const { code, language } = extractCodeInfo(children);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // 为了避免水合不匹配，在服务端和客户端初始渲染时使用相同的结构
-  if (!isClient) {
-    return (
-      <pre className={className} suppressHydrationWarning {...props}>
-        {children}
-      </pre>
-    );
-  }
-
-  // 客户端渲染时，如果有代码内容则使用 CodeBlock
+  // 如果有代码内容则使用 CodeBlock，否则回退到原始 pre 元素
   if (code) {
     return (
-      <CodeBlock
-        code={code}
-        language={language}
-        showLineNumbers={true}
-        className={className}
-      />
+      <CodeBlock code={code} language={language} showLineNumbers={true} className={className} />
     );
   }
 

@@ -1,6 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ["class"],
+  // Enable Tailwind CSS 4.1 new CSS engine optimizations
+  future: {
+    hoverOnlyWhenSupported: true,
+    respectDefaultRingColorOpacity: true,
+  },
+
+  // Optimized dark mode configuration
+  darkMode: ["class", '[data-theme="dark"]'],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -167,7 +174,7 @@ export default {
       },
       // Next.js specific extensions
       screens: {
-        xs: "475px",
+        // 移除自定义 xs 断点，使用 Tailwind CSS 官方断点
       },
       typography: {
         DEFAULT: {
@@ -332,4 +339,9 @@ export default {
     import("@tailwindcss/aspect-ratio"),
     import("@tailwindcss/container-queries"),
   ],
+
+  // CSS optimization settings for better performance
+  experimental: {
+    optimizeUniversalDefaults: true,
+  },
 };

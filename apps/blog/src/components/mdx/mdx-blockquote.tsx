@@ -24,7 +24,7 @@ export const MDXBlockquote = ({
       "flex items-start gap-4",
       "bg-muted/50",
       "border-border",
-      className,
+      className
     )}
     {...props}
   >
@@ -32,10 +32,8 @@ export const MDXBlockquote = ({
     <div className="flex-1">
       {children}
       {(citation ?? author) && (
-        <footer className="mt-4 text-sm text-muted-foreground">
-          {citation && (
-            <cite className="font-medium not-italic">{citation}</cite>
-          )}
+        <footer className="mt-4 text-muted-foreground text-sm">
+          {citation && <cite className="font-medium not-italic">{citation}</cite>}
           {author && (
             <span className="block text-xs">
               — <span className="font-medium">{author}</span>

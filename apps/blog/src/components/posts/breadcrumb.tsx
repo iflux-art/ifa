@@ -36,12 +36,8 @@ interface BreadcrumbProps {
  *   ]}
  * />
  */
-export const Breadcrumb = ({
-  items,
-  separator = "/",
-  className,
-}: BreadcrumbProps) => (
-  <nav className={cn("text-sm font-medium text-muted-foreground", className)}>
+export const Breadcrumb = ({ items, separator = "/", className }: BreadcrumbProps) => (
+  <nav className={cn("font-medium text-muted-foreground text-sm", className)}>
     <ol className="flex flex-wrap items-center">
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
@@ -56,16 +52,11 @@ export const Breadcrumb = ({
         }
         return (
           <li key={item.label} className="flex items-center">
-            {index > 0 && (
-              <span className="mx-2 text-muted-foreground/70">{separator}</span>
-            )}
+            {index > 0 && <span className="mx-2 text-muted-foreground/70">{separator}</span>}
             {isLast || !href ? (
               <span className="text-foreground">{label}</span>
             ) : (
-              <Link
-                href={href}
-                className="text-muted-foreground hover:text-foreground"
-              >
+              <Link href={href} className="text-muted-foreground hover:text-foreground">
                 {label}
               </Link>
             )}

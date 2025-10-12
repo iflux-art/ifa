@@ -4,14 +4,8 @@
  */
 
 import { useCallback, useEffect, useState } from "react";
-import {
-  getSearchSuggestions,
-  performSearch,
-} from "@/components/search/search-engine";
-import type {
-  SearchOptions,
-  SearchResult,
-} from "@/components/search/search-types";
+import { getSearchSuggestions, performSearch } from "@/components/search/search-engine";
+import type { SearchOptions, SearchResult } from "@/components/search/search-types";
 import { useSearchStore } from "./search-store";
 
 interface UseSearchStateReturn {
@@ -32,13 +26,8 @@ interface UseSearchStateReturn {
 
 export function useSearchState(): UseSearchStateReturn {
   // 使用 Zustand 管理搜索状态
-  const {
-    searchTerm,
-    selectedCategory,
-    setSearchTerm,
-    setSelectedCategory,
-    resetState,
-  } = useSearchStore();
+  const { searchTerm, selectedCategory, setSearchTerm, setSelectedCategory, resetState } =
+    useSearchStore();
 
   // 本地状态管理搜索结果和加载状态
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -65,29 +54,25 @@ export function useSearchState(): UseSearchStateReturn {
         const response = await performSearch(searchQuery, options);
         setResults(response.results);
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : "Search failed";
+        const errorMessage = err instanceof Error ? err.message : "搜索失败";
         setError(errorMessage);
         setResults([]);
       } finally {
         setIsLoading(false);
       }
     },
-    [setSearchTerm],
+    [setSearchTerm]
   );
 
-  const getSuggestions = useCallback(
-    async (searchQuery: string): Promise<void> => {
-      try {
-        const suggestionList = await getSearchSuggestions(searchQuery);
-        setSuggestions(suggestionList);
-      } catch (err) {
-        console.error("Failed to get suggestions:", err);
-        setSuggestions([]);
-      }
-    },
-    [],
-  );
+  const getSuggestions = useCallback(async (searchQuery: string): Promise<void> => {
+    try {
+      const suggestionList = await getSearchSuggestions(searchQuery);
+      setSuggestions(suggestionList);
+    } catch (err) {
+      console.error("获取建议失败:", err);
+      setSuggestions([]);
+    }
+  }, []);
 
   // 清理建议当查询为空时
   useEffect(() => {

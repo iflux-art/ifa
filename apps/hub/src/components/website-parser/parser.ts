@@ -37,7 +37,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 async function fetchWithRetry(
   url: string,
   options: RequestInit,
-  retries: number = MAX_RETRIES,
+  retries: number = MAX_RETRIES
 ): Promise<Response> {
   try {
     const response = await fetch(url, options);
@@ -56,7 +56,7 @@ async function fetchWithRetry(
     // 检查是否是CORS错误
     if (error instanceof TypeError && error.message.includes("fetch")) {
       throw new Error(
-        `CORS error or network issue when fetching ${url}. This may be due to the target server not allowing cross-origin requests.`,
+        `CORS error or network issue when fetching ${url}. This may be due to the target server not allowing cross-origin requests.`
       );
     }
 
@@ -71,10 +71,7 @@ async function fetchWithRetry(
 /**
  * 从缓存获取数据
  */
-function getFromCache(
-  url: string,
-  maxAge: number = CACHE_DURATION,
-): WebsiteMetadata | null {
+function getFromCache(url: string, maxAge: number = CACHE_DURATION): WebsiteMetadata | null {
   const cached = metadataCache.get(url);
   if (cached && Date.now() - cached.timestamp < maxAge) {
     return cached.data;
@@ -137,10 +134,7 @@ function extractOtherMeta($: cheerio.CheerioAPI): {
 } {
   const siteName = $('meta[property="og:site_name"]').attr("content") ?? "";
   const type = $('meta[property="og:type"]').attr("content") ?? "";
-  const language =
-    $("html").attr("lang") ??
-    $('meta[property="og:locale"]').attr("content") ??
-    "";
+  const language = $("html").attr("lang") ?? $('meta[property="og:locale"]').attr("content") ?? "";
 
   return {
     siteName: siteName.trim(),
@@ -285,8 +279,7 @@ function createFetchOptions(timeout: number): RequestInit {
     headers: {
       "User-Agent":
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-      Accept:
-        "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
       "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
       "Accept-Encoding": "gzip, deflate, br",
       Dnt: "1",
@@ -302,11 +295,7 @@ function createFetchOptions(timeout: number): RequestInit {
 /**
  * 处理缓存检查
  */
-function checkCache(
-  url: string,
-  useCache: boolean,
-  cacheMaxAge: number,
-): WebsiteMetadata | null {
+function checkCache(url: string, useCache: boolean, cacheMaxAge: number): WebsiteMetadata | null {
   if (!useCache) {
     return null;
   }
@@ -342,10 +331,7 @@ function handleParseError(error: unknown, url: string): ParseResult {
 /**
  * 解析网站信息
  */
-export async function parseWebsite(
-  url: string,
-  options: ParseOptions = {},
-): Promise<ParseResult> {
+export async function parseWebsite(url: string, options: ParseOptions = {}): Promise<ParseResult> {
   const {
     timeout = 10000,
     useCache = true,
@@ -403,7 +389,7 @@ export async function parseWebsite(
  */
 export async function parseWebsites(
   urls: string[],
-  options: ParseOptions = {},
+  options: ParseOptions = {}
 ): Promise<Record<string, ParseResult>> {
   const results: Record<string, ParseResult> = {};
 

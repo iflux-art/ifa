@@ -3,9 +3,9 @@
  * 提供标准化的API请求处理，包括错误处理、重试机制、缓存等
  */
 
-import type { UseAsyncOptions } from "@/types";
 import { executeAsyncOperation, executeWithRetry } from "@/lib/utils/async";
 import { classifyError, handleNetworkError, logError } from "@/lib/utils/error";
+import type { UseAsyncOptions } from "@/types";
 
 // API配置接口
 interface ApiClientConfig {
@@ -71,13 +71,8 @@ export class ApiClient {
   /**
    * 构建完整URL
    */
-  private buildURL(
-    endpoint: string,
-    params?: Record<string, string | number | boolean>,
-  ): string {
-    let url = this.config.baseURL
-      ? `${this.config.baseURL}${endpoint}`
-      : endpoint;
+  private buildURL(endpoint: string, params?: Record<string, string | number | boolean>): string {
+    let url = this.config.baseURL ? `${this.config.baseURL}${endpoint}` : endpoint;
 
     if (params) {
       const searchParams = new URLSearchParams();
@@ -132,9 +127,7 @@ export class ApiClient {
 
       // 创建详细的错误信息
       const errorInfo = {
-        type: classifyError(new Error(errorMessage)) as
-          | "NetworkError"
-          | "UnknownError",
+        type: classifyError(new Error(errorMessage)) as "NetworkError" | "UnknownError",
         message: errorMessage,
         code: errorCode,
         context: {
@@ -160,7 +153,7 @@ export class ApiClient {
       const data = await response.json();
       return data as T;
     } catch (error) {
-      const parseError = new Error("Failed to parse response data");
+      const parseError = new Error("解析响应数据失败");
       (parseError as Error & { originalError?: unknown }).originalError = error;
       throw parseError;
     }
@@ -169,10 +162,7 @@ export class ApiClient {
   /**
    * 发送请求
    */
-  async request<T>(
-    endpoint: string,
-    config: RequestConfig<T> = {},
-  ): Promise<T | null> {
+  async request<T>(endpoint: string, config: RequestConfig<T> = {}): Promise<T | null> {
     const url = this.buildURL(endpoint, config.params);
     const options = this.createRequestOptions(config);
 
@@ -199,7 +189,7 @@ export class ApiClient {
             }
           },
           validator: config.validator,
-        },
+        }
       );
     }
 
@@ -222,10 +212,7 @@ export class ApiClient {
   /**
    * GET请求
    */
-  get<T>(
-    endpoint: string,
-    config: Omit<RequestConfig<T>, "method" | "body"> = {},
-  ) {
+  get<T>(endpoint: string, config: Omit<RequestConfig<T>, "method" | "body"> = {}) {
     return this.request<T>(endpoint, { ...config, method: "GET" });
   }
 
@@ -246,10 +233,7 @@ export class ApiClient {
   /**
    * DELETE请求
    */
-  delete<T>(
-    endpoint: string,
-    config: Omit<RequestConfig<T>, "method" | "body"> = {},
-  ) {
+  delete<T>(endpoint: string, config: Omit<RequestConfig<T>, "method" | "body"> = {}) {
     return this.request<T>(endpoint, { ...config, method: "DELETE" });
   }
 
@@ -273,7 +257,7 @@ export const apiClient = new ApiClient({
 export const { get, post, put, delete: deleteRequest, patch } = apiClient;
 
 // 注意：友链相关类型定义在 @/components/friends/types 中
-import type { FriendLink } from "@/components/friends";
+import type { FriendLink } from "@/components/friends/types";
 
 // 定义友链申请的类型
 interface FriendLinkApplication {
@@ -302,6 +286,5 @@ export const friendsApi = {
   /**
    * 获取友链统计数据
    */
-  getFriendStats: () =>
-    get<{ total: number; pending: number }>("/friends/stats"),
+  getFriendStats: () => get<{ total: number; pending: number }>("/friends/stats"),
 };

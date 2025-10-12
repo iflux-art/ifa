@@ -3,15 +3,10 @@
 import { BookOpen, ExternalLink, FileText, Link, Search } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { Badge } from "@/components/ui/badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import type { SearchResult } from "./hub-search-types";
 import { useAppStore } from "@/stores";
+import type { SearchResult } from "./hub-search-types";
 import { useSearchState } from "./use-search-state";
 
 // 搜索结果项组件
@@ -21,11 +16,7 @@ interface SearchResultItemProps {
   onResultClick: (result: SearchResult) => void;
 }
 
-const SearchResultItem = ({
-  result,
-  index,
-  onResultClick,
-}: SearchResultItemProps) => {
+const SearchResultItem = ({ result, index, onResultClick }: SearchResultItemProps) => {
   const getIcon = (type: string) => {
     switch (type) {
       case "link":
@@ -50,15 +41,13 @@ const SearchResultItem = ({
         <div className="mt-1 text-muted-foreground">{getIcon(result.type)}</div>
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex items-center gap-2">
-            <h4 className="truncate text-sm font-medium">{result.title}</h4>
+            <h4 className="truncate font-medium text-sm">{result.title}</h4>
             <Badge variant="secondary" className="text-xs">
               {result.type}
             </Badge>
           </div>
           {result.description && (
-            <p className="line-clamp-2 text-sm text-muted-foreground">
-              {result.description}
-            </p>
+            <p className="line-clamp-2 text-muted-foreground text-sm">{result.description}</p>
           )}
           {result.tags && result.tags.length > 0 && (
             <div className="mt-2 flex gap-1">
@@ -83,16 +72,9 @@ interface SearchResultsProps {
   onResultClick: (result: SearchResult) => void;
 }
 
-const SearchResults = ({
-  isLoading,
-  results,
-  query,
-  onResultClick,
-}: SearchResultsProps) => {
+const SearchResults = ({ isLoading, results, query, onResultClick }: SearchResultsProps) => {
   if (isLoading) {
-    return (
-      <div className="py-8 text-center text-muted-foreground">搜索中...</div>
-    );
+    return <div className="py-8 text-center text-muted-foreground">搜索中...</div>;
   }
 
   if (results.length > 0) {
@@ -111,11 +93,7 @@ const SearchResults = ({
   }
 
   if (query.trim()) {
-    return (
-      <div className="py-8 text-center text-muted-foreground">
-        未找到相关结果
-      </div>
-    );
+    return <div className="py-8 text-center text-muted-foreground">未找到相关结果</div>;
   }
 
   return null;
@@ -129,7 +107,7 @@ interface SearchInputProps {
 
 const SearchInput = ({ query, onChange }: SearchInputProps) => (
   <div className="relative mb-4">
-    <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
+    <Search className="-translate-y-1/2 absolute top-1/2 left-3 h-4 w-4 transform text-muted-foreground" />
     <Input
       placeholder="搜索链接、文章、文档..."
       value={query}
@@ -145,8 +123,7 @@ interface SearchDialogProps {
 }
 
 export const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
-  const { search, results, isLoading, query, setSearchTerm, resetSearch } =
-    useSearchState();
+  const { search, results, isLoading, query, setSearchTerm, resetSearch } = useSearchState();
 
   // 使用全局应用状态管理加载和错误状态
   const { setLoading, showError, clearError } = useAppStore();

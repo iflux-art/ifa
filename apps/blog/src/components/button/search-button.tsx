@@ -2,8 +2,8 @@
 
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { SearchDialog } from "@/components/search/search-dialog";
+import { Button } from "@/components/ui/button";
 
 /**
  * 搜索图标组件

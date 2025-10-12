@@ -29,15 +29,10 @@ export const MDXImg = ({
       alt={alt}
       width={width}
       height={height}
-      className={`my-6 w-full max-w-full rounded-lg border border-border bg-muted object-cover shadow-md ${className}`}
-      style={
-        isRemote ? undefined : { position: "relative", aspectRatio: "16/9" }
-      }
-      sizes={
-        isRemote
-          ? undefined
-          : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      }
+      className={`my-6 w-full max-w-full rounded-sm border border-border object-cover shadow-md transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 ${className}`}
+      style={isRemote ? undefined : { position: "relative", aspectRatio: "16/9" }}
+      sizes={isRemote ? undefined : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
+      loading="eager"
       {...props}
     />
   );

@@ -1,29 +1,31 @@
 {
-  "root": false,
-  "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+  "extends": ["../../biome.json"],
+  "files": {
+    "includes": ["src/**/*", "*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs"],
+    "ignoreUnknown": true
+  },
   "linter": {
-    "enabled": true,
     "rules": {
-      "recommended": true,
+      "correctness": {
+        "useExhaustiveDependencies": "error"
+      },
+      "performance": {
+        "noAccumulatingSpread": "error"
+      },
+      "style": {
+        "noNonNullAssertion": "warn",
+        "noDescendingSpecificity": "off",
+        "useBlockStatements": "off"
+      },
+      "complexity": {
+        "noForEach": "off"
+      },
       "suspicious": {
         "noUnknownAtRules": "off"
       },
-      "style": {
-        "noDescendingSpecificity": "off"
+      "nursery": {
+        "useSortedClasses": "error"
       }
     }
-  },
-  "formatter": {
-    "enabled": true,
-    "formatWithErrors": false,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineWidth": 80
-  },
-  "files": {
-    "ignoreUnknown": true,
-    "includes": [
-      "src/**/*"
-    ]
   }
 }

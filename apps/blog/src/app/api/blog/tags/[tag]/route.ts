@@ -8,10 +8,7 @@ import { getPostsByTag } from "@/components/posts/lib";
  * @param params 路由参数，包含标签名称
  * @returns 包含指定标签的文章列表
  */
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ tag: string }> },
-) {
+export async function GET(_request: Request, { params }: { params: Promise<{ tag: string }> }) {
   try {
     const resolvedParams = await params;
     const { tag } = resolvedParams;
@@ -22,7 +19,7 @@ export async function GET(
     console.error(`获取标签 ${(await params).tag} 的文章列表失败:`, error);
     return NextResponse.json(
       { error: `获取标签 ${(await params).tag} 的文章列表失败` },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

@@ -18,16 +18,12 @@ export const NavListMenu = ({ className = "" }: NavListMenuProps) => {
   const pathname = usePathname();
 
   return (
-    <nav
-      className={cn("flex items-center gap-6", className)}
-      aria-label="主导航"
-    >
+    <nav className={cn("flex items-center gap-6", className)} aria-label="主导航">
       {NAV_ITEMS.map((item: BaseNavItem) => {
         const href = NAV_PATHS[item.key] || `/${item.key}`;
         const isExternal = "external" in item && item.external;
         const isActive =
-          !isExternal &&
-          (pathname === href || (href !== "/" && pathname.startsWith(href)));
+          !isExternal && (pathname === href || (href !== "/" && pathname.startsWith(href)));
 
         if (isExternal) {
           return (
@@ -37,8 +33,8 @@ export const NavListMenu = ({ className = "" }: NavListMenuProps) => {
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                "text-muted-foreground hover:text-primary",
+                "font-medium text-sm transition-colors hover:text-primary",
+                "text-muted-foreground hover:text-primary"
               )}
             >
               {item.label}
@@ -51,8 +47,8 @@ export const NavListMenu = ({ className = "" }: NavListMenuProps) => {
             key={item.key}
             href={href}
             className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
-              isActive ? "text-primary" : "text-muted-foreground",
+              "font-medium text-sm transition-colors hover:text-primary",
+              isActive ? "text-primary" : "text-muted-foreground"
             )}
             aria-current={isActive ? "page" : undefined}
           >

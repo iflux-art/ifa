@@ -2,54 +2,34 @@
  * 链接功能模块导出
  */
 
-export type {
-  LinksContentProps,
-  LinksSidebarProps,
-} from "./components";
-// 从 components 导出
+// 组件导出
+export { LinkCard } from "./link-card";
+// 工具函数导出
 export {
-  DataTable,
-  getPageActions,
-  getTableActions,
-  getTableColumns,
-  LinkCard,
-  LinksContent,
-  LinksForm,
-  LinksPageContainer,
-  LinksSidebar,
-  LinksSidebarCard,
-} from "./components";
-
-// 从 hooks 导出
-export {
-  useCategories,
-  useFilterState,
-  useLinksData,
-} from "./hooks";
-
-// 从 lib 导出
-export {
-  categoryStructure,
+  clearAllCaches,
   clearCategoryCache,
-  generateCategoriesData,
   loadAllLinksData,
   preloadCriticalCategories,
-} from "./lib";
-export type {
-  LinkDataService,
-  LinkService,
-} from "./services";
+} from "./links-lib";
+// Hooks 导出
+export { useFilterState } from "./use-filter-state";
+// 移除了 useLinksDataState hook 导出，已移到 @/components/links-admin/components
+export { useTagAnchors } from "./use-tag-anchors";
 
-// 从 services 导出
-export {
-  linkDataService,
-  linkService,
-} from "./services";
-// 从 types 导出
+// Store 导出
+// 移除了 useLinksDataStore，已移到 @/components/links-admin/components
+
+// 类型导出
 export type {
-  CategoryId,
-  LinksCategory,
   LinksFormData,
   LinksItem,
-  LinksSubCategory,
-} from "./types";
+} from "./links-types";
+
+// 分类相关类型请从 @/components/link-categories 导入
+// export type { CategoryId, LinksCategory, LinksSubCategory } from "./links-types";
+
+// 工具函数导出
+export {
+  validateLinksFormData,
+  validateLinksUpdate,
+} from "./validation";

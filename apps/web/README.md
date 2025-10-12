@@ -1,59 +1,74 @@
 # Web Application
 
-基于 Next.js 14+ App Router 构建的现代化 Web 应用程序。
+Main web application for the iFlux Art platform.
 
-## 🚀 快速开始
+## Getting Started
+
+### Prerequisites
+
+- Node.js 22.x
+- pnpm 9.15.9
+
+### Installation
 
 ```bash
-# 开发模式
+# Install dependencies
+pnpm install
+
+# Start development server
 pnpm dev
-
-# 构建生产版本
-pnpm build
-
-# 启动生产服务器
-pnpm start
 ```
 
-## 🏗️ 项目结构
+### Available Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run linting
+- `pnpm test` - Run tests
+- `pnpm test:e2e` - Run E2E tests
+- `pnpm type-check` - Run TypeScript type checking
+
+## Project Structure
 
 ```
-web/
-├── src/
-│   ├── app/           # App Router 目录
-│   ├── components/    # 组件目录
-│   ├── features/      # 功能模块
-│   ├── lib/           # 工具函数
-│   └── types/         # TypeScript 类型定义
-├── public/            # 静态资源
-├── styles/            # 全局样式
-└── tests/             # 测试文件
+src/
+├── app/                 # Next.js App Router pages
+├── components/          # React components
+│   ├── ui/             # Reusable UI components
+│   └── theme/          # Theme-related components
+├── lib/                # Utility libraries
+├── hooks/              # Custom React hooks
+├── stores/             # State management (Zustand)
+├── types/              # TypeScript type definitions
+├── config/             # Application configuration
+└── test/               # Test utilities and setup
 ```
 
-## 🧪 测试
+## Technology Stack
 
-```bash
-# 运行单元测试
-pnpm test
+- **Framework**: Next.js 15
+- **Runtime**: React 19
+- **Language**: TypeScript 5.9
+- **Styling**: Tailwind CSS 4.1
+- **State Management**: Zustand
+- **Testing**: Vitest + Playwright
+- **Linting**: Biome
 
-# 运行端到端测试
-pnpm test:e2e
+## Features
 
-# 运行代码检查
-pnpm lint
-```
+- ✅ React 19 with Compiler optimizations
+- ✅ Next.js 15 with Turbopack and PPR
+- ✅ TypeScript with strict configuration
+- ✅ Tailwind CSS with design system
+- ✅ Dark/Light theme support
+- ✅ Comprehensive testing setup
+- ✅ Modern development tooling
 
-## 📦 独立部署
+## Development
 
-要独立部署此应用程序：
+This application is part of a monorepo and shares packages with other applications. Make sure to run commands from the root of the monorepo when working with shared dependencies.
 
-1. 克隆或下载 [apps/web](file:///c:/project/ifa/apps/web) 目录
-2. 安装依赖并构建应用程序：
-   ```bash
-   pnpm install
-   pnpm build
-   ```
+## Deployment
 
-## 📄 许可证
-
-MIT 许可证 - 详见 [LICENSE](file:///c:/project/ifa/apps/web/LICENSE) 文件了解详情。
+The application is configured for independent deployment and can be deployed to any platform that supports Next.js applications.

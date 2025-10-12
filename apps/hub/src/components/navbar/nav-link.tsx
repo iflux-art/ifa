@@ -23,11 +23,7 @@ interface NavLinkProps {
 /**
  * 判断链接是否处于活动状态
  */
-function isLinkActive(
-  pathname: string,
-  href: string,
-  currentDoc?: string,
-): boolean {
+function isLinkActive(pathname: string, href: string, currentDoc?: string): boolean {
   // 完全匹配
   if (pathname === href) {
     return true;
@@ -111,7 +107,7 @@ export const NavLink = ({
       className={cn(
         "flex items-center justify-between rounded-md px-3 py-2 text-sm transition-colors",
         className,
-        isActive ? activeClassName : inactiveClassName,
+        isActive ? activeClassName : inactiveClassName
       )}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
@@ -124,7 +120,4 @@ export const NavLink = ({
   );
 };
 
-/**
- * @deprecated 请使用 NavLink 替代 ActiveLink，ActiveLink 将在未来版本中移除
- */
-export { NavLink as ActiveLink };
+// ActiveLink 已移除，请使用 NavLink

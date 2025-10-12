@@ -16,12 +16,7 @@ const MIDDLEWARE_CACHE_CONFIG = {
  */
 const CSP_CONFIG = {
   "default-src": ["'self'"],
-  "script-src": [
-    "'self'",
-    "'unsafe-inline'",
-    "'unsafe-eval'",
-    "https://cdn.jsdelivr.net",
-  ],
+  "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.jsdelivr.net"],
   "style-src": ["'self'", "'unsafe-inline'"],
   "img-src": ["'self'", "data:", "https:"],
   "font-src": ["'self'", "data:"],
@@ -44,8 +39,7 @@ const SECURITY_HEADERS = {
   "X-Content-Type-Options": "nosniff",
   "X-XSS-Protection": "1; mode=block",
   "Referrer-Policy": "strict-origin-when-cross-origin",
-  "Permissions-Policy":
-    "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), interest-cohort=()",
 } as const;
 
 /**
@@ -63,10 +57,7 @@ const getCacheControl = (pathname: string): string => {
   const { staticAssets, fonts, images, api } = MIDDLEWARE_CACHE_CONFIG;
 
   // 静态资源
-  if (
-    /\.(js|css|json|xml|txt|ico)$/.test(pathname) ||
-    pathname.startsWith("/_next/static/")
-  ) {
+  if (/\.(js|css|json|xml|txt|ico)$/.test(pathname) || pathname.startsWith("/_next/static/")) {
     const maxAge = staticAssets;
     const sMaxAge = maxAge * 2;
     const staleWhileRevalidate = maxAge * 24;
@@ -124,7 +115,7 @@ export default function middleware(request: NextRequest) {
         "connect-src 'self' https: http: ws: wss:; " +
         "frame-src 'self' https: http:; " +
         "worker-src 'self' blob:; " +
-        "form-action 'self' https: http:;",
+        "form-action 'self' https: http:;"
     );
   } else {
     // 生产环境：严格的 CSP

@@ -5,16 +5,10 @@ import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const Avatar = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Root>) => (
+const Avatar = ({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Root>) => (
   <AvatarPrimitive.Root
     data-slot="avatar"
-    className={cn(
-      "relative flex size-8 shrink-0 overflow-hidden rounded-full",
-      className,
-    )}
+    className={cn("relative flex size-8 shrink-0 overflow-hidden rounded-full", className)}
     {...props}
   />
 );
@@ -36,10 +30,7 @@ const AvatarFallback = ({
 }: React.ComponentProps<typeof AvatarPrimitive.Fallback>) => (
   <AvatarPrimitive.Fallback
     data-slot="avatar-fallback"
-    className={cn(
-      "flex size-full items-center justify-center rounded-full bg-muted",
-      className,
-    )}
+    className={cn("flex size-full items-center justify-center rounded-full bg-muted", className)}
     {...props}
   />
 );

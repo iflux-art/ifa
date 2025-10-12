@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { generateCacheHeaders } from "@/lib/cache-config";
 
 /**
  * 简化版中间件
@@ -24,7 +25,7 @@ export default function middleware(request: NextRequest) {
         "connect-src 'self' https: http: ws: wss:; " +
         "frame-src 'self' https: http:; " +
         "worker-src 'self' blob:; " +
-        "form-action 'self' https: http:;",
+        "form-action 'self' https: http:;"
     );
   } else {
     // 生产环境使用严格 CSP
@@ -41,7 +42,7 @@ export default function middleware(request: NextRequest) {
         "form-action 'self'; " +
         "base-uri 'self'; " +
         "worker-src 'self' blob:; " +
-        "upgrade-insecure-requests;",
+        "upgrade-insecure-requests;"
     );
   }
 
@@ -50,50 +51,54 @@ export default function middleware(request: NextRequest) {
 
   // 设置安全头
   response.headers.set("X-DNS-Prefetch-Control", "on");
-  response.headers.set(
-    "Strict-Transport-Security",
-    "max-age=31536000; includeSubDomains",
-  );
+  response.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
   response.headers.set("X-Frame-Options", "SAMEORIGIN");
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("X-XSS-Protection", "1; mode=block");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   response.headers.set(
     "Permissions-Policy",
-    "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+    "camera=(), microphone=(), geolocation=(), interest-cohort=()"
   );
 
   return response;
 }
 
 /**
- * 获取缓存策略
+ * 获取智能缓存策略
  */
 function getCacheControl(pathname: string): string {
   // 静态资源缓存策略
-  if (
-    /\.(js|css|json|xml|txt|ico)$/.test(pathname) ||
-    pathname.startsWith("/_next/static/")
-  ) {
-    return "public, max-age=3600, s-maxage=7200, stale-while-revalidate=86400";
+  if (/\.(js|css|json|xml|txt|ico)$/.test(pathname) || pathname.startsWith("/_next/static/")) {
+    const headers = generateCacheHeaders("STATIC_ASSETS");
+    return headers["Cache-Control"];
   }
 
   // 图片缓存策略
   if (/\.(png|jpg|jpeg|gif|webp|avif|svg)$/.test(pathname)) {
-    return "public, max-age=86400, s-maxage=172800, stale-while-revalidate=864000";
+    const headers = generateCacheHeaders("STATIC_ASSETS");
+    return headers["Cache-Control"];
   }
 
   // 字体缓存策略
   if (/\.(woff|woff2|ttf|otf)$/.test(pathname)) {
-    return "public, max-age=86400, s-maxage=172800, stale-while-revalidate=2073600";
+    const headers = generateCacheHeaders("STATIC_ASSETS");
+    return headers["Cache-Control"];
   }
 
   // API路由缓存策略
   if (pathname.includes("/api/")) {
-    return "public, max-age=30, s-maxage=60, stale-while-revalidate=300";
+    const headers = generateCacheHeaders("API_RESPONSES");
+    return headers["Cache-Control"];
   }
 
-  // 其他页面不缓存
+  // 页面缓存策略
+  if (pathname === "/" || pathname.startsWith("/about") || pathname.startsWith("/contact")) {
+    const headers = generateCacheHeaders("PAGE_CACHE");
+    return headers["Cache-Control"];
+  }
+
+  // 用户相关页面不缓存
   return "no-store, no-cache, max-age=0, must-revalidate, proxy-revalidate";
 }
 

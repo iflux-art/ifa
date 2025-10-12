@@ -8,7 +8,7 @@ interface GreetingProps {
 }
 
 // 时间段类型
-type TimeSlot = "morning" | "noon" | "afternoon" | "evening" | "lateNight";
+type TimePeriod = "morning" | "noon" | "afternoon" | "evening" | "night";
 
 /**
  * 问候语数据
@@ -122,7 +122,7 @@ const GREETINGS_BY_TIME = {
     "给自己一个温暖的拥抱，晚安！",
     "夜晚的每一刻，都是新的开始！",
   ],
-  lateNight: [
+  night: [
     '您已进入"阴间作息区"',
     '建议立即执行"躺倒关机"指令！',
     "秃头预警！",
@@ -156,13 +156,24 @@ const GREETINGS_BY_TIME = {
  * 获取当前时间段
  * @returns 当前时间段key
  */
-const getCurrentTimeSlot = (): TimeSlot => {
+const getCurrentTimeSlot = (): TimePeriod => {
   const hour = new Date().getHours();
-  if (hour >= 6 && hour <= 10) return "morning";
-  if (hour >= 11 && hour <= 13) return "noon";
-  if (hour >= 14 && hour <= 17) return "afternoon";
-  if (hour >= 18 && hour <= 23) return "evening";
-  return "lateNight";
+  const getTimePeriod = (hour: number): TimePeriod => {
+    if (hour >= 6 && hour <= 10) {
+      return "morning";
+    }
+    if (hour >= 11 && hour <= 13) {
+      return "noon";
+    }
+    if (hour >= 14 && hour <= 17) {
+      return "afternoon";
+    }
+    if (hour >= 18 && hour <= 23) {
+      return "evening";
+    }
+    return "night";
+  };
+  return getTimePeriod(hour);
 };
 
 /**
@@ -195,7 +206,7 @@ export const Greeting = ({ className }: GreetingProps) => {
 
   return (
     <button
-      className={`mb-5 cursor-pointer text-xl font-normal text-muted-foreground transition-colors hover:text-muted-foreground/70 md:text-2xl ${className ?? ""}`}
+      className={`mb-5 cursor-pointer font-normal text-muted-foreground text-xl transition-colors hover:text-muted-foreground/70 md:text-2xl ${className ?? ""}`}
       onClick={refreshGreeting}
       onKeyDown={(e) => e.key === "Enter" && refreshGreeting()}
       title="点击刷新问候语"

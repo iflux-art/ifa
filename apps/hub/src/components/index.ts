@@ -8,10 +8,6 @@ export { GitHubButton } from "./button";
 
 // 底栏组件
 export { Footer } from "./footer";
-// 类型导出
-export type { PageContainerProps } from "./layout";
-// 布局组件
-export { PageContainer } from "./layout";
 // UI 组件
 export {
   AlertDialog,

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "rangeStrategy": "bump"
+    },
+    {
+      "matchPackagePatterns": [
+        "@types/*"
+      ],
+      "groupName": "type definitions"
+    },
+    {
+      "matchPackagePatterns": [
+        "@radix-ui/*"
+      ],
+      "groupName": "radix-ui"
+    },
+    {
+      "matchPackagePatterns": [
+        "@tailwindcss/*"
+      ],
+      "groupName": "tailwindcss"
+    }
+  ],
+  "schedule": [
+    "before 6am on monday"
+  ],
+  "timezone": "UTC",
+  "assignees": [
+    "@maintainer"
+  ],
+  "reviewers": [
+    "@maintainer"
+  ]
+}

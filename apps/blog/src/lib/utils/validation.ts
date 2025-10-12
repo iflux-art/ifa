@@ -28,16 +28,13 @@ export function isValidUrl(urlString: string): boolean {
  */
 export function validateRequiredFields(
   data: Record<string, unknown>,
-  requiredFields: string[],
+  requiredFields: string[]
 ): string[] {
   const missingFields: string[] = [];
 
   for (const field of requiredFields) {
     // 检查字段是否存在且不为空
-    if (
-      !data[field] ||
-      (typeof data[field] === "string" && !data[field]?.toString().trim())
-    ) {
+    if (!data[field] || (typeof data[field] === "string" && !data[field]?.toString().trim())) {
       missingFields.push(field);
     }
   }

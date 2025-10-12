@@ -23,17 +23,17 @@ export const NAV_ITEMS = [
     icon: PenTool,
   },
   {
+    key: "friends",
+    label: "友链",
+    description: "探索我们的合作伙伴和友情链接，发现更多优质资源",
+    icon: Link,
+  },
+  {
     key: "hub",
     label: "导航",
     description: "网址导航和资源集合",
     icon: Home,
     href: "https://hub.iflux.art/",
-  },
-  {
-    key: "friends",
-    label: "友链",
-    description: "探索我们的合作伙伴和友情链接，发现更多优质资源",
-    icon: Link,
   },
 ] as const;
 
@@ -53,8 +53,8 @@ const FLAT_NAV_ITEMS: NavConfigItem[] = flattenNavItems(NAV_ITEMS);
 
 export const NAV_PATHS: Record<string, string> = {
   blog: "/",
-  hub: "https://hub.iflux.art/",
   friends: "/friends",
+  hub: "https://hub.iflux.art/",
 } as const;
 
 /**
@@ -63,5 +63,5 @@ export const NAV_PATHS: Record<string, string> = {
 // Navigation configuration validation removed for production
 
 export const NAV_DESCRIPTIONS = Object.fromEntries(
-  FLAT_NAV_ITEMS.map((item) => [item.key, item.description]),
+  FLAT_NAV_ITEMS.map((item) => [item.key, item.description])
 ) as Record<string, string>;

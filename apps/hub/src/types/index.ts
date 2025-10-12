@@ -1,13 +1,8 @@
+// Export type definitions from this file
+export type AppConfig = {
+  name: string;
+  version: string;
+  environment: "development" | "production" | "test";
+};
+
 // ==================== 布局相关类型 ====================
-export type {
-  AppGridProps,
-  GridColsMap,
-  GridGapMap,
-  PageContainerConfig,
-  PageContainerProps,
-  PageLayoutProps,
-  PageLayoutType,
-  SidebarConfig,
-  ThreeColumnGridProps,
-  ThreeColumnLayoutProps,
-} from "./layout-types";

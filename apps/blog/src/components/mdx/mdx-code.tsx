@@ -18,9 +18,7 @@ export const MDXCode = ({ children, className, ...props }: MDXCodeProps) => {
   useEffect(() => {
     // 检查是否为行内代码（不在pre标签内）
     if (codeRef.current) {
-      const isInlineCode = !codeRef.current.parentElement?.tagName
-        .toLowerCase()
-        .includes("pre");
+      const isInlineCode = !codeRef.current.parentElement?.tagName.toLowerCase().includes("pre");
 
       // 只有行内代码才应用自定义样式和处理
       if (isInlineCode) {
@@ -40,17 +38,14 @@ export const MDXCode = ({ children, className, ...props }: MDXCodeProps) => {
           "dark:bg-muted/80",
           "dark:text-primary/90",
           "before:hidden",
-          "after:hidden",
+          "after:hidden"
         );
 
         // 处理内容（移除反引号）
         if (codeRef.current.textContent) {
           const content = codeRef.current.textContent;
           if (content.startsWith("`") && content.endsWith("`")) {
-            codeRef.current.textContent = content.substring(
-              1,
-              content.length - 1,
-            );
+            codeRef.current.textContent = content.substring(1, content.length - 1);
           }
         }
       }

@@ -45,11 +45,7 @@ const SCROLL_OFFSET = NAVBAR_HEIGHT;
  * @param offset 偏移量（默认为0）
  * @param updateHash 是否更新URL hash（默认为false）
  */
-function scrollToElement(
-  elementId: string,
-  offset = 0,
-  updateHash = false,
-): void {
+function scrollToElement(elementId: string, offset = 0, updateHash = false): void {
   const element = document.getElementById(elementId);
   if (!element) return;
 
@@ -114,7 +110,7 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
           "hover:text-foreground",
           // active 状态
           isActive && "font-medium text-foreground",
-          "w-full",
+          "w-full"
         )}
         style={{
           paddingLeft: heading.level > 2 ? `calc(${indent}rem + 1rem)` : "1rem",
@@ -129,7 +125,7 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <span className="overflow-wrap-anywhere block w-full text-left leading-relaxed break-words hyphens-auto whitespace-normal">
+        <span className="overflow-wrap-anywhere block w-full hyphens-auto whitespace-normal break-words text-left leading-relaxed">
           {heading.text}
         </span>
       </a>
@@ -145,21 +141,14 @@ interface TocContainerProps {
 }
 
 const TocContainer = ({ headings, activeId, tocRef }: TocContainerProps) => (
-  <div
-    ref={tocRef}
-    className="hide-scrollbar max-h-64 overflow-y-auto scroll-smooth"
-  >
+  <div ref={tocRef} className="hide-scrollbar max-h-64 overflow-y-auto scroll-smooth">
     <div className="relative">
       {/* 左侧细线 */}
       <div className="absolute top-0 bottom-0 left-2 w-px bg-border" />
 
       <div className="space-y-1">
         {headings.map((heading, _index) => (
-          <HeadingItem
-            key={heading.id}
-            heading={heading}
-            isActive={activeId === heading.id}
-          />
+          <HeadingItem key={heading.id} heading={heading} isActive={activeId === heading.id} />
         ))}
       </div>
     </div>
@@ -172,11 +161,7 @@ const TocContainer = ({ headings, activeId, tocRef }: TocContainerProps) => (
  * 以卡片形式显示文档的目录结构，支持点击导航和滚动高亮
  * 样式与其他侧边栏卡片保持一致
  */
-export const TableOfContents = ({
-  headings,
-  className,
-  title = "目录",
-}: TableOfContentsProps) => {
+export const TableOfContents = ({ headings, className, title = "目录" }: TableOfContentsProps) => {
   const tocRef = useRef<HTMLDivElement>(null);
 
   // 使用自定义 hook 处理标题观察
@@ -191,24 +176,18 @@ export const TableOfContents = ({
 
     // 防抖逻辑
     const timeoutId = setTimeout(() => {
-      const activeElement = tocRef.current?.querySelector(
-        `a[href="#${activeId}"]`,
-      );
+      const activeElement = tocRef.current?.querySelector(`a[href="#${activeId}"]`);
 
       if (activeElement && tocRef.current) {
         const containerRect = tocRef.current.getBoundingClientRect();
         const activeRect = activeElement.getBoundingClientRect();
 
         const isInView =
-          activeRect.top >= containerRect.top &&
-          activeRect.bottom <= containerRect.bottom;
+          activeRect.top >= containerRect.top && activeRect.bottom <= containerRect.bottom;
 
         if (!isInView) {
           const scrollTop =
-            activeRect.top -
-            containerRect.top -
-            containerRect.height / 2 +
-            activeRect.height / 2;
+            activeRect.top - containerRect.top - containerRect.height / 2 + activeRect.height / 2;
 
           // 使用更平滑的滚动
           tocRef.current.scrollTo({
@@ -226,7 +205,7 @@ export const TableOfContents = ({
 
   // 过滤掉h1标题，只显示h2-h4
   const filteredHeadings = headings.filter(
-    (heading: TocHeading) => heading.level >= 2 && heading.level <= 4,
+    (heading: TocHeading) => heading.level >= 2 && heading.level <= 4
   );
 
   // 根据标题级别对目录进行分组和嵌套
@@ -250,19 +229,20 @@ export const TableOfContents = ({
   const organizedHeadings = organizeHeadings(filteredHeadings);
 
   return (
-    <Card className={cn("w-full", className)}>
+    <Card
+      className={cn(
+        "w-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10",
+        className
+      )}
+    >
       <CardHeader className="pt-4 pb-2">
-        <CardTitle className="flex items-center gap-2 text-sm font-medium text-foreground">
+        <CardTitle className="flex items-center gap-2 font-medium text-foreground text-sm">
           <Text className="h-3.5 w-3.5 text-primary" />
           {title}
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0 pb-4">
-        <TocContainer
-          headings={organizedHeadings}
-          activeId={activeId}
-          tocRef={tocRef}
-        />
+        <TocContainer headings={organizedHeadings} activeId={activeId} tocRef={tocRef} />
       </CardContent>
     </Card>
   );

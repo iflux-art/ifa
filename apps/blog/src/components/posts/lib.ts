@@ -6,10 +6,12 @@ export { getBlogContent } from "./blog-content";
 // 从client-utils重新导出客户端安全的函数
 export {
   calculateReadingTime,
+  createBlogBreadcrumbs,
   debounce,
   extractHeadings,
   formatDate,
   formatNumber,
+  generateBreadcrumbs,
   groupByCategory,
   groupByTag,
   sortContent,
@@ -21,103 +23,6 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import type { BlogPost } from "./blog-types";
-import type { BreadcrumbItem } from "@/components/navbar/types";
-
-// ==================== 面包屑导航相关类型和函数 ====================
-
-interface GenerateBreadcrumbsOptions {
-  basePath: string;
-  slug: string[];
-  currentTitle?: string;
-  startLabel: string;
-  segmentProcessor?: (segment: string, index: number) => string;
-}
-
-interface BlogBreadcrumbProps {
-  slug: string[];
-  title: string;
-}
-
-/**
- * 生成面包屑导航的通用函数
- */
-export function generateBreadcrumbs({
-  basePath,
-  slug,
-  currentTitle,
-  startLabel,
-  segmentProcessor,
-}: GenerateBreadcrumbsOptions): { label: string; href?: string }[] {
-  const items: { label: string; href?: string }[] = [
-    { label: startLabel, href: `/${basePath}` },
-  ];
-  let currentPath = "";
-
-  slug.forEach((segment, index) => {
-    const isLastSegment = index === slug.length - 1;
-    currentPath += `/${segment}`;
-
-    const label = (() => {
-      if (segmentProcessor) {
-        return segmentProcessor(segment, index);
-      }
-      if (isLastSegment && currentTitle) {
-        return currentTitle;
-      }
-      return segment;
-    })();
-
-    if (isLastSegment) {
-      items.push({ label });
-    } else {
-      items.push({ label, href: `/${basePath}${currentPath}` });
-    }
-  });
-
-  return items;
-}
-
-/**
- * 获取博客目录的显示名称
- * 根据实际的文件夹结构返回友好的显示名称
- */
-function getBlogDirectoryTitle(segment: string): string {
-  const directoryTitleMap: Record<string, string> = {
-    ai: "人工智能",
-    dev: "开发技术",
-    essays: "随笔感悟",
-    music: "音乐制作",
-    ops: "运维部署",
-    project: "项目经验",
-    software: "软件工具",
-  };
-
-  return directoryTitleMap[segment] || segment;
-}
-
-/**
- * 创建博客面包屑导航
- */
-export function createBlogBreadcrumbs({
-  slug,
-  title,
-}: BlogBreadcrumbProps): BreadcrumbItem[] {
-  return generateBreadcrumbs({
-    basePath: "", // 博客列表页在根路径上
-    slug,
-    currentTitle: title,
-    startLabel: "博客",
-    segmentProcessor: (segment, index) => {
-      // 如果是最后一个段落且有标题，使用标题
-      const isLastSegment = index === slug.length - 1;
-      if (isLastSegment && title) {
-        return title;
-      }
-      // 否则使用目录映射名称
-      return getBlogDirectoryTitle(segment);
-    },
-  });
-}
 
 // ==================== 博客相关函数 ====================
 
@@ -128,8 +33,7 @@ function isMarkdownFile(fileName: string): boolean {
 
 // 生成文章slug
 function generateBlogSlug(itemPath: string, blogDir: string): string {
-  const pathParts =
-    itemPath.split(blogDir)[1]?.split(path.sep).filter(Boolean) ?? [];
+  const pathParts = itemPath.split(blogDir)[1]?.split(path.sep).filter(Boolean) ?? [];
 
   if (pathParts.length === 1) {
     // 直接在blog目录下的文件
@@ -156,11 +60,7 @@ function createBlogPost(data: Record<string, unknown>, slug: string): BlogPost {
 }
 
 // 处理单个文件的函数
-function processFile(
-  itemPath: string,
-  blogDir: string,
-  posts: BlogPost[],
-): void {
+function processFile(itemPath: string, blogDir: string, posts: BlogPost[]): void {
   const fileContent = fs.readFileSync(itemPath, "utf8");
   const { data } = matter(fileContent);
 
@@ -267,10 +167,7 @@ export function getAllTags(): string[] {
 }
 
 // 处理文件计数标签
-function countTagsFromFile(
-  itemPath: string,
-  tagCounts: Record<string, number>,
-): void {
+function countTagsFromFile(itemPath: string, tagCounts: Record<string, number>): void {
   const fileContent = fs.readFileSync(itemPath, "utf8");
   const { data } = matter(fileContent);
 
@@ -322,12 +219,7 @@ function hasTag(data: Record<string, unknown>, tag: string): boolean {
 }
 
 // 处理单个文件的函数
-function processPostFile(
-  itemPath: string,
-  blogDir: string,
-  tag: string,
-  posts: BlogPost[],
-): void {
+function processPostFile(itemPath: string, blogDir: string, tag: string, posts: BlogPost[]): void {
   const fileContent = fs.readFileSync(itemPath, "utf8");
   const { data } = matter(fileContent);
 
@@ -396,7 +288,7 @@ const generateFullSlug = (itemPath: string, blogDir: string): string => {
 const createBlogPostForTimeline = (
   itemPath: string,
   data: Record<string, unknown>,
-  blogDir: string,
+  blogDir: string
 ): BlogPost => {
   const slug = path.basename(itemPath).replace(/\.(mdx|md)$/, "");
   const fullSlug = generateFullSlug(itemPath, blogDir);
@@ -422,7 +314,7 @@ const createBlogPostForTimeline = (
 const processFileForTimeline = (
   itemPath: string,
   blogDir: string,
-  postsByYear: Record<string, BlogPost[]>,
+  postsByYear: Record<string, BlogPost[]>
 ): void => {
   const fileContent = fs.readFileSync(itemPath, "utf8");
   const { data } = matter(fileContent);
@@ -449,7 +341,7 @@ const processFileForTimeline = (
 const findPostsInDirectory = (
   dir: string,
   blogDir: string,
-  postsByYear: Record<string, BlogPost[]>,
+  postsByYear: Record<string, BlogPost[]>
 ): void => {
   const items = fs.readdirSync(dir, { withFileTypes: true });
 
@@ -472,10 +364,7 @@ const sortPostsByYear = (postsByYear: Record<string, BlogPost[]>): void => {
     // 修复：添加类型检查以确保 postsByYear[year] 存在
     const posts = postsByYear[year];
     if (posts) {
-      posts.sort(
-        (a, b) =>
-          new Date(b.date ?? "").getTime() - new Date(a.date ?? "").getTime(),
-      );
+      posts.sort((a, b) => new Date(b.date ?? "").getTime() - new Date(a.date ?? "").getTime());
     }
   });
 };

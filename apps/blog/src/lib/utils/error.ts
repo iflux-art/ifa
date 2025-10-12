@@ -41,11 +41,7 @@ export function classifyError(error: unknown): ErrorInfo["type"] {
       return "ContentNotFound";
     }
 
-    if (
-      message.includes("network") ||
-      message.includes("fetch") ||
-      message.includes("timeout")
-    ) {
+    if (message.includes("network") || message.includes("fetch") || message.includes("timeout")) {
       return "NetworkError";
     }
 
@@ -65,8 +61,7 @@ function buildLogMessage(errorInfo: ErrorInfo) {
     ...errorInfo,
     timestamp: errorInfo.timestamp || new Date(),
     environment: process.env.NODE_ENV,
-    userAgent:
-      typeof window !== "undefined" ? window.navigator.userAgent : "server",
+    userAgent: typeof window !== "undefined" ? window.navigator.userAgent : "server",
   };
 }
 
@@ -88,7 +83,7 @@ function logDevelopmentError(errorInfo: ErrorInfo): void {
   }
 
   // 输出详细信息
-  console.error("ℹ️ Error Details:", {
+  console.error("ℹ️ 错误详情:", {
     type: errorInfo.type,
     message: errorInfo.message,
     code: errorInfo.code,
@@ -102,7 +97,7 @@ function logDevelopmentError(errorInfo: ErrorInfo): void {
  */
 function logContextInfo(errorInfo: ErrorInfo): void {
   if (errorInfo.context && Object.keys(errorInfo.context).length > 0) {
-    console.error("🔍 Context:", errorInfo.context);
+    console.error("🔍 上下文:", errorInfo.context);
   }
 }
 
@@ -128,7 +123,7 @@ function logContentNotFoundStack(errorInfo: ErrorInfo): void {
 
   // 可选显示堆栈（通常不需要）
   if (process.env.SHOW_CONTENT_NOT_FOUND_STACK === "true") {
-    console.error("📚 Stack Trace (Info):", errorInfo.originalError.stack);
+    console.error("📚 堆栈跟踪 (信息):", errorInfo.originalError.stack);
   }
 }
 
@@ -142,17 +137,14 @@ function logOtherErrorStack(errorInfo: ErrorInfo): void {
   }
 
   if (errorInfo.originalError instanceof Error) {
-    console.error("📚 Stack Trace:", errorInfo.originalError.stack);
+    console.error("📚 堆栈跟踪:", errorInfo.originalError.stack);
   }
 }
 
 /**
  * 处理开发环境堆栈信息输出
  */
-function logDevelopmentStack(
-  errorInfo: ErrorInfo,
-  includeStack: boolean,
-): void {
+function logDevelopmentStack(errorInfo: ErrorInfo, includeStack: boolean): void {
   if (!(includeStack && errorInfo.originalError instanceof Error)) {
     return;
   }
@@ -167,10 +159,7 @@ function logDevelopmentStack(
 /**
  * 处理开发环境日志输出
  */
-function logDevelopmentOutput(
-  errorInfo: ErrorInfo,
-  includeStack: boolean,
-): void {
+function logDevelopmentOutput(errorInfo: ErrorInfo, includeStack: boolean): void {
   logDevelopmentError(errorInfo);
   logContextInfo(errorInfo);
   logDevelopmentStack(errorInfo, includeStack);
@@ -181,7 +170,7 @@ function logDevelopmentOutput(
  */
 function logProductionOutput(
   errorInfo: ErrorInfo,
-  logMessage: ReturnType<typeof buildLogMessage>,
+  logMessage: ReturnType<typeof buildLogMessage>
 ): void {
   // 生产环境中只记录简化的错误信息，避免暴露敏感信息
   console.error(`[${errorInfo.type}] ${errorInfo.message}`, {
@@ -234,7 +223,7 @@ export function logError(errorInfo: ErrorInfo, options: LogOptions = {}): void {
 export function handleContentError(
   error: unknown,
   contentType: "blog" | "links",
-  contentId?: string,
+  contentId?: string
 ): ErrorInfo {
   // 获取更多上下文信息
   const context: Record<string, unknown> = {
@@ -254,8 +243,7 @@ export function handleContentError(
 
   const errorInfo: ErrorInfo = {
     type: classifyError(error),
-    message:
-      error instanceof Error ? error.message : "Unknown content loading error",
+    message: error instanceof Error ? error.message : "未知内容加载错误",
     context,
     originalError: error,
     timestamp: new Date(),
@@ -278,13 +266,10 @@ export function handleContentError(
 /**
  * 网络请求错误处理器
  */
-export function handleNetworkError(
-  error: unknown,
-  endpoint?: string,
-): ErrorInfo {
+export function handleNetworkError(error: unknown, endpoint?: string): ErrorInfo {
   const errorInfo: ErrorInfo = {
     type: "NetworkError",
-    message: error instanceof Error ? error.message : "Network request failed",
+    message: error instanceof Error ? error.message : "网络请求失败",
     context: {
       endpoint,
       timestamp: new Date().toISOString(),
@@ -314,10 +299,7 @@ export function getUserFriendlyMessage(errorInfo: ErrorInfo): string {
 /**
  * 错误边界组件的错误处理
  */
-export function handleComponentError(
-  error: Error,
-  errorInfo: { componentStack: string },
-): void {
+export function handleComponentError(error: Error, errorInfo: { componentStack: string }): void {
   const errorDetails: ErrorInfo = {
     type: "UnknownError",
     message: error.message,

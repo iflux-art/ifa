@@ -14,7 +14,7 @@ export function useHeadingObserver(
   options = {
     rootMargin: "-20% 0px -80% 0px",
     threshold: 0.2,
-  },
+  }
 ) {
   const [activeId, setActiveId] = useState<string>("");
   const clickedHeadingRef = useRef<string | null>(null);
@@ -88,9 +88,7 @@ export function useHeadingObserver(
         const element = document.getElementById(heading.id);
         if (!element) {
           // 查找匹配文本内容的标题元素
-          const headingElements = document.querySelectorAll(
-            "h1, h2, h3, h4, h5, h6",
-          );
+          const headingElements = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
           headingElements.forEach((el) => {
             if (el.textContent?.trim() === heading.text) {
               if (!el.id) {

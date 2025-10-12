@@ -10,29 +10,29 @@ export const NAV_ITEMS: BaseNavItem[] = [
     icon: PenTool,
   },
   {
-    key: "hub",
-    label: "导航",
-    href: "https://hub.iflux.art/",
-    icon: Home,
-  },
-  {
     key: "friends",
     label: "友链",
     href: "https://blog.iflux.art/friends/",
     icon: Link,
+  },
+  {
+    key: "hub",
+    label: "导航",
+    href: "https://hub.iflux.art/",
+    icon: Home,
   },
 ];
 
 // 导航路径映射
 export const NAV_PATHS: Record<string, string> = {
   blog: "https://blog.iflux.art/",
-  hub: "https://hub.iflux.art/",
   friends: "https://blog.iflux.art/friends/",
+  hub: "https://hub.iflux.art/",
 };
 
 // 导航描述信息
 export const NAV_DESCRIPTIONS: Record<string, string> = {
   blog: "查看最新博客文章",
-  hub: "查看网站导航",
   friends: "查看友情链接",
+  hub: "查看网站导航",
 };

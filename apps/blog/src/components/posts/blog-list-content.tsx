@@ -1,28 +1,28 @@
 "use client";
 
-import type { BlogPost } from "@/components/posts/blog-types";
 import Image from "next/image";
 import Link from "next/link";
 import { forwardRef } from "react";
+import type { BlogPost } from "@/components/posts/blog-types";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-// ====== 迁移自 src/utils/date.ts ======
 /**
  * 格式化日期
  * @param date 日期字符串或Date对象
  * @param format 可选格式 (支持 'MM月dd日')
  * @returns 格式化后的日期字符串
  */
-function formatDate(date: string | Date | undefined, format?: string): string {
-  if (!date) return "";
+export const formatDate = (dateString: string | undefined): string => {
+  if (!dateString) {
+    return "";
+  }
 
-  const d = new Date(date);
-  if (Number.isNaN(d.getTime())) return "";
+  const d = new Date(dateString);
 
-  if (format === "MM月dd日") {
-    return `${d.getMonth() + 1}月${d.getDate()}日`;
+  if (Number.isNaN(d.getTime())) {
+    return "";
   }
 
   return d.toLocaleDateString("zh-CN", {
@@ -30,8 +30,7 @@ function formatDate(date: string | Date | undefined, format?: string): string {
     month: "long",
     day: "numeric",
   });
-}
-// ====== END ======
+};
 
 // 内联文章卡片相关类型定义
 interface BlogCardProps {
@@ -58,7 +57,7 @@ const CategoryBadge = ({ category, onCategoryClick }: CategoryBadgeProps) => (
   <div className="mb-2 sm:mb-3">
     <Badge
       variant="secondary"
-      className="min-h-[28px] cursor-pointer touch-manipulation px-3 py-1 text-xs font-medium transition-colors hover:bg-primary hover:text-primary-foreground"
+      className="min-h-[28px] cursor-pointer touch-manipulation px-3 py-1 font-medium text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -144,7 +143,7 @@ const BlogCard = forwardRef<HTMLAnchorElement, BlogCardProps>(
       onCategoryClick,
       onTagClick,
     },
-    ref,
+    ref
   ) => (
     <Link ref={ref} href={href} className="block h-full">
       <Card
@@ -154,7 +153,7 @@ const BlogCard = forwardRef<HTMLAnchorElement, BlogCardProps>(
           "touch-manipulation active:scale-[0.98]",
           // 移动端最小高度确保一致性
           "h-[240px]",
-          className,
+          className
         )}
       >
         <div className="flex h-full">
@@ -164,39 +163,32 @@ const BlogCard = forwardRef<HTMLAnchorElement, BlogCardProps>(
               "flex flex-1 flex-col p-3 sm:p-4 md:p-5 lg:p-6",
               // 移动端始终占满宽度，桌面端根据是否有封面调整
               "w-full",
-              cover ? "lg:w-auto lg:flex-1" : "",
+              cover ? "lg:w-auto lg:flex-1" : ""
             )}
           >
             {/* Category Badge - Above title */}
-            {category && (
-              <CategoryBadge
-                category={category}
-                onCategoryClick={onCategoryClick}
-              />
-            )}
+            {category && <CategoryBadge category={category} onCategoryClick={onCategoryClick} />}
 
             {/* Title */}
-            <h2 className="mb-2 line-clamp-2 text-lg leading-tight font-bold transition-colors group-hover:text-primary sm:mb-3 sm:text-xl">
+            <h2 className="mb-2 line-clamp-2 font-bold text-lg leading-tight transition-colors group-hover:text-primary sm:mb-3 sm:text-xl">
               {title}
             </h2>
 
             {/* Description */}
             {description && (
-              <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground sm:mb-4 sm:line-clamp-3">
+              <p className="mb-3 line-clamp-2 text-muted-foreground text-sm leading-relaxed sm:mb-4 sm:line-clamp-3">
                 {description}
               </p>
             )}
 
             {/* Tags */}
-            {tags.length > 0 && (
-              <TagBadges tags={tags} onTagClick={onTagClick} />
-            )}
+            {tags.length > 0 && <TagBadges tags={tags} onTagClick={onTagClick} />}
 
             {/* Spacer to push date to bottom */}
             <div className="flex-1" />
 
             {/* Date - Bottom left with prefix */}
-            <div className="flex items-center text-xs text-muted-foreground sm:text-sm">
+            <div className="flex items-center text-muted-foreground text-xs sm:text-sm">
               {date && <span>发布于 {date}</span>}
             </div>
           </div>
@@ -206,7 +198,7 @@ const BlogCard = forwardRef<HTMLAnchorElement, BlogCardProps>(
         </div>
       </Card>
     </Link>
-  ),
+  )
 );
 
 BlogCard.displayName = "BlogCard";
@@ -250,7 +242,7 @@ export const BlogListContent = ({
         <div className="text-center">
           <p className="text-lg text-muted-foreground">{getEmptyMessage()}</p>
           {(selectedCategory ?? selectedTag) && (
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-2 text-muted-foreground text-sm">
               尝试调整筛选条件或清除筛选查看所有文章
             </p>
           )}

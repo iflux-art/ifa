@@ -11,9 +11,6 @@ export function GET() {
     return NextResponse.json(postsByYear);
   } catch (error) {
     console.error("Error fetching timeline posts:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch timeline posts" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Failed to fetch timeline posts" }, { status: 500 });
   }
 }
