@@ -12,7 +12,8 @@ export interface LinksItem {
   iconType?: "image" | "text";
   category: string;
   tags: string[];
-  featured: boolean;
+  // 用于图标懒加载的标识
+  iconLazy?: boolean;
 }
 
 export interface Category {

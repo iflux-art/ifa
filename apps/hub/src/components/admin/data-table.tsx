@@ -1,112 +1,121 @@
 /**
- * 优化的数据表格组件
- * 专门为管理页面优化的表格组件，提升大数据量性能
+ * 管理页面数据表格组件
+ * 提供链接数据的展示和操作功能
  */
 
 "use client";
 
+import { memo, useMemo } from "react";
+import type { LinksItem } from "@/components/links/links-types";
+import { useCategories } from "@/components/link-categories";
+import { Badge } from "@/components/ui/badge";
+import { GenericDataTable } from "@/components/links-admin/components/generic-data-table";
+import type {
+  DataTableAction,
+  DataTableColumn,
+} from "@/components/links-admin/components/generic-data-table";
 import { Edit, ExternalLink, Trash2 } from "lucide-react";
 import Image from "next/image";
-import { memo, useMemo } from "react";
-import { useCategories } from "@/components/link-categories";
-import type { LinksItem } from "@/components/links/links-types";
-import { GenericDataTable } from "@/components/links-admin/components/generic-data-table";
-import { Badge } from "@/components/ui/badge";
-import type { DataTableAction, DataTableColumn, DataTableProps } from "./types";
+
+interface DataTableProps {
+  data: LinksItem[];
+  onEdit: (record: LinksItem) => void;
+  onDelete: (record: LinksItem) => void;
+}
 
 /**
  * 获取表格列配置
  * 使用 useMemo 优化性能
  */
 const useTableColumns = (
-  getCategoryName: (categoryId: string) => string
+  getCategoryName: (categoryId: string) => string | undefined
 ): DataTableColumn<LinksItem>[] => {
   return useMemo(
     () => [
       {
-        key: "icon",
-        title: "图标",
-        width: "44px",
-        render: (_value: unknown, record: LinksItem, _index: number) => {
-          const { icon, iconType } = record;
-          const isImage = typeof icon === "string" && /^https?:\/\//.test(icon);
-          return (
-            <div className="mx-auto flex h-10 w-10 items-center justify-center">
-              {iconType === "image" || isImage ? (
-                <Image
-                  src={icon}
-                  alt=""
-                  width={24}
-                  height={24}
-                  className="h-6 w-6 object-contain"
-                  unoptimized
-                />
-              ) : (
-                <span className="font-bold text-sm">{icon}</span>
-              )}
-            </div>
-          );
-        },
-      },
-      {
         key: "title",
         title: "标题",
-        width: "450px",
-        render: (value: unknown, record: LinksItem, _index: number) => (
-          <div>
-            <div className="font-medium">{String(value)}</div>
-            <div className="max-w-[300px] truncate text-muted-foreground text-sm">{record.url}</div>
+        width: "150px",
+        render: (_value: unknown, record: LinksItem, _index: number) => (
+          <div className="flex items-center gap-2">
+            {record.icon ? (
+              <div className="relative h-6 w-6 rounded border">
+                <Image
+                  src={record.icon}
+                  alt={record.title}
+                  fill
+                  className="rounded object-contain"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="flex h-6 w-6 items-center justify-center rounded border bg-muted font-medium text-xs">
+                {record.title.charAt(0).toUpperCase()}
+              </div>
+            )}
+            <span className="max-w-[100px] truncate font-medium">{record.title}</span>
           </div>
+        ),
+      },
+      {
+        key: "url",
+        title: "网址",
+        width: "200px",
+        render: (value: unknown, _record: LinksItem, _index: number) => (
+          <a
+            href={value as string}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block max-w-[190px] truncate text-primary hover:underline"
+          >
+            {value as string}
+          </a>
         ),
       },
       {
         key: "category",
         title: "分类",
         width: "120px",
-        render: (value: unknown, _record: LinksItem, _index: number) =>
-          value ? getCategoryName(value as string) : "-",
-      },
-      {
-        key: "tags",
-        title: "标签",
-        width: "350px",
         render: (value: unknown, _record: LinksItem, _index: number) => {
-          const tags = value as string[];
-
-          if (!tags?.length) {
-            return null;
-          }
-
+          const categoryName = getCategoryName(value as string);
           return (
-            <div className="flex flex-wrap gap-1">
-              {tags.slice(0, 3).map((tag: string) => (
-                <Badge key={tag} variant="outline" className="px-2 text-xs">
-                  {tag}
-                </Badge>
-              ))}
-              {tags.length > 3 && (
-                <Badge variant="outline" className="px-2 text-xs">
-                  +{tags.length - 3}
-                </Badge>
-              )}
-            </div>
+            <Badge variant="secondary" className="px-2 text-xs">
+              {categoryName}
+            </Badge>
           );
         },
       },
       {
-        key: "featured",
-        title: "状态",
-        width: "100px",
-        render: (value: unknown, _record: LinksItem, _index: number) =>
-          (value as boolean) ? (
-            <Badge variant="default" className="px-2 text-xs">
-              精选
-            </Badge>
-          ) : (
-            <Badge variant="outline" className="px-2 text-xs">
-              普通
-            </Badge>
-          ),
+        key: "tags",
+        title: "标签",
+        width: "150px",
+        render: (value: unknown, _record: LinksItem, _index: number) => (
+          <div className="flex flex-wrap gap-1">
+            {(value as string[])
+              .slice(0, 2)
+              .map((tag: string) => (
+                <Badge key={tag} variant="outline" className="px-1.5 py-0.5 text-xs">
+                  {tag}
+                </Badge>
+              ))
+              .concat(
+                (value as string[]).length > 2
+                  ? [
+                      <Badge
+                        key="more"
+                        variant="outline"
+                        className="px-1.5 py-0.5 text-muted-foreground text-xs"
+                      >
+                        +{(value as string[]).length - 2}
+                      </Badge>,
+                    ]
+                  : []
+              )}
+          </div>
+        ),
       },
     ],
     [getCategoryName]

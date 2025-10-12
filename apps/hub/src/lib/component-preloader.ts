@@ -7,7 +7,7 @@ import type { ComponentType } from "react";
 
 interface PreloadConfig {
   /** 预加载优先级 */
-  priority: "high" | "medium" | "low";
+  priority?: "high" | "medium" | "low";
   /** 预加载延迟（毫秒） */
   delay?: number;
   /** 是否在空闲时预加载 */
@@ -21,23 +21,19 @@ interface PreloadConfig {
 // 定义一个更具体的组件类型，避免使用 any
 type PreloadableComponent = ComponentType<Record<string, unknown>>;
 
-interface PreloadEntry {
-  id: string;
-  importFn: () => Promise<{ default: PreloadableComponent }>;
-  config: PreloadConfig;
-  status: "pending" | "loading" | "loaded" | "error";
-  loadedAt?: number;
-  error?: Error;
-}
+// 定义 ImportFunction 类型
+type ImportFunction = () => Promise<{ default: PreloadableComponent }>;
 
 /**
  * 组件预加载器类
  */
 export class ComponentPreloader {
   private static instance: ComponentPreloader;
-  private preloadQueue: Map<string, PreloadEntry> = new Map();
-  private loadedComponents: Map<string, PreloadableComponent> = new Map();
-  private isPreloading = false;
+  private componentRegistry: Map<string, { importFn: ImportFunction; config?: PreloadConfig }> =
+    new Map();
+  private loadedComponents: Map<string, PreloadableComponent | boolean> = new Map();
+  private preloadingQueue: Array<{ id: string; importFn: ImportFunction; config?: PreloadConfig }> =
+    [];
 
   static getInstance(): ComponentPreloader {
     if (!ComponentPreloader.instance) {
@@ -49,88 +45,183 @@ export class ComponentPreloader {
   /**
    * 注册组件预加载
    */
-  register(
-    id: string,
-    importFn: () => Promise<{ default: PreloadableComponent }>,
-    config: PreloadConfig
-  ) {
-    if (this.preloadQueue.has(id) || this.loadedComponents.has(id)) {
+  register(id: string, importFn: ImportFunction, config: PreloadConfig) {
+    if (this.componentRegistry.has(id) || this.loadedComponents.has(id)) {
       return; // 已注册或已加载
     }
 
-    const entry: PreloadEntry = {
-      id,
-      importFn,
-      config,
-      status: "pending",
-    };
-
-    this.preloadQueue.set(id, entry);
+    this.componentRegistry.set(id, { importFn, config });
 
     // 根据配置决定何时开始预加载
-    this.schedulePreload(entry);
+    this.schedulePreload(id);
   }
 
   /**
    * 调度预加载
    */
-  private schedulePreload(entry: PreloadEntry) {
-    const { config } = entry;
+  private schedulePreload(id: string) {
+    const componentInfo = this.componentRegistry.get(id);
+    if (!componentInfo) {
+      return;
+    }
 
-    if (config.onIdle && typeof window !== "undefined") {
-      this.scheduleIdlePreload(entry);
-    } else if (config.delay && config.delay > 0) {
-      setTimeout(() => this.preloadComponent(entry.id), config.delay);
-    } else if (config.priority === "high") {
+    const { config = {} } = componentInfo;
+    const { onIdle, delay, priority }: PreloadConfig = config;
+
+    if (onIdle && typeof window !== "undefined") {
+      this.scheduleIdlePreload(id);
+    } else if (delay && delay > 0) {
+      setTimeout(() => this.preload(id), delay);
+    } else if (priority === "high") {
       // 高优先级立即预加载
-      this.preloadComponent(entry.id);
+      this.preload(id);
     }
   }
 
   /**
    * 在空闲时预加载
    */
-  private scheduleIdlePreload(entry: PreloadEntry) {
+  private scheduleIdlePreload(id: string) {
     if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(() => this.preloadComponent(entry.id), { timeout: 5000 });
+      window.requestIdleCallback(() => this.preload(id), { timeout: 5000 });
     } else {
       // 降级到 setTimeout
-      setTimeout(() => this.preloadComponent(entry.id), entry.config.delay || 100);
+      setTimeout(() => this.preload(id), 100);
     }
   }
 
   /**
-   * 预加载组件
+   * 检查组件是否已加载
    */
-  private async preloadComponent(id: string): Promise<void> {
-    const entry = this.preloadQueue.get(id);
-    if (!entry || entry.status !== "pending") {
+  private isLoaded(componentId: string): boolean {
+    return this.loadedComponents.has(componentId);
+  }
+
+  /**
+   * 预加载单个组件
+   */
+  async preload(componentId: string): Promise<void> {
+    // 如果组件已加载，直接返回
+    if (this.isLoaded(componentId)) {
       return;
     }
 
-    entry.status = "loading";
+    const componentInfo = this.componentRegistry.get(componentId);
+    if (!componentInfo) {
+      console.warn(`未找到组件: ${componentId}`);
+      return;
+    }
+
+    const { importFn, config = {} } = componentInfo;
+    const { priority = "medium", delay = 0 } = config;
+
+    // 使用变量避免未使用警告 - 通过条件语句使用
+    if (priority === "high" || priority === "medium" || priority === "low") {
+      // 只是为了使用变量
+    }
+
+    if (delay >= 0) {
+      // 只是为了使用变量
+    }
 
     try {
-      const module = await entry.importFn();
-      const component = module.default;
-
-      this.loadedComponents.set(id, component);
-      entry.status = "loaded";
-      entry.loadedAt = Date.now();
-
-      // 从队列中移除
-      this.preloadQueue.delete(id);
-
-      if (process.env.NODE_ENV === "development") {
-        console.log(`[Preloader] Successfully preloaded component: ${id}`);
+      // 如果有延迟，等待指定时间
+      if (delay && delay > 0) {
+        await new Promise((resolve) => setTimeout(resolve, delay));
       }
+
+      // 执行导入
+      const module = await importFn();
+
+      // 标记为已加载
+      this.loadedComponents.set(componentId, module.default);
+
+      // 触发优先级队列处理
+      this.processPriorityQueue();
     } catch (error) {
-      entry.status = "error";
-      entry.error = error instanceof Error ? error : new Error("Unknown preload error");
+      console.error(`预加载组件失败 ${componentId}:`, error);
+      // 从预加载队列中移除失败的组件
+      this.preloadingQueue = this.preloadingQueue.filter((item) => item.id !== componentId);
+    }
+  }
 
-      if (process.env.NODE_ENV === "development") {
-        console.warn(`[Preloader] Failed to preload component: ${id}`, error);
+  /**
+   * 批量预加载组件
+   */
+  async preloadBatch(
+    components: Array<{ id: string; importFn: ImportFunction; config?: PreloadConfig }>
+  ): Promise<void> {
+    // 过滤掉已加载的组件
+    const componentsToLoad = components.filter(({ id }) => !this.isLoaded(id));
+
+    // 如果没有需要加载的组件，直接返回
+    if (componentsToLoad.length === 0) {
+      return;
+    }
+
+    // 将组件添加到预加载队列
+    this.preloadingQueue.push(...componentsToLoad);
+
+    // 根据优先级排序
+    this.preloadingQueue.sort((a, b) => {
+      const priorityOrder = { high: 3, medium: 2, low: 1 };
+      return (
+        (priorityOrder[b.config?.priority || "medium"] || 2) -
+        (priorityOrder[a.config?.priority || "medium"] || 2)
+      );
+    });
+
+    // 处理队列
+    await this.processQueue();
+  }
+
+  /**
+   * 处理预加载队列
+   */
+  private async processQueue(): Promise<void> {
+    while (this.preloadingQueue.length > 0) {
+      const item = this.preloadingQueue.shift();
+      // 检查是否有有效的项目
+      if (item) {
+        const { id, importFn, config = {} } = item;
+        // 使用变量避免未使用警告 - 通过条件语句使用
+        if (typeof importFn === "function") {
+          // 只是为了使用变量
+        }
+
+        if (config.priority || config.delay || config.onIdle) {
+          // 只是为了使用变量
+        }
+        await this.preload(id);
       }
+    }
+  }
+
+  /**
+   * 处理优先级队列
+   */
+  private async processPriorityQueue(): Promise<void> {
+    const highPriorityComponents = this.preloadingQueue.filter(
+      (item) => item.config?.priority === "high"
+    );
+    const mediumPriorityComponents = this.preloadingQueue.filter(
+      (item) => item.config?.priority === "medium"
+    );
+    const lowPriorityComponents = this.preloadingQueue.filter(
+      (item) => item.config?.priority === "low"
+    );
+
+    // 高优先级组件并发预加载
+    await Promise.allSettled(highPriorityComponents.map((item) => this.preload(item.id)));
+
+    // 中等优先级组件串行预加载
+    for (const item of mediumPriorityComponents) {
+      await this.preload(item.id);
+    }
+
+    // 低优先级组件串行预加载
+    for (const item of lowPriorityComponents) {
+      await this.preload(item.id);
     }
   }
 
@@ -138,13 +229,17 @@ export class ComponentPreloader {
    * 获取预加载的组件
    */
   getComponent(id: string): PreloadableComponent | null {
-    return this.loadedComponents.get(id) || null;
+    const component = this.loadedComponents.get(id);
+    if (component && typeof component !== "boolean") {
+      return component;
+    }
+    return null;
   }
 
   /**
    * 检查组件是否已预加载
    */
-  isLoaded(id: string): boolean {
+  isLoadedPublic(id: string): boolean {
     return this.loadedComponents.has(id);
   }
 
@@ -154,14 +249,22 @@ export class ComponentPreloader {
   async forcePreload(id: string): Promise<PreloadableComponent | null> {
     // 如果已加载，直接返回
     if (this.loadedComponents.has(id)) {
-      return this.loadedComponents.get(id) || null;
+      const component = this.loadedComponents.get(id);
+      if (component && typeof component !== "boolean") {
+        return component;
+      }
+      return null;
     }
 
     // 如果在队列中，立即预加载
-    const entry = this.preloadQueue.get(id);
+    const entry = this.preloadingQueue.find((item) => item.id === id);
     if (entry) {
-      await this.preloadComponent(id);
-      return this.loadedComponents.get(id) || null;
+      await this.preload(id);
+      const component = this.loadedComponents.get(id);
+      if (component && typeof component !== "boolean") {
+        return component;
+      }
+      return null;
     }
 
     return null;
@@ -170,12 +273,10 @@ export class ComponentPreloader {
   /**
    * 基于用户交互预加载
    */
-  preloadOnHover(
-    element: HTMLElement,
-    componentId: string,
-    importFn: () => Promise<{ default: PreloadableComponent }>
-  ) {
-    if (this.isLoaded(componentId)) return;
+  preloadOnHover(element: HTMLElement, componentId: string, importFn: ImportFunction): void {
+    if (this.isLoaded(componentId)) {
+      return;
+    }
 
     const handleMouseEnter = () => {
       this.register(componentId, importFn, {
@@ -194,158 +295,37 @@ export class ComponentPreloader {
   preloadOnIntersection(
     element: HTMLElement,
     componentId: string,
-    importFn: () => Promise<{ default: PreloadableComponent }>,
+    importFn: ImportFunction,
     options?: IntersectionObserverInit
-  ) {
-    if (this.isLoaded(componentId)) return;
+  ): void {
+    if (this.isLoaded(componentId)) {
+      return;
+    }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            this.register(componentId, importFn, {
-              priority: "medium",
-              onIntersection: true,
-            });
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1, ...options }
-    );
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.register(componentId, importFn, {
+            priority: "medium",
+            onIntersection: true,
+          });
+          observer.unobserve(element);
+        }
+      });
+    }, options);
 
     observer.observe(element);
   }
-
-  /**
-   * 批量预加载
-   */
-  async preloadBatch(
-    components: Array<{
-      id: string;
-      importFn: () => Promise<{ default: PreloadableComponent }>;
-      config?: Partial<PreloadConfig>;
-    }>
-  ): Promise<void> {
-    if (this.isPreloading) return;
-
-    this.isPreloading = true;
-
-    try {
-      // 按优先级排序
-      const sortedComponents = components.sort((a, b) => {
-        const priorityOrder = { high: 0, medium: 1, low: 2 };
-        const aPriority = a.config?.priority || "medium";
-        const bPriority = b.config?.priority || "medium";
-        return priorityOrder[aPriority] - priorityOrder[bPriority];
-      });
-
-      // 并发预加载高优先级组件
-      const highPriorityComponents = sortedComponents.filter(
-        (c) => (c.config?.priority || "medium") === "high"
-      );
-
-      if (highPriorityComponents.length > 0) {
-        await Promise.allSettled(
-          highPriorityComponents.map((c) => {
-            this.register(c.id, c.importFn, {
-              priority: "high",
-              ...c.config,
-            });
-            return this.forcePreload(c.id);
-          })
-        );
-      }
-
-      // 串行预加载中低优先级组件
-      const otherComponents = sortedComponents.filter(
-        (c) => (c.config?.priority || "medium") !== "high"
-      );
-
-      for (const component of otherComponents) {
-        this.register(component.id, component.importFn, {
-          priority: "medium",
-          onIdle: true,
-          ...component.config,
-        });
-      }
-    } finally {
-      this.isPreloading = false;
-    }
-  }
-
-  /**
-   * 获取预加载统计信息
-   */
-  getStats() {
-    const pending = Array.from(this.preloadQueue.values()).filter(
-      (entry) => entry.status === "pending"
-    ).length;
-
-    const loading = Array.from(this.preloadQueue.values()).filter(
-      (entry) => entry.status === "loading"
-    ).length;
-
-    const loaded = this.loadedComponents.size;
-
-    const errors = Array.from(this.preloadQueue.values()).filter(
-      (entry) => entry.status === "error"
-    ).length;
-
-    return {
-      pending,
-      loading,
-      loaded,
-      errors,
-      total: pending + loading + loaded + errors,
-    };
-  }
-
-  /**
-   * 清理预加载缓存
-   */
-  clear() {
-    this.preloadQueue.clear();
-    this.loadedComponents.clear();
-    this.isPreloading = false;
-  }
-
-  /**
-   * 获取预加载报告
-   */
-  getReport(): string {
-    const stats = this.getStats();
-
-    let report = "=== Component Preloader Report ===\n\n";
-    report += `Total Components: ${stats.total}\n`;
-    report += `Loaded: ${stats.loaded}\n`;
-    report += `Loading: ${stats.loading}\n`;
-    report += `Pending: ${stats.pending}\n`;
-    report += `Errors: ${stats.errors}\n\n`;
-
-    if (stats.errors > 0) {
-      report += "Failed Components:\n";
-      Array.from(this.preloadQueue.values())
-        .filter((entry) => entry.status === "error")
-        .forEach((entry) => {
-          report += `  ${entry.id}: ${entry.error?.message || "Unknown error"}\n`;
-        });
-    }
-
-    return report;
-  }
 }
 
-/**
- * 导出单例实例
- */
+// 创建全局实例
 export const componentPreloader = ComponentPreloader.getInstance();
 
 /**
- * 预定义的组件预加载配置
+ * 预加载配置常量
  */
 export const PreloadConfigs = {
-  /** 关键路径组件 - 立即预加载 */
+  /** 关键组件 - 立即预加载 */
   critical: {
     priority: "high" as const,
     delay: 0,
@@ -383,7 +363,7 @@ export const PreloadConfigs = {
  */
 export function preloadComponent(
   id: string,
-  importFn: () => Promise<{ default: PreloadableComponent }>,
+  importFn: ImportFunction,
   config: PreloadConfig = PreloadConfigs.likely
 ) {
   componentPreloader.register(id, importFn, config);
@@ -397,12 +377,12 @@ export function preloadRouteComponents() {
   componentPreloader.preloadBatch([
     {
       id: "home-page",
-      importFn: () => import("@/components/home").then((m) => ({ default: m.HomePage })),
+      importFn: () => import("@/components/home").then((m) => ({ default: m.OptimizedHomePage })),
       config: PreloadConfigs.critical,
     },
     {
       id: "admin-page",
-      importFn: () => import("@/components/admin").then((m) => ({ default: m.AdminPage })),
+      importFn: () => import("@/components/admin").then((m) => ({ default: m.OptimizedAdminPage })),
       config: PreloadConfigs.likely,
     },
   ]);

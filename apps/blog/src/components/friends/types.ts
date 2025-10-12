@@ -19,8 +19,6 @@ export interface FriendLink {
   category: "friends";
   /** 标签列表 */
   tags?: string[];
-  /** 是否推荐 */
-  featured?: boolean;
   /** 友链图标 */
   icon?: string;
   /** 图标类型 */

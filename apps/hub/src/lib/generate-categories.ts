@@ -1,16 +1,31 @@
 /**
- * 链接分类相关功能（服务端专用）
- * 提供链接分类的生成和管理能力
+ * 构建时分类数据生成工具
+ * 根据 links-data.json 自动生成分类数据，避免重复维护
  */
 
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import type { LinkCategory } from "@/components/link-categories/categories";
-import type { CategoryId } from "@/components/link-categories/categories-types"; // 从 categories-types 导入
-import type { LinksItem } from "@/components/links/links-types";
+import type {
+  LinksCategory,
+  LinksSubCategory,
+  CategoryId,
+} from "@/components/link-categories/categories-types";
+
+interface LinksItem {
+  id: string;
+  title: string;
+  url: string;
+  description: string;
+  icon: string;
+  iconType?: "image" | "text";
+  category: string;
+  tags: string[];
+  iconLazy?: boolean;
+}
 
 /**
  * 分类显示名称配置
+ * 与 link-categories/categories-server.ts 保持同步
  */
 const CATEGORY_DISPLAY_NAMES: { [key: string]: string } = {
   // 主分类
@@ -90,7 +105,7 @@ const CATEGORY_DISPLAY_NAMES: { [key: string]: string } = {
 /**
  * 获取分类显示名称
  */
-export function getCategoryDisplayName(categoryId: string): string {
+function getCategoryDisplayName(categoryId: string): string {
   // 首先尝试直接匹配
   if (CATEGORY_DISPLAY_NAMES[categoryId]) {
     return CATEGORY_DISPLAY_NAMES[categoryId];
@@ -110,11 +125,9 @@ export function getCategoryDisplayName(categoryId: string): string {
 }
 
 /**
- * 基于 links-data.json 生成分类数据（服务端专用）
+ * 基于 links-data.json 生成分类数据
  */
-export async function generateCategoriesFromFiles(): Promise<LinkCategory[]> {
-  const categories: LinkCategory[] = [];
-
+export async function generateCategoriesFromLinksData(): Promise<LinksCategory[]> {
   try {
     // 从 links-data.json 读取数据
     const linksFilePath = path.join(process.cwd(), "src/components/links/links-data.json");
@@ -147,32 +160,75 @@ export async function generateCategoriesFromFiles(): Promise<LinkCategory[]> {
     });
 
     // 构建分类结构
-    Object.keys(categoryMap).forEach((categoryId) => {
-      const categoryData = categoryMap[categoryId];
+    const categories: LinksCategory[] = Object.keys(categoryMap)
+      .filter((categoryId) => !categoryId.includes("/")) // 只处理根分类
+      .map((categoryId) => {
+        const categoryData = categoryMap[categoryId];
 
-      // 只处理根分类（不包含/的分类）
-      if (!categoryId.includes("/")) {
-        const children = Array.from(categoryData.children).map((childId) => {
-          const childData = categoryMap[childId];
-          return {
-            id: childId as CategoryId,
-            name: getCategoryDisplayName(childId),
-            count: childData ? childData.items.length : 0,
-          };
-        });
+        // 处理子分类
+        const children: LinksSubCategory[] = Array.from(categoryData.children)
+          .map((childId) => {
+            const parts = childId.split("/");
+            return {
+              id: childId as CategoryId,
+              name: getCategoryDisplayName(parts[1]) || parts[1],
+            };
+          })
+          .sort((a, b) => a.name.localeCompare(b.name));
 
-        categories.push({
+        return {
           id: categoryId as CategoryId,
           name: getCategoryDisplayName(categoryId),
-          count: categoryData.items.length,
           children: children.length > 0 ? children : undefined,
-        });
-      }
-    });
+        };
+      })
+      .sort((a, b) => a.name.localeCompare(b.name));
 
     return categories;
   } catch (error) {
     console.error("Error generating categories from links data:", error);
-    return [];
+    throw error;
   }
+}
+
+/**
+ * 生成分类数据文件
+ */
+export async function generateCategoriesFile() {
+  try {
+    const categories = await generateCategoriesFromLinksData();
+
+    // 生成 TypeScript 文件内容
+    const fileContent = `\
+/**
+ * 自动生成的分类数据
+ * 基于 src/components/links/links-data.json 生成
+ * 请勿手动修改此文件
+ */
+
+import type { LinksCategory } from "@/components/link-categories/categories-types";
+
+export const generatedCategories: LinksCategory[] = ${JSON.stringify(categories, null, 2)};
+
+export default generatedCategories;
+`;
+
+    // 写入文件
+    const outputPath = path.join(process.cwd(), "src/generated/categories.ts");
+    await fs.writeFile(outputPath, fileContent, "utf8");
+
+    console.log(`Categories generated successfully: ${outputPath}`);
+    return categories;
+  } catch (error) {
+    console.error("Error generating categories file:", error);
+    throw error;
+  }
+}
+
+// 如果直接运行此脚本，则执行生成操作
+if (require.main === module) {
+  generateCategoriesFile().catch((error) => {
+    console.error("Failed to generate categories:", error);
+    process.exit(1);
+  });
 }

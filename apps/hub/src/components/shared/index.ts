@@ -3,12 +3,7 @@
  */
 
 export { FeatureErrorBoundary } from "./error-boundary";
-export {
-  measurePerformance,
-  monitorPageLoad,
-  monitorWebVitals,
-  usePerformanceMonitor,
-} from "./performance";
+// 已移除 Web Vitals 相关导出
 export type * from "./types";
 export { useAsyncError } from "./use-async-error";
 export { useDebouncedValue } from "./use-debounced-value";

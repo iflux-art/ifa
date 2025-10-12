@@ -7,9 +7,7 @@ export { LinkCard } from "./link-card";
 // 工具函数导出
 export {
   clearAllCaches,
-  clearCategoryCache,
   loadAllLinksData,
-  preloadCriticalCategories,
 } from "./links-lib";
 // Hooks 导出
 export { useFilterState } from "./use-filter-state";

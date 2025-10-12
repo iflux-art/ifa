@@ -5,7 +5,7 @@
 
 export { AdminDialogs } from "./admin-dialogs";
 // 主要组件
-export { AdminPage } from "./admin-page";
+export { OptimizedAdminPage } from "./optimized-admin-page";
 // Store
 export { useAdminStore } from "./admin-store";
 export { DataTable } from "./data-table";

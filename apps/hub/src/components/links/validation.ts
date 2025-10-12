@@ -42,7 +42,7 @@ function validateBasicFields(formData: Record<string, unknown>): {
  * 构建表单数据对象
  */
 function buildFormData(formData: Record<string, unknown>): LinksFormData {
-  const { title, url, category, description, tags, featured, icon, iconType } = formData;
+  const { title, url, category, description, tags, icon, iconType } = formData;
 
   return {
     title: title as string,
@@ -50,7 +50,6 @@ function buildFormData(formData: Record<string, unknown>): LinksFormData {
     description: (description as string) || "",
     category: category as (typeof validCategories)[number],
     tags: Array.isArray(tags) ? (tags as string[]) : [],
-    featured: Boolean(featured),
     icon: (icon as string) || "",
     iconType: (iconType ?? "text") as "image" | "text",
   };

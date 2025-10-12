@@ -1,7 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["www.google.com", "favicon.yandex.net", "icons.duckduckgo.com"],
+    // For a navigation site, we allow images from any external source
+    // Using remotePatterns to match any domain with https protocol
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+      {
+        protocol: "http",
+        hostname: "**",
+      },
+    ],
   },
 
   // Development optimizations
@@ -63,7 +74,6 @@ const nextConfig = {
       "@/stores": "./src/stores",
       "@/types": "./src/types",
       "@/config": "./src/config",
-      "@/content": "./src/content",
     },
     resolveExtensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },

@@ -1,125 +1,199 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { z } from "zod";
 
-/**
- * 性能分析数据收集端点
- */
-
-interface AnalyticsEvent {
-  event: string;
-  data: unknown;
-  timestamp: number;
+// 定义数据类型
+interface ClientInfo {
+  userAgent: string;
+  language: string;
+  platform: string;
+  screenWidth: number;
+  screenHeight: number;
 }
 
-interface WebVitalData {
-  name: string;
-  value: number;
+interface PageViewData {
+  url: string;
+  referrer: string;
+  title: string;
   sessionId: string;
-  timestamp: number;
+}
+
+interface EventData {
+  name: string;
+  category: string;
+  label?: string;
+  value?: number;
+  sessionId: string;
+}
+
+interface ErrorData {
+  message: string;
+  stack: string;
+  url: string;
+  sessionId: string;
 }
 
 interface LongTaskData {
   duration: number;
-  startTime: number;
   sessionId: string;
 }
 
 interface SlowResourceData {
   name: string;
   duration: number;
-  size: number;
-  type: string;
+  size?: number;
   sessionId: string;
 }
 
-/**
- * 处理性能分析数据
- */
-export async function POST(request: NextRequest) {
-  try {
-    const body: AnalyticsEvent = await request.json();
+// 定义 Zod schemas
+const PageViewDataSchema = z.object({
+  url: z.string().url(),
+  referrer: z.string(),
+  title: z.string(),
+  sessionId: z.string(),
+});
 
-    // 验证数据格式
-    if (!(body.event && body.data && body.timestamp)) {
-      return NextResponse.json({ error: "Invalid analytics data format" }, { status: 400 });
+const EventDataSchema = z.object({
+  name: z.string(),
+  category: z.string(),
+  label: z.string().optional(),
+  value: z.number().optional(),
+  sessionId: z.string(),
+});
+
+const ErrorDataSchema = z.object({
+  message: z.string(),
+  stack: z.string(),
+  url: z.string().url(),
+  sessionId: z.string(),
+});
+
+const LongTaskDataSchema = z.object({
+  duration: z.number(),
+  sessionId: z.string(),
+});
+
+const SlowResourceDataSchema = z.object({
+  name: z.string(),
+  duration: z.number(),
+  size: z.number().optional(),
+  sessionId: z.string(),
+});
+
+// 定义事件类型映射
+const eventSchemas: Record<string, z.ZodSchema> = {
+  "page-view": PageViewDataSchema,
+  event: EventDataSchema,
+  error: ErrorDataSchema,
+  "long-task": LongTaskDataSchema,
+  "slow-resource": SlowResourceDataSchema,
+};
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const { type, data, clientInfo } = body;
+
+    // 验证事件类型
+    if (!(type && eventSchemas[type])) {
+      return NextResponse.json({ error: "Invalid event type" }, { status: 400 });
     }
 
-    // 获取客户端信息
-    const userAgent = request.headers.get("user-agent") || "unknown";
-    const referer = request.headers.get("referer") || "unknown";
-    const ip =
-      request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
+    // 验证数据
+    const schema = eventSchemas[type];
+    const result = schema.safeParse(data);
+    if (!result.success) {
+      return NextResponse.json({ error: "Invalid data", details: result.error }, { status: 400 });
+    }
 
-    // 构建完整的分析数据
-    const analyticsData = {
-      ...body,
-      clientInfo: {
-        userAgent,
-        referer,
-        ip: ip.split(",")[0].trim(), // 取第一个 IP
-      },
-      serverTimestamp: Date.now(),
-    };
+    const validatedData = result.data;
+    const serverTimestamp = Date.now();
 
-    // 根据事件类型处理数据
-    switch (body.event) {
-      case "web-vital":
-        await handleWebVital({
-          ...analyticsData,
-          data: analyticsData.data as WebVitalData,
-        });
+    // 处理不同类型的数据
+    switch (type) {
+      case "page-view":
+        await handlePageView({ data: validatedData, clientInfo, serverTimestamp });
+        break;
+      case "event":
+        await handleEvent({ data: validatedData, clientInfo, serverTimestamp });
+        break;
+      case "error":
+        await handleError({ data: validatedData, clientInfo, serverTimestamp });
         break;
       case "long-task":
-        await handleLongTask({
-          ...analyticsData,
-          data: analyticsData.data as LongTaskData,
-        });
+        await handleLongTask({ data: validatedData, clientInfo, serverTimestamp });
         break;
       case "slow-resource":
-        await handleSlowResource({
-          ...analyticsData,
-          data: analyticsData.data as SlowResourceData,
-        });
+        await handleSlowResource({ data: validatedData, clientInfo, serverTimestamp });
         break;
       default:
-        console.log("Unknown analytics event:", body.event);
-    }
-
-    // 在开发环境下打印日志
-    if (process.env.NODE_ENV === "development") {
-      console.log("📊 Analytics Event:", {
-        event: body.event,
-        data: body.data,
-        timestamp: new Date(body.timestamp).toISOString(),
-      });
+        return NextResponse.json({ error: "Unsupported event type" }, { status: 400 });
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Analytics processing error:", error);
+    console.error("Analytics API error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
 /**
- * 处理 Web Vitals 数据
+ * 处理页面浏览数据
  */
-async function handleWebVital(data: {
-  data: WebVitalData;
-  clientInfo: unknown;
+async function handlePageView(data: {
+  data: PageViewData;
+  clientInfo: ClientInfo;
   serverTimestamp: number;
 }) {
-  const webVitalData: WebVitalData = data.data;
+  const pageViewData: PageViewData = data.data;
 
   // 在生产环境中，这里应该发送到实际的分析服务
   // 例如 Google Analytics, DataDog, New Relic 等
 
   if (process.env.NODE_ENV === "production") {
-    // 发送到外部分析服务
-    await sendToExternalAnalytics("web-vital", data);
+    await sendToExternalAnalytics("page-view", data);
   }
 
-  // 检查性能阈值并发送告警
-  await checkPerformanceThresholds(webVitalData);
+  console.log("Page view:", pageViewData);
+}
+
+/**
+ * 处理事件数据
+ */
+async function handleEvent(data: {
+  data: EventData;
+  clientInfo: ClientInfo;
+  serverTimestamp: number;
+}) {
+  const eventData: EventData = data.data;
+
+  // 在生产环境中，这里应该发送到实际的分析服务
+
+  if (process.env.NODE_ENV === "production") {
+    await sendToExternalAnalytics("event", data);
+  }
+
+  console.log("Event:", eventData);
+}
+
+/**
+ * 处理错误数据
+ */
+async function handleError(data: {
+  data: ErrorData;
+  clientInfo: ClientInfo;
+  serverTimestamp: number;
+}) {
+  const errorData: ErrorData = data.data;
+
+  // 错误应该被特别关注并发送告警
+  console.error("Client error:", errorData);
+
+  if (process.env.NODE_ENV === "production") {
+    await sendToExternalAnalytics("error", data);
+
+    // 发送告警
+    await sendErrorAlert(errorData);
+  }
 }
 
 /**
@@ -127,7 +201,7 @@ async function handleWebVital(data: {
  */
 async function handleLongTask(data: {
   data: LongTaskData;
-  clientInfo: unknown;
+  clientInfo: ClientInfo;
   serverTimestamp: number;
 }) {
   const longTaskData: LongTaskData = data.data;
@@ -153,7 +227,7 @@ async function handleLongTask(data: {
  */
 async function handleSlowResource(data: {
   data: SlowResourceData;
-  clientInfo: unknown;
+  clientInfo: ClientInfo;
   serverTimestamp: number;
 }) {
   const slowResourceData: SlowResourceData = data.data;
@@ -171,38 +245,13 @@ async function handleSlowResource(data: {
 }
 
 /**
- * 检查性能阈值
- */
-async function checkPerformanceThresholds(data: WebVitalData) {
-  const thresholds = {
-    LCP: { good: 2500, poor: 4000 },
-    FID: { good: 100, poor: 300 },
-    CLS: { good: 0.1, poor: 0.25 },
-    FCP: { good: 1800, poor: 3000 },
-    TTFB: { good: 800, poor: 1800 },
-  };
-
-  const threshold = thresholds[data.name as keyof typeof thresholds];
-  if (!threshold) return;
-
-  if (data.value > threshold.poor) {
-    await sendPerformanceAlert("poor-web-vital", {
-      metric: data.name,
-      value: data.value,
-      threshold: threshold.poor,
-      sessionId: data.sessionId,
-    });
-  }
-}
-
-/**
  * 发送到外部分析服务
  */
 async function sendToExternalAnalytics(
   event: string,
   data: {
-    data: WebVitalData | LongTaskData | SlowResourceData;
-    clientInfo: unknown;
+    data: PageViewData | EventData | ErrorData | LongTaskData | SlowResourceData;
+    clientInfo: ClientInfo;
     serverTimestamp: number;
   }
 ) {
@@ -259,6 +308,65 @@ async function sendToExternalAnalytics(
 }
 
 /**
+ * 发送错误告警
+ */
+async function sendErrorAlert(data: ErrorData) {
+  try {
+    // Slack 告警
+    if (process.env.SLACK_WEBHOOK_URL) {
+      await fetch(process.env.SLACK_WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: "🚨 Client Error Alert",
+          attachments: [
+            {
+              color: "danger",
+              fields: [
+                {
+                  title: "Message",
+                  value: data.message,
+                  short: false,
+                },
+                {
+                  title: "URL",
+                  value: data.url,
+                  short: true,
+                },
+                {
+                  title: "Session ID",
+                  value: data.sessionId,
+                  short: true,
+                },
+              ],
+            },
+          ],
+        }),
+      });
+    }
+
+    // 邮件告警
+    if (process.env.EMAIL_ALERT_ENDPOINT) {
+      await fetch(process.env.EMAIL_ALERT_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to: process.env.ALERT_EMAIL,
+          subject: "Client Error Alert",
+          body: `Message: ${data.message}\nURL: ${data.url}\nStack: ${data.stack}`,
+        }),
+      });
+    }
+  } catch (error) {
+    console.error("Failed to send error alert:", error);
+  }
+}
+
+/**
  * 发送性能告警
  */
 async function sendPerformanceAlert(type: string, data: unknown) {
@@ -302,41 +410,5 @@ async function sendPerformanceAlert(type: string, data: unknown) {
     }
   } catch (error) {
     console.error("Failed to send performance alert:", error);
-  }
-}
-
-/**
- * 获取性能统计数据 (GET 请求)
- */
-export function GET(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const timeRange = searchParams.get("timeRange") || "24h";
-    const metric = searchParams.get("metric");
-
-    // 这里应该从数据库或缓存中获取统计数据
-    // 目前返回模拟数据
-    const stats = {
-      timeRange,
-      metric,
-      summary: {
-        totalEvents: 1234,
-        avgLCP: 2100,
-        avgFID: 85,
-        avgCLS: 0.08,
-        slowResources: 12,
-        longTasks: 5,
-      },
-      trends: [
-        { timestamp: Date.now() - 3600000, value: 2000 },
-        { timestamp: Date.now() - 1800000, value: 2200 },
-        { timestamp: Date.now(), value: 2100 },
-      ],
-    };
-
-    return NextResponse.json(stats);
-  } catch (error) {
-    console.error("Failed to get analytics stats:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

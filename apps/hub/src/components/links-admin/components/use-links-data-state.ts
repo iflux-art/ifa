@@ -42,9 +42,7 @@ export function useLinksDataState() {
       try {
         isInitialized.current = true;
         setLoading(true);
-        // 添加可以禁止浏览器缓存的随机参数
-        const timestamp = Date.now();
-        const itemsData = await loadAllLinksData(`${timestamp}`);
+        const itemsData = await loadAllLinksData();
         setItems(itemsData);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error");
@@ -53,7 +51,7 @@ export function useLinksDataState() {
       }
     }
 
-    void fetchData();
+    fetchData();
 
     // 清理函数，用于在组件卸载时重置状态
     return () => {

@@ -9,9 +9,9 @@
     "pnpm": "9.15.9"
   },
   "scripts": {
-    "dev": "node scripts/load-env.js && next dev --port 3002",
+    "dev": "node scripts/load-env.js && node scripts/generate-categories.js && next dev --port 3002",
     "clean": "rimraf .next",
-    "build": "next build",
+    "build": "node scripts/generate-categories.js && next build",
     "start": "next start --port 3002",
     "lint": "biome lint .",
     "lint:fix": "biome lint --apply .",
@@ -31,7 +31,9 @@
     "check-project": "node scripts/check-project.js",
     "depcheck": "pnpm dlx depcheck",
     "env:load": "node scripts/load-env.js",
-    "env:validate": "node scripts/load-env.js"
+    "env:validate": "node scripts/load-env.js",
+    "preprocess": "node scripts/preprocess-links-data.cjs",
+    "generate:categories": "node scripts/generate-categories.js"
   },
   "repository": {
     "type": "git",

@@ -5,7 +5,6 @@
 
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import { glob } from "fast-glob";
 import type { SearchResult } from "./hub-search-types";
 
 interface LinkItem {
@@ -27,55 +26,23 @@ const CACHE_TTL = 5 * 60 * 1000; // 5分钟缓存
  * 扫描链接文件
  */
 async function scanLinkFiles(): Promise<SearchResult[]> {
-  const linksDir = path.join(process.cwd(), "src/content/links");
   const results: SearchResult[] = [];
 
   try {
-    // 读取根目录下的JSON文件
-    const rootFiles = await fs.readdir(linksDir);
-    for (const file of rootFiles) {
-      if (file.endsWith(".json") && file !== "index.js") {
-        const filePath = path.join(linksDir, file);
-        const fileContent = await fs.readFile(filePath, "utf8");
-        const items: LinkItem[] = JSON.parse(fileContent);
+    // 直接从 links-data.json 读取数据
+    const linksFilePath = path.join(process.cwd(), "src/components/links/links-data.json");
+    const fileContent = await fs.readFile(linksFilePath, "utf8");
+    const items: LinkItem[] = JSON.parse(fileContent);
 
-        items.forEach((item) => {
-          results.push({
-            type: "link",
-            title: item.title,
-            description: item.description,
-            url: item.url,
-            tags: item.tags,
-          });
-        });
-      }
-    }
-
-    // 读取分类目录下的JSON文件
-    const categoryDir = path.join(linksDir, "category");
-    if (
-      await fs
-        .stat(categoryDir)
-        .then((stat) => stat.isDirectory())
-        .catch(() => false)
-    ) {
-      const categoryFiles = await glob("**/*.json", { cwd: categoryDir });
-      for (const file of categoryFiles) {
-        const filePath = path.join(categoryDir, file);
-        const fileContent = await fs.readFile(filePath, "utf8");
-        const items: LinkItem[] = JSON.parse(fileContent);
-
-        items.forEach((item) => {
-          results.push({
-            type: "link",
-            title: item.title,
-            description: item.description,
-            url: item.url,
-            tags: item.tags,
-          });
-        });
-      }
-    }
+    items.forEach((item) => {
+      results.push({
+        type: "link",
+        title: item.title,
+        description: item.description,
+        url: item.url,
+        tags: item.tags,
+      });
+    });
   } catch (error) {
     console.error("Error scanning link files:", error);
   }

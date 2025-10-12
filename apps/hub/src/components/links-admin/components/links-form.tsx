@@ -18,7 +18,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useWebsiteParser } from "@/components/website-parser/use-website-parser";
 import { isValidUrl } from "@/lib/utils/validation";
@@ -32,7 +31,6 @@ function useLinksFormState(initialData?: Partial<LinksFormData>) {
     icon: "",
     iconType: "image",
     tags: [],
-    featured: false,
     category: "" as LinksFormData["category"],
     ...initialData,
   });
@@ -362,7 +360,7 @@ export const LinksForm = ({ submitAction, onCancel, initialData, isLoading }: Li
 
     setParseSuccess(false);
 
-    void parseWebsite(formData.url).then((metadata) => {
+    parseWebsite(formData.url).then((metadata) => {
       if (metadata) {
         setFormData((prev) => ({
           ...prev,
@@ -387,7 +385,7 @@ export const LinksForm = ({ submitAction, onCancel, initialData, isLoading }: Li
       return;
     }
 
-    void submitAction(formData);
+    submitAction(formData);
   };
 
   return (
@@ -420,9 +418,6 @@ export const LinksForm = ({ submitAction, onCancel, initialData, isLoading }: Li
         onInputChange={handleInputChange}
       />
 
-      {/* 精选 */}
-      <FeaturedSection formData={formData} onInputChange={handleInputChange} />
-
       {/* 操作按钮 */}
       <div className="flex gap-2 pt-4">
         <Button type="submit" disabled={isLoading ?? !!urlError}>
@@ -436,26 +431,5 @@ export const LinksForm = ({ submitAction, onCancel, initialData, isLoading }: Li
         )}
       </div>
     </form>
-  );
-};
-
-// 精选开关组件
-interface FeaturedSectionProps {
-  formData: LinksFormData;
-  onInputChange: (field: keyof LinksFormData, value: LinksFormData[keyof LinksFormData]) => void;
-}
-
-const FeaturedSection = ({ formData, onInputChange }: FeaturedSectionProps) => {
-  const featuredId = useId();
-
-  return (
-    <div className="flex items-center space-x-2">
-      <Switch
-        id={featuredId}
-        checked={formData.featured}
-        onCheckedChange={(checked) => onInputChange("featured", checked)}
-      />
-      <Label htmlFor={featuredId}>设为精选</Label>
-    </div>
   );
 };

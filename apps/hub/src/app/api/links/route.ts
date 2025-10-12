@@ -1,7 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server";
 import type { LinksItem } from "@/components/links/links-types";
-import { linkService } from "@/components/links-admin/services";
+import { LinkFileServiceImpl } from "@/components/links-admin/services/link-file-service";
 import { setCacheHeaders } from "@/lib/api/cache-utils";
+
+// 创建文件服务实例（仅在服务器端）
+const linkFileService = new LinkFileServiceImpl();
 
 // 添加缓存变量
 let cachedLinksData: LinksItem[] | null = null;
@@ -17,8 +20,8 @@ export async function GET() {
       return NextResponse.json(cachedLinksData);
     }
 
-    // 通过服务层获取数据
-    const items = await linkService.getAllLinks();
+    // 通过文件服务获取数据
+    const items = await linkFileService.readLinks();
 
     // 更新缓存
     cachedLinksData = items;
@@ -43,8 +46,11 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // 通过服务层创建新链接
-    const newItem = await linkService.addLink(body);
+    // 通过文件服务创建新链接
+    const newItem = await linkFileService.addLink(body);
+
+    // 清除缓存
+    cachedLinksData = null;
 
     return NextResponse.json(newItem, { status: 201 });
   } catch (error) {
@@ -81,12 +87,15 @@ export async function PUT(request: NextRequest) {
 
     const body = await request.json();
 
-    // 通过服务层更新链接
-    const updatedItem = await linkService.updateLink(id, body);
+    // 通过文件服务更新链接
+    const updatedItem = await linkFileService.updateLink(id, body);
 
     if (!updatedItem) {
       return NextResponse.json({ error: "Item not found" }, { status: 404 });
     }
+
+    // 清除缓存
+    cachedLinksData = null;
 
     return NextResponse.json(updatedItem);
   } catch (error) {
@@ -121,12 +130,15 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "Missing item ID" }, { status: 400 });
     }
 
-    // 通过服务层删除链接
-    const success = await linkService.deleteLink(id);
+    // 通过文件服务删除链接
+    const success = await linkFileService.deleteLink(id);
 
     if (!success) {
       return NextResponse.json({ error: "Item not found" }, { status: 404 });
     }
+
+    // 清除缓存
+    cachedLinksData = null;
 
     return NextResponse.json({ success: true });
   } catch (error) {

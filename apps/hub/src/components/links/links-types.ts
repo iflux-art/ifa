@@ -12,7 +12,6 @@ export interface LinksItem {
   icon: string;
   iconType?: "image" | "text";
   tags: string[];
-  featured: boolean;
   category: string; // 使用 string 类型而不是 CategoryId，让使用者从 link-categories 导入具体的类型
   createdAt?: string;
   updatedAt?: string;
@@ -26,6 +25,5 @@ export interface LinksFormData {
   icon: string;
   iconType: "image" | "text";
   tags: string[];
-  featured: boolean;
   category: string; // 使用 string 类型而不是 CategoryId，让使用者从 link-categories 导入具体的类型
 }
