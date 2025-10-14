@@ -3,8 +3,8 @@
  * 用于服务端渲染和静态生成优化
  */
 
-import type { LinksItem } from "@/components/links/links-types";
 import type { LinksCategory } from "@/components/link-categories/categories-types";
+import type { LinksItem } from "@/components/links/links-types";
 
 // 动态导入链接数据
 async function getLinksData() {
@@ -32,17 +32,8 @@ export async function getStaticAdminData() {
       iconType: item.iconType as "image" | "text" | undefined,
     }));
 
-    // 使用生成的分类数据
-    let categories: LinksCategory[] = [];
-    try {
-      const generatedCategories = await import("@/components/links/generated-categories").then(
-        (module) => module.generatedCategories || module.default
-      );
-      // 类型转换
-      categories = generatedCategories as LinksCategory[];
-    } catch (error) {
-      console.warn("Failed to load generated categories, using empty array:", error);
-    }
+    // 使用空的分类数组，分类数据现在通过API动态获取
+    const categories: LinksCategory[] = [];
 
     // 返回数据
     return {

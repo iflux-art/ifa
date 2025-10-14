@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { lazy, type ComponentType, Suspense } from "react";
+import { type ComponentType, lazy, Suspense } from "react";
 
 /**
  * 创建懒加载组件的工厂函数

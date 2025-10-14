@@ -22,11 +22,7 @@ export {
   CardHeader,
   CardTitle,
 } from "./card";
-export {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "./collapsible";
+
 export {
   Dialog,
   DialogContent,
@@ -68,15 +64,6 @@ export {
   SelectValue,
 } from "./select";
 export { Separator } from "./separator";
-export {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "./sheet";
+
 export { Switch } from "./switch";
 export { Textarea } from "./textarea";

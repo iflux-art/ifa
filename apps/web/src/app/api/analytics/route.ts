@@ -1,48 +1,13 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-
-// 定义数据类型
-interface ClientInfo {
-  userAgent: string;
-  language: string;
-  platform: string;
-  screenWidth: number;
-  screenHeight: number;
-}
-
-interface PageViewData {
-  url: string;
-  referrer: string;
-  title: string;
-  sessionId: string;
-}
-
-interface EventData {
-  name: string;
-  category: string;
-  label?: string;
-  value?: number;
-  sessionId: string;
-}
-
-interface ErrorData {
-  message: string;
-  stack: string;
-  url: string;
-  sessionId: string;
-}
-
-interface LongTaskData {
-  duration: number;
-  sessionId: string;
-}
-
-interface SlowResourceData {
-  name: string;
-  duration: number;
-  size?: number;
-  sessionId: string;
-}
+import type {
+  ClientInfo,
+  PageViewData,
+  EventData,
+  ErrorData,
+  LongTaskData,
+  SlowResourceData,
+} from "@/types/api";
 
 // 定义 Zod schemas
 const PageViewDataSchema = z.object({

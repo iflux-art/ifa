@@ -331,5 +331,125 @@
     "icon": "https://blog.w1ndys.top/images/favicon.ico",
     "id": "mb6tp902fx84zarx41f",
     "iconLazy": true
+  },
+  {
+    "title": "十年之约",
+    "url": "https://www.foreverblog.cn/",
+    "description": "十年之约是一个记录、展示独立博客的平台，即从加入这个活动起，我们的博客10年不关闭或者更久，保持更新和活力。把博客从爱好变成一种习惯，坚持10年，是一项很有意义的活动，我们希望更多的博主加入！",
+    "category": "development/security",
+    "tags": ["博客联盟"],
+    "icon": "https://www.foreverblog.cn/favicon.ico",
+    "id": "mbhu8hw2po5yeq9pmp",
+    "iconLazy": true
+  },
+  {
+    "title": "BlogFinder",
+    "url": "https://bf.zzxworld.com/",
+    "description": "",
+    "category": "development/security",
+    "tags": ["博客联盟"],
+    "icon": "https://bf.zzxworld.com/favicon.ico",
+    "id": "mbhu8vwof3mrc21o9av",
+    "iconLazy": true
+  },
+  {
+    "title": "BlogsClub - 博客俱乐部",
+    "url": "https://www.blogsclub.org/",
+    "description": "BlogsClub是一个互联网独立博客俱乐部",
+    "category": "development/security",
+    "tags": ["博客联盟"],
+    "icon": "https://www.blogsclub.org/usr/themes/default/favicon.png",
+    "id": "mbhu98vpoqzthcd27ui",
+    "iconLazy": true
+  },
+  {
+    "title": "集博栈",
+    "url": "https://zhblogs.cn/",
+    "description": "",
+    "category": "development/security",
+    "tags": ["博客联盟"],
+    "icon": "https://zhblogs.cn/favicon.ico",
+    "id": "mbhu9m276gzjk9xjknq",
+    "iconLazy": true
+  },
+  {
+    "title": "博客驿站",
+    "url": "https://www.bloginn.vip/",
+    "description": "",
+    "category": "development/security",
+    "tags": ["博客联盟"],
+    "icon": "https://www.bloginn.vip/favicon.ico",
+    "id": "mbhu9z3tj7j0e2lbkpb",
+    "iconLazy": true
+  },
+  {
+    "title": "博客星球",
+    "url": "https://www.blogplanet.cn/",
+    "description": "",
+    "category": "development/security",
+    "tags": ["博客联盟"],
+    "icon": "https://www.blogplanet.cn/favicon.ico",
+    "id": "mbhuab3nds9ljuz9lmo",
+    "iconLazy": true
+  },
+  {
+    "title": "Blogwe",
+    "url": "https://blogwe.com/",
+    "description": "",
+    "category": "development/security",
+    "tags": ["博客联盟"],
+    "icon": "https://blogwe.com/favicon.ico",
+    "id": "mbhuap1wvswtkmxaxl",
+    "iconLazy": true
+  },
+  {
+    "title": "笔墨迹",
+    "url": "https://blogscn.fun/",
+    "description": "Your description here.",
+    "category": "development/security",
+    "tags": ["博客联盟"],
+    "icon": "https://photo.xiangming.site/img/blogscn_icon.png",
+    "id": "mbhub1a9ucuarerirzm",
+    "iconLazy": true
+  },
+  {
+    "title": "博友圈",
+    "url": "https://www.boyouquan.com/",
+    "description": "博客人的朋友圈！",
+    "category": "development/security",
+    "tags": ["博客联盟"],
+    "icon": "https://www.boyouquan.com/assets/favicon.ico",
+    "id": "mbhubfatl9pgds9e5s9",
+    "iconLazy": true
+  },
+  {
+    "title": "萌国ICP备案",
+    "url": "https://icp.gov.moe/",
+    "description": "萌友网站联萌，快来申请萌萌的ICP备案号吧!",
+    "category": "development/security",
+    "tags": ["友链接力"],
+    "icon": "https://icp.gov.moe/favicon.ico",
+    "id": "mbhubz19tffvbu089y",
+    "iconLazy": true
+  },
+  {
+    "title": "开往 | 友链接力",
+    "url": "https://www.travellings.cn/",
+    "description": "友链接力",
+    "category": "development/security",
+    "tags": ["友链接力"],
+    "icon": "https://www.travellings.cn/assets/favicon.png",
+    "id": "mbhucd751c0vuzu6zlw",
+    "iconLazy": true
+  },
+  {
+    "title": "个站商店",
+    "url": "https://storeweb.cn/",
+    "description": "一个精致的，带社交元素的个人网站发布平台，博客收录网站",
+    "category": "development/security",
+    "tags": ["友链接力"],
+    "icon": "https://storeweb.cn/static/favicon.ico",
+    "id": "mbhucpld1c69s4siymk",
+    "iconLazy": true
   }
 ]

@@ -42,32 +42,12 @@ const nextConfig = {
       allowedOrigins: ["localhost:3000", "localhost:3001", "localhost:3002"],
     },
 
-    // Enable optimized CSS loading
-    optimizeCss: true,
-
-    // Enable advanced code splitting
-    esmExternals: true,
-
     // MDX specific optimizations
     mdxRs: true,
   },
 
-  // Turbopack configuration with advanced optimizations
+  // Simplified Turbopack configuration
   turbopack: {
-    rules: {
-      "*.svg": {
-        loaders: ["@svgr/webpack"],
-        as: "*.js",
-      },
-      "*.md": {
-        loaders: ["raw-loader"],
-        as: "*.js",
-      },
-      "*.mdx": {
-        loaders: ["@mdx-js/loader"],
-        as: "*.js",
-      },
-    },
     resolveAlias: {
       "@": "./src",
       "@/components": "./src/components",
@@ -79,70 +59,21 @@ const nextConfig = {
       "@/config": "./src/config",
       "@/content": "./src/content",
     },
-    resolveExtensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".md", ".mdx"],
   },
 
   // Performance optimizations
   compress: true,
   poweredByHeader: false,
 
-  // Advanced webpack optimizations for production
-  webpack: (config, { dev, isServer, webpack }) => {
-    // Enable React Compiler babel plugin
+  // Simplified webpack optimizations
+  webpack: (config, { dev, webpack }) => {
+    // Disable React DevTools in production
     if (!dev) {
       config.plugins.push(
         new webpack.DefinePlugin({
           __REACT_DEVTOOLS_GLOBAL_HOOK__: "({ isDisabled: true })",
         })
       );
-    }
-
-    if (!dev && !isServer) {
-      // Optimize bundle splitting with advanced strategies
-      config.optimization.splitChunks = {
-        chunks: "all",
-        minSize: 20000,
-        maxSize: 244000,
-        cacheGroups: {
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true,
-          },
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            chunks: "all",
-            priority: 10,
-            enforce: true,
-          },
-          react: {
-            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-            name: "react",
-            chunks: "all",
-            priority: 20,
-          },
-          mdx: {
-            test: /[\\/]node_modules[\\/](@mdx-js|mdx)[\\/]/,
-            name: "mdx",
-            chunks: "all",
-            priority: 18,
-          },
-          common: {
-            name: "common",
-            minChunks: 2,
-            chunks: "all",
-            priority: 5,
-            reuseExistingChunk: true,
-          },
-        },
-      };
-
-      // Enable advanced optimizations
-      config.optimization.usedExports = true;
-      config.optimization.sideEffects = false;
-      config.optimization.moduleIds = "deterministic";
-      config.optimization.chunkIds = "deterministic";
     }
 
     return config;

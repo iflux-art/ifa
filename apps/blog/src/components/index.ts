@@ -23,7 +23,6 @@ export { SearchButton } from "./button/search-button";
 export { TravelButton } from "./button/travel-button";
 // ==================== 卡片组件 ====================
 // 通用卡片组件目录
-export {} from "./cards";
 
 // ==================== 底栏组件 ====================
 export { Footer } from "./footer";
@@ -62,17 +61,6 @@ export {
   AlertDescription,
   AlertTitle,
 } from "./ui/alert";
-export {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "./ui/alert-dialog";
 // ==================== UI 组件库 ====================
 export { BackButton } from "./ui/back-button";
 export { Badge } from "./ui/badge";
@@ -89,6 +77,4 @@ export {
   CardTitle,
 } from "./ui/card";
 export { Input } from "./ui/input";
-export { Label } from "./ui/label";
-export { Switch } from "./ui/switch";
 export { Textarea } from "./ui/textarea";

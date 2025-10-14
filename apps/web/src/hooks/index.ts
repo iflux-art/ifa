@@ -1,2 +1,4 @@
 // Export custom hooks from this file
-// Example: export { useCustomHook } from './use-custom-hook'
+export { useMounted } from "./use-mounted";
+export { useScroll, useScrollToTop, useScrollDirection } from "./use-scroll";
+export { useExternalLink, useSafeExternalLink } from "./use-external-link";

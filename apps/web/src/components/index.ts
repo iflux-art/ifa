@@ -1,14 +1,19 @@
-// ==================== 核心组件导出 ====================
+/**
+ * 组件统一导出文件
+ * 按模块分组导出，便于管理和使用
+ */
 
-// ==================== 主题组件导出 ====================
-export { ThemeProvider, ThemeToggle } from "@/components/theme";
-export { GitHubButton } from "./button/github-button";
-// ==================== 布局组件导出 ====================
-export { Footer } from "./footer";
-// ==================== 业务组件导出 ====================
-export { LinkCard } from "./home/link-card";
+// ==================== UI 组件导出 ====================
 export { BackButton } from "./ui/back-button";
-// ==================== UI组件导出 ====================
-// 只导出项目中实际使用的UI组件
 export { Button, buttonVariants } from "./ui/button";
 export { Card, CardContent } from "./ui/card";
+
+// ==================== 布局组件导出 ====================
+export { Footer } from "./layout/footer";
+export { MainNavbar } from "./layout/navbar";
+export { ThemeProvider, ThemeToggle } from "./layout/theme";
+
+// ==================== 功能组件导出 ====================
+export { GitHubButton, TravelButton } from "./features/buttons";
+export { FeaturedLinks, HeroSection, LinkCard } from "./features/home";
+export { LazyFeaturedLinks, LazyHeroSection } from "./features/home/lazy-components";

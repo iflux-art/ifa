@@ -36,7 +36,9 @@ export function useCategories() {
       }
     }
 
-    void fetchCategories();
+    fetchCategories().catch((error) => {
+      console.error("Error fetching categories:", error);
+    });
   }, []);
 
   /**
@@ -54,7 +56,8 @@ export function useCategories() {
       if (cat.children) {
         const subCategory = cat.children.find((sub) => sub.id === categoryId);
         if (subCategory) {
-          return `${cat.name} > ${subCategory.name}`;
+          // 只返回子分类名称，不包含父分类名称
+          return subCategory.name;
         }
       }
     }

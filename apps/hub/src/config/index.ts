@@ -1,5 +1,5 @@
-import { loadFeatureFlags } from "./features";
 import { getHubClientEnv, loadHubEnvConfig } from "./env";
+import { loadFeatureFlags } from "./features";
 
 /**
  * Hub 应用配置

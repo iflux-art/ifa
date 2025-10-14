@@ -28,25 +28,16 @@
     "incremental": true,
     "tsBuildInfoFile": ".tsbuildinfo",
 
-    // TypeScript 5.9 specific optimizations (compatibility mode)
-    "exactOptionalPropertyTypes": false,
-    "noUncheckedIndexedAccess": false,
+    // TypeScript optimizations
     "noImplicitOverride": true,
     "useDefineForClassFields": true,
 
-    // Advanced type checking
+    // Essential type checking
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": false, // Disabled for compatibility
-    "noUnusedParameters": false, // Disabled for compatibility
     "noImplicitThis": true,
     "alwaysStrict": true,
-
-    // Import/export optimizations
-    "verbatimModuleSyntax": false, // Disabled for compatibility
-    "allowImportingTsExtensions": false,
-    "allowArbitraryExtensions": false,
 
     "plugins": [
       {

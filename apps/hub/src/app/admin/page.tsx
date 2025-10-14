@@ -3,13 +3,13 @@
  * 实现静态生成、代码分割和骨架屏优化
  */
 
+import type { Metadata } from "next";
 import { lazy, Suspense } from "react";
+import { getStaticAdminData } from "@/components/admin/get-static-admin-data";
+import type { LinksCategory } from "@/components/link-categories";
+import type { LinksItem } from "@/components/links/links-types";
 import { FeatureErrorBoundary } from "@/components/shared/error-boundary";
 import { AdminErrorFallback } from "@/components/shared/error-fallback";
-import type { Metadata } from "next";
-import { getStaticAdminData } from "@/components/admin/get-static-admin-data";
-import type { LinksItem } from "@/components/links/links-types";
-import type { LinksCategory } from "@/components/link-categories";
 
 // 静态生成元数据
 export const metadata: Metadata = {

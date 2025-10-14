@@ -1,14 +1,11 @@
-import { Home } from "lucide-react";
-import type { Metadata } from "next";
+"use client";
+
+import { ArrowLeft, Home } from "lucide-react";
 import Link from "next/link";
-import { useId } from "react";
-import { BackButton } from "@/components/ui/back-button";
 import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
-  title: "404 - 页面未找到",
-  description: "抱歉，您访问的页面不存在或已被移除。",
-};
+// Note: metadata cannot be exported from client components
+// The metadata will be handled by the layout or a parent server component
 
 const DEFAULT_TEXTS = {
   code: "404",
@@ -23,7 +20,7 @@ const DEFAULT_TEXTS = {
  * 符合404页面设计规范，使用通用的布局和组件
  */
 export default function NotFoundPage() {
-  const errorTitleId = useId();
+  const errorTitleId = "error-title";
   const code = DEFAULT_TEXTS.code;
   const title = DEFAULT_TEXTS.title;
   const description = DEFAULT_TEXTS.description;
@@ -46,14 +43,17 @@ export default function NotFoundPage() {
 
           {/* 主要操作按钮 */}
           <div className="mb-8 flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg">
-              <Link href={backUrl} className="flex items-center gap-2">
+            <Link href={backUrl}>
+              <Button size="lg" className="flex items-center gap-2">
                 <Home className="h-4 w-4" aria-hidden="true" />
                 {buttonText}
-              </Link>
-            </Button>
+              </Button>
+            </Link>
 
-            <BackButton />
+            <Button variant="outline" size="lg" onClick={() => window.history.back()}>
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+              返回上页
+            </Button>
           </div>
         </div>
       </section>

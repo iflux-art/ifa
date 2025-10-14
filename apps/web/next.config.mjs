@@ -1,118 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Development optimizations
-  ...(process.env.NODE_ENV === "development" && {
-    // Enable fast refresh
-    reactStrictMode: true,
-  }),
+  // Enable React Strict Mode for better development experience
+  reactStrictMode: true,
 
-  // Production optimizations
-  ...(process.env.NODE_ENV === "production" && {
-    reactStrictMode: true,
-    // Turbopack handles compression automatically in Next.js 15+
-  }),
-
-  // Enable Next.js 15 features and optimizations
+  // Next.js 15 recommended experimental features
   experimental: {
     // Enable optimized package imports for better tree shaking
-    optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
+    optimizePackageImports: ["lucide-react"],
 
     // Enable server actions for React 19 compatibility
     serverActions: {
       allowedOrigins: ["localhost:3000", "localhost:3001", "localhost:3002"],
     },
-
-    // Enable optimized CSS loading
-    optimizeCss: true,
-
-    // Enable advanced code splitting
-    esmExternals: true,
   },
 
-  // Turbopack configuration with advanced optimizations
+  // Turbopack configuration - let it handle optimizations automatically
   turbopack: {
-    rules: {
-      "*.svg": {
-        loaders: ["@svgr/webpack"],
-        as: "*.js",
-      },
-      "*.md": {
-        loaders: ["raw-loader"],
-        as: "*.js",
-      },
-    },
     resolveAlias: {
       "@": "./src",
-      "@/components": "./src/components",
-      "@/lib": "./src/lib",
-      "@/utils": "./src/utils",
-      "@/hooks": "./src/hooks",
-      "@/stores": "./src/stores",
-      "@/types": "./src/types",
-      "@/config": "./src/config",
     },
-    resolveExtensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
 
-  // Performance optimizations
-  compress: true,
+  // Basic security and performance settings
   poweredByHeader: false,
-
-  // Advanced webpack optimizations for production
-  webpack: (config, { dev, isServer, webpack }) => {
-    // Enable React Compiler babel plugin
-    if (!dev) {
-      config.plugins.push(
-        new webpack.DefinePlugin({
-          __REACT_DEVTOOLS_GLOBAL_HOOK__: "({ isDisabled: true })",
-        })
-      );
-    }
-
-    if (!(dev || isServer)) {
-      // Optimize bundle splitting with advanced strategies
-      config.optimization.splitChunks = {
-        chunks: "all",
-        minSize: 20000,
-        maxSize: 244000,
-        cacheGroups: {
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true,
-          },
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            chunks: "all",
-            priority: 10,
-            enforce: true,
-          },
-          react: {
-            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-            name: "react",
-            chunks: "all",
-            priority: 20,
-          },
-          common: {
-            name: "common",
-            minChunks: 2,
-            chunks: "all",
-            priority: 5,
-            reuseExistingChunk: true,
-          },
-        },
-      };
-
-      // Enable advanced optimizations
-      config.optimization.usedExports = true;
-      config.optimization.sideEffects = false;
-      config.optimization.moduleIds = "deterministic";
-      config.optimization.chunkIds = "deterministic";
-    }
-
-    return config;
-  },
 };
 
 export default nextConfig;

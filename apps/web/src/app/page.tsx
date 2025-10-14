@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LazyFeaturedLinks, LazyHeroSection } from "@/components/home/lazy-components";
+import { FeaturedLinks, HeroSection } from "@/components/features/home";
 
 // ==================== SEO配置 ====================
 const SEO_CONFIG = {
@@ -37,11 +37,11 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* Hero区域 - 懒加载 */}
-      <LazyHeroSection />
+      {/* Hero区域 */}
+      <HeroSection />
 
-      {/* 特色链接 - 懒加载 */}
-      <LazyFeaturedLinks />
+      {/* 特色链接 */}
+      <FeaturedLinks />
     </>
   );
 }

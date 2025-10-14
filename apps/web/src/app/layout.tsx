@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components";
-import { MainNavbar } from "@/components/navbar";
-import { ThemeProvider } from "@/components/theme";
+import { MainNavbar } from "@/components/layout/navbar";
+import { ThemeProvider } from "@/components/layout/theme";
 import { SITE_METADATA } from "@/config";
 import "./globals.css";
 

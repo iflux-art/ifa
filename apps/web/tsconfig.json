@@ -1,26 +1,25 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    // Target latest ES features for better performance
+    // Target ES2022 for optimal Next.js 15 performance
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "es2022", "webworker"],
+    "lib": ["dom", "dom.iterable", "es2022"],
 
-    // Basic configuration
+    // Essential configuration for Next.js 15
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
 
-    // Module resolution optimizations
+    // Module resolution optimized for Next.js 15 and React 19
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
 
-    // React and JSX optimizations
+    // React 19 JSX configuration
     "jsx": "preserve",
     "jsxImportSource": "react",
 
@@ -28,25 +27,14 @@
     "incremental": true,
     "tsBuildInfoFile": ".tsbuildinfo",
 
-    // TypeScript 5.9 specific optimizations (compatibility mode)
-    "exactOptionalPropertyTypes": false,
-    "noUncheckedIndexedAccess": false,
-    "noImplicitOverride": true,
+    // TypeScript 5.9 compatibility with Next.js 15
     "useDefineForClassFields": true,
+    "allowSyntheticDefaultImports": true,
 
-    // Advanced type checking
+    // Essential type checking (removed overly strict options)
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": false, // Disabled for compatibility
-    "noUnusedParameters": false, // Disabled for compatibility
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-
-    // Import/export optimizations
-    "verbatimModuleSyntax": false, // Disabled for compatibility
-    "allowImportingTsExtensions": false,
-    "allowArbitraryExtensions": false,
 
     "plugins": [
       {
@@ -54,20 +42,13 @@
       }
     ],
     "baseUrl": ".",
-    "ignoreDeprecations": "5.0",
     "paths": {
       "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
       "@/lib/*": ["./src/lib/*"],
-      "@/utils/*": ["./src/lib/utils/*"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/stores/*": ["./src/stores/*"],
-      "@/types/*": ["./src/types/*"],
-      "@/config/*": ["./src/config/*"],
-      "@/components/ui/*": ["./src/components/ui/*"],
-      "@/content/*": ["./src/content/*"]
+      "@/config/*": ["./src/config/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "dist", "build", "coverage"]
+  "exclude": ["node_modules", "dist", "build", "coverage", ".next"]
 }

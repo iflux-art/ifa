@@ -5,13 +5,13 @@
 
 "use client";
 
-import { memo, useEffect, useMemo, useState, useCallback } from "react";
-import type { Category, LinksItem } from "./types";
-import { LinksContent } from "./links-content";
-import { Sidebar } from "./sidebar";
-import { useFilterState } from "@/components/links/use-filter-state";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useCategories } from "@/components/link-categories";
 import { loadAllLinksData } from "@/components/links/links-lib";
+import { useFilterState } from "@/components/links/use-filter-state";
+import { LinksContent } from "./links-content";
+import { Sidebar } from "./sidebar";
+import type { Category, LinksItem } from "./types";
 
 // 定义组件属性类型
 interface OptimizedHomePageProps {
@@ -30,7 +30,7 @@ export const OptimizedHomePage = memo(({ initialData }: OptimizedHomePageProps) 
   const [hasMoreData, setHasMoreData] = useState(true);
 
   // 使用共享的分类数据 hook
-  const { getFilteredCategories, getCategoryName } = useCategories();
+  const { getFilteredCategories } = useCategories();
 
   // 转换分类数据格式
   const categories: Category[] = useMemo(() => {
@@ -43,13 +43,13 @@ export const OptimizedHomePage = memo(({ initialData }: OptimizedHomePageProps) 
     const filteredCategories = getFilteredCategories();
     return filteredCategories.map((cat) => ({
       id: cat.id,
-      name: getCategoryName(cat.id) || cat.name, // 使用 getCategoryName 获取显示名称
+      name: cat.name, // 直接使用分类名称，不包含父分类
       children: cat.children?.map((child) => ({
         id: child.id,
-        name: getCategoryName(child.id) || child.name, // 使用 getCategoryName 获取显示名称
+        name: child.name, // 子分类只显示自己的名称
       })),
     }));
-  }, [getFilteredCategories, getCategoryName, initialData?.categories]);
+  }, [getFilteredCategories, initialData?.categories]);
 
   // 使用过滤后的数据进行状态管理
   const {

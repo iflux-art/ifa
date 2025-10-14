@@ -62,62 +62,6 @@ export function normalizeUrl(url: string): string {
 }
 
 /**
- * 验证页面参数
- * @param params 页面参数对象
- * @param requiredFields 必填参数数组
- * @returns 验证结果
- */
-export function validatePageParams(
-  params: Record<string, unknown>,
-  requiredFields: string[] = []
-): { isValid: boolean; missingFields: string[] } {
-  const missingFields = requiredFields.filter(
-    (field) => params[field] === undefined || params[field] === null || params[field] === ""
-  );
-
-  return {
-    isValid: missingFields.length === 0,
-    missingFields,
-  };
-}
-
-/**
- * 安全的JSON解析
- * @param jsonString JSON字符串
- * @param defaultValue 默认值
- * @returns 解析后的对象或默认值
- */
-export function safeJsonParse<T>(jsonString: string, defaultValue: T): T {
-  try {
-    return JSON.parse(jsonString) as T;
-  } catch {
-    return defaultValue;
-  }
-}
-
-/**
- * 验证字符串长度
- * @param value 字符串值
- * @param min 最小长度
- * @param max 最大长度
- * @returns 是否符合长度要求
- */
-export function validateStringLength(value: string, min: number, max: number): boolean {
-  return value.length >= min && value.length <= max;
-}
-
-/**
- * 验证数组长度
- * @param value 数组值
- * @param min 最小长度
- * @param max 最大长度
- * @returns 是否符合长度要求
- */
-export function validateArrayLength<T>(value: T[], min: number, max: number): boolean {
-  return value.length >= min && value.length <= max;
-}
-
-/**
  * 验证是否为有效的分类ID
  * @param category 分类ID
  * @param validCategories 有效的分类ID数组

@@ -4,11 +4,11 @@
  */
 
 export { AdminDialogs } from "./admin-dialogs";
-// 主要组件
-export { OptimizedAdminPage } from "./optimized-admin-page";
 // Store
 export { useAdminStore } from "./admin-store";
 export { DataTable } from "./data-table";
+// 主要组件
+export { OptimizedAdminPage } from "./optimized-admin-page";
 export { PageHeader } from "./page-header";
 export { SearchFilter } from "./search-filter";
 // 类型定义

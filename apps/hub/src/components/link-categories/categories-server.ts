@@ -154,16 +154,29 @@ export async function generateCategoriesFromFiles(): Promise<LinkCategory[]> {
       if (!categoryId.includes("/")) {
         const children = Array.from(categoryData.children).map((childId) => {
           const childData = categoryMap[childId];
+          // 对于中文分类，子分类名称应该是斜杠后部分
+          let childName = getCategoryDisplayName(childId);
+          if (childName === childId && childId.includes("/")) {
+            // 如果没有找到映射且包含斜杠，使用斜杠后部分作为名称
+            childName = childId.split("/")[1];
+          }
           return {
             id: childId as CategoryId,
-            name: getCategoryDisplayName(childId),
+            name: childName,
             count: childData ? childData.items.length : 0,
           };
         });
 
+        // 对于中文分类，父分类名称就是分类ID本身
+        let parentName = getCategoryDisplayName(categoryId);
+        if (parentName === categoryId) {
+          // 如果没有找到映射，直接使用分类ID作为名称
+          parentName = categoryId;
+        }
+
         categories.push({
           id: categoryId as CategoryId,
-          name: getCategoryDisplayName(categoryId),
+          name: parentName,
           count: categoryData.items.length,
           children: children.length > 0 ? children : undefined,
         });

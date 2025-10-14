@@ -32,24 +32,52 @@ const buttonVariants = cva(
   }
 );
 
+/** Button 组件 Props 接口 */
+export interface ButtonProps
+  extends React.ComponentProps<"button">,
+    VariantProps<typeof buttonVariants> {
+  /** 是否作为子组件渲染 */
+  asChild?: boolean;
+  /** 加载状态 */
+  loading?: boolean;
+  /** 加载文本 */
+  loadingText?: string;
+  /** 左侧图标 */
+  leftIcon?: React.ReactNode;
+  /** 右侧图标 */
+  rightIcon?: React.ReactNode;
+}
+
 const Button = ({
   className,
   variant,
   size,
   asChild = false,
+  loading = false,
+  loadingText,
+  leftIcon,
+  rightIcon,
+  children,
+  disabled,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-  }) => {
+}: ButtonProps) => {
   const Comp = asChild ? Slot : "button";
+  const isDisabled = disabled || loading;
 
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      disabled={isDisabled}
       {...props}
-    />
+    >
+      {loading && (
+        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+      )}
+      {!loading && leftIcon && <span className="mr-2">{leftIcon}</span>}
+      {loading ? loadingText || children : children}
+      {!loading && rightIcon && <span className="ml-2">{rightIcon}</span>}
+    </Comp>
   );
 };
 

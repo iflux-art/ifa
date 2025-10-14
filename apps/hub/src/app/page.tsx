@@ -42,19 +42,12 @@ async function getStaticData() {
     }));
 
     // 使用生成的分类数据
-    let categories: Array<{
+    const categories: Array<{
       id: string;
       name: string;
       children?: Array<{ id: string; name: string }>;
     }> = [];
-    try {
-      const generatedCategories = await import("../components/links/generated-categories").then(
-        (module) => module.generatedCategories || module.default
-      );
-      categories = generatedCategories;
-    } catch (error) {
-      console.warn("Failed to load generated categories, using empty array:", error);
-    }
+    // 分类数据现在通过API动态获取，不再使用静态生成的文件
 
     // 只返回关键数据，减少初始加载量
     const criticalItems = items.slice(0, 100); // 只返回前100个项目作为关键数据

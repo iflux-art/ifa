@@ -5,17 +5,17 @@
 
 "use client";
 
+import { Edit, ExternalLink, Trash2 } from "lucide-react";
+import Image from "next/image";
 import { memo, useMemo } from "react";
-import type { LinksItem } from "@/components/links/links-types";
 import { useCategories } from "@/components/link-categories";
-import { Badge } from "@/components/ui/badge";
-import { GenericDataTable } from "@/components/links-admin/components/generic-data-table";
+import type { LinksItem } from "@/components/links/links-types";
 import type {
   DataTableAction,
   DataTableColumn,
 } from "@/components/links-admin/components/generic-data-table";
-import { Edit, ExternalLink, Trash2 } from "lucide-react";
-import Image from "next/image";
+import { GenericDataTable } from "@/components/links-admin/components/generic-data-table";
+import { Badge } from "@/components/ui/badge";
 
 interface DataTableProps {
   data: LinksItem[];
