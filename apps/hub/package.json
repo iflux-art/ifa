@@ -69,6 +69,7 @@
     "@playwright/test": "^1.56.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/postcss": "^4.1.14",
     "@testing-library/jest-dom": "^6.8.0",
     "@types/node": "^22.18.8",
     "@types/react": "^19.1.11",

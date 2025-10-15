@@ -60,18 +60,17 @@
     "@biomejs/biome": "^2.2.5",
     "@playwright/test": "^1.56.0",
     "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/postcss": "^4.1.14",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.8.0",
     "@types/node": "^22.18.8",
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.7",
     "jsdom": "^26.1.0",
-
     "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   },
-
   "sideEffects": false,
   "keywords": [
     "nextjs",
