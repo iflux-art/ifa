@@ -11,7 +11,9 @@ export default defineConfig({
     "src/validation.ts",
   ],
   format: ["esm"],
-  dts: true,
+  dts: {
+    resolve: true,
+  },
   sourcemap: true,
   clean: true,
   treeshake: true,
@@ -19,4 +21,5 @@ export default defineConfig({
   target: "es2022",
   splitting: false,
   external: ["zod"],
+  tsconfig: "./tsconfig.build.json",
 });

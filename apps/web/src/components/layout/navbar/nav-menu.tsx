@@ -18,7 +18,7 @@ export const NavListMenu = ({ className = "" }: NavListMenuProps) => {
   const pathname = usePathname();
 
   return (
-    <nav className={cn("flex items-center gap-6", className)} aria-label="主导航">
+    <nav className={cn("hidden items-center gap-6 md:flex", className)} aria-label="主导航">
       {NAV_ITEMS.map((item: BaseNavItem) => {
         const href = NAV_PATHS[item.key] || `/${item.key}`;
         const isExternal = "external" in item && item.external;

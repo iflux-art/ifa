@@ -39,6 +39,9 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
 
+    // Project references support
+    "composite": true,
+
     "plugins": [
       {
         "name": "next"
@@ -47,14 +50,15 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/utils/*": ["./src/lib/utils/*"],
-      "@/types/*": ["./src/types/*"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/stores/*": ["./src/stores/*"],
-      "@/config/*": ["./src/config/*"],
-      "@/content/*": ["./src/content/*"]
+      "@/components": ["./src/components"],
+      "@/lib": ["./src/lib"],
+      "@/lib/utils": ["./src/lib/utils/index"],
+      "@/hooks": ["./src/hooks"],
+      "@/stores": ["./src/stores"],
+      "@/types": ["./src/types"],
+      "@/config": ["./src/config"],
+      "@/app": ["./src/app"],
+      "@/content": ["./src/content"]
     }
   },
   "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", ".next/types/**/*.ts"],

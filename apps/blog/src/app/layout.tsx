@@ -2,52 +2,14 @@ import "./globals.css";
 import type { Metadata } from "next";
 import type React from "react";
 import { Footer } from "@/components";
-import { MainNavbar } from "@/components/navbar/main-navbar";
-import { ThemeProvider } from "@/components/theme/theme-provider";
+import { MainNavbar } from "@/components";
+import { ThemeProvider } from "@/components";
 import { SITE_METADATA } from "@/config";
 
-// 直接使用 Next.js 的 Metadata API 构建元数据，简化 SEO 配置
 export const metadata: Metadata = {
   title: SITE_METADATA.title,
   description: SITE_METADATA.description,
-  keywords: [...SITE_METADATA.keywords],
   authors: [{ name: SITE_METADATA.author }],
-  creator: SITE_METADATA.author,
-  publisher: SITE_METADATA.author,
-  metadataBase: new URL(SITE_METADATA.url),
-  openGraph: {
-    type: "website",
-    locale: SITE_METADATA.locale,
-    url: SITE_METADATA.url,
-    title: SITE_METADATA.title,
-    description: SITE_METADATA.description,
-    siteName: SITE_METADATA.title,
-    images: [
-      {
-        url: SITE_METADATA.image,
-        width: 1200,
-        height: 630,
-        alt: SITE_METADATA.title,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: SITE_METADATA.title,
-    description: SITE_METADATA.description,
-    images: [SITE_METADATA.image],
-    creator: SITE_METADATA.twitter,
-  },
-};
-
-export const viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 2,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
@@ -58,7 +20,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
   >
     <head />
     <body>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        enableSystem={false}
+        disableTransitionOnChange
+      >
         {/* 页面主体布局容器 */}
         <div className="flex flex-col">
           <MainNavbar className="flex-shrink-0" />

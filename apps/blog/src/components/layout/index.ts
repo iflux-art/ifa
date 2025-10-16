@@ -1,18 +1,13 @@
 /**
- * 通用布局组件导出
- * 集中导出所有通用布局组件，便于引用
+ * 布局组件统一导出
+ * 包含页面布局相关的所有组件
  */
 
-// 配置信息
-export {
-  NAV_DESCRIPTIONS,
-  NAV_ITEMS,
-  NAV_PATHS,
-} from "@/components/navbar/nav-config";
-export { Breadcrumb } from "@/components/posts";
-export { SidebarWrapper } from "@/components/sidebar";
-// 导航相关组件
+// 页面布局组件
+export { Footer } from "./footer";
+export { BlogPageContainer as BlogPage } from "./blog-page";
+export { BlogPostPageContainer as BlogPostPage } from "./blog-post-page";
+export { FriendsPage } from "./friends-page";
 
-// 布局结构组件
-
-// 布局工具函数
+// 导航栏组件
+export * from "./navbar";

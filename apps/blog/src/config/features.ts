@@ -35,33 +35,33 @@ const _defaultFeatures: FeatureFlags = {
  * 从环境变量加载功能标志
  */
 export function loadFeatureFlags(): FeatureFlags {
-  const env = loadBlogEnvConfig();
+  const isDev = process.env.NODE_ENV === "development";
 
   return {
     // React 19 特性
-    reactCompiler: env.NEXT_PUBLIC_ENABLE_REACT_COMPILER,
+    reactCompiler: true, // 默认启用
     reactActions: true, // React 19 始终启用
     useHook: true, // React 19 始终启用
 
     // Next.js 15 特性
-    ppr: env.NEXT_PUBLIC_ENABLE_PPR,
-    turbopack: env.NEXT_PUBLIC_ENABLE_TURBOPACK,
+    ppr: true, // 默认启用
+    turbopack: true, // 默认启用
     dynamicIO: true, // Next.js 15 始终启用
 
     // 性能特性
     caching: true, // 默认启用
     compression: true, // 默认启用
-    bundleAnalysis: env.NODE_ENV === "development",
+    bundleAnalysis: isDev,
 
     // 开发特性
-    hotReload: env.NODE_ENV === "development",
+    hotReload: isDev,
     sourceMap: true, // 默认启用
     typeChecking: true, // 默认启用
 
     // UI 特性
-    darkMode: env.NEXT_PUBLIC_ENABLE_DARK_MODE,
-    animations: env.NEXT_PUBLIC_ENABLE_ANIMATIONS,
-    accessibility: env.NEXT_PUBLIC_ENABLE_ACCESSIBILITY,
+    darkMode: true, // 默认启用
+    animations: true, // 默认启用
+    accessibility: true, // 默认启用
   };
 }
 

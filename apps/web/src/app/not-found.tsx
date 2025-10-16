@@ -2,7 +2,7 @@
 
 import { ArrowLeft, Home } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components";
 
 // Note: metadata cannot be exported from client components
 // The metadata will be handled by the layout or a parent server component

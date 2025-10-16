@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
  */
 export const Footer = () => (
   <footer className={cn("w-full py-4 md:py-6", "border-border/30 border-t", "bg-transparent")}>
-    <div className="container mx-auto flex items-center justify-center px-4">
+    <div className={cn("container mx-auto px-4", "flex items-center justify-center")}>
       <div className="text-muted-foreground text-sm">© 2025 iFluxArt 保留所有权利</div>
     </div>
   </footer>

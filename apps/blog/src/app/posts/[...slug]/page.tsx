@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
-import { getBlogContent } from "@/components/posts/lib";
+import { getBlogContent } from "@/components/features/posts/lib";
 import { handleContentError } from "@/lib/utils/error";
 
 interface BlogPostPageProps {

@@ -257,7 +257,7 @@ export const apiClient = new ApiClient({
 export const { get, post, put, delete: deleteRequest, patch } = apiClient;
 
 // 注意：友链相关类型定义在 @/components/friends/types 中
-import type { FriendLink } from "@/components/friends/types";
+import type { FriendLink } from "@/components/features/friends/types";
 
 // 定义友链申请的类型
 interface FriendLinkApplication {

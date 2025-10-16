@@ -8,18 +8,21 @@ export const NAV_ITEMS: BaseNavItem[] = [
     label: "博客",
     href: "https://blog.iflux.art/",
     icon: PenTool,
+    external: true,
   },
   {
     key: "friends",
     label: "友链",
     href: "https://blog.iflux.art/friends/",
     icon: Link,
+    external: true,
   },
   {
     key: "hub",
     label: "导航",
     href: "https://hub.iflux.art/",
     icon: Home,
+    external: true,
   },
 ];
 

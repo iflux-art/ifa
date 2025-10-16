@@ -119,10 +119,6 @@ function main() {
   console.log(`   分类: ${process.env.NEXT_PUBLIC_ENABLE_CATEGORIES || 'true'}`);
   console.log(`   每页文章数: ${process.env.NEXT_PUBLIC_POSTS_PER_PAGE || '10'}`);
   
-  // SEO配置
-  console.log('\n🔍 SEO配置:');
-  console.log(`   站点名称: ${process.env.NEXT_PUBLIC_SITE_NAME || 'Blog App'}`);
-  console.log(`   站点URL: ${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001'}`);
   
   // 功能标志
   console.log('\n🚩 功能标志:');

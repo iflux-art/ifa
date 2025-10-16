@@ -4,16 +4,16 @@
  */
 
 // ==================== UI 组件导出 ====================
-export { BackButton } from "./ui/back-button";
-export { Button, buttonVariants } from "./ui/button";
-export { Card, CardContent } from "./ui/card";
+export * from "./ui";
 
 // ==================== 布局组件导出 ====================
-export { Footer } from "./layout/footer";
-export { MainNavbar } from "./layout/navbar";
-export { ThemeProvider, ThemeToggle } from "./layout/theme";
+export * from "./layout";
 
 // ==================== 功能组件导出 ====================
-export { GitHubButton, TravelButton } from "./features/buttons";
-export { FeaturedLinks, HeroSection, LinkCard } from "./features/home";
-export { LazyFeaturedLinks, LazyHeroSection } from "./features/home/lazy-components";
+export * from "./features";
+
+// ==================== 主题组件导出 ====================
+export * from "./theme";
+
+// ==================== 共享组件导出 ====================
+export * from "./shared";

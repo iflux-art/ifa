@@ -5,16 +5,14 @@
 
 import type { Metadata } from "next";
 import { lazy, Suspense } from "react";
-import { getStaticAdminData } from "@/components/admin/get-static-admin-data";
-import type { LinksCategory } from "@/components/link-categories";
-import type { LinksItem } from "@/components/links/links-types";
-import { FeatureErrorBoundary } from "@/components/shared/error-boundary";
+import { getStaticAdminData } from "@/components/features/admin/get-static-admin-data";
+import type { LinksCategory } from "@/components/features/link-categories";
+import type { LinksItem } from "@/components/features/links/links-types";
+import { FeatureErrorBoundary } from "@/components/shared/error-fallback";
 import { AdminErrorFallback } from "@/components/shared/error-fallback";
 
-// 静态生成元数据
 export const metadata: Metadata = {
-  title: "管理后台 - IFA Hub",
-  description: "管理网站链接和内容",
+  title: "管理后台",
 };
 
 // 服务端获取静态数据
@@ -36,7 +34,7 @@ async function getStaticData() {
 
 // 使用 React.lazy 进行代码分割优化
 const OptimizedAdminPage = lazy(() =>
-  import("@/components/admin/optimized-admin-page").then((module) => ({
+  import("@/components/features/admin/optimized-admin-page").then((module) => ({
     default: module.OptimizedAdminPage,
   }))
 );

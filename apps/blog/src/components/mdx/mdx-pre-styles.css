@@ -4,9 +4,19 @@
 
 /* 调整行号样式 */
 .line-numbers .line-numbers-rows {
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid;
   padding-right: 10px;
   opacity: 0.7;
+}
+
+/* 浅色模式下的行号竖线颜色 */
+:root:not(.dark) .line-numbers .line-numbers-rows {
+  border-right-color: #d1d5db; /* gray-300 */
+}
+
+/* 深色模式下的行号竖线颜色 */
+.dark .line-numbers .line-numbers-rows {
+  border-right-color: rgba(255, 255, 255, 0.15);
 }
 
 /* 调整代码块边距和样式 */

@@ -1,13 +1,14 @@
 "use client";
 
-import { BlogListContent } from "@/components/posts/blog-list-content";
-import type { BlogPost } from "@/components/posts/blog-types";
-import { useBlogPage } from "@/components/posts/use-blog-page";
-import { BlogCategoryCard } from "@/components/sidebar/blog-category-card";
-import { LatestPostsCard } from "@/components/sidebar/latest-posts-card";
-import { RelatedPostsCard } from "@/components/sidebar/related-posts-card";
-import { SidebarWrapper } from "@/components/sidebar/sidebar-wrapper";
-import { TagCloudCard } from "@/components/sidebar/tag-cloud-card";
+import { BlogListContent } from "@/components/features/posts/blog-list-content";
+import type { BlogPost } from "@/components/features/posts/blog-types";
+import { useBlogPage } from "@/components/features/posts/use-blog-page";
+
+import { BlogCategoryCard } from "@/components/features/sidebar/blog-category-card";
+import { LatestPostsCard } from "@/components/features/sidebar/latest-posts-card";
+import { RelatedPostsCard } from "@/components/features/sidebar/related-posts-card";
+import { SidebarWrapper } from "@/components/features/sidebar/sidebar-wrapper";
+import { TagCloudCard } from "@/components/features/sidebar/tag-cloud-card";
 
 interface BlogPageContainerProps {
   initialPosts?: BlogPost[];

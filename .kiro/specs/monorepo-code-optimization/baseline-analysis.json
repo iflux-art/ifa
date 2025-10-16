@@ -1,0 +1,2052 @@
+{
+  "timestamp": "2025-10-16T10:56:30.161Z",
+  "fileStructure": {
+    "web": {
+      "totalFiles": 66,
+      "totalDirectories": 0,
+      "totalSize": 295643,
+      "fileTypes": {
+        "json": {
+          "count": 6,
+          "size": 16614,
+          "files": [
+            "biome.json",
+            "components.json",
+            "package.json",
+            "tsconfig.json",
+            "vercel.json",
+            "src/components/features/home/profile.json"
+          ]
+        },
+        "LICENSE": {
+          "count": 1,
+          "size": 1084,
+          "files": [
+            "LICENSE"
+          ]
+        },
+        "ts": {
+          "count": 29,
+          "size": 31185,
+          "files": [
+            "next-env.d.ts",
+            "playwright.config.ts",
+            "vitest.config.ts",
+            "e2e/website.spec.ts",
+            "src/middleware.ts",
+            "src/components/index.ts",
+            "src/config/env.ts",
+            "src/config/index.ts",
+            "src/config/metadata.ts",
+            "src/hooks/index.ts",
+            "src/hooks/use-external-link.ts",
+            "src/hooks/use-mounted.ts",
+            "src/hooks/use-scroll.ts",
+            "src/test/setup.ts",
+            "src/lib/cache-config.ts",
+            "src/lib/index.ts",
+            "src/components/features/index.ts",
+            "src/types/config.ts",
+            "src/types/index.ts",
+            "src/components/ui/index.ts",
+            "src/lib/utils/core.ts",
+            "src/lib/utils/index.ts",
+            "src/components/layout/index.ts",
+            "src/components/features/buttons/index.ts",
+            "src/components/features/home/index.ts",
+            "src/components/layout/navbar/index.ts",
+            "src/components/layout/navbar/navbar-config.ts",
+            "src/components/layout/navbar/navbar-types.ts",
+            "src/components/layout/theme/index.ts"
+          ]
+        },
+        "mjs": {
+          "count": 3,
+          "size": 1380,
+          "files": [
+            "next.config.mjs",
+            "postcss.config.mjs",
+            "tailwind.config.mjs"
+          ]
+        },
+        "md": {
+          "count": 1,
+          "size": 2032,
+          "files": [
+            "README.md"
+          ]
+        },
+        "js": {
+          "count": 2,
+          "size": 7068,
+          "files": [
+            "setup-standalone.js",
+            "scripts/load-env.js"
+          ]
+        },
+        "tsbuildinfo": {
+          "count": 1,
+          "size": 181333,
+          "files": [
+            "tsconfig.tsbuildinfo"
+          ]
+        },
+        "ico": {
+          "count": 1,
+          "size": 1968,
+          "files": [
+            "src/app/favicon.ico"
+          ]
+        },
+        "css": {
+          "count": 1,
+          "size": 5107,
+          "files": [
+            "src/app/globals.css"
+          ]
+        },
+        "tsx": {
+          "count": 21,
+          "size": 47872,
+          "files": [
+            "src/app/layout.tsx",
+            "src/app/loading.tsx",
+            "src/app/not-found.tsx",
+            "src/app/page.tsx",
+            "src/lib/lazy-loading.tsx",
+            "src/components/ui/back-button.tsx",
+            "src/components/ui/button.tsx",
+            "src/components/ui/card.tsx",
+            "src/components/layout/footer.tsx",
+            "src/components/features/buttons/github-button.tsx",
+            "src/components/features/buttons/travel-button.tsx",
+            "src/components/features/home/featured-links.tsx",
+            "src/components/features/home/hero-section.tsx",
+            "src/components/features/home/lazy-components.tsx",
+            "src/components/features/home/link-card.tsx",
+            "src/components/layout/navbar/logo.tsx",
+            "src/components/layout/navbar/main-navbar.tsx",
+            "src/components/layout/navbar/mobile-menu.tsx",
+            "src/components/layout/navbar/nav-menu.tsx",
+            "src/components/layout/theme/theme-provider.tsx",
+            "src/components/layout/theme/theme-toggle.tsx"
+          ]
+        }
+      },
+      "directories": [],
+      "srcStructure": {
+        "_files": [
+          "middleware.ts"
+        ],
+        "app": {
+          "_files": [
+            "favicon.ico",
+            "globals.css",
+            "layout.tsx",
+            "loading.tsx",
+            "not-found.tsx",
+            "page.tsx"
+          ]
+        },
+        "lib": {
+          "_files": [
+            "cache-config.ts",
+            "index.ts",
+            "lazy-loading.tsx"
+          ],
+          "utils": {
+            "_files": [
+              "core.ts",
+              "index.ts"
+            ]
+          }
+        },
+        "hooks": {
+          "_files": [
+            "index.ts",
+            "use-external-link.ts",
+            "use-mounted.ts",
+            "use-scroll.ts"
+          ]
+        },
+        "config": {
+          "_files": [
+            "env.ts",
+            "index.ts",
+            "metadata.ts"
+          ]
+        },
+        "components": {
+          "_files": [
+            "index.ts"
+          ],
+          "features": {
+            "_files": [
+              "index.ts"
+            ],
+            "buttons": {
+              "_files": [
+                "github-button.tsx",
+                "index.ts",
+                "travel-button.tsx"
+              ]
+            },
+            "home": {
+              "_files": [
+                "featured-links.tsx",
+                "hero-section.tsx",
+                "index.ts",
+                "lazy-components.tsx",
+                "link-card.tsx",
+                "profile.json"
+              ]
+            }
+          },
+          "ui": {
+            "_files": [
+              "back-button.tsx",
+              "button.tsx",
+              "card.tsx",
+              "index.ts"
+            ]
+          },
+          "layout": {
+            "_files": [
+              "footer.tsx",
+              "index.ts"
+            ],
+            "navbar": {
+              "_files": [
+                "index.ts",
+                "logo.tsx",
+                "main-navbar.tsx",
+                "mobile-menu.tsx",
+                "nav-menu.tsx",
+                "navbar-config.ts",
+                "navbar-types.ts"
+              ]
+            },
+            "theme": {
+              "_files": [
+                "index.ts",
+                "theme-provider.tsx",
+                "theme-toggle.tsx"
+              ]
+            }
+          }
+        },
+        "test": {
+          "_files": [
+            "setup.ts"
+          ]
+        },
+        "types": {
+          "_files": [
+            "config.ts",
+            "index.ts"
+          ]
+        }
+      }
+    },
+    "blog": {
+      "totalFiles": 172,
+      "totalDirectories": 0,
+      "totalSize": 751669,
+      "fileTypes": {
+        "json": {
+          "count": 6,
+          "size": 21641,
+          "files": [
+            "biome.json",
+            "components.json",
+            "package.json",
+            "tsconfig.json",
+            "vercel.json",
+            "src/components/features/friends/friends.json"
+          ]
+        },
+        "LICENSE": {
+          "count": 1,
+          "size": 1084,
+          "files": [
+            "LICENSE"
+          ]
+        },
+        "ts": {
+          "count": 72,
+          "size": 164475,
+          "files": [
+            "next-env.d.ts",
+            "playwright.config.ts",
+            "vitest.config.ts",
+            "e2e/blog.spec.ts",
+            "src/middleware.ts",
+            "src/components/index.ts",
+            "src/config/env.ts",
+            "src/config/features.ts",
+            "src/config/index.ts",
+            "src/config/metadata.ts",
+            "src/hooks/index.ts",
+            "src/hooks/use-advanced-cache.ts",
+            "src/hooks/use-content-data.ts",
+            "src/hooks/use-heading-observer.ts",
+            "src/lib/cache-config.ts",
+            "src/lib/index.ts",
+            "src/components/layout/index.ts",
+            "src/components/mdx/index.ts",
+            "src/components/mdx/mdx-components.ts",
+            "src/components/navbar/index.ts",
+            "src/components/navbar/nav-config.ts",
+            "src/components/navbar/types.ts",
+            "src/components/navbar/use-active-section.ts",
+            "src/components/posts/blog-content.ts",
+            "src/components/posts/blog-types.ts",
+            "src/components/posts/client-utils.ts",
+            "src/components/posts/hooks.ts",
+            "src/components/posts/index.ts",
+            "src/components/posts/lib.ts",
+            "src/components/posts/use-blog-page.ts",
+            "src/components/theme/index.ts",
+            "src/components/ui/index.ts",
+            "src/lib/api/api-client.ts",
+            "src/lib/api/api-middleware.ts",
+            "src/lib/api/api-paths.ts",
+            "src/lib/api/api-utils.ts",
+            "src/lib/api/cache-utils.ts",
+            "src/lib/api/index.ts",
+            "src/lib/utils/async.ts",
+            "src/lib/utils/core.ts",
+            "src/lib/utils/error.ts",
+            "src/lib/utils/helpers.ts",
+            "src/lib/utils/index.ts",
+            "src/lib/utils/store.ts",
+            "src/lib/utils/validation.ts",
+            "src/app/api/search/route.ts",
+            "src/stores/app-store.standard.ts",
+            "src/stores/index.ts",
+            "src/types/async-types.ts",
+            "src/types/config.ts",
+            "src/types/css-modules.d.ts",
+            "src/types/index.ts",
+            "src/test/setup.ts",
+            "src/components/features/comment/index.ts",
+            "src/components/features/buttons/index.ts",
+            "src/components/features/friends/friends-store.standard.ts",
+            "src/components/features/friends/index.ts",
+            "src/components/features/friends/types.ts",
+            "src/app/api/blog/posts/route.ts",
+            "src/components/features/search/index.ts",
+            "src/components/features/search/search-engine.ts",
+            "src/components/features/search/search-store.ts",
+            "src/components/features/search/search-types.ts",
+            "src/components/features/search/server-search.ts",
+            "src/components/features/search/use-search-state.ts",
+            "src/app/api/links/ws/route.ts",
+            "src/components/features/sidebar/index.ts",
+            "src/app/api/search/blog/route.ts",
+            "src/app/api/blog/timeline/route.ts",
+            "src/app/api/blog/tags/route.ts",
+            "src/app/api/blog/tags/count/route.ts",
+            "src/app/api/blog/tags/[tag]/route.ts"
+          ]
+        },
+        "mjs": {
+          "count": 3,
+          "size": 9444,
+          "files": [
+            "next.config.mjs",
+            "postcss.config.mjs",
+            "tailwind.config.mjs"
+          ]
+        },
+        "md": {
+          "count": 2,
+          "size": 2137,
+          "files": [
+            "README.md",
+            "public/README.md"
+          ]
+        },
+        "js": {
+          "count": 2,
+          "size": 5669,
+          "files": [
+            "setup-standalone.js",
+            "scripts/load-env.js"
+          ]
+        },
+        "tsbuildinfo": {
+          "count": 1,
+          "size": 231768,
+          "files": [
+            "tsconfig.tsbuildinfo"
+          ]
+        },
+        "svg": {
+          "count": 2,
+          "size": 837,
+          "files": [
+            "public/blog-cover-example.svg",
+            "public/images/cover-example.svg"
+          ]
+        },
+        "ico": {
+          "count": 1,
+          "size": 1968,
+          "files": [
+            "src/app/favicon.ico"
+          ]
+        },
+        "css": {
+          "count": 2,
+          "size": 9655,
+          "files": [
+            "src/app/globals.css",
+            "src/components/mdx/mdx-pre-styles.css"
+          ]
+        },
+        "tsx": {
+          "count": 54,
+          "size": 163504,
+          "files": [
+            "src/app/layout.tsx",
+            "src/app/loading.tsx",
+            "src/app/not-found.tsx",
+            "src/app/page.tsx",
+            "src/components/footer.tsx",
+            "src/lib/lazy-loading.tsx",
+            "src/app/friends/page.tsx",
+            "src/components/layout/blog-page.tsx",
+            "src/components/layout/blog-post-page.tsx",
+            "src/components/layout/friends-page.tsx",
+            "src/components/mdx/client-mdx-renderer.tsx",
+            "src/components/mdx/mdx-blockquote.tsx",
+            "src/components/mdx/mdx-code.tsx",
+            "src/components/mdx/mdx-img.tsx",
+            "src/components/mdx/mdx-link.tsx",
+            "src/components/mdx/mdx-pre.tsx",
+            "src/components/navbar/logo.tsx",
+            "src/components/navbar/main-navbar.tsx",
+            "src/components/navbar/mobile-menu.tsx",
+            "src/components/navbar/mobile-sidebar-content.tsx",
+            "src/components/navbar/mobile-sidebar-context.tsx",
+            "src/components/navbar/nav-item.tsx",
+            "src/components/navbar/nav-link.tsx",
+            "src/components/navbar/nav-menu.tsx",
+            "src/components/posts/blog-list-content.tsx",
+            "src/components/posts/breadcrumb.tsx",
+            "src/components/posts/post-meta.tsx",
+            "src/components/theme/theme-provider.tsx",
+            "src/components/theme/theme-toggle.tsx",
+            "src/components/ui/alert.tsx",
+            "src/components/ui/back-button.tsx",
+            "src/components/ui/badge.tsx",
+            "src/components/ui/button.tsx",
+            "src/components/ui/card.tsx",
+            "src/components/ui/dialog.tsx",
+            "src/components/ui/input.tsx",
+            "src/components/ui/sheet.tsx",
+            "src/components/ui/textarea.tsx",
+            "src/app/posts/[...slug]/page.tsx",
+            "src/components/features/comment/greeting.tsx",
+            "src/components/features/comment/twikoo-comment.tsx",
+            "src/components/features/buttons/github-button.tsx",
+            "src/components/features/buttons/search-button.tsx",
+            "src/components/features/buttons/travel-button.tsx",
+            "src/components/features/friends/friend-link-application.tsx",
+            "src/components/features/friends/link-card.tsx",
+            "src/components/features/search/search-bar.tsx",
+            "src/components/features/search/search-dialog.tsx",
+            "src/components/features/sidebar/blog-category-card.tsx",
+            "src/components/features/sidebar/latest-posts-card.tsx",
+            "src/components/features/sidebar/related-posts-card.tsx",
+            "src/components/features/sidebar/sidebar-wrapper.tsx",
+            "src/components/features/sidebar/table-of-contents.tsx",
+            "src/components/features/sidebar/tag-cloud-card.tsx"
+          ]
+        },
+        "mdx": {
+          "count": 26,
+          "size": 139487,
+          "files": [
+            "src/content/ad/copywriting-axioms.mdx",
+            "src/content/ad/creative-eye-catching.mdx",
+            "src/content/ad/creativity-basics.mdx",
+            "src/content/ad/headline-writing-guide.mdx",
+            "src/content/dev/publish-packages-to-npm.mdx",
+            "src/content/film/film-structure-analysis.mdx",
+            "src/content/film/major-film-festivals.mdx",
+            "src/content/film/shutter-island-film-analysis.mdx",
+            "src/content/playwriting/character-relationships.mdx",
+            "src/content/playwriting/director-mindset.mdx",
+            "src/content/playwriting/dramatic-actions.mdx",
+            "src/content/playwriting/dramatic-conflicts.mdx",
+            "src/content/playwriting/dramatic-events.mdx",
+            "src/content/playwriting/screenplay-elements.mdx",
+            "src/content/playwriting/story-endings.mdx",
+            "src/content/playwriting/suspense-techniques.mdx",
+            "src/content/playwriting/three-act-structure.mdx",
+            "src/content/software/cloudflare-zero-trust.mdx",
+            "src/content/software/configure-ssh-keys.mdx",
+            "src/content/software/geforce-mode-switch.mdx",
+            "src/content/software/invite.mdx",
+            "src/content/software/obsidian-plugins.mdx",
+            "src/content/software/typography-guide.mdx",
+            "src/content/software/v2rayn.mdx",
+            "src/content/software/windows-dpi-scaling.mdx",
+            "src/content/software/windows-scroll-reverse.mdx"
+          ]
+        }
+      },
+      "directories": [],
+      "srcStructure": {
+        "_files": [
+          "middleware.ts"
+        ],
+        "components": {
+          "_files": [
+            "footer.tsx",
+            "index.ts"
+          ],
+          "layout": {
+            "_files": [
+              "blog-page.tsx",
+              "blog-post-page.tsx",
+              "friends-page.tsx",
+              "index.ts"
+            ]
+          },
+          "navbar": {
+            "_files": [
+              "index.ts",
+              "logo.tsx",
+              "main-navbar.tsx",
+              "mobile-menu.tsx",
+              "mobile-sidebar-content.tsx",
+              "mobile-sidebar-context.tsx",
+              "nav-config.ts",
+              "nav-item.tsx",
+              "nav-link.tsx",
+              "nav-menu.tsx",
+              "types.ts",
+              "use-active-section.ts"
+            ]
+          },
+          "posts": {
+            "_files": [
+              "blog-content.ts",
+              "blog-list-content.tsx",
+              "blog-types.ts",
+              "breadcrumb.tsx",
+              "client-utils.ts",
+              "hooks.ts",
+              "index.ts",
+              "lib.ts",
+              "post-meta.tsx",
+              "use-blog-page.ts"
+            ]
+          },
+          "mdx": {
+            "_files": [
+              "client-mdx-renderer.tsx",
+              "index.ts",
+              "mdx-blockquote.tsx",
+              "mdx-code.tsx",
+              "mdx-components.ts",
+              "mdx-img.tsx",
+              "mdx-link.tsx",
+              "mdx-pre-styles.css",
+              "mdx-pre.tsx"
+            ]
+          },
+          "theme": {
+            "_files": [
+              "index.ts",
+              "theme-provider.tsx",
+              "theme-toggle.tsx"
+            ]
+          },
+          "ui": {
+            "_files": [
+              "alert.tsx",
+              "back-button.tsx",
+              "badge.tsx",
+              "button.tsx",
+              "card.tsx",
+              "dialog.tsx",
+              "index.ts",
+              "input.tsx",
+              "sheet.tsx",
+              "textarea.tsx"
+            ]
+          },
+          "features": {
+            "buttons": {
+              "_files": [
+                "github-button.tsx",
+                "index.ts",
+                "search-button.tsx",
+                "travel-button.tsx"
+              ]
+            },
+            "comment": {
+              "_files": [
+                "greeting.tsx",
+                "index.ts",
+                "twikoo-comment.tsx"
+              ]
+            },
+            "friends": {
+              "_files": [
+                "friend-link-application.tsx",
+                "friends-store.standard.ts",
+                "friends.json",
+                "index.ts",
+                "link-card.tsx",
+                "types.ts"
+              ]
+            },
+            "search": {
+              "_files": [
+                "index.ts",
+                "search-bar.tsx",
+                "search-dialog.tsx",
+                "search-engine.ts",
+                "search-store.ts",
+                "search-types.ts",
+                "server-search.ts",
+                "use-search-state.ts"
+              ]
+            },
+            "sidebar": {
+              "_files": [
+                "blog-category-card.tsx",
+                "index.ts",
+                "latest-posts-card.tsx",
+                "related-posts-card.tsx",
+                "sidebar-wrapper.tsx",
+                "table-of-contents.tsx",
+                "tag-cloud-card.tsx"
+              ]
+            }
+          }
+        },
+        "app": {
+          "_files": [
+            "favicon.ico",
+            "globals.css",
+            "layout.tsx",
+            "loading.tsx",
+            "not-found.tsx",
+            "page.tsx"
+          ],
+          "friends": {
+            "_files": [
+              "page.tsx"
+            ]
+          },
+          "posts": {
+            "[...slug]": {
+              "_files": [
+                "page.tsx"
+              ]
+            }
+          },
+          "api": {
+            "blog": {
+              "posts": {
+                "_files": [
+                  "route.ts"
+                ]
+              },
+              "tags": {
+                "_files": [
+                  "route.ts"
+                ],
+                "count": {
+                  "_files": [
+                    "route.ts"
+                  ]
+                },
+                "[tag]": {
+                  "_files": [
+                    "route.ts"
+                  ]
+                }
+              },
+              "timeline": {
+                "_files": [
+                  "route.ts"
+                ]
+              }
+            },
+            "search": {
+              "_files": [
+                "route.ts"
+              ],
+              "blog": {
+                "_files": [
+                  "route.ts"
+                ]
+              }
+            },
+            "links": {
+              "ws": {
+                "_files": [
+                  "route.ts"
+                ]
+              }
+            }
+          }
+        },
+        "config": {
+          "_files": [
+            "env.ts",
+            "features.ts",
+            "index.ts",
+            "metadata.ts"
+          ]
+        },
+        "stores": {
+          "_files": [
+            "app-store.standard.ts",
+            "index.ts"
+          ]
+        },
+        "lib": {
+          "_files": [
+            "cache-config.ts",
+            "index.ts",
+            "lazy-loading.tsx"
+          ],
+          "api": {
+            "_files": [
+              "api-client.ts",
+              "api-middleware.ts",
+              "api-paths.ts",
+              "api-utils.ts",
+              "cache-utils.ts",
+              "index.ts"
+            ]
+          },
+          "utils": {
+            "_files": [
+              "async.ts",
+              "core.ts",
+              "error.ts",
+              "helpers.ts",
+              "index.ts",
+              "store.ts",
+              "validation.ts"
+            ]
+          }
+        },
+        "hooks": {
+          "_files": [
+            "index.ts",
+            "use-advanced-cache.ts",
+            "use-content-data.ts",
+            "use-heading-observer.ts"
+          ]
+        },
+        "test": {
+          "_files": [
+            "setup.ts"
+          ]
+        },
+        "types": {
+          "_files": [
+            "async-types.ts",
+            "config.ts",
+            "css-modules.d.ts",
+            "index.ts"
+          ]
+        },
+        "content": {
+          "ad": {
+            "_files": [
+              "copywriting-axioms.mdx",
+              "creative-eye-catching.mdx",
+              "creativity-basics.mdx",
+              "headline-writing-guide.mdx"
+            ]
+          },
+          "dev": {
+            "_files": [
+              "publish-packages-to-npm.mdx"
+            ]
+          },
+          "playwriting": {
+            "_files": [
+              "character-relationships.mdx",
+              "director-mindset.mdx",
+              "dramatic-actions.mdx",
+              "dramatic-conflicts.mdx",
+              "dramatic-events.mdx",
+              "screenplay-elements.mdx",
+              "story-endings.mdx",
+              "suspense-techniques.mdx",
+              "three-act-structure.mdx"
+            ]
+          },
+          "film": {
+            "_files": [
+              "film-structure-analysis.mdx",
+              "major-film-festivals.mdx",
+              "shutter-island-film-analysis.mdx"
+            ]
+          },
+          "software": {
+            "_files": [
+              "cloudflare-zero-trust.mdx",
+              "configure-ssh-keys.mdx",
+              "geforce-mode-switch.mdx",
+              "invite.mdx",
+              "obsidian-plugins.mdx",
+              "typography-guide.mdx",
+              "v2rayn.mdx",
+              "windows-dpi-scaling.mdx",
+              "windows-scroll-reverse.mdx"
+            ]
+          }
+        }
+      }
+    },
+    "hub": {
+      "totalFiles": 179,
+      "totalDirectories": 0,
+      "totalSize": 1206671,
+      "fileTypes": {
+        "json": {
+          "count": 6,
+          "size": 511286,
+          "files": [
+            "biome.json",
+            "components.json",
+            "package.json",
+            "tsconfig.json",
+            "vercel.json",
+            "src/components/links/links-data.json"
+          ]
+        },
+        "md": {
+          "count": 3,
+          "size": 5591,
+          "files": [
+            "CLEANUP_REPORT.md",
+            "README.md",
+            "public/README.md"
+          ]
+        },
+        "LICENSE": {
+          "count": 1,
+          "size": 1084,
+          "files": [
+            "LICENSE"
+          ]
+        },
+        "ts": {
+          "count": 99,
+          "size": 203234,
+          "files": [
+            "next-env.d.ts",
+            "playwright.config.ts",
+            "vitest.config.ts",
+            "e2e/hub.spec.ts",
+            "src/middleware.ts",
+            "src/components/index.ts",
+            "src/hooks/index.ts",
+            "src/hooks/use-cache.ts",
+            "src/hooks/use-content-data.ts",
+            "src/hooks/use-error-tracking.ts",
+            "src/lib/cache-config.ts",
+            "src/lib/cache-utils.ts",
+            "src/lib/chunk-error-handler.ts",
+            "src/lib/component-preloader.ts",
+            "src/lib/index.ts",
+            "src/config/env.ts",
+            "src/config/features.ts",
+            "src/config/index.ts",
+            "src/config/metadata.ts",
+            "src/stores/app-store.standard.ts",
+            "src/stores/index.ts",
+            "src/stores/link-filter-store.standard.ts",
+            "src/types/config.ts",
+            "src/types/css-modules.d.ts",
+            "src/types/index.ts",
+            "src/components/admin/admin-store.ts",
+            "src/components/admin/get-static-admin-data.ts",
+            "src/components/admin/index.ts",
+            "src/components/admin/types.ts",
+            "src/components/admin/use-admin-data.ts",
+            "src/components/admin/use-event-handlers.ts",
+            "src/components/admin/use-filtered-items.ts",
+            "src/components/auth/auth-types.ts",
+            "src/components/auth/index.ts",
+            "src/components/home/index.ts",
+            "src/components/home/types.ts",
+            "src/components/home/use-links-data.ts",
+            "src/components/links/index.ts",
+            "src/components/links/links-lib.ts",
+            "src/components/links/links-types.ts",
+            "src/components/links/use-filter-state.ts",
+            "src/components/links/use-tag-anchors.ts",
+            "src/components/links/validation.ts",
+            "src/components/link-categories/categories-server.ts",
+            "src/components/link-categories/categories-types.ts",
+            "src/components/link-categories/categories.ts",
+            "src/components/link-categories/index.ts",
+            "src/components/link-categories/use-categories.ts",
+            "src/components/links-admin/index.ts",
+            "src/components/navbar/index.ts",
+            "src/components/navbar/nav-config.ts",
+            "src/components/navbar/use-active-section.ts",
+            "src/components/shared/index.ts",
+            "src/components/shared/types.ts",
+            "src/components/shared/use-async-error.ts",
+            "src/components/shared/use-debounced-value.ts",
+            "src/lib/api/api-client.ts",
+            "src/lib/api/api-middleware.ts",
+            "src/lib/api/api-paths.ts",
+            "src/lib/api/api-utils.ts",
+            "src/lib/api/cache-utils.ts",
+            "src/lib/api/index.ts",
+            "src/lib/utils/core.ts",
+            "src/lib/utils/error.ts",
+            "src/lib/utils/helpers.ts",
+            "src/lib/utils/index.ts",
+            "src/lib/utils/validation.ts",
+            "src/app/api/errors/route.ts",
+            "src/app/api/links/route.ts",
+            "src/app/api/parse-website/route.ts",
+            "src/components/website-parser/index.ts",
+            "src/components/website-parser/parser.ts",
+            "src/components/website-parser/types.ts",
+            "src/components/website-parser/use-website-parser.ts",
+            "src/components/website-parser/utils.ts",
+            "src/components/website-parser/validation.ts",
+            "src/components/ui/index.ts",
+            "src/app/api/search/route.ts",
+            "src/components/theme/index.ts",
+            "src/components/features/buttons/index.ts",
+            "src/components/features/search/hub-search-types.ts",
+            "src/components/features/search/index.ts",
+            "src/components/features/search/search-engine.ts",
+            "src/components/features/search/search-store.ts",
+            "src/components/features/search/server-search.ts",
+            "src/components/features/search/use-search-state.ts",
+            "src/components/features/search/use-search.ts",
+            "src/components/links-admin/components/admin-store.ts",
+            "src/components/links-admin/components/index.ts",
+            "src/components/links-admin/components/links-data-store.ts",
+            "src/components/links-admin/components/use-links-data-state.ts",
+            "src/components/links-admin/hooks/index.ts",
+            "src/components/links-admin/hooks/use-debounced-value.ts",
+            "src/components/links-admin/dialogs/index.ts",
+            "src/components/links-admin/services/index.ts",
+            "src/components/links-admin/services/link-data-service.ts",
+            "src/components/links-admin/services/link-file-service.ts",
+            "src/components/links-admin/services/link-service.ts",
+            "src/app/api/links/categories/route.ts"
+          ]
+        },
+        "mjs": {
+          "count": 4,
+          "size": 4414,
+          "files": [
+            "next.config.mjs",
+            "postcss.config.mjs",
+            "tailwind.config.mjs",
+            "scripts/translate-descriptions.mjs"
+          ]
+        },
+        "js": {
+          "count": 2,
+          "size": 6872,
+          "files": [
+            "setup-standalone.js",
+            "scripts/load-env.js"
+          ]
+        },
+        "tsbuildinfo": {
+          "count": 1,
+          "size": 288529,
+          "files": [
+            "tsconfig.tsbuildinfo"
+          ]
+        },
+        "ico": {
+          "count": 1,
+          "size": 1968,
+          "files": [
+            "src/app/favicon.ico"
+          ]
+        },
+        "css": {
+          "count": 1,
+          "size": 5156,
+          "files": [
+            "src/app/globals.css"
+          ]
+        },
+        "tsx": {
+          "count": 61,
+          "size": 178537,
+          "files": [
+            "src/app/layout.tsx",
+            "src/app/loading.tsx",
+            "src/app/not-found.tsx",
+            "src/app/page.tsx",
+            "src/components/error-boundary.tsx",
+            "src/components/footer.tsx",
+            "src/components/global-error-handler.tsx",
+            "src/lib/route-lazy-loading.tsx",
+            "src/app/admin/page.tsx",
+            "src/components/admin/admin-dialogs.tsx",
+            "src/components/admin/data-table.tsx",
+            "src/components/admin/optimized-admin-page.tsx",
+            "src/components/admin/page-header.tsx",
+            "src/components/admin/search-filter.tsx",
+            "src/components/auth/auth-buttons.tsx",
+            "src/components/home/links-content.tsx",
+            "src/components/home/optimized-home-page.tsx",
+            "src/components/home/sidebar.tsx",
+            "src/components/links/link-card.tsx",
+            "src/components/navbar/logo.tsx",
+            "src/components/navbar/main-navbar.tsx",
+            "src/components/navbar/mobile-menu.tsx",
+            "src/components/navbar/mobile-sidebar-provider.tsx",
+            "src/components/navbar/nav-card-menu.tsx",
+            "src/components/navbar/nav-item.tsx",
+            "src/components/navbar/nav-link.tsx",
+            "src/components/navbar/nav-menu.tsx",
+            "src/components/shared/error-boundary.tsx",
+            "src/components/shared/error-fallback.tsx",
+            "src/components/ui/alert-dialog.tsx",
+            "src/components/ui/alert.tsx",
+            "src/components/ui/avatar.tsx",
+            "src/components/ui/back-button.tsx",
+            "src/components/ui/badge.tsx",
+            "src/components/ui/button.tsx",
+            "src/components/ui/card.tsx",
+            "src/components/ui/dialog.tsx",
+            "src/components/ui/dropdown-menu.tsx",
+            "src/components/ui/input.tsx",
+            "src/components/ui/label.tsx",
+            "src/components/ui/select.tsx",
+            "src/components/ui/separator.tsx",
+            "src/components/ui/switch.tsx",
+            "src/components/ui/textarea.tsx",
+            "src/components/theme/theme-provider.tsx",
+            "src/components/theme/theme-toggle.tsx",
+            "src/app/auth/callback/page.tsx",
+            "src/components/features/buttons/github-button.tsx",
+            "src/components/features/buttons/travel-button.tsx",
+            "src/components/features/search/search-bar.tsx",
+            "src/components/features/search/search-button.tsx",
+            "src/components/features/search/search-dialog.tsx",
+            "src/components/features/search/search-results.tsx",
+            "src/app/sign-up/[[...sign-up]]/page.tsx",
+            "src/app/sign-in/[[...sign-in]]/page.tsx",
+            "src/components/links-admin/components/admin-actions.tsx",
+            "src/components/links-admin/components/generic-data-table.tsx",
+            "src/components/links-admin/components/links-form.tsx",
+            "src/components/links-admin/dialogs/add-dialog.tsx",
+            "src/components/links-admin/dialogs/delete-dialog.tsx",
+            "src/components/links-admin/dialogs/edit-dialog.tsx"
+          ]
+        }
+      },
+      "directories": [],
+      "srcStructure": {
+        "_files": [
+          "middleware.ts"
+        ],
+        "components": {
+          "_files": [
+            "error-boundary.tsx",
+            "footer.tsx",
+            "global-error-handler.tsx",
+            "index.ts"
+          ],
+          "admin": {
+            "_files": [
+              "admin-dialogs.tsx",
+              "admin-store.ts",
+              "data-table.tsx",
+              "get-static-admin-data.ts",
+              "index.ts",
+              "optimized-admin-page.tsx",
+              "page-header.tsx",
+              "search-filter.tsx",
+              "types.ts",
+              "use-admin-data.ts",
+              "use-event-handlers.ts",
+              "use-filtered-items.ts"
+            ]
+          },
+          "auth": {
+            "_files": [
+              "auth-buttons.tsx",
+              "auth-types.ts",
+              "index.ts"
+            ]
+          },
+          "home": {
+            "_files": [
+              "index.ts",
+              "links-content.tsx",
+              "optimized-home-page.tsx",
+              "sidebar.tsx",
+              "types.ts",
+              "use-links-data.ts"
+            ]
+          },
+          "link-categories": {
+            "_files": [
+              "categories-server.ts",
+              "categories-types.ts",
+              "categories.ts",
+              "index.ts",
+              "use-categories.ts"
+            ]
+          },
+          "links-admin": {
+            "_files": [
+              "index.ts"
+            ],
+            "dialogs": {
+              "_files": [
+                "add-dialog.tsx",
+                "delete-dialog.tsx",
+                "edit-dialog.tsx",
+                "index.ts"
+              ]
+            },
+            "components": {
+              "_files": [
+                "admin-actions.tsx",
+                "admin-store.ts",
+                "generic-data-table.tsx",
+                "index.ts",
+                "links-data-store.ts",
+                "links-form.tsx",
+                "use-links-data-state.ts"
+              ]
+            },
+            "hooks": {
+              "_files": [
+                "index.ts",
+                "use-debounced-value.ts"
+              ]
+            },
+            "services": {
+              "_files": [
+                "index.ts",
+                "link-data-service.ts",
+                "link-file-service.ts",
+                "link-service.ts"
+              ]
+            }
+          },
+          "links": {
+            "_files": [
+              "index.ts",
+              "link-card.tsx",
+              "links-data.json",
+              "links-lib.ts",
+              "links-types.ts",
+              "use-filter-state.ts",
+              "use-tag-anchors.ts",
+              "validation.ts"
+            ]
+          },
+          "navbar": {
+            "_files": [
+              "index.ts",
+              "logo.tsx",
+              "main-navbar.tsx",
+              "mobile-menu.tsx",
+              "mobile-sidebar-provider.tsx",
+              "nav-card-menu.tsx",
+              "nav-config.ts",
+              "nav-item.tsx",
+              "nav-link.tsx",
+              "nav-menu.tsx",
+              "use-active-section.ts"
+            ]
+          },
+          "theme": {
+            "_files": [
+              "index.ts",
+              "theme-provider.tsx",
+              "theme-toggle.tsx"
+            ]
+          },
+          "shared": {
+            "_files": [
+              "error-boundary.tsx",
+              "error-fallback.tsx",
+              "index.ts",
+              "types.ts",
+              "use-async-error.ts",
+              "use-debounced-value.ts"
+            ]
+          },
+          "website-parser": {
+            "_files": [
+              "index.ts",
+              "parser.ts",
+              "types.ts",
+              "use-website-parser.ts",
+              "utils.ts",
+              "validation.ts"
+            ]
+          },
+          "ui": {
+            "_files": [
+              "alert-dialog.tsx",
+              "alert.tsx",
+              "avatar.tsx",
+              "back-button.tsx",
+              "badge.tsx",
+              "button.tsx",
+              "card.tsx",
+              "dialog.tsx",
+              "dropdown-menu.tsx",
+              "index.ts",
+              "input.tsx",
+              "label.tsx",
+              "select.tsx",
+              "separator.tsx",
+              "switch.tsx",
+              "textarea.tsx"
+            ]
+          },
+          "features": {
+            "buttons": {
+              "_files": [
+                "github-button.tsx",
+                "index.ts",
+                "travel-button.tsx"
+              ]
+            },
+            "search": {
+              "_files": [
+                "hub-search-types.ts",
+                "index.ts",
+                "search-bar.tsx",
+                "search-button.tsx",
+                "search-dialog.tsx",
+                "search-engine.ts",
+                "search-results.tsx",
+                "search-store.ts",
+                "server-search.ts",
+                "use-search-state.ts",
+                "use-search.ts"
+              ]
+            }
+          }
+        },
+        "app": {
+          "_files": [
+            "favicon.ico",
+            "globals.css",
+            "layout.tsx",
+            "loading.tsx",
+            "not-found.tsx",
+            "page.tsx"
+          ],
+          "admin": {
+            "_files": [
+              "page.tsx"
+            ]
+          },
+          "api": {
+            "errors": {
+              "_files": [
+                "route.ts"
+              ]
+            },
+            "links": {
+              "_files": [
+                "route.ts"
+              ],
+              "categories": {
+                "_files": [
+                  "route.ts"
+                ]
+              }
+            },
+            "parse-website": {
+              "_files": [
+                "route.ts"
+              ]
+            },
+            "search": {
+              "_files": [
+                "route.ts"
+              ]
+            }
+          },
+          "sign-up": {
+            "[[...sign-up]]": {
+              "_files": [
+                "page.tsx"
+              ]
+            }
+          },
+          "auth": {
+            "callback": {
+              "_files": [
+                "page.tsx"
+              ]
+            }
+          },
+          "sign-in": {
+            "[[...sign-in]]": {
+              "_files": [
+                "page.tsx"
+              ]
+            }
+          }
+        },
+        "hooks": {
+          "_files": [
+            "index.ts",
+            "use-cache.ts",
+            "use-content-data.ts",
+            "use-error-tracking.ts"
+          ]
+        },
+        "config": {
+          "_files": [
+            "env.ts",
+            "features.ts",
+            "index.ts",
+            "metadata.ts"
+          ]
+        },
+        "lib": {
+          "_files": [
+            "cache-config.ts",
+            "cache-utils.ts",
+            "chunk-error-handler.ts",
+            "component-preloader.ts",
+            "index.ts",
+            "route-lazy-loading.tsx"
+          ],
+          "api": {
+            "_files": [
+              "api-client.ts",
+              "api-middleware.ts",
+              "api-paths.ts",
+              "api-utils.ts",
+              "cache-utils.ts",
+              "index.ts"
+            ]
+          },
+          "utils": {
+            "_files": [
+              "core.ts",
+              "error.ts",
+              "helpers.ts",
+              "index.ts",
+              "validation.ts"
+            ]
+          }
+        },
+        "stores": {
+          "_files": [
+            "app-store.standard.ts",
+            "index.ts",
+            "link-filter-store.standard.ts"
+          ]
+        },
+        "types": {
+          "_files": [
+            "config.ts",
+            "css-modules.d.ts",
+            "index.ts"
+          ]
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "web": {
+      "production": {
+        "@radix-ui/react-slot": "^1.2.3",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "dotenv": "^16.4.7",
+        "lucide-react": "^0.525.0",
+        "next": "^15.5.3",
+        "next-themes": "^0.4.6",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "tailwind-merge": "^3.3.1",
+        "zod": "^3.23.8"
+      },
+      "development": {
+        "@biomejs/biome": "^2.2.5",
+        "@playwright/test": "^1.56.0",
+        "@tailwindcss/aspect-ratio": "^0.4.2",
+        "@tailwindcss/container-queries": "^0.1.1",
+        "@tailwindcss/forms": "^0.5.9",
+        "@tailwindcss/postcss": "^4.1.14",
+        "@tailwindcss/typography": "^0.5.16",
+        "@testing-library/jest-dom": "^6.8.0",
+        "@types/node": "^22.18.8",
+        "@types/react": "^19.1.11",
+        "@types/react-dom": "^19.1.7",
+        "jsdom": "^26.1.0",
+        "tailwindcss": "^4.1.14",
+        "typescript": "^5.9.3",
+        "vitest": "^3.2.4"
+      },
+      "totalProduction": 11,
+      "totalDevelopment": 15,
+      "scripts": {
+        "dev": "node scripts/load-env.js && next dev",
+        "clean": "rimraf .next",
+        "build": "next build",
+        "start": "next start",
+        "lint": "biome lint .",
+        "lint:fix": "biome lint --write .",
+        "format": "biome format --write .",
+        "format:check": "biome format .",
+        "check": "biome check --write .",
+        "check:fix": "biome check --write .",
+        "type-check": "tsc --noEmit",
+        "preview": "next build && next start",
+        "update-deps": "pnpm update",
+        "update-deps:latest": "pnpm update --latest",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "test:coverage": "vitest run --coverage",
+        "test:e2e": "npx playwright test",
+        "test:e2e:ui": "npx playwright test --ui",
+        "check-project": "node scripts/check-project.js",
+        "depcheck": "pnpm dlx depcheck",
+        "env:load": "node scripts/load-env.js",
+        "env:validate": "node scripts/load-env.js"
+      }
+    },
+    "blog": {
+      "production": {
+        "@mdx-js/mdx": "^3.1.1",
+        "@mdx-js/react": "^3.1.1",
+        "@next/mdx": "^15.5.3",
+        "@radix-ui/react-dialog": "^1.1.15",
+        "@radix-ui/react-slot": "^1.2.3",
+        "@types/prismjs": "^1.26.5",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "dotenv": "^16.4.7",
+        "fast-glob": "^3.3.3",
+        "gray-matter": "^4.0.3",
+        "immer": "^10.1.3",
+        "lucide-react": "^0.525.0",
+        "next": "^15.5.3",
+        "next-themes": "^0.4.6",
+        "prismjs": "^1.30.0",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "remark-gfm": "^4.0.1",
+        "tailwind-merge": "^3.3.1",
+        "zod": "^3.23.8",
+        "zustand": "^5.0.8"
+      },
+      "development": {
+        "@biomejs/biome": "^2.2.5",
+        "@playwright/test": "^1.56.0",
+        "@tailwindcss/container-queries": "^0.1.1",
+        "@tailwindcss/postcss": "^4.1.14",
+        "@tailwindcss/typography": "^0.5.16",
+        "@testing-library/jest-dom": "^6.8.0",
+        "@types/node": "^22.18.8",
+        "@types/react": "^19.1.11",
+        "@types/react-dom": "^19.1.7",
+        "jsdom": "^26.1.0",
+        "tailwindcss": "^4.1.14",
+        "typescript": "^5.9.3",
+        "vitest": "^3.2.4"
+      },
+      "totalProduction": 22,
+      "totalDevelopment": 13,
+      "scripts": {
+        "dev": "node scripts/load-env.js && next dev --port 3001",
+        "clean": "rimraf .next",
+        "build": "next build",
+        "start": "next start --port 3001",
+        "lint": "biome lint .",
+        "lint:fix": "biome lint --apply .",
+        "format": "biome format --write .",
+        "format:check": "biome format .",
+        "check": "biome check --write .",
+        "check:fix": "biome check --apply .",
+        "type-check": "tsc --noEmit",
+        "preview": "next build && next start",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "test:coverage": "vitest run --coverage",
+        "test:e2e": "npx playwright test",
+        "test:e2e:ui": "npx playwright test --ui",
+        "depcheck": "pnpm dlx depcheck"
+      }
+    },
+    "hub": {
+      "production": {
+        "@clerk/nextjs": "^6.32.0",
+        "@radix-ui/react-alert-dialog": "^1.1.15",
+        "@radix-ui/react-avatar": "^1.1.10",
+        "@radix-ui/react-collapsible": "^1.1.12",
+        "@radix-ui/react-dialog": "^1.1.15",
+        "@radix-ui/react-dropdown-menu": "^2.1.16",
+        "@radix-ui/react-label": "^2.1.7",
+        "@radix-ui/react-select": "^2.2.6",
+        "@radix-ui/react-separator": "^1.1.7",
+        "@radix-ui/react-slot": "^1.2.3",
+        "@radix-ui/react-switch": "^1.2.6",
+        "cheerio": "^1.1.2",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "dotenv": "^16.4.7",
+        "immer": "^10.1.3",
+        "lucide-react": "^0.525.0",
+        "next": "^15.5.3",
+        "next-themes": "^0.4.6",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "tailwind-merge": "^3.3.1",
+        "zod": "^3.23.8",
+        "zustand": "^5.0.8"
+      },
+      "development": {
+        "@biomejs/biome": "^2.2.5",
+        "@playwright/test": "^1.56.0",
+        "@tailwindcss/aspect-ratio": "^0.4.2",
+        "@tailwindcss/container-queries": "^0.1.1",
+        "@tailwindcss/postcss": "^4.1.14",
+        "@testing-library/jest-dom": "^6.8.0",
+        "@types/node": "^22.18.8",
+        "@types/react": "^19.1.11",
+        "@types/react-dom": "^19.1.7",
+        "jsdom": "^26.1.0",
+        "tailwindcss": "^4.1.14",
+        "typescript": "^5.9.3",
+        "vitest": "^3.2.4"
+      },
+      "totalProduction": 24,
+      "totalDevelopment": 13,
+      "scripts": {
+        "dev": "node scripts/load-env.js && next dev --port 3002",
+        "clean": "rimraf .next",
+        "build": "next build",
+        "start": "next start --port 3002",
+        "lint": "biome lint .",
+        "lint:fix": "biome lint --apply .",
+        "format": "biome format --write .",
+        "format:check": "biome format .",
+        "check": "biome check --write .",
+        "check:fix": "biome check --apply .",
+        "type-check": "tsc --noEmit",
+        "preview": "next build && next start",
+        "update-deps": "pnpm update",
+        "update-deps:latest": "pnpm update --latest",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "test:coverage": "vitest run --coverage",
+        "test:e2e": "npx playwright test",
+        "test:e2e:ui": "npx playwright test --ui",
+        "check-project": "node scripts/check-project.js",
+        "depcheck": "pnpm dlx depcheck",
+        "env:load": "node scripts/load-env.js",
+        "env:validate": "node scripts/load-env.js",
+        "preprocess": "node scripts/preprocess-links-data.cjs"
+      }
+    }
+  },
+  "codeMetrics": {
+    "web": {
+      "totalCodeFiles": 46,
+      "totalLines": 2583,
+      "estimatedComponents": 35,
+      "estimatedHooks": 6,
+      "estimatedUtils": 13,
+      "avgLinesPerFile": 56
+    },
+    "blog": {
+      "totalCodeFiles": 122,
+      "totalLines": 11345,
+      "estimatedComponents": 80,
+      "estimatedHooks": 9,
+      "estimatedUtils": 62,
+      "avgLinesPerFile": 93
+    },
+    "hub": {
+      "totalCodeFiles": 156,
+      "totalLines": 13349,
+      "estimatedComponents": 96,
+      "estimatedHooks": 13,
+      "estimatedUtils": 52,
+      "avgLinesPerFile": 86
+    }
+  },
+  "buildMetrics": {
+    "web": {
+      "configs": {
+        "next.config.mjs": {
+          "exists": true,
+          "size": 770
+        },
+        "tsconfig.json": {
+          "exists": true,
+          "size": 1538
+        },
+        "biome.json": {
+          "exists": true,
+          "size": 703
+        },
+        "tailwind.config.mjs": {
+          "exists": true,
+          "size": 512
+        },
+        "vitest.config.ts": {
+          "exists": true,
+          "size": 1128
+        },
+        "playwright.config.ts": {
+          "exists": true,
+          "size": 1931
+        }
+      },
+      "hasStandaloneScript": true,
+      "hasE2ETests": true,
+      "hasScriptsDir": true
+    },
+    "blog": {
+      "configs": {
+        "next.config.mjs": {
+          "exists": true,
+          "size": 2260
+        },
+        "tsconfig.json": {
+          "exists": true,
+          "size": 1750
+        },
+        "biome.json": {
+          "exists": true,
+          "size": 890
+        },
+        "tailwind.config.mjs": {
+          "exists": true,
+          "size": 7086
+        },
+        "vitest.config.ts": {
+          "exists": true,
+          "size": 598
+        },
+        "playwright.config.ts": {
+          "exists": true,
+          "size": 1931
+        }
+      },
+      "hasStandaloneScript": true,
+      "hasE2ETests": true,
+      "hasScriptsDir": true
+    },
+    "hub": {
+      "configs": {
+        "next.config.mjs": {
+          "exists": true,
+          "size": 887
+        },
+        "tsconfig.json": {
+          "exists": true,
+          "size": 1907
+        },
+        "biome.json": {
+          "exists": true,
+          "size": 966
+        },
+        "tailwind.config.mjs": {
+          "exists": true,
+          "size": 1904
+        },
+        "vitest.config.ts": {
+          "exists": true,
+          "size": 333
+        },
+        "playwright.config.ts": {
+          "exists": true,
+          "size": 1931
+        }
+      },
+      "hasStandaloneScript": true,
+      "hasE2ETests": true,
+      "hasScriptsDir": true
+    }
+  },
+  "duplicateAnalysis": {
+    "production": {
+      "duplicates": [
+        {
+          "package": "@radix-ui/react-slot",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^1.2.3"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "class-variance-authority",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^0.7.1"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "clsx",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^2.1.1"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "dotenv",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^16.4.7"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "lucide-react",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^0.525.0"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "next",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^15.5.3"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "next-themes",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^0.4.6"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "react",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^19.2.0"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "react-dom",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^19.2.0"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "tailwind-merge",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^3.3.1"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "zod",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^3.23.8"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "@radix-ui/react-dialog",
+          "apps": [
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^1.1.15"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "immer",
+          "apps": [
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^10.1.3"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "zustand",
+          "apps": [
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^5.0.8"
+          ],
+          "hasVersionConflict": false
+        }
+      ],
+      "versionConflicts": []
+    },
+    "development": {
+      "duplicates": [
+        {
+          "package": "@biomejs/biome",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^2.2.5"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "@playwright/test",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^1.56.0"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "@tailwindcss/aspect-ratio",
+          "apps": [
+            "web",
+            "hub"
+          ],
+          "versions": [
+            "^0.4.2"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "@tailwindcss/container-queries",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^0.1.1"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "@tailwindcss/postcss",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^4.1.14"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "@tailwindcss/typography",
+          "apps": [
+            "web",
+            "blog"
+          ],
+          "versions": [
+            "^0.5.16"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "@testing-library/jest-dom",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^6.8.0"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "@types/node",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^22.18.8"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "@types/react",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^19.1.11"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "@types/react-dom",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^19.1.7"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "jsdom",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^26.1.0"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "tailwindcss",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^4.1.14"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "typescript",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^5.9.3"
+          ],
+          "hasVersionConflict": false
+        },
+        {
+          "package": "vitest",
+          "apps": [
+            "web",
+            "blog",
+            "hub"
+          ],
+          "versions": [
+            "^3.2.4"
+          ],
+          "hasVersionConflict": false
+        }
+      ],
+      "versionConflicts": []
+    }
+  },
+  "summary": {
+    "totalApps": 3,
+    "totalFiles": 417,
+    "totalSize": 2253983,
+    "totalDependencies": {
+      "production": 57,
+      "development": 41
+    },
+    "duplicatePackages": {
+      "production": 14,
+      "development": 14
+    },
+    "versionConflicts": {
+      "production": 0,
+      "development": 0
+    }
+  }
+}

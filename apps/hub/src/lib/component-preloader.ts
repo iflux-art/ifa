@@ -377,12 +377,14 @@ export function preloadRouteComponents() {
   componentPreloader.preloadBatch([
     {
       id: "home-page",
-      importFn: () => import("@/components/home").then((m) => ({ default: m.OptimizedHomePage })),
+      importFn: () =>
+        import("@/components/features/home").then((m) => ({ default: m.OptimizedHomePage })),
       config: PreloadConfigs.critical,
     },
     {
       id: "admin-page",
-      importFn: () => import("@/components/admin").then((m) => ({ default: m.OptimizedAdminPage })),
+      importFn: () =>
+        import("@/components/features/admin").then((m) => ({ default: m.OptimizedAdminPage })),
       config: PreloadConfigs.likely,
     },
   ]);

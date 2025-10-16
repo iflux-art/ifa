@@ -32,12 +32,6 @@ export const SEARCH_API_PATHS = {
   SearchSuggestions: "/api/search/suggestions",
 } as const;
 
-// 分析API路径
-export const ANALYTICS_API_PATHS = {
-  PageViews: "/api/analytics/page-views",
-  UserActivity: "/api/analytics/user-activity",
-} as const;
-
 // 通知API路径
 export const NOTIFICATION_API_PATHS = {
   Notifications: "/api/notifications",
@@ -58,7 +52,6 @@ export const API_PATHS = {
   content: CONTENT_API_PATHS,
   user: USER_API_PATHS,
   search: SEARCH_API_PATHS,
-  analytics: ANALYTICS_API_PATHS,
   notification: NOTIFICATION_API_PATHS,
   friends: FRIENDS_API_PATHS,
 } as const;

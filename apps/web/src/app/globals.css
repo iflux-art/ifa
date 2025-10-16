@@ -158,4 +158,7 @@
     display: none;
     /* Chrome/Safari/Webkit */
   }
+
+  /* 响应式断点控制通过 JavaScript 和 Tailwind 类实现 */
+  /* 不需要额外的 CSS 媒体查询，完全依赖 JavaScript 检测和条件渲染 */
 }

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import type { LinkCategory } from "@/components/link-categories/categories";
-import { generateCategoriesFromFiles } from "@/components/link-categories/categories-server";
+import type { LinkCategory } from "@/components/features/link-categories/categories";
+import { generateCategoriesFromFiles } from "@/components/features/link-categories/categories-server";
 
 // 添加缓存变量
 let cachedCategories: LinkCategory[] | null = null;

@@ -1,6 +1,16 @@
 import { create } from "zustand";
 
-// 状态接口
+/**
+ * 通知状态类型
+ */
+export interface NotificationState {
+  hasUnread: boolean;
+  count: number;
+}
+
+/**
+ * 应用状态接口
+ */
 export interface AppUIState {
   // UI 状态
   isSidebarOpen: boolean;
@@ -11,10 +21,7 @@ export interface AppUIState {
   language: string;
 
   // 通知状态
-  notifications: {
-    hasUnread: boolean;
-    count: number;
-  };
+  notifications: NotificationState;
 
   // 加载状态
   isLoading: boolean;
@@ -24,7 +31,9 @@ export interface AppUIState {
   error: string | null;
 }
 
-// 动作接口
+/**
+ * 应用动作接口
+ */
 export interface AppActions {
   // UI Actions
   setIsSidebarOpen: (isOpen: boolean) => void;
@@ -37,7 +46,7 @@ export interface AppActions {
   setLanguage: (language: string) => void;
 
   // 通知 Actions
-  setNotifications: (notifications: { hasUnread: boolean; count: number }) => void;
+  setNotifications: (notifications: NotificationState) => void;
   showNotificationBadge: () => void;
   hideNotificationBadge: () => void;
   incrementNotificationCount: () => void;
@@ -52,14 +61,15 @@ export interface AppActions {
   resetUIState: () => void;
 }
 
-// 派生状态接口 (空类型)
-export type AppDerivedState = Record<never, never>;
-
-// 完整的Store接口
+/**
+ * 完整的Store接口
+ */
 export interface AppStore extends AppUIState, AppActions {}
 
-// 初始状态
-export const initialState: AppUIState = {
+/**
+ * 初始状态常量
+ */
+export const INITIAL_APP_STATE: AppUIState = {
   isSidebarOpen: false,
   isSearchOpen: false,
   isMobile: false,
@@ -73,25 +83,49 @@ export const initialState: AppUIState = {
   error: null,
 };
 
-// 创建函数
+/**
+ * 通知操作辅助函数
+ */
+const createNotificationActions = (set: (fn: (state: AppStore) => Partial<AppStore>) => void) => ({
+  setNotifications: (notifications: NotificationState) => set(() => ({ notifications })),
+
+  showNotificationBadge: () =>
+    set((state) => ({
+      notifications: {
+        ...state.notifications,
+        hasUnread: true,
+        count: state.notifications.count + 1,
+      },
+    })),
+
+  hideNotificationBadge: () =>
+    set(() => ({
+      notifications: {
+        hasUnread: false,
+        count: 0,
+      },
+    })),
+
+  incrementNotificationCount: () =>
+    set((state) => ({
+      notifications: {
+        ...state.notifications,
+        count: state.notifications.count + 1,
+        hasUnread: true,
+      },
+    })),
+});
+
+/**
+ * 创建应用Store
+ */
 export const createAppStore = () => {
-  return create<AppStore>()((set, _get) => ({
-    // ...initialState,
-    isSidebarOpen: false,
-    isSearchOpen: false,
-    isMobile: false,
-    language: "zh-CN",
-    notifications: {
-      hasUnread: false,
-      count: 0,
-    },
-    isLoading: false,
-    loadingMessage: "",
-    error: null,
+  return create<AppStore>()((set) => ({
+    ...INITIAL_APP_STATE,
 
     // UI Actions
-    setIsSidebarOpen: (isOpen) => set({ isSidebarOpen: isOpen }),
-    setIsSearchOpen: (isOpen) => set({ isSearchOpen: isOpen }),
+    setIsSidebarOpen: (isSidebarOpen) => set({ isSidebarOpen }),
+    setIsSearchOpen: (isSearchOpen) => set({ isSearchOpen }),
     setIsMobile: (isMobile) => set({ isMobile }),
     toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
     toggleSearch: () => set((state) => ({ isSearchOpen: !state.isSearchOpen })),
@@ -99,52 +133,16 @@ export const createAppStore = () => {
     // 配置 Actions
     setLanguage: (language) => set({ language }),
 
-    // 通知 Actions
-    setNotifications: (notifications) => set({ notifications }),
-    showNotificationBadge: () =>
-      set((state) => ({
-        notifications: {
-          ...state.notifications,
-          hasUnread: true,
-          count: state.notifications.count + 1,
-        },
-      })),
-    hideNotificationBadge: () =>
-      set({
-        notifications: {
-          hasUnread: false,
-          count: 0,
-        },
-      }),
-    incrementNotificationCount: () =>
-      set((state) => ({
-        notifications: {
-          ...state.notifications,
-          count: state.notifications.count + 1,
-          hasUnread: true,
-        },
-      })),
+    // 通知 Actions - 使用辅助函数
+    ...createNotificationActions(set),
 
     // 加载 Actions
-    setLoading: (isLoading, message = "") => set({ isLoading, loadingMessage: message }),
+    setLoading: (isLoading, loadingMessage = "") => set({ isLoading, loadingMessage }),
     showError: (error) => set({ error, isLoading: false }),
     clearError: () => set({ error: null }),
 
     // 重置 Actions
-    resetState: () =>
-      set({
-        isSidebarOpen: false,
-        isSearchOpen: false,
-        isMobile: false,
-        language: "zh-CN",
-        notifications: {
-          hasUnread: false,
-          count: 0,
-        },
-        isLoading: false,
-        loadingMessage: "",
-        error: null,
-      }),
+    resetState: () => set(INITIAL_APP_STATE),
     resetUIState: () =>
       set({
         isSidebarOpen: false,
@@ -154,5 +152,7 @@ export const createAppStore = () => {
   }));
 };
 
-// 默认导出store实例
+/**
+ * 默认导出store实例
+ */
 export const useAppStore = createAppStore();

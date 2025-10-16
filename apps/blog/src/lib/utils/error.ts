@@ -69,17 +69,16 @@ function buildLogMessage(errorInfo: ErrorInfo) {
  * 输出开发环境的基础错误信息
  */
 function logDevelopmentError(errorInfo: ErrorInfo): void {
-  // 在生产环境中不输出详细错误信息
-  if (process.env.NODE_ENV === "production") {
-    return;
-  }
+  if (process.env.NODE_ENV === "production") return;
 
-  // 为 ContentNotFound 提供更友好的输出格式
-  if (errorInfo.type === "ContentNotFound") {
-    console.warn(`📝 ${errorInfo.type}: ${errorInfo.message}`);
+  const isContentNotFound = errorInfo.type === "ContentNotFound";
+  const logMethod = isContentNotFound ? console.warn : console.error;
+  const icon = isContentNotFound ? "📝" : "🚨";
+
+  logMethod(`${icon} ${errorInfo.type}: ${errorInfo.message}`);
+
+  if (isContentNotFound) {
     console.warn("ℹ️ 这是一个预期的错误，用户访问了不存在的内容");
-  } else {
-    console.error(`🚨 ${errorInfo.type}: ${errorInfo.message}`);
   }
 
   // 输出详细信息
@@ -102,57 +101,31 @@ function logContextInfo(errorInfo: ErrorInfo): void {
 }
 
 /**
- * 输出ContentNotFound错误的堆栈信息
- */
-function logContentNotFoundStack(errorInfo: ErrorInfo): void {
-  // 在生产环境中不输出堆栈信息
-  if (process.env.NODE_ENV === "production") {
-    return;
-  }
-
-  if (!(errorInfo.originalError instanceof Error)) {
-    return;
-  }
-
-  // 为 ContentNotFound 提供更有用的调试信息
-  console.error("📚 错误来源:", {
-    message: errorInfo.originalError.message,
-    requestedContent: errorInfo.context?.contentId,
-    contentType: errorInfo.context?.contentType,
-  });
-
-  // 可选显示堆栈（通常不需要）
-  if (process.env.SHOW_CONTENT_NOT_FOUND_STACK === "true") {
-    console.error("📚 堆栈跟踪 (信息):", errorInfo.originalError.stack);
-  }
-}
-
-/**
- * 输出其他错误类型的堆栈信息
- */
-function logOtherErrorStack(errorInfo: ErrorInfo): void {
-  // 在生产环境中不输出堆栈信息
-  if (process.env.NODE_ENV === "production") {
-    return;
-  }
-
-  if (errorInfo.originalError instanceof Error) {
-    console.error("📚 堆栈跟踪:", errorInfo.originalError.stack);
-  }
-}
-
-/**
  * 处理开发环境堆栈信息输出
  */
 function logDevelopmentStack(errorInfo: ErrorInfo, includeStack: boolean): void {
-  if (!(includeStack && errorInfo.originalError instanceof Error)) {
+  if (
+    process.env.NODE_ENV === "production" ||
+    !includeStack ||
+    !(errorInfo.originalError instanceof Error)
+  ) {
     return;
   }
 
   if (errorInfo.type === "ContentNotFound") {
-    logContentNotFoundStack(errorInfo);
+    // 为 ContentNotFound 提供更有用的调试信息
+    console.error("📚 错误来源:", {
+      message: errorInfo.originalError.message,
+      requestedContent: errorInfo.context?.contentId,
+      contentType: errorInfo.context?.contentType,
+    });
+
+    // 可选显示堆栈（通常不需要）
+    if (process.env.SHOW_CONTENT_NOT_FOUND_STACK === "true") {
+      console.error("📚 堆栈跟踪 (信息):", errorInfo.originalError.stack);
+    }
   } else {
-    logOtherErrorStack(errorInfo);
+    console.error("📚 堆栈跟踪:", errorInfo.originalError.stack);
   }
 }
 

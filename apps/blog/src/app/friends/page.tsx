@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import friendsData from "@/components/friends/friends.json";
+import friendsData from "@/components/features/friends/friends.json";
 
 // 动态导入友链页面组件
 const FriendsPage = dynamic(

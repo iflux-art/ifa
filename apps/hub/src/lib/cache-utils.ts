@@ -1,4 +1,4 @@
-import { clearAllCaches } from "@/components/links/links-lib";
+import { clearAllCaches } from "@/components/features/links/links-lib";
 
 /**
  * 开发工具：手动清除所有缓存

@@ -1,13 +1,23 @@
 import { getHubClientEnv, loadHubEnvConfig } from "./env";
 import { loadFeatureFlags } from "./features";
+import { APP_CONSTANTS } from "@/lib/constants";
 
 /**
- * Hub 应用配置
+ * 配置分组类型
+ */
+interface ConfigGroup<T> {
+  [key: string]: T;
+}
+
+/**
+ * Hub 应用配置管理器
+ * 优化了配置访问模式，提供更好的类型安全和缓存机制
  */
 export class HubAppConfig {
   private static instance: HubAppConfig;
   private env: ReturnType<typeof loadHubEnvConfig>;
   private features: ReturnType<typeof loadFeatureFlags>;
+  private configCache = new Map<string, unknown>();
 
   private constructor() {
     this.env = loadHubEnvConfig();
@@ -19,6 +29,16 @@ export class HubAppConfig {
       HubAppConfig.instance = new HubAppConfig();
     }
     return HubAppConfig.instance;
+  }
+
+  /**
+   * 缓存配置访问
+   */
+  private getCachedConfig<T>(key: string, factory: () => T): T {
+    if (!this.configCache.has(key)) {
+      this.configCache.set(key, factory());
+    }
+    return this.configCache.get(key) as T;
   }
 
   /**
@@ -39,7 +59,7 @@ export class HubAppConfig {
    * 获取客户端安全配置
    */
   public getClientConfig() {
-    return {
+    return this.getCachedConfig("client", () => ({
       env: getHubClientEnv(),
       features: {
         darkMode: this.features.darkMode,
@@ -48,7 +68,7 @@ export class HubAppConfig {
         reactCompiler: this.features.reactCompiler,
         ppr: this.features.ppr,
       },
-    };
+    }));
   }
 
   /**
@@ -62,133 +82,53 @@ export class HubAppConfig {
    * 获取应用元数据
    */
   public getAppMetadata() {
-    return {
-      name: this.env.NEXT_PUBLIC_APP_NAME,
+    return this.getCachedConfig("app", () => ({
+      name: this.env.NEXT_PUBLIC_APP_NAME || APP_CONSTANTS.NAME,
       url: this.env.NEXT_PUBLIC_APP_URL,
-      environment: this.env.NODE_ENV,
-      version: process.env.npm_package_version || "1.0.0",
-    };
+      environment: process.env.NODE_ENV || "development",
+      version: process.env.npm_package_version || APP_CONSTANTS.VERSION,
+      description: APP_CONSTANTS.DESCRIPTION,
+    }));
   }
 
   /**
-   * 获取 Clerk 认证配置
+   * 获取认证配置组
    */
   public getClerkConfig() {
-    return {
+    return this.getCachedConfig("clerk", () => ({
       publishableKey: this.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
       secretKey: this.env.CLERK_SECRET_KEY,
-      signInUrl: this.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
-      signUpUrl: this.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-      afterSignInUrl: this.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
-      afterSignUpUrl: this.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
+    }));
+  }
+
+  /**
+   * 获取所有配置组
+   */
+  public getAllConfigs(): ConfigGroup<unknown> {
+    return {
+      app: this.getAppMetadata(),
+      auth: this.getClerkConfig(),
+      client: this.getClientConfig(),
     };
   }
 
   /**
-   * 获取 Hub 特定配置
+   * 清除配置缓存
    */
-  public getHubConfig() {
-    return {
-      enableAdminPanel: this.env.NEXT_PUBLIC_ENABLE_ADMIN_PANEL,
-      enableUserManagement: this.env.NEXT_PUBLIC_ENABLE_USER_MANAGEMENT,
-      enableAnalyticsDashboard: this.env.NEXT_PUBLIC_ENABLE_ANALYTICS_DASHBOARD,
-      enableNotifications: this.env.NEXT_PUBLIC_ENABLE_NOTIFICATIONS,
-    };
+  public clearCache(): void {
+    this.configCache.clear();
   }
 
   /**
-   * 获取文件上传配置
+   * 获取配置摘要（用于调试）
    */
-  public getFileUploadConfig() {
-    const allowedTypes = this.env.ALLOWED_FILE_TYPES.split(",").map((type) => type.trim());
-
+  public getConfigSummary() {
     return {
-      storageProvider: this.env.STORAGE_PROVIDER,
-      maxFileSize: this.env.MAX_FILE_SIZE,
-      allowedFileTypes: allowedTypes,
-    };
-  }
-
-  /**
-   * 获取 Webhook 配置
-   */
-  public getWebhookConfig() {
-    return {
-      secret: this.env.WEBHOOK_SECRET,
-      timeout: this.env.WEBHOOK_TIMEOUT,
-    };
-  }
-
-  /**
-   * 获取 Redis 配置
-   */
-  public getRedisConfig() {
-    return {
-      url: this.env.REDIS_URL,
-      host: this.env.REDIS_HOST,
-      port: this.env.REDIS_PORT,
-      password: this.env.REDIS_PASSWORD,
-    };
-  }
-
-  /**
-   * 获取数据库配置
-   */
-  public getDatabaseConfig() {
-    if (!this.env.DATABASE_URL) {
-      return null;
-    }
-
-    return {
-      url: this.env.DATABASE_URL,
-      host: this.env.DB_HOST,
-      port: this.env.DB_PORT,
-      name: this.env.DB_NAME,
-      user: this.env.DB_USER,
-      password: this.env.DB_PASSWORD,
-    };
-  }
-
-  /**
-   * 获取 API 配置
-   */
-  public getApiConfig() {
-    return {
-      baseUrl: this.env.API_BASE_URL || `${this.env.NEXT_PUBLIC_APP_URL}/api`,
-      timeout: this.env.API_TIMEOUT || 10000,
-      retries: this.env.API_RETRIES || 3,
-    };
-  }
-
-  /**
-   * 获取速率限制配置（Hub 的更高限制）
-   */
-  public getRateLimitConfig() {
-    return {
-      requests: this.env.RATE_LIMIT_REQUESTS || 500,
-      window: this.env.RATE_LIMIT_WINDOW || 900000, // 15 minutes
-    };
-  }
-
-  /**
-   * 获取 CORS 配置
-   */
-  public getCorsConfig() {
-    const origins = this.env.CORS_ORIGINS?.split(",") || [this.env.NEXT_PUBLIC_APP_URL];
-
-    return {
-      origin: origins,
-      credentials: this.env.CORS_CREDENTIALS === "true",
-    };
-  }
-
-  /**
-   * 获取监控配置
-   */
-  public getMonitoringConfig() {
-    return {
-      sentryDsn: this.env.SENTRY_DSN,
-      datadogApiKey: this.env.DATADOG_API_KEY,
+      environment: process.env.NODE_ENV || "development",
+      features: Object.keys(this.features).filter(
+        (key) => this.features[key as keyof typeof this.features]
+      ),
+      cacheSize: this.configCache.size,
     };
   }
 }

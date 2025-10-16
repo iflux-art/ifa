@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "404 - 页面未找到",
-  description: "抱歉，您访问的页面不存在或已被移除。",
 };
 
 const DEFAULT_TEXTS = {

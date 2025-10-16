@@ -1,0 +1,32 @@
+{
+  "name": "@repo/shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared utilities and constants",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rimraf dist .turbo",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "check": "biome check --write .",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.5",
+    "@types/node": "^22.18.10",
+    "tsup": "^8.3.5",
+    "typescript": "^5.9.3"
+  }
+}

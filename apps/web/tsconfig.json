@@ -36,6 +36,9 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
 
+    // Project references support
+    "composite": true,
+
     "plugins": [
       {
         "name": "next"
@@ -44,9 +47,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/config/*": ["./src/config/*"]
+      "@/components": ["./src/components"],
+      "@/lib": ["./src/lib"],
+      "@/lib/utils": ["./src/lib/utils/index"],
+      "@/hooks": ["./src/hooks"],
+      "@/stores": ["./src/stores"],
+      "@/types": ["./src/types"],
+      "@/config": ["./src/config"],
+      "@/app": ["./src/app"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

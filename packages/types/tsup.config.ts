@@ -10,11 +10,15 @@ export default defineConfig({
     "src/database.ts",
   ],
   format: ["esm"],
-  dts: true,
+  dts: {
+    resolve: true,
+  },
   sourcemap: true,
   clean: true,
   treeshake: true,
   minify: false,
   target: "es2022",
   splitting: false,
+  external: ["react"],
+  tsconfig: "./tsconfig.build.json",
 });

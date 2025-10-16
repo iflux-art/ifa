@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getAllTagsWithCount } from "@/components/posts/lib";
+import { getAllTagsWithCount } from "@/components/features/posts/lib";
 
 /**
  * 获取所有标签及其计数的 API 路由

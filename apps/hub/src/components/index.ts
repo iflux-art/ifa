@@ -1,55 +1,24 @@
 /**
- * 组件库统一导出
- * 按功能模块组织导出，便于按需导入
+ * 组件统一导出文件
+ * 按模块分组导出，便于管理和使用
  */
 
-// 按钮组件
-export { GitHubButton } from "./button";
+// ==================== UI 组件导出 ====================
+export * from "./ui";
 
-// 底栏组件
-export { Footer } from "./footer";
-// UI 组件
+// ==================== 布局组件导出 ====================
+export * from "./layout";
+
+// ==================== 功能组件导出 ====================
+export * from "./features";
+
+// ==================== 主题组件导出 ====================
+export * from "./theme";
+
+// ==================== 共享组件导出 ====================
 export {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  BackButton,
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  Input,
-  Label,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Separator,
-  Switch,
-} from "./ui";
+  ChunkLoadErrorBoundary,
+  FeatureErrorBoundary,
+  GlobalErrorHandler,
+  useAsyncError,
+} from "./shared";

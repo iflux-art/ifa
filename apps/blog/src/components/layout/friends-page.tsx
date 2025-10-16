@@ -1,10 +1,10 @@
 "use client";
 
 import type { Metadata } from "next";
-import { TwikooComment } from "@/components/comment";
-import { FriendLinkApplication } from "@/components/friends/friend-link-application";
-import { FriendLinkCard } from "@/components/friends/link-card";
-import type { FriendLink } from "@/components/friends/types";
+import { TwikooComment } from "@/components/features/comment";
+import { FriendLinkApplication } from "@/components/features/friends/friend-link-application";
+import { FriendLinkCard } from "@/components/features/friends/link-card";
+import type { FriendLink } from "@/components/features/friends/types";
 import { cn } from "@/lib/utils";
 
 // 页面元数据

@@ -1,4 +1,8 @@
-// Export type definitions from this file
+// ==================== 通用类型导出 ====================
+export * from "./common";
+import type { BaseProps, Size, Breakpoint, Theme, ComponentFactory } from "./common";
+
+// ==================== 应用配置类型 ====================
 export type AppConfig = {
   name: string;
   version: string;
@@ -8,28 +12,19 @@ export type AppConfig = {
 // ==================== 基础组件类型 ====================
 
 /**
- * 基础组件 Props 接口
- */
-export interface BaseComponentProps {
-  className?: string;
-  children?: React.ReactNode;
-  "data-testid"?: string;
-}
-
-/**
  * 扩展组件 Props 接口
  */
-export interface ExtendedComponentProps extends BaseComponentProps {
+export interface ExtendedComponentProps extends BaseProps {
   variant?: string;
-  size?: "sm" | "md" | "lg";
+  size?: Size;
   disabled?: boolean;
 }
 
 /**
  * 响应式布局 Props 接口
  */
-export interface ResponsiveLayoutProps extends BaseComponentProps {
-  breakpoint?: "sm" | "md" | "lg" | "xl";
+export interface ResponsiveLayoutProps extends BaseProps {
+  breakpoint?: Breakpoint;
   sidebar?: React.ReactNode;
   showNavbar?: boolean;
   showFooter?: boolean;
@@ -63,53 +58,7 @@ export interface NavigationItem {
  */
 export interface PageMetadata {
   title: string;
-  description: string;
-  keywords: string[];
-  image?: string;
-  url?: string;
-}
-
-// ==================== API 响应类型 ====================
-
-/**
- * 标准 API 响应格式
- */
-export interface ApiResponse<T = unknown> {
-  data: T;
-  success: boolean;
-  message?: string;
-  error?: string;
-  timestamp?: string;
-}
-
-/**
- * 分页信息接口
- */
-export interface PaginationInfo {
-  page: number;
-  limit: number;
-  total: number;
-  totalPages: number;
-  hasNext: boolean;
-  hasPrev: boolean;
-}
-
-/**
- * 分页响应接口
- */
-export interface PaginatedResponse<T> extends ApiResponse<T[]> {
-  pagination: PaginationInfo;
-}
-
-/**
- * API 错误接口
- */
-export interface ApiError {
-  code: string;
-  message: string;
-  details?: unknown;
-  timestamp: Date;
-  path?: string;
+  description?: string;
 }
 
 // ==================== 数据模型类型 ====================
@@ -153,52 +102,12 @@ export interface LinkCardProps {
   children?: React.ReactNode;
 }
 
-// ==================== 性能监控类型 ====================
-
-/**
- * 性能指标接口
- */
-export interface PerformanceMetrics {
-  /** First Contentful Paint */
-  fcp: number;
-  /** Largest Contentful Paint */
-  lcp: number;
-  /** First Input Delay */
-  fid: number;
-  /** Cumulative Layout Shift */
-  cls: number;
-  /** Time to First Byte */
-  ttfb: number;
-}
-
-/**
- * 错误日志接口
- */
-export interface ErrorLog {
-  id: string;
-  timestamp: Date;
-  level: "error" | "warn" | "info";
-  message: string;
-  stack?: string;
-  userAgent: string;
-  url: string;
-  userId?: string;
-}
-
 // ==================== 懒加载组件类型 ====================
 
 /**
  * 懒加载组件工厂函数类型
  */
-export type LazyComponentFactory<T extends React.ComponentType<unknown>> = () => Promise<{
-  default: T;
-}>;
-
-/**
- * 懒加载组件 Props 类型
- */
-export type LazyComponentProps<T extends React.ComponentType<unknown>> =
-  T extends React.ComponentType<infer P> ? P : never;
+export type LazyComponentFactory<T extends React.ComponentType<unknown>> = ComponentFactory<T>;
 
 /**
  * 预加载选项接口
@@ -213,11 +122,6 @@ export interface PreloadOptions {
 }
 
 // ==================== 主题相关类型 ====================
-
-/**
- * 主题类型
- */
-export type Theme = "light" | "dark" | "system";
 
 /**
  * 主题提供者 Props 接口
@@ -254,29 +158,8 @@ export interface ValidationRule {
 }
 
 // ==================== 工具类型 ====================
-
-/**
- * 可选属性类型
- */
-export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-
-/**
- * 严格的 Omit 类型
- */
-export type StrictOmit<T, K extends keyof T> = Omit<T, K>;
-
-/**
- * 深度只读类型
- */
-export type DeepReadonly<T> = {
-  readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
-};
-
-/**
- * 非空类型
- */
-export type NonNullable<T> = T extends null | undefined ? never : T;
+// 已通过 common.ts 导出
 
 // ==================== API 类型导出 ====================
-export * from "./api";
+// Web 子应用作为静态展示站点，不需要 API 相关的类型导出
 export * from "./config";

@@ -9,10 +9,9 @@ export interface FeatureFlags {
 }
 
 /**
- * 客户端配置接口
+ * 简化的客户端配置接口
  */
 export interface ClientConfig {
   appName: string;
   appUrl: string;
-  features: FeatureFlags;
 }

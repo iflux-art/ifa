@@ -1,51 +1,71 @@
 "use client";
 
-/**
- * 功能模块错误边界组件
- * 提供组件级别的错误处理和恢复机制
- */
+import { Component, type ErrorInfo, type ReactNode } from "react";
+import { handleChunkLoadError } from "@/components/features/links/links-lib";
 
-import { Component } from "react";
-import type { ErrorBoundaryProps, ErrorBoundaryState } from "./types";
+interface Props {
+  children: ReactNode;
+  fallback?: ReactNode;
+}
 
-export class FeatureErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+interface State {
+  hasError: boolean;
+  error?: Error;
+}
+
+export class ChunkLoadErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+  static getDerivedStateFromError(error: Error): State {
+    // 检查是否是chunk加载错误
+    const isChunkLoadError =
+      error.message.includes("ChunkLoadError") ||
+      error.message.includes("Loading chunk") ||
+      error.message.includes("Failed to fetch");
+
+    if (isChunkLoadError) {
+      console.warn("检测到Chunk加载错误:", error);
+      handleChunkLoadError();
+    }
+
     return { hasError: true, error };
   }
 
-  override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error("Feature error:", error, errorInfo);
-
-    // 可以在这里添加错误报告逻辑
-    if (typeof window !== "undefined") {
-      // 客户端错误追踪
-      console.error("Client-side error in feature component:", {
-        error: error.message,
-        stack: error.stack,
-        componentStack: errorInfo.componentStack,
-      });
-    }
+  override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("错误边界捕获到错误:", error, errorInfo);
   }
 
   override render() {
     if (this.state.hasError) {
+      const isChunkLoadError =
+        this.state.error?.message.includes("ChunkLoadError") ||
+        this.state.error?.message.includes("Loading chunk") ||
+        this.state.error?.message.includes("Failed to fetch");
+
+      if (isChunkLoadError) {
+        return (
+          <div className="flex min-h-screen items-center justify-center">
+            <div className="text-center">
+              <h2 className="mb-2 font-semibold text-xl">加载中...</h2>
+              <p className="text-gray-600">正在重新加载资源，请稍候...</p>
+            </div>
+          </div>
+        );
+      }
+
       return (
         this.props.fallback || (
-          <div className="flex items-center justify-center p-8 text-center">
-            <div className="max-w-md">
-              <h2 className="mb-2 font-semibold text-destructive text-lg">功能加载失败</h2>
-              <p className="mb-4 text-muted-foreground text-sm">
-                抱歉，此功能遇到了问题。请刷新页面重试。
-              </p>
+          <div className="flex min-h-screen items-center justify-center">
+            <div className="text-center">
+              <h2 className="mb-2 font-semibold text-xl">出现了一些问题</h2>
+              <p className="text-gray-600">请刷新页面重试</p>
               <button
                 type="button"
                 onClick={() => window.location.reload()}
-                className="rounded-md bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90"
+                className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
               >
                 刷新页面
               </button>

@@ -1,42 +1,13 @@
 import type { Metadata } from "next";
-import { Footer } from "@/components";
-import { MainNavbar } from "@/components/layout/navbar";
-import { ThemeProvider } from "@/components/layout/theme";
+import { Footer, MainNavbar, ThemeProvider } from "@/components";
 import { SITE_METADATA } from "@/config";
+
 import "./globals.css";
 
-// 转换 SITE_METADATA 为 Next.js Metadata 格式
 export const metadata: Metadata = {
   title: SITE_METADATA.title,
   description: SITE_METADATA.description,
-  keywords: [...SITE_METADATA.keywords], // 转换为可变数组
   authors: [{ name: SITE_METADATA.author }],
-  creator: SITE_METADATA.author,
-  publisher: SITE_METADATA.author,
-  metadataBase: new URL(SITE_METADATA.url),
-  openGraph: {
-    type: "website",
-    locale: SITE_METADATA.locale,
-    url: SITE_METADATA.url,
-    title: SITE_METADATA.title,
-    description: SITE_METADATA.description,
-    siteName: SITE_METADATA.title,
-    images: [
-      {
-        url: SITE_METADATA.image,
-        width: 1200,
-        height: 630,
-        alt: SITE_METADATA.title,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: SITE_METADATA.title,
-    description: SITE_METADATA.description,
-    images: [SITE_METADATA.image],
-    creator: SITE_METADATA.twitter,
-  },
 };
 
 export default function RootLayout({
@@ -49,9 +20,9 @@ export default function RootLayout({
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange={true}
         >
           <MainNavbar />
           <div className="relative flex min-h-screen flex-col">

@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { performServerSearch } from "@/components/search/server-search";
+import { performServerSearch } from "@/components/features/search/server-search";
 
 export async function GET(request: NextRequest) {
   try {

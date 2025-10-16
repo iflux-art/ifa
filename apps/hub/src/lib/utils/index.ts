@@ -14,3 +14,20 @@ export {
   normalizeUrl,
   validateRequiredFields,
 } from "./validation";
+
+// ==================== 配置工具函数 ====================
+export {
+  getConfig,
+  isFeatureEnabled,
+  getEnvVar,
+  isDevelopment,
+  isProduction,
+  clearConfigCache,
+  getFullConfig,
+} from "./config-utils";
+
+// ==================== 缓存工具 ====================
+export * from "./cache";
+
+// ==================== 懒加载工具 ====================
+export * from "./lazy-loading";

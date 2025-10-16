@@ -40,6 +40,9 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
 
+    // Project references support
+    "composite": true,
+
     // Next.js plugin for enhanced development experience
     "plugins": [
       {
@@ -51,12 +54,14 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/types/*": ["./src/types/*"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/config/*": ["./src/config/*"],
-      "@/stores/*": ["./src/stores/*"]
+      "@/components": ["./src/components"],
+      "@/lib": ["./src/lib"],
+      "@/lib/utils": ["./src/lib/utils/index"],
+      "@/hooks": ["./src/hooks"],
+      "@/stores": ["./src/stores"],
+      "@/types": ["./src/types"],
+      "@/config": ["./src/config"],
+      "@/app": ["./src/app"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

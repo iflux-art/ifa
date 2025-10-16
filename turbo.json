@@ -7,15 +7,21 @@
     "tailwind.config.*",
     "postcss.config.*",
     "biome.json",
-    ".biomejs.json"
+    ".biomejs.json",
+    "turbo.json",
+    "pnpm-workspace.yaml"
   ],
   "globalEnv": ["NODE_ENV", "NEXT_PUBLIC_*", "CI", "VERCEL", "TURBO_*"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "type-check"],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx,json,md,mdx}",
         "public/**",
+        "app/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "components/**/*.{ts,tsx,js,jsx}",
+        "lib/**/*.{ts,tsx,js,jsx}",
+        "styles/**/*.{css,scss}",
         "next.config.*",
         "package.json",
         "tsconfig.json",
@@ -28,8 +34,7 @@
         ".next/**",
         "!.next/cache/**",
         "dist/**",
-        "storybook-static/**",
-        ".turbo/**"
+        "storybook-static/**"
       ],
       "env": ["NODE_ENV", "NEXT_PUBLIC_*", "CI", "VERCEL"],
       "cache": true,
@@ -42,6 +47,10 @@
       "env": ["NODE_ENV", "NEXT_PUBLIC_*"],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "app/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "components/**/*.{ts,tsx,js,jsx}",
+        "lib/**/*.{ts,tsx,js,jsx}",
+        "styles/**/*.{css,scss}",
         "public/**",
         "next.config.*",
         "package.json",
@@ -63,6 +72,9 @@
       "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx}",
+        "app/**/*.{ts,tsx,js,jsx}",
+        "components/**/*.{ts,tsx,js,jsx}",
+        "lib/**/*.{ts,tsx,js,jsx}",
         "*.{ts,tsx,js,jsx}",
         "package.json",
         "biome.json",
@@ -74,6 +86,9 @@
     "format": {
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "app/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "components/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "lib/**/*.{ts,tsx,js,jsx,json,md,mdx}",
         "*.{ts,tsx,js,jsx,json,md,mdx}",
         "package.json",
         "biome.json",
@@ -86,6 +101,9 @@
       "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "app/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "components/**/*.{ts,tsx,js,jsx,json,md,mdx}",
+        "lib/**/*.{ts,tsx,js,jsx,json,md,mdx}",
         "*.{ts,tsx,js,jsx,json,md,mdx}",
         "package.json",
         "biome.json",
@@ -98,6 +116,9 @@
       "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx}",
+        "app/**/*.{ts,tsx}",
+        "components/**/*.{ts,tsx}",
+        "lib/**/*.{ts,tsx}",
         "*.{ts,tsx}",
         "package.json",
         "tsconfig.json"
@@ -106,9 +127,13 @@
       "cache": true
     },
     "test": {
-      "dependsOn": [],
+      "dependsOn": ["type-check"],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx}",
+        "app/**/*.{ts,tsx,js,jsx}",
+        "components/**/*.{ts,tsx,js,jsx}",
+        "lib/**/*.{ts,tsx,js,jsx}",
+        "__tests__/**/*.{ts,tsx,js,jsx}",
         "**/*.test.{ts,tsx,js,jsx}",
         "**/*.spec.{ts,tsx,js,jsx}",
         "vitest.config.*",
@@ -163,6 +188,9 @@
       "persistent": true,
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx}",
+        "app/**/*.{ts,tsx,js,jsx}",
+        "components/**/*.{ts,tsx,js,jsx}",
+        "lib/**/*.{ts,tsx,js,jsx}",
         "**/*.stories.{ts,tsx,js,jsx}",
         ".storybook/**",
         "package.json"
@@ -172,6 +200,9 @@
       "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx}",
+        "app/**/*.{ts,tsx,js,jsx}",
+        "components/**/*.{ts,tsx,js,jsx}",
+        "lib/**/*.{ts,tsx,js,jsx}",
         "**/*.stories.{ts,tsx,js,jsx}",
         ".storybook/**",
         "package.json"
@@ -185,7 +216,7 @@
       "outputs": []
     },
     "prebuild": {
-      "dependsOn": ["type-check", "lint"],
+      "dependsOn": ["type-check", "lint", "test"],
       "cache": true,
       "outputs": []
     },
@@ -203,11 +234,29 @@
       "dependsOn": [],
       "inputs": [
         "src/**/*.{ts,tsx,js,jsx}",
+        "app/**/*.{ts,tsx,js,jsx}",
+        "components/**/*.{ts,tsx,js,jsx}",
+        "lib/**/*.{ts,tsx,js,jsx}",
         "package.json",
         ".depcheckrc"
       ],
       "outputs": [],
       "cache": true
+    },
+    "env:validate": {
+      "dependsOn": [],
+      "inputs": [
+        ".env*",
+        "scripts/load-env.js",
+        "package.json"
+      ],
+      "outputs": [],
+      "cache": true
+    },
+    "setup": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "outputs": []
     }
   },
   "remoteCache": {

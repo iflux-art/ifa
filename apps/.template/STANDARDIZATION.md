@@ -2,6 +2,24 @@
 
 This document outlines the standardized structure and configuration for all sub-applications in the monorepo.
 
+> **📖 完整文档**: 请参考 [APPLICATION_STRUCTURE_STANDARDS.md](./APPLICATION_STRUCTURE_STANDARDS.md) 获取详细的结构标准和 [CODE_STYLE_GUIDE.md](./CODE_STYLE_GUIDE.md) 获取代码风格指南。
+
+## 快速工具 (Quick Tools)
+
+### 验证应用结构
+```bash
+node apps/.template/validate-app-structure.js apps/web
+```
+
+### 标准化现有应用
+```bash
+# 预览模式
+node apps/.template/standardize-app.js --dry-run apps/web
+
+# 实际执行
+node apps/.template/standardize-app.js apps/web
+```
+
 ## Directory Structure
 
 All sub-applications follow this standardized directory structure:

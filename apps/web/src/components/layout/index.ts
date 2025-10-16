@@ -8,6 +8,3 @@ export { Footer } from "./footer";
 
 // 导航栏组件
 export { Logo, MainNavbar, NavListMenu } from "./navbar";
-
-// 主题组件
-export { ThemeProvider, ThemeToggle } from "./theme";

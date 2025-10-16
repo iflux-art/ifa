@@ -7,6 +7,7 @@ export { Logo } from "./logo";
 // 组件导出
 export { MainNavbar } from "./main-navbar";
 export { NavListMenu } from "./nav-menu";
+export { MobileMenu } from "./mobile-menu";
 
 // 配置导出
 export { NAV_DESCRIPTIONS, NAV_ITEMS, NAV_PATHS } from "./navbar-config";

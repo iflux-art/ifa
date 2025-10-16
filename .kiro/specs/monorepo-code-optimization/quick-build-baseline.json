@@ -1,0 +1,65 @@
+{
+  "timestamp": "2025-10-16T10:59:36.033Z",
+  "buildSizes": {
+    "web": {
+      "bytes": 84616196,
+      "mb": "80.70",
+      "fileCount": 94
+    },
+    "blog": {
+      "bytes": 193971793,
+      "mb": "184.99",
+      "fileCount": 155
+    },
+    "hub": {
+      "bytes": 225418079,
+      "mb": "214.98",
+      "fileCount": 163
+    }
+  },
+  "dependencyCounts": {
+    "web": {
+      "error": "require is not defined"
+    },
+    "blog": {
+      "error": "require is not defined"
+    },
+    "hub": {
+      "error": "require is not defined"
+    }
+  },
+  "fileCounts": {
+    "web": {
+      "sourceFiles": 46,
+      "configFiles": 12,
+      "totalFiles": 66
+    },
+    "blog": {
+      "sourceFiles": 122,
+      "configFiles": 12,
+      "totalFiles": 172
+    },
+    "hub": {
+      "sourceFiles": 156,
+      "configFiles": 12,
+      "totalFiles": 179
+    }
+  },
+  "buildTimes": {
+    "clean": {
+      "success": true,
+      "duration": 1842
+    },
+    "fullBuild": {
+      "success": true,
+      "duration": 30796
+    }
+  },
+  "summary": {
+    "totalApps": 3,
+    "totalBuildSize": 504006068,
+    "totalDependencies": 0,
+    "totalSourceFiles": 324,
+    "totalBuildSizeMB": "480.66"
+  }
+}

@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "es6"],
+    "lib": ["dom", "dom.iterable", "es2022"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -14,15 +14,26 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "baseUrl": ".",
     "paths": {
-      "@repo/utils": ["./packages/utils/src"]
+      "@repo/utils": ["./packages/utils/src"],
+      "@repo/ui": ["./packages/ui/src"],
+      "@repo/config": ["./packages/config/src"],
+      "@repo/shared": ["./packages/shared/src"],
+      "@repo/types": ["./packages/types/src"],
+      "@repo/middleware": ["./packages/middleware/src"]
     }
   },
-  "files": ["tsconfig.json"],
-  "exclude": ["node_modules"]
+  "files": [],
+  "references": [
+    { "path": "./packages/utils" },
+    { "path": "./packages/ui" },
+    { "path": "./packages/config" },
+    { "path": "./packages/shared" },
+    { "path": "./packages/types" },
+    { "path": "./packages/middleware" },
+    { "path": "./apps/hub" },
+    { "path": "./apps/web" },
+    { "path": "./apps/blog" }
+  ]
 }

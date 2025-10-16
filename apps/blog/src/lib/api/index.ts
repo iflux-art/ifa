@@ -16,24 +16,10 @@ export {
   put,
 } from "./api-client";
 
-// 从 api-middleware 导出
-export type {
-  LoggingOptions,
-  MiddlewareResult,
-  ValidationOptions,
-} from "./api-middleware";
-export {
-  runMiddleware,
-  withCORS,
-  withLogging,
-  withPublicApi,
-  withRateLimit,
-  withValidation,
-} from "./api-middleware";
+// API middleware utilities removed for simplicity
 
 // 从 api-paths 导出
 export {
-  ANALYTICS_API_PATHS,
   API_PATHS,
   BLOG_API_PATHS,
   CONTENT_API_PATHS,

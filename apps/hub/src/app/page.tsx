@@ -5,33 +5,27 @@
 
 import type { Metadata } from "next";
 import { lazy, Suspense } from "react";
-import type { LinksItem } from "@/components/home/types";
-import { FeatureErrorBoundary } from "@/components/shared/error-boundary";
+import type { LinksItem } from "@/components/features/home/types";
+import { FeatureErrorBoundary } from "@/components/shared/error-fallback";
 import { ErrorFallback } from "@/components/shared/error-fallback";
 
 // 按需加载 OptimizedHomePage 组件
 const OptimizedHomePage = lazy(() =>
-  import("../components/home/optimized-home-page").then((module) => ({
+  import("@/components/features/home/optimized-home-page").then((module) => ({
     default: module.OptimizedHomePage,
   }))
 );
 
-// 在构建时生成静态元数据
 export const metadata: Metadata = {
   title: "网址导航",
   description: "收集整理各类优质网站资源，方便快速访问",
-  openGraph: {
-    title: "网址导航",
-    description: "收集整理各类优质网站资源，方便快速访问",
-    type: "website",
-  },
 };
 
 // 在构建时获取静态数据
 async function getStaticData() {
   try {
     // 直接从链接数据文件中获取数据
-    const data = await import("../components/links/links-data.json").then(
+    const data = await import("@/components/features/links/links-data.json").then(
       (module) => module.default || module
     );
 
@@ -41,17 +35,29 @@ async function getStaticData() {
       iconType: item.iconType as "image" | "text" | undefined,
     }));
 
-    // 使用生成的分类数据
+    // 生成分类数据
+    const { generateCategoriesFromFiles } = await import(
+      "@/components/features/link-categories/categories-server"
+    );
+    const generatedCategories = await generateCategoriesFromFiles();
+
+    // 转换分类数据格式
     const categories: Array<{
       id: string;
       name: string;
       children?: Array<{ id: string; name: string }>;
-    }> = [];
-    // 分类数据现在通过API动态获取，不再使用静态生成的文件
+    }> = generatedCategories.map((cat) => ({
+      id: cat.id,
+      name: cat.name,
+      children: cat.children?.map((child) => ({
+        id: child.id,
+        name: child.name,
+      })),
+    }));
 
     // 只返回关键数据，减少初始加载量
     const criticalItems = items.slice(0, 100); // 只返回前100个项目作为关键数据
-    const criticalCategories = categories.slice(0, 5); // 只返回前5个分类
+    const criticalCategories = categories; // 返回所有分类，因为分类数量不多
 
     return {
       items: criticalItems,
@@ -88,7 +94,7 @@ export default async function OptimizedHome() {
                 <div className="col-span-12 xl:col-span-8">
                   <div className="grid grid-cols-8 gap-4 sm:gap-6">
                     {/* 左侧边栏 */}
-                    <div className="col-span-8 md:col-span-2">
+                    <div className="hidden md:col-span-2 md:block">
                       <div className="space-y-4 pt-6">
                         <div className="h-6 w-3/4 animate-pulse rounded bg-muted"></div>
                         <div className="space-y-2">

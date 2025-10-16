@@ -1,4 +1,4 @@
-import { handleChunkLoadError } from "@/components/links/links-lib";
+import { handleChunkLoadError } from "@/components/features/links/links-lib";
 
 /**
  * 全局chunk加载错误处理器

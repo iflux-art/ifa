@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
-import type { LinksItem } from "@/components/links/links-types";
-import { LinkFileServiceImpl } from "@/components/links-admin/services/link-file-service";
+import type { LinksItem } from "@/components/features/links/links-types";
+import { LinkFileServiceImpl } from "@/components/features/links-admin/services/link-file-service";
 import { setCacheHeaders } from "@/lib/api/cache-utils";
 
 // 创建文件服务实例（仅在服务器端）

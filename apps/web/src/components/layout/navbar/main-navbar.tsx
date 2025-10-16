@@ -2,10 +2,11 @@
 
 import { memo } from "react";
 import { GitHubButton, TravelButton } from "@/components/features";
-import { useScroll, useScrollToTop } from "@/hooks";
-import { ThemeToggle } from "../theme";
+import { useScroll, useScrollToTop, useIsMobile, useIsDesktop } from "@/hooks";
+import { ThemeToggle } from "@/components/theme";
 import { Logo } from "./logo";
 import { NavListMenu } from "./nav-menu";
+import { MobileMenu } from "./mobile-menu";
 
 interface MainNavbarProps {
   className?: string;
@@ -18,6 +19,10 @@ export const MainNavbar = memo<MainNavbarProps>(({ className = "" }) => {
   // 使用自定义 Hook 优化滚动到顶部功能
   const scrollToTop = useScrollToTop();
 
+  // 响应式断点检测
+  const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
+
   return (
     <nav
       className={`sticky top-0 z-40 h-16 w-full backdrop-blur ${className}`}
@@ -29,14 +34,19 @@ export const MainNavbar = memo<MainNavbarProps>(({ className = "" }) => {
           <Logo />
         </div>
 
-        <div className="flex items-center justify-center gap-8 opacity-100">
-          <NavListMenu className="flex-1" />
-        </div>
+        {/* 桌面端导航菜单 - 仅在 md 断点及以上显示 */}
+        {isDesktop && (
+          <div className="hidden items-center justify-center gap-8 opacity-100 md:flex">
+            <NavListMenu className="flex-1" />
+          </div>
+        )}
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <GitHubButton />
           <TravelButton />
+          {/* 移动端菜单 - 仅在 md 断点以下显示 */}
+          {isMobile && <MobileMenu />}
         </div>
       </div>
       <div className="relative h-px w-full overflow-hidden">

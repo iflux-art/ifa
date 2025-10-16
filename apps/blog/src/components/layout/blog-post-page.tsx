@@ -1,17 +1,18 @@
 "use client";
 
-import { TwikooComment } from "@/components/comment";
+import { TwikooComment } from "@/components/features/comment";
 import ClientMDXRenderer from "@/components/mdx/client-mdx-renderer";
-import type { BlogFrontmatter } from "@/components/posts/blog-content";
-import { Breadcrumb } from "@/components/posts/breadcrumb";
-import { createBlogBreadcrumbs } from "@/components/posts/client-utils";
-import { PostMeta } from "@/components/posts/post-meta";
-import { BlogCategoryCard } from "@/components/sidebar/blog-category-card";
-import { LatestPostsCard } from "@/components/sidebar/latest-posts-card";
-import { RelatedPostsCard } from "@/components/sidebar/related-posts-card";
-import { SidebarWrapper } from "@/components/sidebar/sidebar-wrapper";
-import { TableOfContents } from "@/components/sidebar/table-of-contents";
-import { TagCloudCard } from "@/components/sidebar/tag-cloud-card";
+import type { BlogFrontmatter } from "@/components/features/posts/blog-content";
+import { Breadcrumb } from "@/components/features/posts/breadcrumb";
+import { createBlogBreadcrumbs } from "@/components/features/posts/client-utils";
+import { PostMeta } from "@/components/features/posts/post-meta";
+import { BlogCategoryCard } from "@/components/features/sidebar/blog-category-card";
+import { LatestPostsCard } from "@/components/features/sidebar/latest-posts-card";
+import { RelatedPostsCard } from "@/components/features/sidebar/related-posts-card";
+import { SidebarWrapper } from "@/components/features/sidebar/sidebar-wrapper";
+import { TableOfContents } from "@/components/features/sidebar/table-of-contents";
+import { TagCloudCard } from "@/components/features/sidebar/tag-cloud-card";
+
 import { cn } from "@/lib/utils";
 
 interface BlogPostPageProps {
