@@ -31,6 +31,7 @@ export class LinkFileServiceImpl implements LinkFileService {
       process.cwd(),
       "src",
       "components",
+      "features",
       "links",
       "links-data.json"
     );

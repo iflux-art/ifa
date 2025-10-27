@@ -65,7 +65,6 @@
     "perf:measure": "node scripts/measure-build-performance.js",
     "workspace:validate": "node scripts/validate-workspace.js",
     "workspace:sync": "node scripts/sync-configs.js",
-
     "build:deploy": "node scripts/build-deployment.js build",
     "build:deploy:fast": "node scripts/build-deployment.js build --skip-checks",
     "build:report": "node scripts/build-deployment.js report",
@@ -75,6 +74,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.2.5",
     "@playwright/test": "^1.56.0",
+    "@tailwindcss/postcss": "^4.1.16",
     "@testing-library/jest-dom": "^6.9.1",
     "@turbo/gen": "^1.13.4",
     "@types/lodash.debounce": "^4.0.9",
