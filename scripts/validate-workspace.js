@@ -176,15 +176,8 @@ function validateWorkspaceConfig() {
 
 async function validateApps() {
   const appPaths = await fastGlob('apps/*', { onlyDirectories: true });
-  const templatePath = appPaths.find(path => path.includes('.template'));
   const appDirs = appPaths.filter(path => !path.includes('.template'));
-  
-  if (templatePath) {
-    log(`✅ Found template directory: ${templatePath}`, COLORS.green);
-  } else {
-    log('⚠️  Template directory not found', COLORS.yellow);
-  }
-  
+
   let allAppsValid = true;
   
   for (const appPath of appDirs) {

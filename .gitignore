@@ -1,17 +1,12 @@
 # Dependencies
 node_modules/
-.pnp
-.pnp.js
 
 # Testing
 coverage/
-.nyc_output
 
 # Next.js
 .next/
 out/
-build/
-dist/
 
 # Production
 *.tgz
@@ -46,7 +41,6 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -124,14 +118,14 @@ public
 .yarn/install-state.gz
 .pnp.*
 
-# Turbo
-.turbo
-
 # Vercel
 .vercel
 
 # Storybook
 storybook-static
+
+# Playwright
+.playwright/
 
 # IDE
 .vscode/

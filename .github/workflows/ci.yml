@@ -7,8 +7,8 @@ on:
     branches: [main, develop]
 
 env:
-  NODE_VERSION: '18'
-  PNPM_VERSION: '8'
+  NODE_VERSION: '22'
+  PNPM_VERSION: '9'
 
 jobs:
   quality-checks:
@@ -47,17 +47,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build packages
-        run: pnpm build:packages
-
       - name: Run Biome checks
-        run: pnpm turbo run check
+        run: pnpm check
 
       - name: Run TypeScript type checking
-        run: pnpm turbo run type-check
+        run: pnpm type-check
 
       - name: Run unit tests
-        run: pnpm turbo run test:coverage
+        run: pnpm test:coverage
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v3
@@ -91,7 +88,7 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
 
-      - name: Build applications
+      - name: Build application
         run: pnpm build
 
       - name: Run E2E tests
@@ -127,10 +124,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build all packages and apps
+      - name: Build application
         run: pnpm build
-
-      - name: Check build artifacts
-        run: |
-          echo "Checking build outputs..."
-          ls -la apps/*/dist apps/*/.next packages/*/dist || true
