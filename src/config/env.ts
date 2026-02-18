@@ -1,56 +1,91 @@
-import { z } from "zod";
-
-/**
- * 博客应用环境变量模式 - 只保留必需配置
- */
-export const blogEnvSchema = z.object({
-	// 应用基本信息
-	NEXT_PUBLIC_APP_NAME: z.string().default("Blog App"),
-	NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
-	PORT: z
-		.string()
-		.transform(Number)
-		.pipe(z.number().min(1).max(65535))
-		.default("3000"),
-
-	// 博客核心功能
-	NEXT_PUBLIC_ENABLE_COMMENTS: z
-		.string()
-		.transform((val) => val === "true")
-		.default("true"),
-	NEXT_PUBLIC_POSTS_PER_PAGE: z
-		.string()
-		.transform(Number)
-		.pipe(z.number().min(1).max(50))
-		.default("10"),
-
-	// CMS 集成（可选）
-	CMS_API_URL: z.string().url().optional(),
-	CMS_API_KEY: z.string().optional(),
-});
-
 /**
  * 博客应用环境配置类型
  */
-export type BlogEnvConfig = z.infer<typeof blogEnvSchema>;
+export interface BlogEnvConfig {
+	// 应用基本信息
+	NEXT_PUBLIC_APP_NAME: string;
+	NEXT_PUBLIC_APP_URL: string;
+	PORT: number;
+
+	// 博客核心功能
+	NEXT_PUBLIC_ENABLE_COMMENTS: boolean;
+	NEXT_PUBLIC_POSTS_PER_PAGE: number;
+
+	// CMS 集成（可选）
+	CMS_API_URL?: string;
+	CMS_API_KEY?: string;
+}
+
+/**
+ * 解析布尔值环境变量
+ */
+function parseBoolean(
+	value: string | undefined,
+	defaultValue: boolean,
+): boolean {
+	if (value === undefined) return defaultValue;
+	return value === "true";
+}
+
+/**
+ * 解析数字环境变量
+ */
+function parseNumber(
+	value: string | undefined,
+	defaultValue: number,
+	min?: number,
+	max?: number,
+): number {
+	if (value === undefined) return defaultValue;
+	const parsed = Number.parseInt(value, 10);
+	if (Number.isNaN(parsed)) return defaultValue;
+	if (min !== undefined && parsed < min) return min;
+	if (max !== undefined && parsed > max) return max;
+	return parsed;
+}
+
+/**
+ * 解析 URL 环境变量
+ */
+function parseUrl(value: string | undefined, defaultValue: string): string {
+	if (value === undefined) return defaultValue;
+	try {
+		new URL(value);
+		return value;
+	} catch {
+		return defaultValue;
+	}
+}
 
 /**
  * 加载并验证博客应用环境变量
  */
 export function loadBlogEnvConfig(): BlogEnvConfig {
-	try {
-		const blogConfig = blogEnvSchema.parse(process.env);
-		return blogConfig;
-	} catch (error) {
-		if (error instanceof z.ZodError) {
-			const errorMessages = error.errors
-				.map((err) => `${err.path.join(".")}: ${err.message}`)
-				.join("\n");
+	return {
+		// 应用基本信息
+		NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME || "Blog App",
+		NEXT_PUBLIC_APP_URL: parseUrl(
+			process.env.NEXT_PUBLIC_APP_URL,
+			"http://localhost:3000",
+		),
+		PORT: parseNumber(process.env.PORT, 3000, 1, 65535),
 
-			throw new Error(`博客应用环境变量验证失败:\n${errorMessages}`);
-		}
-		throw error;
-	}
+		// 博客核心功能
+		NEXT_PUBLIC_ENABLE_COMMENTS: parseBoolean(
+			process.env.NEXT_PUBLIC_ENABLE_COMMENTS,
+			true,
+		),
+		NEXT_PUBLIC_POSTS_PER_PAGE: parseNumber(
+			process.env.NEXT_PUBLIC_POSTS_PER_PAGE,
+			10,
+			1,
+			50,
+		),
+
+		// CMS 集成（可选）
+		CMS_API_URL: process.env.CMS_API_URL,
+		CMS_API_KEY: process.env.CMS_API_KEY,
+	};
 }
 
 /**

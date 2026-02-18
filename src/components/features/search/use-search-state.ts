@@ -2,114 +2,97 @@
 
 /**
  * 搜索状态管理 React Hook
- * 集成 Zustand 状态管理
+ * 使用本地搜索，无需 API 调用
  */
 
 import { useCallback, useEffect, useState } from "react";
 import {
-	getSearchSuggestions,
-	performSearch,
-} from "@/components/features/search/search-engine";
-import type {
-	SearchOptions,
-	SearchResult,
-} from "@/components/features/search/search-types";
-import { useSearchStore } from "./search-store";
+	performLocalSearch,
+	preloadSearchIndex,
+} from "@/components/features/search/local-search-engine";
+import type { SearchResult } from "@/components/features/search/search-types";
 
 interface UseSearchStateReturn {
-	search: (query: string, options?: SearchOptions) => Promise<void>;
+	/** 执行搜索 */
+	search: (query: string) => Promise<void>;
+	/** 搜索结果 */
 	results: SearchResult[];
+	/** 是否正在加载 */
 	isLoading: boolean;
+	/** 是否正在加载索引 */
+	isIndexLoading: boolean;
+	/** 错误信息 */
 	error: string | null;
+	/** 当前搜索词 */
 	query: string;
-	suggestions: string[];
-	getSuggestions: (query: string) => Promise<void>;
-	// Zustand 状态
-	searchTerm: string;
-	selectedCategory: string;
-	setSearchTerm: (term: string) => void;
-	setSelectedCategory: (category: string) => void;
+	/** 设置搜索词 */
+	setQuery: (query: string) => void;
+	/** 重置搜索 */
 	resetSearch: () => void;
 }
 
 export function useSearchState(): UseSearchStateReturn {
-	// 使用 Zustand 管理搜索状态
-	const {
-		searchTerm,
-		selectedCategory,
-		setSearchTerm,
-		setSelectedCategory,
-		resetState,
-	} = useSearchStore();
-
-	// 本地状态管理搜索结果和加载状态
+	const [query, setQuery] = useState("");
 	const [results, setResults] = useState<SearchResult[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isIndexLoading, setIsIndexLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-	const [query, setQuery] = useState("");
-	const [suggestions, setSuggestions] = useState<string[]>([]);
 
-	// 当 Zustand 中的搜索词改变时，更新本地查询状态
+	// 组件挂载时预加载索引
 	useEffect(() => {
-		setQuery(searchTerm);
-	}, [searchTerm]);
-
-	const search = useCallback(
-		async (searchQuery: string, options?: SearchOptions): Promise<void> => {
-			// 更新 Zustand 状态
-			setSearchTerm(searchQuery);
-
-			setIsLoading(true);
-			setError(null);
-			setQuery(searchQuery);
-
+		const loadIndex = async () => {
 			try {
-				const response = await performSearch(searchQuery, options);
-				setResults(response.results);
+				setIsIndexLoading(true);
+				// 预加载索引
+				preloadSearchIndex();
+				// 等待一小段时间确保索引开始加载
+				await new Promise((resolve) => setTimeout(resolve, 100));
 			} catch (err) {
-				const errorMessage = err instanceof Error ? err.message : "搜索失败";
-				setError(errorMessage);
-				setResults([]);
+				console.error("Failed to preload search index:", err);
 			} finally {
-				setIsLoading(false);
+				setIsIndexLoading(false);
 			}
-		},
-		[setSearchTerm],
-	);
+		};
 
-	const getSuggestions = useCallback(
-		async (searchQuery: string): Promise<void> => {
-			try {
-				const suggestionList = await getSearchSuggestions(searchQuery);
-				setSuggestions(suggestionList);
-			} catch (err) {
-				console.error("获取建议失败:", err);
-				setSuggestions([]);
-			}
-		},
-		[],
-	);
+		loadIndex();
+	}, []);
 
-	// 清理建议当查询为空时
-	useEffect(() => {
-		if (!query.trim()) {
-			setSuggestions([]);
+	const search = useCallback(async (searchQuery: string): Promise<void> => {
+		if (!searchQuery.trim()) {
+			setResults([]);
+			return;
 		}
-	}, [query]);
+
+		setIsLoading(true);
+		setError(null);
+
+		try {
+			const searchResults = await performLocalSearch(searchQuery, 15);
+			setResults(searchResults);
+		} catch (err) {
+			const errorMessage = err instanceof Error ? err.message : "搜索失败";
+			setError(errorMessage);
+			setResults([]);
+		} finally {
+			setIsLoading(false);
+		}
+	}, []);
+
+	const resetSearch = useCallback(() => {
+		setQuery("");
+		setResults([]);
+		setIsLoading(false);
+		setError(null);
+	}, []);
 
 	return {
 		search,
 		results,
 		isLoading,
+		isIndexLoading,
 		error,
 		query,
-		suggestions,
-		getSuggestions,
-		// Zustand 状态和动作
-		searchTerm,
-		selectedCategory,
-		setSearchTerm,
-		setSelectedCategory,
-		resetSearch: resetState,
+		setQuery,
+		resetSearch,
 	};
 }

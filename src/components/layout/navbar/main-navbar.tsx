@@ -1,31 +1,24 @@
 "use client";
 
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SearchButton, TravelButton } from "@/components/features/buttons";
 import { ThemeToggle } from "@/components/theme";
 import { Logo } from "./logo";
-import { MobileMenu } from "./mobile-menu";
 import { NavListMenu } from "./nav-menu";
 
 interface MainNavbarProps {
 	className?: string;
-	sidebarContent?: React.ReactNode;
-	sidebarContentWithCallback?: (onLinkClick: () => void) => React.ReactNode;
 }
 
-export const MainNavbar = ({
-	className = "",
-	sidebarContent,
-	sidebarContentWithCallback,
-}: MainNavbarProps) => {
+export const MainNavbar = ({ className = "" }: MainNavbarProps) => {
 	const [isScrolled, setIsScrolled] = useState(false);
 
-	useEffect(() => {
-		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 0);
-		};
+	const handleScroll = useCallback(() => {
+		setIsScrolled(window.scrollY > 0);
+	}, []);
 
+	useEffect(() => {
 		// 初始检查
 		handleScroll();
 
@@ -36,12 +29,12 @@ export const MainNavbar = ({
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
 		};
-	}, []);
+	}, [handleScroll]);
 
 	// 双击返回顶部功能
-	const scrollToTop = () => {
+	const scrollToTop = useCallback(() => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
-	};
+	}, []);
 
 	return (
 		<nav
@@ -50,24 +43,15 @@ export const MainNavbar = ({
 			aria-label="导航栏"
 		>
 			<div className="container mx-auto flex h-full items-center justify-between px-4">
-				<div className="flex items-center opacity-100">
-					<Logo />
-				</div>
+				<Logo />
 
 				{/* 桌面端导航菜单 */}
-				<div className="hidden items-center justify-center gap-8 opacity-100 md:flex">
-					<NavListMenu className="flex-1" />
-				</div>
+				<NavListMenu className="hidden gap-8 md:flex" />
 
 				<div className="flex items-center gap-2">
 					<SearchButton />
 					<ThemeToggle />
 					<TravelButton />
-					{/* 移动端菜单 */}
-					<MobileMenu
-						sidebarContent={sidebarContent}
-						sidebarContentWithCallback={sidebarContentWithCallback}
-					/>
 				</div>
 			</div>
 			<div className="relative h-px w-full overflow-hidden">

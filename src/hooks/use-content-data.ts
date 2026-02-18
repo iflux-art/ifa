@@ -67,7 +67,7 @@ export function useContentData<T>({
 	disableCache = false,
 	params,
 	headers,
-	forceRefresh = false, // 新增强制刷新参数
+	forceRefresh = false,
 }: ContentLoadOptions): HookResult<T> {
 	const pathname = usePathname();
 
@@ -75,7 +75,7 @@ export function useContentData<T>({
 	const getCacheKey = () => `${type}:${category ?? "all"}:${pathname}`;
 
 	// 数据获取函数
-	const fetchData = () => {
+	const fetchData = async (): Promise<T> => {
 		const apiUrl = url ?? path ?? "";
 		if (!apiUrl) {
 			throw new Error("URL or path is required");
@@ -93,7 +93,7 @@ export function useContentData<T>({
 		}
 
 		// 创建请求函数
-		const makeRequest = async () => {
+		const makeRequest = async (): Promise<T> => {
 			try {
 				// 添加缓存控制头来防止服务器缓存
 				const headerOptions: Record<string, string> = {
@@ -112,8 +112,7 @@ export function useContentData<T>({
 				const fetchOptions: RequestInit = {
 					headers: headerOptions,
 					cache: forceRefresh || disableCache ? "no-store" : "force-cache",
-					next: { revalidate: forceRefresh || disableCache ? 0 : 60 }, // 60秒重新验证
-					...(params ?? {}),
+					next: { revalidate: forceRefresh || disableCache ? 0 : 60 },
 				};
 
 				const response = await fetch(finalUrl, fetchOptions);
@@ -144,8 +143,7 @@ export function useContentData<T>({
 		fetchData,
 		{
 			expiry: disableCache || forceRefresh ? 0 : cacheTime,
-			useMemoryCache: !(forceRefresh || disableCache),
-			useLocalStorage: !(forceRefresh || disableCache),
+			enabled: !(forceRefresh || disableCache),
 		},
 	);
 
@@ -153,6 +151,8 @@ export function useContentData<T>({
 		data: data ?? null,
 		loading,
 		error: error ?? null,
-		refresh: () => refetch(),
+		refresh: async () => {
+			await refetch();
+		},
 	};
 }

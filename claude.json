@@ -1,0 +1,32 @@
+{
+  "project": {
+    "name": "Blog",
+    "description": "A modern Next.js App Router blog with MDX support",
+    "version": "1.0.0"
+  },
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Bash"
+    ],
+    "deny": [
+      "rm -rf node_modules",
+      "rm -rf .next"
+    ]
+  },
+  "completion": {
+    "autoStart": true,
+    "description": "Next.js Blog Project"
+  },
+  "env": {
+    "loadEnvFiles": true,
+    "HTTP_PROXY": "${HTTP_PROXY}",
+    "HTTPS_PROXY": "${HTTPS_PROXY}",
+    "http_proxy": "${http_proxy}",
+    "https_proxy": "${https_proxy}",
+    "ALL_PROXY": "${ALL_PROXY}",
+    "NO_PROXY": "${NO_PROXY}"
+  }
+}

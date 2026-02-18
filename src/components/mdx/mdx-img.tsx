@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type React from "react";
+import type { ComponentPropsWithoutRef, ReactElement } from "react";
 
 type MDXImgProps = {
 	src: string;
@@ -7,39 +7,38 @@ type MDXImgProps = {
 	width?: number;
 	height?: number;
 	className?: string;
-} & React.ComponentPropsWithoutRef<typeof Image>;
+	priority?: boolean;
+} & ComponentPropsWithoutRef<typeof Image>;
 
 /**
  * Custom MDX Image component
- * Provides default width/height for images
+ * Follows Next.js best practices for image optimization:
+ * - Lazy loading by default (loading="lazy")
+ * - Use priority prop for above-the-fold images
+ * - Proper sizes attribute for responsive loading
+ *
+ * @see https://nextjs.org/docs/app/building-your-application/optimizing/images
  */
-export const MDXImg = ({
+export function MDXImg({
 	src,
 	alt,
-	width = 800, // Default width
-	height = 450, // Default height (16:9 aspect ratio)
+	width = 800,
+	height = 450,
 	className = "",
+	priority = false,
 	...props
-}: MDXImgProps) => {
-	const isRemote = src.startsWith("http");
-
+}: MDXImgProps): ReactElement {
 	return (
 		<Image
 			src={src}
 			alt={alt}
 			width={width}
 			height={height}
-			className={`my-6 w-full max-w-full rounded-sm border border-border object-cover shadow-md transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 ${className}`}
-			style={
-				isRemote ? undefined : { position: "relative", aspectRatio: "16/9" }
-			}
-			sizes={
-				isRemote
-					? undefined
-					: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-			}
-			loading="eager"
+			className={`w-full max-w-full rounded-sm border border-border object-cover shadow-md transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 ${className}`}
+			sizes="(max-width: 768px) 100vw, (max-width: 1200px) 640px, 800px"
+			priority={priority}
+			placeholder="empty"
 			{...props}
 		/>
 	);
-};
+}

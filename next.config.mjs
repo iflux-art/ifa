@@ -1,8 +1,11 @@
 import createMDX from "@next/mdx";
+import remarkGfm from "remark-gfm";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	// Allow MDX files as pages
 	pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+
 	images: {
 		remotePatterns: [
 			{
@@ -20,71 +23,30 @@ const nextConfig = {
 		],
 	},
 
-	// Development optimizations
-	...(process.env.NODE_ENV === "development" && {
-		// Enable fast refresh
-		reactStrictMode: true,
-	}),
-
-	// Production optimizations
-	...(process.env.NODE_ENV === "production" && {
-		reactStrictMode: true,
-		// Turbopack handles compression automatically in Next.js 15+
-	}),
+	// Enable React Strict Mode for both development and production
+	// This helps catch potential problems early during development
+	reactStrictMode: true,
 
 	// Enable Next.js 15 features and optimizations
 	experimental: {
 		// Enable optimized package imports for better tree shaking
-		optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
+		optimizePackageImports: ["lucide-react"],
 
-		// Enable server actions for React 19 compatibility
-		serverActions: {
-			allowedOrigins: ["localhost:3000", "localhost:3001", "localhost:3002"],
-		},
-
-		// MDX specific optimizations
+		// MDX specific optimizations - use Rust compiler for better performance
 		mdxRs: true,
-	},
-
-	// Simplified Turbopack configuration
-	turbopack: {
-		resolveAlias: {
-			"@": "./src",
-			"@/components": "./src/components",
-			"@/lib": "./src/lib",
-			"@/utils": "./src/utils",
-			"@/hooks": "./src/hooks",
-			"@/stores": "./src/stores",
-			"@/types": "./src/types",
-			"@/config": "./src/config",
-			"@/content": "./src/content",
-		},
 	},
 
 	// Performance optimizations
 	compress: true,
 	poweredByHeader: false,
-
-	// Simplified webpack optimizations
-	webpack: (config, { dev, webpack }) => {
-		// Disable React DevTools in production
-		if (!dev) {
-			config.plugins.push(
-				new webpack.DefinePlugin({
-					__REACT_DEVTOOLS_GLOBAL_HOOK__: "({ isDisabled: true })",
-				}),
-			);
-		}
-
-		return config;
-	},
 };
 
+// Configure MDX with remark plugins
 const withMDX = createMDX({
-	// Add providerImportSource configuration if needed
-	// options: {
-	//   providerImportSource: "@mdx-js/react",
-	// },
+	options: {
+		remarkPlugins: [remarkGfm],
+		rehypePlugins: [],
+	},
 });
 
 export default withMDX(nextConfig);

@@ -14,9 +14,6 @@ export const metadata: Metadata = {
  */
 export const revalidate = 3600;
 
-// 每页显示的文章数量
-const POSTS_PER_PAGE = 12;
-
 // 服务端获取所有需要的数据
 async function getBlogPageData() {
 	try {
@@ -24,7 +21,7 @@ async function getBlogPageData() {
 		const allPosts = await getAllPosts();
 
 		// 获取所有标签及其计数
-		const tagsWithCount = getAllTagsWithCount();
+		const tagsWithCount = await getAllTagsWithCount();
 		const allTags = Object.entries(tagsWithCount)
 			.map(([name, count]) => ({ name, count }))
 			.sort((a, b) => b.count - a.count);
@@ -57,20 +54,11 @@ async function getBlogPageData() {
 				category: post.category,
 			}));
 
-		// 获取相关文章（这里我们选择最新的10篇文章作为相关文章）
-		const relatedPosts = allPosts.slice(0, 10).map((post) => ({
-			title: post.title ?? post.slug,
-			href: `/posts/${post.slug}`,
-			category: post.category,
-			slug: post.slug.split("/"),
-		}));
-
 		return {
 			allPosts,
 			allTags,
 			categories,
 			latestPosts,
-			relatedPosts,
 		};
 	} catch (error) {
 		console.error("获取博客页面数据失败:", error);
@@ -79,39 +67,20 @@ async function getBlogPageData() {
 			allTags: [],
 			categories: [],
 			latestPosts: [],
-			relatedPosts: [],
 		};
 	}
 }
 
-interface HomeProps {
-	searchParams: Promise<{ page?: string }>;
-}
-
-export default async function Home({ searchParams }: HomeProps) {
-	const { allPosts, allTags, categories, latestPosts, relatedPosts } =
+export default async function Home() {
+	const { allPosts, allTags, categories, latestPosts } =
 		await getBlogPageData();
-
-	// 获取当前页码
-	const resolvedSearchParams = await searchParams;
-	const currentPage = parseInt(resolvedSearchParams?.page || "1", 10);
-	const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
-
-	// 获取当前页的文章
-	const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-	const endIndex = startIndex + POSTS_PER_PAGE;
-	const paginatedPosts = allPosts.slice(startIndex, endIndex);
 
 	return (
 		<BlogPageContainer
-			initialPosts={paginatedPosts}
+			initialPosts={allPosts}
 			allTags={allTags}
 			categories={categories}
 			latestPosts={latestPosts}
-			relatedPosts={relatedPosts}
-			currentPage={currentPage}
-			totalPages={totalPages}
-			totalPosts={allPosts.length}
 		/>
 	);
 }

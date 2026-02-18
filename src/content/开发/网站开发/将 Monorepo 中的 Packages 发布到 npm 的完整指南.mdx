@@ -1,0 +1,178 @@
+---
+title: 将 Monorepo 中的 Packages 发布到 npm 的完整指南
+description: 一份新手友好的教程，详细介绍如何将 monorepo 项目中的共享包发布到 npm registry
+category: 开发
+tags:
+ - 开发指南
+ - Monorepo
+ - npm
+date: 2025-09-16
+---
+
+在现代前端开发中，Monorepo（单体仓库）已经成为一种流行的项目组织方式。它允许我们在一个仓库中管理多个相关的项目和共享包。然而，许多开发者在尝试将这些共享包发布到 npm 时会遇到困难。本文将详细介绍如何将 Monorepo 项目中的 packages 发布到 npm，即使是新手也能轻松掌握。
+
+## 什么是 Monorepo 和 Packages？
+
+在深入发布流程之前，让我们先了解一下相关概念：
+
+- **Monorepo**：单体仓库，指在一个代码仓库中管理多个相关项目的架构模式。
+- **Packages**：在 Monorepo 中，packages 通常指共享的库或组件，可以被多个项目复用。
+
+在我们的项目中，packages 位于 [packages](file://c:\project\ifa\packages) 目录下，包含 [@repo/ui](file://c:\project\ifa\packages\ui\package.json#L2-L2) 和 [@repo/utils](file://c:\project\ifa\packages\utils\package.json#L2-L2) 两个共享包。
+
+## 发布前的准备工作
+
+### 1. 检查包的配置
+
+首先，我们需要确保要发布的包配置正确。打开包目录下的 [package.json](file://c:\project\ifa\packages\ui\package.json) 文件，检查以下关键配置：
+
+```json
+{
+  "name": "@repo/ui", // 包名，使用作用域命名
+  "version": "0.1.0", // 版本号
+  "private": false, // 必须设置为 false 才能发布
+  "publishConfig": {
+    "access": "public" // 公开访问权限
+  }
+}
+```
+
+### 2. 创建 npm 账户
+
+如果你还没有 npm 账户，需要先在 [npmjs.com](https://www.npmjs.com/) 上注册一个账户。
+
+### 3. 登录 npm
+
+在终端中执行以下命令登录你的 npm 账户：
+
+```bash
+npm login
+```
+
+按照提示输入你的用户名、密码和邮箱。
+
+## 构建你的包
+
+在发布之前，我们需要先构建包以生成可发布的文件。
+
+### 构建所有包
+
+在项目根目录执行：
+
+```bash
+pnpm run build:packages
+```
+
+### 单独构建特定包
+
+你也可以单独构建每个包：
+
+```bash
+# 构建 utils 包
+cd packages/utils
+pnpm run build
+
+# 构建 ui 包
+cd packages/ui
+pnpm run build
+```
+
+## 测试发布（可选但推荐）
+
+在正式发布之前，我们可以创建一个 tarball 文件来测试包是否能正常工作：
+
+```bash
+# 在包目录中执行
+cd packages/utils
+npm pack
+
+cd packages/ui
+npm pack
+```
+
+这会创建一个 `.tgz` 文件，你可以将其安装到其他项目中进行测试。
+
+## 正式发布到 npm
+
+### 发布 @repo/utils 包
+
+```bash
+cd packages/utils
+npm publish
+```
+
+### 发布 @repo/ui 包
+
+```bash
+cd packages/ui
+npm publish
+```
+
+## 版本管理
+
+发布后，如果需要更新版本，可以使用以下命令：
+
+```bash
+# 在包目录中执行
+npm version patch  # 补丁版本 (0.0.1) - 修复 bug
+npm version minor  # 次要版本 (0.1.0) - 添加新功能
+npm version major  # 主要版本 (1.0.0) - 重大更新
+```
+
+然后重新发布：
+
+```bash
+npm publish
+```
+
+## 使用发布的包
+
+发布成功后，其他项目可以通过以下方式安装：
+
+```bash
+# 使用 npm
+npm install @repo/utils
+npm install @repo/ui
+
+# 使用 pnpm
+pnpm add @repo/utils
+pnpm add @repo/ui
+```
+
+## 常见问题和注意事项
+
+### 1. 作用域包
+
+由于我们使用了 `@repo` 作用域，需要在 [package.json](file://c:\project\ifa\packages\ui\package.json) 中设置 `"publishConfig": {"access": "public"}` 来确保包可以公开访问。
+
+### 2. 依赖关系
+
+注意 [@repo/ui](file://c:\project\ifa\packages\ui\package.json#L2-L2) 依赖于 [@repo/utils](file://c:\project\ifa\packages\utils\package.json#L2-L2)，确保在发布时版本兼容。
+
+### 3. Peer Dependencies
+
+[@repo/ui](file://c:\project\ifa\packages\ui\package.json#L2-L2) 包有 React 的 peer dependencies，使用者需要安装相应版本的 React。
+
+### 4. 私有包
+
+如果想发布私有包，需要在 [package.json](file://c:\project\ifa\packages\ui\package.json) 中设置 `"private": true` 或者在 npm 上付费使用私有包功能。
+
+### 5. 版本号
+
+遵循语义化版本控制（SemVer）规范，合理更新版本号：
+- **Patch** (0.0.x)：修复 bug，向后兼容
+- **Minor** (0.x.0)：添加新功能，向后兼容
+- **Major** (x.0.0)：重大更新，可能不兼容
+
+## 总结
+
+通过以上步骤，你已经学会了如何将 Monorepo 项目中的 packages 发布到 npm。整个流程包括：
+
+1. 检查和配置包的 [package.json](file://c:\project\ifa\packages\ui\package.json)
+2. 创建并登录 npm 账户
+3. 构建包
+4. 测试发布（可选）
+5. 正式发布到 npm
+6. 版本管理
+
+发布共享包不仅能提高代码复用性，还能为社区做出贡献。希望这篇指南能帮助你顺利发布自己的 npm 包！

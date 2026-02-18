@@ -18,36 +18,3 @@ export interface UseAsyncOptions<T> {
 	/** 数据验证函数 */
 	validator?: (data: T) => boolean;
 }
-
-export interface AsyncOperationResult<T> {
-	/** 操作结果数据 */
-	data: T | null;
-	/** 是否正在加载 */
-	loading: boolean;
-	/** 错误信息 */
-	error: string | null;
-	/** 重新执行操作的函数 */
-	refetch: () => Promise<T | null>;
-}
-
-/**
- * 缓存选项类型定义
- */
-export interface CacheOptions<T> {
-	/** 缓存键前缀 */
-	prefix?: string;
-	/** 缓存过期时间（毫秒） */
-	expiry?: number;
-	/** 是否使用内存缓存 */
-	useMemoryCache?: boolean;
-	/** 是否使用本地存储缓存 */
-	useLocalStorage?: boolean;
-	/** 最大重试次数 */
-	maxRetries?: number;
-	/** 重试延迟（毫秒） */
-	retryDelay?: number;
-	/** 内存缓存最大数量 */
-	maxCacheSize?: number;
-	/** 数据验证函数 */
-	validator?: (data: T) => boolean;
-}

@@ -7,6 +7,7 @@
 
 import { useMemo } from "react";
 import type { BlogPost } from "@/components/features/posts/blog-types";
+import { sortPostsByDate } from "@/components/features/posts/client-utils";
 // 从 blog-category-card 组件中导入 CategoryWithCount 类型
 import type { CategoryWithCount } from "@/components/features/sidebar/blog-category-card";
 import { type HookResult, useContentData } from "@/hooks/use-content-data";
@@ -188,26 +189,3 @@ export async function getAllPosts() {
 
 // Blog 页面状态管理 Hook
 export { useBlogPage } from "./use-blog-page";
-
-// 按日期对博客文章进行排序
-function sortPostsByDate(posts: BlogPost[] | null | undefined) {
-	if (!(posts && Array.isArray(posts))) {
-		return [];
-	}
-	return [...posts].sort((a, b) => {
-		// 确保 date 属性存在且是有效的
-		if (a.date && b.date) {
-			// 处理不同的日期格式
-			const dateA = new Date(a.date);
-			const dateB = new Date(b.date);
-
-			// 检查日期是否有效
-			if (Number.isNaN(dateA.getTime()) || Number.isNaN(dateB.getTime())) {
-				return 0;
-			}
-
-			return dateB.getTime() - dateA.getTime();
-		}
-		return 0;
-	});
-}

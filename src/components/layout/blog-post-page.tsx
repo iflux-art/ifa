@@ -1,9 +1,6 @@
 "use client";
 
-import { TwikooComment } from "@/components/features/comment";
 import type { BlogFrontmatter } from "@/components/features/posts/blog-content";
-import { Breadcrumb } from "@/components/features/posts/breadcrumb";
-import { createBlogBreadcrumbs } from "@/components/features/posts/client-utils";
 import { PostMeta } from "@/components/features/posts/post-meta";
 import { BlogCategoryCard } from "@/components/features/sidebar/blog-category-card";
 import { LatestPostsCard } from "@/components/features/sidebar/latest-posts-card";
@@ -47,37 +44,6 @@ interface BlogPostPageProps {
 }
 
 /**
- * 计算预计阅读时间
- * 基于中文阅读速度约 300-400 字/分钟，英文约 200-250 词/分钟
- * 这里采用保守估计 250 字/分钟
- */
-function _calculateReadingTime(wordCount: number): string {
-	if (wordCount === 0) {
-		return "0 分钟";
-	}
-
-	const wordsPerMinute = 250;
-	const minutes = Math.ceil(wordCount / wordsPerMinute);
-
-	if (minutes < 1) {
-		return "1 分钟";
-	}
-
-	if (minutes < 60) {
-		return `${minutes} 分钟`;
-	}
-
-	const hours = Math.floor(minutes / 60);
-	const remainingMinutes = minutes % 60;
-
-	if (remainingMinutes === 0) {
-		return `${hours} 小时`;
-	}
-
-	return `${hours} 小时 ${remainingMinutes} 分钟`;
-}
-
-/**
  * 博客文章页面容器组件
  * 处理博客文章的展示逻辑
  */
@@ -91,16 +57,10 @@ export const BlogPostPageContainer = ({
 	allTags,
 	allCategories,
 }: BlogPostPageProps) => {
+	// 标题从 frontmatter 获取（提供 slug 作为后备）
 	const title = frontmatter.title ?? slug.join("/");
 	const date = frontmatter.date
 		? new Date(frontmatter.date).toLocaleDateString("zh-CN", {
-				year: "numeric",
-				month: "long",
-				day: "numeric",
-			})
-		: undefined;
-	const updatedAt = frontmatter.update
-		? new Date(frontmatter.update).toLocaleDateString("zh-CN", {
 				year: "numeric",
 				month: "long",
 				day: "numeric",
@@ -132,11 +92,6 @@ export const BlogPostPageContainer = ({
 
 	// 右侧边栏内容（现在为空）
 	const _rightSidebar = null; // 保留变量但添加下划线前缀以避免未使用警告
-
-	const breadcrumbs = createBlogBreadcrumbs({
-		slug: slug.slice(1),
-		title,
-	});
 
 	return (
 		<div className="min-h-screen bg-background">
@@ -177,30 +132,18 @@ export const BlogPostPageContainer = ({
 											"p-3 sm:p-4 md:p-5 lg:p-6",
 										)}
 									>
-										{/* 面包屑导航 */}
-										{breadcrumbs && breadcrumbs.length > 0 && (
-											<div className="mb-6">
-												<Breadcrumb items={breadcrumbs} />
-											</div>
-										)}
-
 										<header className="mb-8">
-											<h1 className="mb-8 font-bold text-4xl tracking-tight sm:text-4xl">
+											<h1 className="mb-8 font-bold text-2xl tracking-tight sm:text-2xl">
 												{title}
 											</h1>
 											{/* 使用 PostMeta 组件显示文章元数据 */}
-											<PostMeta
-												date={date}
-												updatedAt={updatedAt}
-												wordCount={content.length}
-											/>
+											<PostMeta date={date} wordCount={content.length} />
 										</header>
 
-										<div className="prose prose-zinc dark:prose-invert max-w-none prose-img:rounded-xl">
+										<div className="prose prose-sm prose-zinc dark:prose-invert max-w-none prose-img:rounded-xl">
 											<ClientMDXRenderer content={content} />
 										</div>
 									</article>
-									<TwikooComment />
 								</div>
 							</div>
 						</div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Quote } from "lucide-react";
+import type React from "react";
 import { cn } from "@/lib/utils";
 
 type MDXBlockquoteProps = {
@@ -24,12 +25,13 @@ export const MDXBlockquote = ({
 			"flex items-start gap-4",
 			"bg-muted/50",
 			"border-border",
+			"overflow-hidden",
 			className,
 		)}
 		{...props}
 	>
 		<Quote className="mt-1 h-5 w-5 flex-shrink-0 text-muted-foreground" />
-		<div className="flex-1">
+		<div className="min-w-0 flex-1 break-words">
 			{children}
 			{(citation ?? author) && (
 				<footer className="mt-4 text-muted-foreground text-sm">

@@ -1,37 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { forwardRef } from "react";
 import type { BlogPost } from "@/components/features/posts/blog-types";
+import { formatDate } from "@/components/features/posts/client-utils";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-/**
- * 格式化日期
- * @param date 日期字符串或Date对象
- * @param format 可选格式 (支持 'MM月dd日')
- * @returns 格式化后的日期字符串
- */
-export const formatDate = (dateString: string | undefined): string => {
-	if (!dateString) {
-		return "";
-	}
-
-	const d = new Date(dateString);
-
-	if (Number.isNaN(d.getTime())) {
-		return "";
-	}
-
-	return d.toLocaleDateString("zh-CN", {
-		year: "numeric",
-		month: "long",
-		day: "numeric",
-	});
-};
+// Re-export formatDate for backward compatibility
+export { formatDate };
 
 // 内联文章卡片相关类型定义
 interface BlogCardProps {
@@ -40,8 +17,6 @@ interface BlogCardProps {
 	href: string;
 	category?: string;
 	tags?: string[];
-	cover?: string;
-	date?: string;
 	author?: string;
 	className?: string;
 	onCategoryClick?: (category: string) => void;
@@ -55,19 +30,17 @@ interface CategoryBadgeProps {
 }
 
 const CategoryBadge = ({ category, onCategoryClick }: CategoryBadgeProps) => (
-	<div className="mb-2 sm:mb-3">
-		<Badge
-			variant="secondary"
-			className="min-h-[28px] cursor-pointer touch-manipulation px-3 py-1 font-medium text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
-			onClick={(e) => {
-				e.preventDefault();
-				e.stopPropagation();
-				onCategoryClick?.(category);
-			}}
-		>
-			{category}
-		</Badge>
-	</div>
+	<Badge
+		variant="secondary"
+		className="cursor-pointer touch-manipulation px-2.5 py-1 font-medium text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
+		onClick={(e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			onCategoryClick?.(category);
+		}}
+	>
+		{category}
+	</Badge>
 );
 
 // 标签列表组件
@@ -77,12 +50,12 @@ interface TagBadgesProps {
 }
 
 const TagBadges = ({ tags, onTagClick }: TagBadgesProps) => (
-	<div className="mb-2 flex flex-wrap gap-1.5 sm:mb-3 sm:gap-2">
-		{tags.map((tag) => (
+	<div className="flex flex-wrap gap-1">
+		{tags.slice(0, 4).map((tag) => (
 			<Badge
 				key={tag}
 				variant="outline"
-				className="min-h-[24px] cursor-pointer touch-manipulation border-muted-foreground/20 px-2 py-1 text-xs transition-colors hover:border-primary/30 hover:bg-accent/50"
+				className="cursor-pointer touch-manipulation border-muted-foreground/20 px-2 py-0.5 text-xs transition-colors hover:border-primary/30 hover:bg-accent/50"
 				onClick={(e) => {
 					e.preventDefault();
 					e.stopPropagation();
@@ -92,37 +65,6 @@ const TagBadges = ({ tags, onTagClick }: TagBadgesProps) => (
 				{tag}
 			</Badge>
 		))}
-	</div>
-);
-
-// 封面图片组件
-interface CoverImageProps {
-	cover: string;
-	title: string;
-}
-
-const CoverImage = ({ cover, title }: CoverImageProps) => (
-	<div
-		className="relative hidden flex-shrink-0 overflow-hidden rounded-r-[calc(var(--radius)-1px)] bg-muted/30 lg:block"
-		style={{ width: "45%", aspectRatio: "4/3" }}
-	>
-		<Image
-			src={cover}
-			alt={`${title} 封面`}
-			fill
-			className="object-cover transition-transform duration-300 group-hover:scale-105"
-			sizes="(max-width: 1024px) 0vw, 45vw"
-			onError={(e) => {
-				// 图片加载失败时隐藏图片容器
-				const img = e.target as HTMLImageElement;
-				const container = img.closest("div");
-				if (container) {
-					container.style.display = "none";
-				}
-			}}
-		/>
-		{/* 封面渐变遮罩效果 */}
-		<div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 	</div>
 );
 
@@ -138,74 +80,54 @@ const BlogCard = forwardRef<HTMLAnchorElement, BlogCardProps>(
 			href,
 			category,
 			tags = [],
-			cover,
-			date,
 			className,
 			onCategoryClick,
 			onTagClick,
 		},
 		ref,
 	) => (
-		<Link ref={ref} href={href} className="block h-full">
+		<a ref={ref} href={href} className="block h-full">
 			<Card
 				className={cn(
 					"group h-full overflow-hidden border transition-all duration-300 hover:border-primary/50 hover:shadow-lg",
-					// 移动端触摸优化 - 更大的触摸区域和更好的反馈
+					// 移动端触摸优化
 					"touch-manipulation active:scale-[0.98]",
-					// 移动端最小高度确保一致性
-					"h-[240px]",
 					className,
 				)}
 			>
 				<div className="flex h-full">
-					{/* 左侧内容区域 */}
-					<div
-						className={cn(
-							"flex flex-1 flex-col p-3 sm:p-4 md:p-5 lg:p-6",
-							// 移动端始终占满宽度，桌面端根据是否有封面调整
-							"w-full",
-							cover ? "lg:w-auto lg:flex-1" : "",
-						)}
-					>
-						{/* Category Badge - Above title */}
-						{category && (
-							<CategoryBadge
-								category={category}
-								onCategoryClick={onCategoryClick}
-							/>
-						)}
+					{/* 内容区域 */}
+					<div className="flex w-full flex-1 flex-col p-4">
+						{/* Title with Category on the right */}
+						<div className="mb-2 flex items-center gap-2">
+							<h2 className="flex-1 truncate font-bold text-base leading-tight transition-colors group-hover:text-primary">
+								{title}
+							</h2>
+							{category && (
+								<CategoryBadge
+									category={category}
+									onCategoryClick={onCategoryClick}
+								/>
+							)}
+						</div>
 
-						{/* Title */}
-						<h2 className="mb-2 line-clamp-2 font-bold text-lg leading-tight transition-colors group-hover:text-primary sm:mb-3 sm:text-xl">
-							{title}
-						</h2>
-
-						{/* Description */}
+						{/* Description - 2 lines */}
 						{description && (
-							<p className="mb-3 line-clamp-2 text-muted-foreground text-sm leading-relaxed sm:mb-4 sm:line-clamp-3">
+							<p className="mb-2 line-clamp-2 text-muted-foreground text-sm">
 								{description}
 							</p>
 						)}
 
-						{/* Tags */}
+						{/* Tags - 1 line */}
 						{tags.length > 0 && (
-							<TagBadges tags={tags} onTagClick={onTagClick} />
+							<div className="mt-auto">
+								<TagBadges tags={tags} onTagClick={onTagClick} />
+							</div>
 						)}
-
-						{/* Spacer to push date to bottom */}
-						<div className="flex-1" />
-
-						{/* Date - Bottom left with prefix */}
-						<div className="flex items-center text-muted-foreground text-xs sm:text-sm">
-							{date && <span>发布于 {date}</span>}
-						</div>
 					</div>
-
-					{/* 右侧封面图片区域 - 仅在桌面端显示 */}
-					{cover && <CoverImage cover={cover} title={title} />}
 				</div>
 			</Card>
-		</Link>
+		</a>
 	),
 );
 
@@ -217,10 +139,6 @@ export interface BlogListContentProps {
 	selectedTag?: string | null;
 	onCategoryClick?: (category: string | null) => void;
 	onTagClick?: (tag: string | null) => void;
-	/** 当前页码 */
-	currentPage?: number;
-	/** 总页数 */
-	totalPages?: number;
 }
 
 /**
@@ -234,8 +152,6 @@ export const BlogListContent = ({
 	selectedTag,
 	onCategoryClick,
 	onTagClick,
-	currentPage = 1,
-	totalPages = 1,
 }: BlogListContentProps) => {
 	// 生成筛选结果为空时的提示信息
 	const getEmptyMessage = () => {
@@ -274,37 +190,12 @@ export const BlogListContent = ({
 					description={post.description}
 					href={`/posts/${post.slug}`}
 					category={post.category}
-					cover={post.image}
 					tags={post.tags}
-					date={formatDate(post.date?.toString())}
 					author={post.author}
 					onCategoryClick={onCategoryClick}
 					onTagClick={onTagClick}
 				/>
 			))}
-
-			{/* 分页控件 */}
-			{totalPages > 1 && (
-				<div className="flex justify-center gap-2 pt-8">
-					{currentPage > 1 && (
-						<Link href={`/?page=${currentPage - 1}`}>
-							<Button variant="outline" size="sm">
-								上一页
-							</Button>
-						</Link>
-					)}
-					<span className="flex items-center text-muted-foreground text-sm">
-						第 {currentPage} / {totalPages} 页
-					</span>
-					{currentPage < totalPages && (
-						<Link href={`/?page=${currentPage + 1}`}>
-							<Button variant="outline" size="sm">
-								下一页
-							</Button>
-						</Link>
-					)}
-				</div>
-			)}
 		</div>
 	);
 };

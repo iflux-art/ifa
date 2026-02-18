@@ -53,17 +53,20 @@ export default {
 				DEFAULT: {
 					css: {
 						maxWidth: "none",
-						color: "rgb(var(--foreground))",
+						color: "var(--foreground)",
 						a: {
-							color: "rgb(var(--brand-600))",
+							color: "var(--primary)",
 							textDecoration: "underline",
 							fontWeight: "500",
+							"&:hover": {
+								opacity: 0.8,
+							},
 						},
 						'[class~="lead"]': {
-							color: "rgb(var(--muted-foreground))",
+							color: "var(--muted-foreground)",
 						},
 						strong: {
-							color: "rgb(var(--foreground))",
+							color: "var(--foreground)",
 							fontWeight: "600",
 						},
 						'ol[type="A"]': {
@@ -98,44 +101,44 @@ export default {
 						},
 						"ol > li::marker": {
 							fontWeight: "400",
-							color: "rgb(var(--muted-foreground))",
+							color: "var(--muted-foreground)",
 						},
 						"ul > li": {
 							position: "relative",
 						},
 						"ul > li::marker": {
-							color: "rgb(var(--muted-foreground))",
+							color: "var(--muted-foreground)",
 						},
 						hr: {
-							borderColor: "rgb(var(--border))",
+							borderColor: "var(--border)",
 							borderTopWidth: 1,
 						},
 						blockquote: {
 							fontWeight: "500",
 							fontStyle: "italic",
-							color: "rgb(var(--foreground))",
+							color: "var(--foreground)",
 							borderLeftWidth: "0.25rem",
-							borderLeftColor: "rgb(var(--border))",
+							borderLeftColor: "var(--border)",
 							quotes: '"\\201C""\\201D""\\2018""\\2019"',
 						},
 						h1: {
-							color: "rgb(var(--foreground))",
+							color: "var(--foreground)",
 							fontWeight: "800",
 						},
 						h2: {
-							color: "rgb(var(--foreground))",
+							color: "var(--foreground)",
 							fontWeight: "700",
 						},
 						h3: {
-							color: "rgb(var(--foreground))",
+							color: "var(--foreground)",
 							fontWeight: "600",
 						},
 						h4: {
-							color: "rgb(var(--foreground))",
+							color: "var(--foreground)",
 							fontWeight: "600",
 						},
 						code: {
-							color: "rgb(var(--foreground))",
+							color: "var(--foreground)",
 							fontWeight: "600",
 						},
 						"code::before": {
@@ -145,8 +148,8 @@ export default {
 							content: '"`"',
 						},
 						pre: {
-							color: "rgb(var(--foreground))",
-							backgroundColor: "rgb(var(--muted))",
+							color: "var(--foreground)",
+							backgroundColor: "var(--muted)",
 							overflowX: "auto",
 						},
 						"pre code": {
@@ -176,10 +179,10 @@ export default {
 							lineHeight: "1.7142857",
 						},
 						thead: {
-							color: "rgb(var(--foreground))",
+							color: "var(--foreground)",
 							fontWeight: "600",
 							borderBottomWidth: "1px",
-							borderBottomColor: "rgb(var(--border))",
+							borderBottomColor: "var(--border)",
 						},
 						"thead th": {
 							verticalAlign: "bottom",
@@ -189,7 +192,7 @@ export default {
 						},
 						"tbody tr": {
 							borderBottomWidth: "1px",
-							borderBottomColor: "rgb(var(--border))",
+							borderBottomColor: "var(--border)",
 						},
 						"tbody tr:last-child": {
 							borderBottomWidth: "0",

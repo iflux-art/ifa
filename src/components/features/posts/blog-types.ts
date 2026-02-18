@@ -1,50 +1,64 @@
 /**
- * 博客相关类型定义
- * 集中管理博客模块的所有类型，便于维护和引用
+ *  Frontmatter type ====================
+/**
+ *  Frontmatter type
+ *  From Markdown/MDX file header metadata
  */
-
-// ==================== 内容类型 ====================
-export interface ContentItem {
-	/** 内容唯一标识符 */
-	id: string;
-	/** 内容标题 */
-	title: string;
-	/** 内容描述 */
-	description?: string;
-	/** 内容分类 */
-	category?: string;
-	/** 内容标签 */
-	tags?: string[];
-	/** 内容创建日期 */
+export interface BlogFrontmatter {
+	/** Article title */
+	title?: string;
+	/** Article creation date */
 	date?: string;
-	/** 内容更新日期 */
+	/** Article description */
+	description?: string;
+	/** Article tags */
+	tags?: string[];
+	/** Article category */
+	category?: string;
+}
+
+// ==================== Content type ====================
+export interface ContentItem {
+	/** Content unique identifier */
+	id: string;
+	/** Content title */
+	title: string;
+	/** Content description */
+	description?: string;
+	/** Content category */
+	category?: string;
+	/** Content tags */
+	tags?: string[];
+	/** Content creation date */
+	date?: string;
+	/** Content update date */
 	update?: string;
-	/** 内容作者 */
+	/** Content author */
 	author?: string;
-	/** 内容封面图片 */
+	/** Content cover image */
 	cover?: string;
-	/** 内容状态 */
+	/** Content status */
 	status?: "draft" | "published" | "archived";
-	/** 内容访问权限 */
+	/** Content access permission */
 	access?: "public" | "private" | "protected";
-	/** 内容字数统计 */
+	/** Content word count */
 	wordCount?: number;
-	/** 内容阅读时长（分钟） */
+	/** Content reading time (minutes) */
 	readingTime?: number;
 }
 
-// ==================== 博客文章类型 ====================
+// ==================== Blog post type ====================
 export interface BlogPost extends ContentItem {
-	/** 博客文章摘要 */
+	/** Blog post excerpt */
 	excerpt?: string;
-	/** 博客文章作者头像 */
+	/** Blog post author avatar */
 	authorAvatar?: string;
-	/** 博客文章作者简介 */
+	/** Blog post author bio */
 	authorBio?: string;
-	/** 博客文章是否已发布 */
+	/** Blog post published status */
 	published?: boolean;
-	/** 博客文章slug */
+	/** Blog post slug */
 	slug: string;
-	/** 博客文章图片 (别名 cover) */
+	/** Blog post image (alias for cover) */
 	image?: string;
 }

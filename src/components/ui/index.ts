@@ -20,14 +20,3 @@ export {
 	DialogTrigger,
 } from "./dialog";
 export { Input } from "./input";
-export {
-	Sheet,
-	SheetClose,
-	SheetContent,
-	SheetDescription,
-	SheetFooter,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
-} from "./sheet";
-export { Textarea } from "./textarea";

@@ -77,22 +77,3 @@ export function getSearchSuggestions(query: string, _limit = 5): string[] {
 		return [];
 	}
 }
-
-/**
- * 高亮搜索关键词
- */
-export function highlightSearchTerm(text: string, searchTerm: string): string {
-	if (!searchTerm.trim()) {
-		return text;
-	}
-
-	const regex = new RegExp(`(${escapeRegExp(searchTerm)})`, "gi");
-	return text.replace(regex, "<mark>$1</mark>");
-}
-
-/**
- * 转义正则表达式特殊字符
- */
-function escapeRegExp(string: string): string {
-	return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}

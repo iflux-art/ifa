@@ -2,6 +2,7 @@
 
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import { preloadSearchIndex } from "@/components/features/search/local-search-engine";
 import { SearchDialog } from "@/components/features/search/search-dialog";
 import { Button } from "@/components/ui/button";
 
@@ -12,16 +13,14 @@ import { Button } from "@/components/ui/button";
 export const SearchButton = () => {
 	const [open, setOpen] = useState(false);
 
-	// 在组件挂载时预加载搜索对话框组件
+	// 在组件挂载时预加载搜索索引
 	useEffect(() => {
-		// 使用动态导入预加载搜索对话框
-		import("@/components/features/search/search-dialog").catch((error) => {
-			console.warn("Failed to preload search dialog:", error);
-		});
+		preloadSearchIndex();
 	}, []);
 
-	// 在悬停时预加载搜索对话框
+	// 在悬停时预加载搜索对话框组件
 	const handleMouseEnter = () => {
+		// 预加载搜索对话框组件
 		import("@/components/features/search/search-dialog").catch((error) => {
 			console.warn("Failed to preload search dialog on hover:", error);
 		});

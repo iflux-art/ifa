@@ -16,7 +16,7 @@ interface BlogPostPageProps {
  */
 export async function generateStaticParams() {
 	const { getBlogCache } = await import("@/components/features/posts/lib");
-	const cache = getBlogCache();
+	const cache = await getBlogCache();
 
 	return cache.posts.map((post) => ({
 		slug: post.slug.split("/"),

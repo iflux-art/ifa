@@ -1,0 +1,10 @@
+{
+	"pinned": [
+		"editor:clear-formatting",
+		"hard-breaks:replace-all-soft-breaks",
+		"editing-toolbar:editor:toggle-numbered-list",
+		"easy-typing-obsidian:easy-typing-delete-blank-line",
+		"obsidian-mind-map:app:markmap-preview",
+		"app:reload"
+	]
+}

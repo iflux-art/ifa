@@ -1,0 +1,241 @@
+{
+  "main": {
+    "id": "0c83debe0c916667",
+    "type": "split",
+    "children": [
+      {
+        "id": "a9b423984cff979f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4c3215caaeebed43",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "开发/将 Monorepo 中的 Packages 发布到 npm 的完整指南.mdx",
+                "mode": "source",
+                "source": true,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "将 Monorepo 中的 Packages 发布到 npm 的完整指南"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "840292b75d93d08a",
+    "type": "split",
+    "children": [
+      {
+        "id": "907dcc19eddcca70",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "013ae4975190c0b7",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "085478cdf297af33",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#创意",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "dbbe388947ffb4ac",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 283.50840759277344
+  },
+  "right": {
+    "id": "4375a4c7c41942f8",
+    "type": "split",
+    "children": [
+      {
+        "id": "16a8218632440ba5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "53ac92f87e1562a5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "97cd19ef74d870b8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          },
+          {
+            "id": "a4fa97c20544a490",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "待定/ad/ad-theory/ad-man-confessions.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "ad-man-confessions 的反向链接列表"
+            }
+          },
+          {
+            "id": "b839f8cf43ce9389",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "待定/ad/ad-theory/ad-man-confessions.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "ad-man-confessions 的出链列表"
+            }
+          },
+          {
+            "id": "f787eaa40dddff37",
+            "type": "leaf",
+            "state": {
+              "type": "smtcmp-chat-view",
+              "state": {},
+              "icon": "wand-sparkles",
+              "title": "Smart composer chat"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:新建数据库": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "pkmer:Open Pkmer Market": false,
+      "obsidian-textgenerator-plugin:Generate Text!": false,
+      "obsidian-textgenerator-plugin:Text Generator: Templates Packages Manager": false,
+      "smart-composer:Open smart composer": false,
+      "copilot:Open Copilot Chat": false,
+      "edit-mdx:New .mdx file": false,
+      "nutstore-sync:Start sync": false,
+      "nutstore-sync:Stop sync": false
+    }
+  },
+  "active": "4c3215caaeebed43",
+  "lastOpenFiles": [
+    "编剧/故事的 13 种结局方式.mdx",
+    "编剧/经典三幕式的写作公式.mdx",
+    "编剧/培养导演思维.mdx",
+    "编剧/人物关系设计.mdx",
+    "编剧/什么是好剧本.mdx",
+    "软件/Windows反转滚轮方向.mdx",
+    "软件/Windows自定义缩放设置.mdx",
+    "软件/V2rayN 客户端配置指南.mdx",
+    "软件/项目文字排版样式统一指南.mdx",
+    "软件/Obsidian 实用插件推荐.mdx",
+    "软件/各大平台的邀请码及内测链接.mdx",
+    "大纲/项目.md",
+    "待定/ad/ad-copy/brand-campaigns/celebrity-ad-copy.md",
+    "大纲/运营.md",
+    "大纲/信息.md",
+    "best-practices.md",
+    "未命名.md",
+    "待定/ad/ad-theory/ad-man-confessions.md",
+    "待定/development/containerization/containerization.md",
+    "待定/ai/prompt-engineering.md",
+    "待定/ai/deepseek-r1-complete-guide.md",
+    "待定/ad/ad-theory/tencent-news-factual-journalism-birth.md",
+    "待定/ad/ad-theory/brand-creativity-principles.md",
+    "待定/ad/ad-theory/bernbach-ad-quotes.md",
+    "待定/ad/ad-copy/pun-based-usernames.md",
+    "待定/ad/ad-copy/examples/job-copy.md",
+    "待定/ad/ad-copy/examples/fashion-copy.md",
+    "待定/ad/ad-copy/examples/ad-categories.md",
+    "待定/ad/ad-copy/brand-campaigns/payeasy-campaigns.md",
+    "待定/ad/ad-copy/brand-campaigns/missose-campaigns.md",
+    "待定/ad/ad-copy/brand-campaigns/keep-moving-copy.md",
+    "待定/ad/ad-copy/brand-campaigns/kbaby-campaigns.md",
+    "未命名.canvas",
+    "项目/成翼传媒/《80&90&00后恋爱观对比调查报告》调查内容.md",
+    "项目/成翼传媒/“6.8张朝阳搜狐带货直播”抖音推广方案.md",
+    "项目/成翼传媒/“6.7搜狐马拉松”短视频推广方案.md",
+    "项目/成翼传媒/“天使之路”2019维密秀摩登天使之夜暨官宣发布会简况.md",
+    "附件/抖音直播流程1.png"
+  ]
+}

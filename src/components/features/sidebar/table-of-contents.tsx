@@ -1,7 +1,7 @@
 "use client";
 
 import { Text } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useHeadingObserver } from "@/hooks/use-heading-observer";
 import { cn } from "@/lib/utils";
@@ -85,15 +85,12 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
 	// 计算缩进，根据标题级别
 	const indent = (heading.level - 2) * 0.75;
 
-	// 添加状态跟踪hover
-	const [isHovered, setIsHovered] = useState(false);
-
 	// 根据标题级别设置不同的样式
 	const headingSize =
 		{
 			2: "font-medium",
 			3: "font-normal",
-			4: "text-sm",
+			4: "font-normal",
 		}[heading.level] ?? "";
 
 	return (
@@ -103,21 +100,19 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
 				className={`absolute top-1.5 bottom-1.5 left-2 w-0.5 rounded-full transition-all duration-300 ease-out ${
 					isActive
 						? "bg-primary opacity-100"
-						: isHovered
-							? "bg-primary/30 opacity-100"
-							: "bg-transparent opacity-0"
+						: "bg-transparent opacity-0 group-hover:bg-primary/30 group-hover:opacity-100"
 				}`}
 			/>
 
 			<a
 				href={`#${heading.id}`}
 				className={cn(
-					"group relative flex min-w-0 items-start py-1.5 text-sm transition-colors duration-200",
+					"group relative flex min-w-0 items-start py-1.5 text-xs transition-colors duration-200",
 					headingSize,
 					// 普通文本
 					"text-muted-foreground",
 					// hover 状态
-					isHovered && "rounded-sm bg-primary/5 font-medium text-foreground",
+					"hover:rounded-sm hover:bg-primary/5 hover:font-medium hover:text-foreground",
 					// active 状态
 					isActive && "rounded-sm bg-primary/10 font-medium text-foreground",
 					"w-full",
@@ -130,8 +125,6 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
 					// 直接滚动到元素，不更新hash
 					scrollToElement(heading.id, SCROLL_OFFSET, true);
 				}}
-				onMouseEnter={() => setIsHovered(true)}
-				onMouseLeave={() => setIsHovered(false)}
 			>
 				<span className="overflow-wrap-anywhere block w-full hyphens-auto whitespace-normal break-words text-left leading-relaxed">
 					{heading.text}

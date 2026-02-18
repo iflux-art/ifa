@@ -2,18 +2,21 @@
 
 import { Tag } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-export interface TagWithCount {
+export interface TagItem {
 	name: string;
-	count: number;
 }
 
+/**
+ * @deprecated 使用 TagItem 代替
+ */
+export type TagWithCount = TagItem;
+
 export interface TagCloudCardProps {
-	allTags?: TagWithCount[];
+	allTags?: TagItem[];
 	selectedTag?: string;
 	selectedTags?: string[];
 	onTagClick?: (tag: string | null) => void;
@@ -41,10 +44,6 @@ export const TagCloudCard = ({
 	useDefaultRouting = false,
 }: TagCloudCardProps) => {
 	const router = useRouter();
-	const sortedTags = React.useMemo(
-		() => [...allTags].sort((a, b) => b.count - a.count),
-		[allTags],
-	);
 
 	// 确保即使 allTags 为 undefined 也能正确处理
 	const validTags = allTags || [];
@@ -65,7 +64,7 @@ export const TagCloudCard = ({
 					</CardTitle>
 				</CardHeader>
 				<CardContent className="pt-0 pb-4">
-					<div className="hide-scrollbar max-h-[250px] overflow-y-auto sm:max-h-[300px]">
+					<div className="hide-scrollbar max-h-[140px] overflow-y-auto">
 						<p className="text-muted-foreground text-sm">暂无标签</p>
 					</div>
 				</CardContent>
@@ -101,9 +100,9 @@ export const TagCloudCard = ({
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="pt-0 pb-4">
-				<div className="hide-scrollbar max-h-[250px] overflow-y-auto sm:max-h-[300px]">
+				<div className="hide-scrollbar max-h-[140px] overflow-y-auto">
 					<div className="flex flex-wrap gap-1.5 sm:gap-2">
-						{sortedTags.map((tag) => {
+						{validTags.map((tag) => {
 							// 检查标签是否被选中（支持单个标签或多个标签）
 							const isSelected = selectedTag
 								? selectedTag === tag.name
@@ -125,7 +124,6 @@ export const TagCloudCard = ({
 									onClick={() => handleTagClick(tag.name)}
 								>
 									{tag.name}
-									<span className="ml-1 opacity-70">({tag.count})</span>
 								</Badge>
 							);
 						})}

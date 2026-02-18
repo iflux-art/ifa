@@ -1,35 +1,65 @@
-import fs from "node:fs";
+/**
+ * 博客内容读取
+ * 使用 Next.js 最佳实践
+ */
+import { promises as fs } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import type { BlogPost } from "@/components/features/posts/blog-types";
-import { getBlogCache } from "@/components/features/posts/lib";
+import type {
+	BlogFrontmatter,
+	BlogPost,
+} from "@/components/features/posts/blog-types";
+import {
+	extractHeadingsSimple,
+	getBlogCache,
+} from "@/components/features/posts/lib";
 
-export interface BlogFrontmatter {
-	/** 文章标题 */
-	title: string;
-	/** 文章描述 */
-	description?: string;
-	/** 文章分类 */
-	category?: string;
-	/** 文章标签 */
-	tags?: string[];
-	/** 文章创建日期 */
-	date?: string;
-	/** 文章更新日期 */
-	update?: string;
-	/** 文章作者 */
-	author?: string;
-	/** 文章封面图片 */
-	cover?: string;
-	/** 文章状态 */
-	status?: "draft" | "published" | "archived";
-	/** 文章访问权限 */
-	access?: "public" | "private" | "protected";
-	/** 允许任意其他属性 */
-	[key: string]: unknown;
+// Re-export BlogFrontmatter for backward compatibility
+export type { BlogFrontmatter } from "@/components/features/posts/blog-types";
+
+const CONTENT_DIR = path.join(process.cwd(), "src", "content");
+
+/**
+ * 查找博客文件
+ */
+async function findBlogFile(slug: string[]): Promise<string | null> {
+	// 解码 URL 编码的 slug（支持中文文件名）
+	const decodedSlug = slug.map((s) => decodeURIComponent(s));
+	const relativePath = path.join(...decodedSlug);
+
+	// 检查直接文件匹配
+	const mdxPath = path.join(CONTENT_DIR, `${relativePath}.mdx`);
+	try {
+		await fs.access(mdxPath);
+		return mdxPath;
+	} catch {}
+
+	const mdPath = path.join(CONTENT_DIR, `${relativePath}.md`);
+	try {
+		await fs.access(mdPath);
+		return mdPath;
+	} catch {}
+
+	// 检查目录中的索引文件
+	const indexMdx = path.join(CONTENT_DIR, relativePath, "index.mdx");
+	try {
+		await fs.access(indexMdx);
+		return indexMdx;
+	} catch {}
+
+	const indexMd = path.join(CONTENT_DIR, relativePath, "index.md");
+	try {
+		await fs.access(indexMd);
+		return indexMd;
+	} catch {}
+
+	return null;
 }
 
-export function getBlogContent(slug: string[]): {
+/**
+ * 获取博客内容
+ */
+export async function getBlogContent(slug: string[]): Promise<{
 	slug: string[];
 	content: string;
 	frontmatter: BlogFrontmatter;
@@ -48,20 +78,24 @@ export function getBlogContent(slug: string[]): {
 	}[];
 	allTags: { name: string; count: number }[];
 	allCategories: { name: string; count: number }[];
-} {
-	const filePath = findBlogFile(slug);
+}> {
+	const filePath = await findBlogFile(slug);
 	if (!filePath) {
 		throw new Error(
 			`未找到博客: ${slug.join("/")}. 请求的博客文章不存在或已被删除。`,
 		);
 	}
-	const fileContent = fs.readFileSync(filePath, "utf8");
+
+	const fileContent = await fs.readFile(filePath, "utf8");
 	const { content, data } = matter(fileContent);
+
+	// 直接使用 frontmatter 中的标题和分类
 	const safeFrontmatter = data as BlogFrontmatter;
-	const headings = extractHeadingsFromContent(content);
+
+	const headings = extractHeadingsSimple(content);
 
 	// 使用统一的缓存数据
-	const cache = getBlogCache();
+	const cache = await getBlogCache();
 	const allMeta = cache.posts;
 	const currentTags = safeFrontmatter.tags ?? [];
 	const currentCategory = safeFrontmatter.category;
@@ -121,105 +155,58 @@ export function getBlogContent(slug: string[]): {
 }
 
 /**
- * 从内容中提取标题（内联函数，避免循环依赖）
- * 处理 Markdown 链接格式 [文本](url)
+ * 获取所有博客元数据
  */
-function extractHeadingsFromContent(
-	content: string,
-): { level: number; text: string; id: string }[] {
-	const headings: { level: number; text: string; id: string }[] = [];
-	const lines = content.split("\n");
-
-	for (const line of lines) {
-		const match = line.match(/^(#{1,6})\s+(.+)$/);
-		if (match) {
-			const level = match[1].length;
-			let text = match[2].trim();
-
-			// 处理 Markdown 链接格式 [文本](url) -> 提取文本
-			text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
-
-			// 生成 ID
-			const id = text
-				.toLowerCase()
-				.replace(/[^\u4e00-\u9fa5a-z0-9]+/g, "-")
-				.replace(/^-+|-+$/g, "");
-			headings.push({ level, text, id });
-		}
-	}
-
-	return headings;
-}
-
-function findBlogFile(slug: string[]): string | null {
-	const blogDir = path.join(process.cwd(), "src", "content");
-	const relativePath = path.join(...slug);
-
-	// 检查直接文件匹配
-	const mdxPath = path.join(blogDir, `${relativePath}.mdx`);
-	if (fs.existsSync(mdxPath)) {
-		return mdxPath;
-	}
-
-	const mdPath = path.join(blogDir, `${relativePath}.md`);
-	if (fs.existsSync(mdPath)) {
-		return mdPath;
-	}
-
-	// 检查目录中的索引文件
-	const indexMdx = path.join(blogDir, relativePath, "index.mdx");
-	if (fs.existsSync(indexMdx)) {
-		return indexMdx;
-	}
-
-	const indexMd = path.join(blogDir, relativePath, "index.md");
-	if (fs.existsSync(indexMd)) {
-		return indexMd;
-	}
-
-	return null;
-}
-
-export function getAllBlogMeta(): {
-	slug: string[];
-	frontmatter: BlogFrontmatter;
-}[] {
-	const blogDir = path.join(process.cwd(), "src", "content");
-	if (!fs.existsSync(blogDir)) {
+export async function getAllBlogMeta(): Promise<
+	{
+		slug: string[];
+		frontmatter: BlogFrontmatter;
+	}[]
+> {
+	try {
+		await fs.access(CONTENT_DIR);
+	} catch {
 		return [];
 	}
 
 	const files: string[] = [];
 
-	const scanDirectory = (dir: string) => {
-		const items = fs.readdirSync(dir, { withFileTypes: true });
-		items.forEach((item) => {
+	async function scanDirectory(dir: string) {
+		const items = await fs.readdir(dir, { withFileTypes: true });
+		for (const item of items) {
+			// 跳过以点开头的目录（如 .obsidian）
+			if (item.name.startsWith(".")) {
+				continue;
+			}
 			const itemPath = path.join(dir, item.name);
 			if (item.isDirectory()) {
-				scanDirectory(itemPath);
+				await scanDirectory(itemPath);
 			} else if (
 				item.isFile() &&
 				(item.name.endsWith(".mdx") || item.name.endsWith(".md"))
 			) {
 				files.push(itemPath);
 			}
-		});
-	};
+		}
+	}
 
-	scanDirectory(blogDir);
+	await scanDirectory(CONTENT_DIR);
 
-	return files.map((filePath) => {
-		const fileContent = fs.readFileSync(filePath, "utf8");
+	const results = [];
+	for (const filePath of files) {
+		const fileContent = await fs.readFile(filePath, "utf8");
 		const { data } = matter(fileContent);
-		const relativePath = path.relative(blogDir, filePath);
+		const relativePath = path.relative(CONTENT_DIR, filePath);
 		const slug = relativePath
 			.replace(/\.(mdx|md)$/, "")
 			.replace(/\\/g, "/")
 			.split("/");
 
-		return {
+		results.push({
 			slug,
 			frontmatter: data as BlogFrontmatter,
-		};
-	});
+		});
+	}
+
+	return results;
 }

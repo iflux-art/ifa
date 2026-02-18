@@ -10,8 +10,14 @@ import type { BreadcrumbItem } from "@/components/layout/navbar/types";
  * @param date 日期字符串或Date对象
  * @returns 格式化后的日期字符串
  */
-export function formatDate(date: string | Date): string {
+export function formatDate(date: string | Date | undefined): string {
+	if (!date) {
+		return "";
+	}
 	const d = new Date(date);
+	if (Number.isNaN(d.getTime())) {
+		return "";
+	}
 	return d.toLocaleDateString("zh-CN", {
 		year: "numeric",
 		month: "long",
@@ -31,6 +37,39 @@ export function calculateReadingTime(content: string): number {
 }
 
 /**
+ * 格式化阅读时间
+ * 基于中文阅读速度约 300-400 字/分钟，英文约 200-250 词/分钟
+ * 这里采用保守估计 250 字/分钟
+ * @param wordCount 字数
+ * @returns 格式化后的阅读时间字符串
+ */
+export function formatReadingTime(wordCount: number): string {
+	if (wordCount === 0) {
+		return "0 分钟";
+	}
+
+	const wordsPerMinute = 250;
+	const minutes = Math.ceil(wordCount / wordsPerMinute);
+
+	if (minutes < 1) {
+		return "1 分钟";
+	}
+
+	if (minutes < 60) {
+		return `${minutes} 分钟`;
+	}
+
+	const hours = Math.floor(minutes / 60);
+	const remainingMinutes = minutes % 60;
+
+	if (remainingMinutes === 0) {
+		return `${hours} 小时`;
+	}
+
+	return `${hours} 小时 ${remainingMinutes} 分钟`;
+}
+
+/**
  * 格式化数字显示
  * @param num 数字
  * @returns 格式化后的字符串
@@ -43,6 +82,35 @@ export function formatNumber(num: number): string {
 		return `${(num / 1000).toFixed(1)}k`;
 	}
 	return num.toString();
+}
+
+/**
+ * 按日期对博客文章进行排序
+ * @param posts 博客文章数组
+ * @returns 排序后的博客文章数组
+ */
+export function sortPostsByDate<T extends { date?: string }>(
+	posts: T[] | null | undefined,
+): T[] {
+	if (!(posts && Array.isArray(posts))) {
+		return [];
+	}
+	return [...posts].sort((a, b) => {
+		// 确保 date 属性存在且是有效的
+		if (a.date && b.date) {
+			// 处理不同的日期格式
+			const dateA = new Date(a.date);
+			const dateB = new Date(b.date);
+
+			// 检查日期是否有效
+			if (Number.isNaN(dateA.getTime()) || Number.isNaN(dateB.getTime())) {
+				return 0;
+			}
+
+			return dateB.getTime() - dateA.getTime();
+		}
+		return 0;
+	});
 }
 
 /**
@@ -252,6 +320,37 @@ export interface TocHeading {
 	text: string;
 	/** 标题级别 */
 	level: number;
+}
+
+/**
+ * 从内容中提取标题（简化版本，用于服务端）
+ * 不修改内容，仅提取标题信息
+ */
+export function extractHeadingsSimple(
+	content: string,
+): { level: number; text: string; id: string }[] {
+	const headings: { level: number; text: string; id: string }[] = [];
+	const lines = content.split("\n");
+
+	for (const line of lines) {
+		const match = line.match(/^(#{1,6})\s+(.+)$/);
+		if (match) {
+			const level = match[1].length;
+			let text = match[2].trim();
+
+			// 处理 Markdown 链接格式 [文本](url) -> 提取文本
+			text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
+
+			// 生成 ID
+			const id = text
+				.toLowerCase()
+				.replace(/[^\u4e00-\u9fa5a-z0-9]+/g, "-")
+				.replace(/^-+|-+$/g, "");
+			headings.push({ level, text, id });
+		}
+	}
+
+	return headings;
 }
 
 /**

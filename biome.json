@@ -1,6 +1,18 @@
 {
 	"files": {
-		"includes": ["src/**/*", "*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs"],
+		"includes": [
+			"src/app/**/*",
+			"src/components/**/*",
+			"src/config/**/*",
+			"src/hooks/**/*",
+			"src/lib/**/*",
+			"src/middleware.ts",
+			"*.ts",
+			"*.tsx",
+			"*.js",
+			"*.jsx",
+			"*.mjs"
+		],
 		"ignoreUnknown": true
 	},
 	"linter": {

@@ -3,7 +3,7 @@
   "compilerOptions": {
     // Target latest ES features for better performance
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "es2022", "webworker"],
+    "lib": ["dom", "dom.iterable", "es2022"],
 
     // Basic configuration
     "allowJs": true,
@@ -22,7 +22,6 @@
 
     // React and JSX optimizations
     "jsx": "preserve",
-    "jsxImportSource": "react",
 
     // Performance optimizations
     "incremental": true,
@@ -31,6 +30,7 @@
     // TypeScript optimizations
     "noImplicitOverride": true,
     "useDefineForClassFields": true,
+    "types": [],
 
     // Essential type checking
     "noImplicitAny": true,
@@ -46,18 +46,9 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/components": ["./src/components"],
-      "@/lib": ["./src/lib"],
-      "@/lib/utils": ["./src/lib/utils/index"],
-      "@/hooks": ["./src/hooks"],
-      "@/stores": ["./src/stores"],
-      "@/types": ["./src/types"],
-      "@/config": ["./src/config"],
-      "@/app": ["./src/app"],
-      "@/content": ["./src/content"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.test.ts", "src/**/*.test.tsx", "src/**/*.spec.ts", "src/**/*.spec.tsx", ".next/types/**/*.ts", "mdx-components.tsx", "vitest.config.mts"],
   "exclude": ["node_modules", "dist", "build", "coverage"]
 }

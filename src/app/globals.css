@@ -4,77 +4,147 @@
 /* Typography 使用 @tailwindcss/typography 插件提供 */
 
 @custom-variant dark (&:is(.dark *));
+
 /**
- * CSS 变量定义 - 按功能分组
+ * OKLCH 颜色系统 - 基于 Tailwind CSS 4.x 和 shadcn/ui 最佳实践
+ *
+ * OKLCH 优势：
+ * - 支持色域外回退，色彩更鲜艳
+ * - 支持 CSS 透明度，混合更自然
+ * - P3 色域支持，色彩更丰富
+ * - 与 Tailwind CSS 4.x 原生兼容
  */
 
+/**
+ * 浅色模式颜色变量 (Light Mode)
+ * 基于 shadcn/ui 的 neutral 调色板 - 黑白灰主调
+ */
 :root {
+	/* 基础圆角 */
 	--radius: 0.625rem;
-	--background: oklch(1 0 0);
-	--foreground: oklch(0.145 0 0);
-	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.145 0 0);
-	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.145 0 0);
-	--primary: oklch(0.205 0 0);
-	--primary-foreground: oklch(0.985 0 0);
-	--secondary: oklch(0.97 0 0);
-	--secondary-foreground: oklch(0.205 0 0);
-	--muted: oklch(0.97 0 0);
-	--muted-foreground: oklch(0.556 0 0);
-	--accent: oklch(0.97 0 0);
-	--accent-foreground: oklch(0.205 0 0);
-	--destructive: oklch(0.577 0.245 27.325);
-	--border: oklch(0.922 0 0);
-	--input: oklch(0.922 0 0);
-	--ring: oklch(0.708 0 0);
-	--chart-1: oklch(0.646 0.222 41.116);
-	--chart-2: oklch(0.6 0.118 184.704);
-	--chart-3: oklch(0.398 0.07 227.392);
-	--chart-4: oklch(0.828 0.189 84.429);
-	--chart-5: oklch(0.769 0.188 70.08);
-	--sidebar: oklch(0.985 0 0);
-	--sidebar-foreground: oklch(0.145 0 0);
-	--sidebar-primary: oklch(0.205 0 0);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.97 0 0);
-	--sidebar-accent-foreground: oklch(0.205 0 0);
-	--sidebar-border: oklch(0.922 0 0);
-	--sidebar-ring: oklch(0.708 0 0);
+
+	/* 核心背景与前景色 - 黑白灰 */
+	--background: oklch(100% 0 0); /* 纯白背景 */
+	--foreground: oklch(20% 0 0); /* 接近黑色的深灰 */
+
+	/* 卡片颜色 */
+	--card: oklch(100% 0 0);
+	--card-foreground: oklch(20% 0 0);
+
+	/* 弹出层颜色 */
+	--popover: oklch(100% 0 0);
+	--popover-foreground: oklch(20% 0 0);
+
+	/* 主要颜色 (Primary) - 黑色基调，用于重要操作 */
+	--primary: oklch(15% 0 0); /* 深黑色 */
+	--primary-foreground: oklch(100% 0 0); /* 白色文字 */
+
+	/* 次要颜色 (Secondary) - 浅灰 */
+	--secondary: oklch(96% 0 0); /* 浅灰色 */
+	--secondary-foreground: oklch(20% 0 0);
+
+	/* 静音/辅助颜色 (Muted) - 更浅的灰色 */
+	--muted: oklch(97% 0 0); /* 静音灰 */
+	--muted-foreground: oklch(50% 0 0); /* 中灰色文字 */
+
+	/* 强调颜色 (Accent) - 浅灰 */
+	--accent: oklch(96% 0 0); /* 强调灰 */
+	--accent-foreground: oklch(20% 0 0);
+
+	/* 危险/销毁颜色 (Destructive) - 红色保留用于错误提示 */
+	--destructive: oklch(55% 0.18 25); /* 红色 - 警告/错误 */
+
+	/* 边框与输入 */
+	--border: oklch(90% 0 0); /* 边框颜色 */
+	--input: oklch(90% 0 0); /* 输入框边框 */
+	--ring: oklch(40% 0 0); /* 聚焦环颜色 - 灰色 */
+
+	/* 图表颜色 - 黑白灰渐变 */
+	--chart-1: oklch(35% 0 0); /* 深灰 */
+	--chart-2: oklch(50% 0 0); /* 中灰 */
+	--chart-3: oklch(65% 0 0); /* 浅灰 */
+	--chart-4: oklch(80% 0 0); /* 更浅灰 */
+	--chart-5: oklch(25% 0 0); /* 近黑色 */
+
+	/* 侧边栏颜色 - 黑白灰 */
+	--sidebar: oklch(98% 0 0);
+	--sidebar-foreground: oklch(20% 0 0);
+	--sidebar-primary: oklch(15% 0 0);
+	--sidebar-primary-foreground: oklch(100% 0 0);
+	--sidebar-accent: oklch(96% 0 0);
+	--sidebar-accent-foreground: oklch(20% 0 0);
+	--sidebar-border: oklch(90% 0 0);
+	--sidebar-ring: oklch(40% 0 0);
+
+	/* 成功/警告/信息提示颜色 */
+	--success: oklch(55% 0.15 150); /* 绿色 */
+	--warning: oklch(70% 0.15 80); /* 黄色/橙色 */
+	--info: oklch(55% 0.12 220); /* 蓝色 */
 }
 
-.dark {
-	--background: oklch(0.145 0 0);
-	--foreground: oklch(0.985 0 0);
-	--card: oklch(0.145 0 0);
-	--card-foreground: oklch(0.985 0 0);
-	--popover: oklch(0.205 0 0);
-	--popover-foreground: oklch(0.985 0 0);
-	--primary: oklch(0.922 0 0);
-	--primary-foreground: oklch(0.205 0 0);
-	--secondary: oklch(0.269 0 0);
-	--secondary-foreground: oklch(0.985 0 0);
-	--muted: oklch(0.269 0 0);
-	--muted-foreground: oklch(0.708 0 0);
-	--accent: oklch(0.269 0 0);
-	--accent-foreground: oklch(0.985 0 0);
-	--destructive: oklch(0.704 0.191 22.216);
-	--border: oklch(1 0 0 / 10%);
-	--input: oklch(1 0 0 / 15%);
-	--ring: oklch(0.556 0 0);
-	--chart-1: oklch(0.488 0.243 264.376);
-	--chart-2: oklch(0.696 0.17 162.48);
-	--chart-3: oklch(0.769 0.188 70.08);
-	--chart-4: oklch(0.627 0.265 303.9);
-	--chart-5: oklch(0.645 0.246 16.439);
-	--sidebar: oklch(0.205 0 0);
-	--sidebar-foreground: oklch(0.985 0 0);
-	--sidebar-primary: oklch(0.488 0.243 264.376);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.269 0 0);
-	--sidebar-accent-foreground: oklch(0.985 0 0);
-	--sidebar-border: oklch(1 0 0 / 10%);
-	--sidebar-ring: oklch(0.556 0 0);
+/**
+ * 深色模式颜色变量 (Dark Mode)
+ * 基于 shadcn/ui 的深色调色板 - 黑白灰反转
+ */
+.dark,
+[data-theme="dark"] {
+	/* 核心背景与前景色 - 反转为深色 */
+	--background: oklch(10% 0 0); /* 深黑色背景 */
+	--foreground: oklch(95% 0 0); /* 接近白色的浅灰 */
+
+	/* 卡片颜色 */
+	--card: oklch(12% 0 0);
+	--card-foreground: oklch(95% 0 0);
+
+	/* 弹出层颜色 */
+	--popover: oklch(15% 0 0);
+	--popover-foreground: oklch(95% 0 0);
+
+	/* 主要颜色 (Primary) - 反转为浅色 */
+	--primary: oklch(90% 0 0); /* 浅灰/白色 */
+	--primary-foreground: oklch(10% 0 0); /* 黑色文字 */
+
+	/* 次要颜色 (Secondary) - 深灰 */
+	--secondary: oklch(22% 0 0);
+	--secondary-foreground: oklch(95% 0 0);
+
+	/* 静音/辅助颜色 (Muted) - 更深的灰 */
+	--muted: oklch(22% 0 0);
+	--muted-foreground: oklch(70% 0 0);
+
+	/* 强调颜色 (Accent) - 深灰 */
+	--accent: oklch(22% 0 0);
+	--accent-foreground: oklch(95% 0 0);
+
+	/* 危险颜色 - 深色模式下更柔和 */
+	--destructive: oklch(60% 0.18 25); /* 柔和红色 */
+
+	/* 边框与输入 - 使用透明度 */
+	--border: oklch(100% 0 0 / 15%); /* 半透明白色边框 */
+	--input: oklch(100% 0 0 / 20%);
+	--ring: oklch(60% 0 0); /* 聚焦环 */
+
+	/* 图表颜色 - 深色模式更鲜艳 */
+	--chart-1: oklch(75% 0 0);
+	--chart-2: oklch(65% 0 0);
+	--chart-3: oklch(55% 0 0);
+	--chart-4: oklch(45% 0 0);
+	--chart-5: oklch(85% 0 0);
+
+	/* 侧边栏颜色 - 黑白灰反转 */
+	--sidebar: oklch(12% 0 0);
+	--sidebar-foreground: oklch(95% 0 0);
+	--sidebar-primary: oklch(90% 0 0);
+	--sidebar-primary-foreground: oklch(10% 0 0);
+	--sidebar-accent: oklch(22% 0 0);
+	--sidebar-accent-foreground: oklch(95% 0 0);
+	--sidebar-border: oklch(100% 0 0 / 15%);
+	--sidebar-ring: oklch(60% 0 0);
+
+	/* 成功/警告/信息提示颜色 */
+	--success: oklch(65% 0.15 150);
+	--warning: oklch(75% 0.15 80);
+	--info: oklch(60% 0.12 220);
 }
 
 /**
@@ -94,7 +164,7 @@
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
 
-	/* 颜色变量映射 */
+	/* 颜色变量映射 - 核心语义颜色 */
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--color-card: var(--card);
@@ -109,6 +179,7 @@
 	--color-accent-foreground: var(--accent-foreground);
 	--color-destructive: var(--destructive);
 	--color-border: var(--border);
+	--color-input: var(--input);
 	--color-ring: var(--ring);
 
 	/* 图表颜色 */
@@ -127,8 +198,125 @@
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-ring: var(--sidebar-ring);
+
+	/* 状态颜色 */
+	--color-success: var(--success);
+	--color-warning: var(--warning);
+	--color-info: var(--info);
 }
 
+/**
+ * 颜色不透明度工具类
+ * 使用 CSS color-mix 实现颜色混合
+ */
+@layer utilities {
+	/* 基础透明度 */
+	.bg-background\/50 {
+		background-color: color-mix(in oklch, var(--background), transparent 50%);
+	}
+	.bg-foreground\/50 {
+		background-color: color-mix(in oklch, var(--foreground), transparent 50%);
+	}
+	.text-foreground\/50 {
+		color: color-mix(in oklch, var(--foreground), transparent 50%);
+	}
+	.border-border\/50 {
+		border-color: color-mix(in oklch, var(--border), transparent 50%);
+	}
+
+	/* 主色调透明度变体 */
+	.bg-primary\/10 {
+		background-color: color-mix(in oklch, var(--primary), transparent 90%);
+	}
+	.bg-primary\/20 {
+		background-color: color-mix(in oklch, var(--primary), transparent 80%);
+	}
+	.bg-primary\/30 {
+		background-color: color-mix(in oklch, var(--primary), transparent 70%);
+	}
+	.bg-primary\/50 {
+		background-color: color-mix(in oklch, var(--primary), transparent 50%);
+	}
+	.bg-primary\/80 {
+		background-color: color-mix(in oklch, var(--primary), transparent 20%);
+	}
+	.text-primary\/50 {
+		color: color-mix(in oklch, var(--primary), transparent 50%);
+	}
+	.text-primary\/70 {
+		color: color-mix(in oklch, var(--primary), transparent 30%);
+	}
+	.border-primary\/30 {
+		border-color: color-mix(in oklch, var(--primary), transparent 70%);
+	}
+
+	/* 次要颜色透明度变体 */
+	.bg-secondary\/50 {
+		background-color: color-mix(in oklch, var(--secondary), transparent 50%);
+	}
+	.bg-secondary\/80 {
+		background-color: color-mix(in oklch, var(--secondary), transparent 20%);
+	}
+
+	/* 静音颜色透明度变体 */
+	.bg-muted\/50 {
+		background-color: color-mix(in oklch, var(--muted), transparent 50%);
+	}
+	.text-muted\/50 {
+		color: color-mix(in oklch, var(--muted-foreground), transparent 50%);
+	}
+
+	/* 破坏性颜色透明度变体 */
+	.bg-destructive\/10 {
+		background-color: color-mix(in oklch, var(--destructive), transparent 90%);
+	}
+	.bg-destructive\/20 {
+		background-color: color-mix(in oklch, var(--destructive), transparent 80%);
+	}
+	.text-destructive\/50 {
+		color: color-mix(in oklch, var(--destructive), transparent 50%);
+	}
+	.border-destructive\/30 {
+		border-color: color-mix(in oklch, var(--destructive), transparent 70%);
+	}
+
+	/* 成功颜色透明度 */
+	.bg-success\/10 {
+		background-color: color-mix(in oklch, var(--success), transparent 90%);
+	}
+	.bg-success\/20 {
+		background-color: color-mix(in oklch, var(--success), transparent 80%);
+	}
+	.text-success\/50 {
+		color: color-mix(in oklch, var(--success), transparent 50%);
+	}
+
+	/* 警告颜色透明度 */
+	.bg-warning\/10 {
+		background-color: color-mix(in oklch, var(--warning), transparent 90%);
+	}
+	.bg-warning\/20 {
+		background-color: color-mix(in oklch, var(--warning), transparent 80%);
+	}
+	.text-warning\/50 {
+		color: color-mix(in oklch, var(--warning), transparent 50%);
+	}
+
+	/* 信息颜色透明度 */
+	.bg-info\/10 {
+		background-color: color-mix(in oklch, var(--info), transparent 90%);
+	}
+	.bg-info\/20 {
+		background-color: color-mix(in oklch, var(--info), transparent 80%);
+	}
+	.text-info\/50 {
+		color: color-mix(in oklch, var(--info), transparent 50%);
+	}
+}
+
+/**
+ * 基础样式层
+ */
 @layer base {
 	* {
 		@apply border-border outline-ring/50;
@@ -164,5 +352,19 @@
 	.hide-scrollbar::-webkit-scrollbar {
 		display: none;
 		/* Chrome/Safari/Webkit */
+	}
+}
+
+/**
+ * 焦点状态优化
+ * 使用 CSS 变量实现更灵活的焦点环
+ */
+@layer utilities {
+	.focus-ring {
+		@apply outline-none ring-2 ring-ring/50 ring-offset-2 ring-offset-background;
+	}
+
+	.focus-ring-inset {
+		@apply outline-none ring-2 ring-inset ring-ring/50;
 	}
 }

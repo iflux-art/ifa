@@ -29,12 +29,15 @@ export const MDXLink = ({
 	if (!href) return null;
 
 	const isExternal = external ?? isExternalLink(href);
+	// 使用 background 渐变实现从左到右延伸的下划线动画
+	// 支持多行文本，效果更好
 	const linkClasses = cn(
-		"not-prose font-medium text-primary hover:text-primary/80",
-		"relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0",
-		"after:bg-current after:transition-all after:duration-300 after:ease-out",
-		"hover:after:w-full",
-		isExternal && "text-primary",
+		"not-prose font-medium text-primary",
+		"bg-gradient-to-r from-primary/80 to-primary/80",
+		"bg-[length:0%_2px] bg-left-bottom bg-no-repeat",
+		"transition-[background-size] duration-300 ease-in-out",
+		"hover:bg-[length:100%_2px]",
+		"isExternal && text-primary",
 		className,
 	);
 

@@ -43,7 +43,7 @@ export {
 // 从 cache-utils 导出
 export {
 	CACHE_CONFIG,
+	type CacheStrategy,
 	generateCacheControl,
-	getCacheStrategy,
 	setCacheHeaders,
 } from "./cache-utils";

@@ -1,7 +1,6 @@
 "use client";
 
 import type { Metadata } from "next";
-import { TwikooComment } from "@/components/features/comment";
 import { FriendLinkApplication } from "@/components/features/friends/friend-link-application";
 import { FriendLinkCard } from "@/components/features/friends/link-card";
 import type { FriendLink } from "@/components/features/friends/types";
@@ -117,11 +116,6 @@ export const FriendsPage = ({
 							{/* 友链申请版块 */}
 							<div className="mt-8">
 								<FriendLinkApplication />
-							</div>
-
-							{/* 评论区 */}
-							<div className="mt-8">
-								<TwikooComment />
 							</div>
 						</div>
 

@@ -6,11 +6,10 @@
 
 "use client";
 
-import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -56,9 +55,6 @@ export const FriendLinkCard = forwardRef<
 		},
 		ref,
 	) => {
-		// 添加状态跟踪hover
-		const [isHovered, setIsHovered] = useState(false);
-
 		// 图标渲染逻辑，与 LinkCard 保持一致
 		const renderIcon = () => {
 			// 获取标题首个字符
@@ -117,8 +113,6 @@ export const FriendLinkCard = forwardRef<
 					className,
 				)}
 				style={cardStyle}
-				onMouseEnter={() => setIsHovered(true)}
-				onMouseLeave={() => setIsHovered(false)}
 			>
 				<CardContent className="flex h-full items-center p-4">
 					<div className="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-muted">
@@ -127,9 +121,6 @@ export const FriendLinkCard = forwardRef<
 					<div className="flex min-w-0 flex-1 flex-col">
 						<div className="mb-1 flex items-center gap-2">
 							<h3 className="truncate font-semibold text-lg">{title}</h3>
-							{isExternal && (
-								<ExternalLink className="h-4 w-4 text-muted-foreground" />
-							)}
 						</div>
 						{description && (
 							<p className="truncate text-muted-foreground text-sm">
@@ -139,17 +130,6 @@ export const FriendLinkCard = forwardRef<
 						{children && <div className="mt-2">{children}</div>}
 					</div>
 				</CardContent>
-
-				{/* Hover状态描述tooltip */}
-				{description && isHovered && (
-					<div
-						className="-translate-x-1/2 absolute bottom-full left-1/2 mb-2 w-64 transform rounded-md border bg-background p-3 shadow-lg"
-						style={{ zIndex: 1000 }}
-					>
-						<p className="text-foreground text-sm">{description}</p>
-						<div className="-translate-x-1/2 absolute bottom-0 left-1/2 h-2 w-2 translate-y-1 rotate-45 border-r border-b bg-background"></div>
-					</div>
-				)}
 			</Card>
 		);
 

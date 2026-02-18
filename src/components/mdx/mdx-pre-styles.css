@@ -1,5 +1,7 @@
 /**
  * 代码高亮自定义样式
+ * 使用 CSS 变量支持浅色/深色模式
+ * 整体使用黑白灰配色，代码高亮使用多彩色
  */
 
 /* 调整行号样式 */
@@ -9,14 +11,14 @@
 	opacity: 0.7;
 }
 
-/* 浅色模式下的行号竖线颜色 */
+/* 浅色模式下的行号竖线颜色 - 使用 CSS 变量 */
 :root:not(.dark) .line-numbers .line-numbers-rows {
-	border-right-color: #d1d5db; /* gray-300 */
+	border-right-color: var(--border);
 }
 
-/* 深色模式下的行号竖线颜色 */
+/* 深色模式下的行号竖线颜色 - 使用 CSS 变量 */
 .dark .line-numbers .line-numbers-rows {
-	border-right-color: rgba(255, 255, 255, 0.15);
+	border-right-color: var(--border);
 }
 
 /* 调整代码块边距和样式 */
@@ -34,16 +36,16 @@ pre[class*="language-"] {
 	z-index: 10;
 }
 
-/* 浅色模式下的代码颜色 */
+/* 浅色模式下的代码颜色 - 多彩色 */
 :root:not(.dark) .token.comment,
 :root:not(.dark) .token.prolog,
 :root:not(.dark) .token.doctype,
 :root:not(.dark) .token.cdata {
-	color: #007800;
+	color: oklch(45% 0.12 150); /* 绿色注释 */
 }
 
 :root:not(.dark) .token.punctuation {
-	color: #303030;
+	color: oklch(35% 0.02 265);
 }
 
 :root:not(.dark) .token.property,
@@ -52,7 +54,7 @@ pre[class*="language-"] {
 :root:not(.dark) .token.number,
 :root:not(.dark) .token.constant,
 :root:not(.dark) .token.symbol {
-	color: #905;
+	color: oklch(55% 0.18 20); /* 橙红色 */
 }
 
 :root:not(.dark) .token.selector,
@@ -60,7 +62,7 @@ pre[class*="language-"] {
 :root:not(.dark) .token.string,
 :root:not(.dark) .token.char,
 :root:not(.dark) .token.builtin {
-	color: #690;
+	color: oklch(55% 0.15 145); /* 绿色字符串 */
 }
 
 :root:not(.dark) .token.operator,
@@ -68,50 +70,50 @@ pre[class*="language-"] {
 :root:not(.dark) .token.url,
 :root:not(.dark) .language-css .token.string,
 :root:not(.dark) .style .token.string {
-	color: #9a6e3a;
+	color: oklch(45% 0.12 45); /* 棕色操作符 */
 	background: transparent;
 }
 
 :root:not(.dark) .token.atrule,
 :root:not(.dark) .token.attr-value,
 :root:not(.dark) .token.keyword {
-	color: #07a;
+	color: oklch(55% 0.15 260); /* 蓝色关键字 */
 }
 
 :root:not(.dark) .token.function {
-	color: #dd4a68;
+	color: oklch(55% 0.18 340); /* 紫红色函数 */
 }
 
 :root:not(.dark) .token.regex,
 :root:not(.dark) .token.important,
 :root:not(.dark) .token.variable {
-	color: #e90;
+	color: oklch(60% 0.18 40); /* 橙色重点 */
 }
 
 :root:not(.dark) .token.punctuation {
-	color: #24292e;
+	color: oklch(30% 0.02 265);
 }
 
 :root:not(.dark) .token.template-string .token.string,
 :root:not(.dark) .token.template-punctuation {
-	color: #24292e;
+	color: oklch(30% 0.02 265);
 }
 
 :root:not(.dark) .token.interpolation,
 :root:not(.dark) .token.interpolation-punctuation {
-	color: #5c6166;
+	color: oklch(50% 0.03 265);
 }
 
 :root:not(.dark) .token.template-string .token.interpolation {
-	color: #953800;
+	color: oklch(45% 0.15 25);
 }
 
 :root:not(.dark) .token.template-string .token.interpolation-punctuation {
-	color: #953800;
+	color: oklch(45% 0.15 25);
 }
 
 :root:not(.dark) code[class*="language-"] {
-	color: #24292e;
+	color: oklch(25% 0.02 265);
 }
 
 .token.important,
@@ -123,16 +125,16 @@ pre[class*="language-"] {
 	font-style: italic;
 }
 
-/* 深色模式下的代码颜色 */
+/* 深色模式下的代码颜色 - 多彩色，更鲜艳 */
 .dark .token.comment,
 .dark .token.prolog,
 .dark .token.doctype,
 .dark .token.cdata {
-	color: #6a9955;
+	color: oklch(60% 0.12 150); /* 亮绿色注释 */
 }
 
 .dark .token.punctuation {
-	color: #d4d4d4;
+	color: oklch(70% 0.02 265);
 }
 
 .dark .token.property,
@@ -141,7 +143,7 @@ pre[class*="language-"] {
 .dark .token.number,
 .dark .token.constant,
 .dark .token.symbol {
-	color: #b5cea8;
+	color: oklch(75% 0.15 120); /* 浅绿色数字 */
 }
 
 .dark .token.selector,
@@ -149,7 +151,7 @@ pre[class*="language-"] {
 .dark .token.string,
 .dark .token.char,
 .dark .token.builtin {
-	color: #ce9178;
+	color: oklch(75% 0.15 25); /* 橙红色字符串 */
 }
 
 .dark .token.operator,
@@ -157,28 +159,28 @@ pre[class*="language-"] {
 .dark .token.url,
 .dark .language-css .token.string,
 .dark .style .token.string {
-	color: #d4d4d4;
+	color: oklch(70% 0.02 265);
 	background: transparent;
 }
 
 .dark .token.atrule,
 .dark .token.attr-value,
 .dark .token.keyword {
-	color: #569cd6;
+	color: oklch(70% 0.15 220); /* 蓝色关键字 */
 }
 
 .dark .token.function {
-	color: #dcdcaa;
+	color: oklch(80% 0.15 80); /* 黄色函数 */
 }
 
 .dark .token.regex,
 .dark .token.important,
 .dark .token.variable {
-	color: #d16969;
+	color: oklch(70% 0.18 20); /* 红色重点 */
 }
 
 .dark code[class*="language-"] {
-	color: #e3e3e3;
+	color: oklch(92% 0 0);
 }
 
 /* 深色模式强制样式 - 放在最后确保优先级 */
@@ -188,6 +190,11 @@ pre[class*="language-"] {
 	background-color: transparent;
 }
 
+/* 代码块背景 - 使用 CSS 变量 */
+pre[class*="language-"] {
+	background-color: var(--muted);
+}
+
 /* 代码块滚动条样式 */
 pre::-webkit-scrollbar {
 	width: 8px;
@@ -195,21 +202,21 @@ pre::-webkit-scrollbar {
 }
 
 pre::-webkit-scrollbar-track {
-	background: rgba(0, 0, 0, 0.1);
+	background: oklch(30% 0.02 265 / 10%);
 	border-radius: 4px;
 }
 
 pre::-webkit-scrollbar-thumb {
-	background: rgba(255, 255, 255, 0.2);
+	background: oklch(60% 0.02 265 / 30%);
 	border-radius: 4px;
 }
 
 pre::-webkit-scrollbar-thumb:hover {
-	background: rgba(255, 255, 255, 0.3);
+	background: oklch(60% 0.02 265 / 50%);
 }
 
 /* 禁用Firefox和Edge的默认滚动条样式 */
 pre {
 	scrollbar-width: thin;
-	scrollbar-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.1);
+	scrollbar-color: oklch(60% 0.02 265 / 30%) oklch(30% 0.02 265 / 10%);
 }

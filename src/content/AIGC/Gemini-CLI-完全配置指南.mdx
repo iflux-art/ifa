@@ -1,0 +1,290 @@
+---
+title: Gemini CLI 完全配置指南
+description: 详细讲解如何在本地安装和配置 Google Gemini CLI，包括 API 密钥获取、环境配置、代理设置以及常见问题解决
+category: AIGC
+tags:
+  - Gemini
+  - CLI
+  - Google AI
+  - 配置指南
+date: 2026-02-18
+---
+
+## 什么是 Gemini CLI
+
+Gemini CLI 是 Google 推出的命令行工具，允许开发者通过终端直接与 Gemini AI 模型交互。它支持交互式对话、文件处理、MCP 服务器管理等功能，是一款强大的 AI 开发辅助工具。
+
+### 主要功能
+
+- **交互式对话**：直接在终端与 Gemini 模型对话
+- **MCP 服务器管理**：支持扩展和管理 MCP 服务器
+- **技能和钩子管理**：自定义 AI 技能和工作流
+- **沙盒模式**：安全地执行 AI 操作
+
+## 环境准备
+
+### 前置要求
+
+- Node.js 18.0 或更高版本
+- npm、pnpm 或 yarn 包管理器
+- Google 账号（用于获取 API 密钥）
+
+### 支持的系统
+
+- Windows 10/11
+- macOS 10.15+
+- Linux (Ubuntu 20.04+)
+
+## 获取 Google AI API 密钥
+
+### 步骤 1：访问 Google AI Studio
+
+打开浏览器，访问 [Google AI Studio](https://aistudio.google.com/app/apikey)。
+
+### 步骤 2：登录账号
+
+使用您的 Google 账号登录。如果没有 Google 账号，需要先注册一个。
+
+### 步骤 3：创建 API 密钥
+
+1. 点击页面上的 **"Create API Key"** 按钮
+2. 选择现有项目或创建新项目
+3. 复制生成的 API 密钥
+
+:::warning
+API 密钥非常重要，请妥善保管，切勿泄露或提交到公开代码仓库。
+:::
+
+### 密钥类型说明
+
+- **API Key**：适用于标准 API 调用
+- **Vertex AI**：适用于企业级应用，需要 Google Cloud 项目
+
+## 安装 Gemini CLI
+
+### 使用 pnpm 安装（推荐）
+
+```bash
+pnpm add -g @google/gemini-cli
+```
+
+### 使用 npm 安装
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+### 使用 yarn 安装
+
+```bash
+yarn global add @google/gemini-cli
+```
+
+### 验证安装
+
+```bash
+npm exec @google/gemini-cli -- --version
+```
+
+成功安装后会显示版本号，例如：`0.29.0`
+
+## 配置 API 密钥
+
+### 方法一：环境变量配置（推荐）
+
+#### Windows CMD
+
+```cmd
+setx GEMINI_API_KEY "你的API密钥"
+```
+
+#### Windows PowerShell
+
+```powershell
+$env:GEMINI_API_KEY="你的API密钥"
+```
+
+#### 永久保存（PowerShell）
+
+```powershell
+[System.Environment]::SetEnvironmentVariable("GEMINI_API_KEY", "你的API密钥", "User")
+```
+
+#### Linux / macOS
+
+```bash
+export GEMINI_API_KEY="你的API密钥"
+```
+
+### 方法二：配置文件
+
+Gemini CLI 支持通过配置文件设置认证信息。配置文件位于：
+
+- Windows: `C:\Users\<用户名>\.gemini\settings.json`
+- macOS / Linux: `~/.gemini/settings.json`
+
+创建或编辑配置文件：
+
+```json
+{
+  "apiKey": "你的API密钥"
+}
+```
+
+### 方法三：交互式配置
+
+首次运行 gemini 命令时，系统会提示输入 API 密钥：
+
+```bash
+npm exec @google/gemini-cli
+```
+
+按照提示输入您的 API 密钥即可。
+
+## 使用代理访问
+
+由于网络环境限制，在中国大陆访问 Google API 可能需要使用代理。
+
+### 设置代理环境变量
+
+#### Windows CMD
+
+```cmd
+set HTTP_PROXY=http://127.0.0.1:7890
+set HTTPS_PROXY=http://127.0.0.1:7890
+```
+
+#### Windows PowerShell
+
+```powershell
+$env:HTTP_PROXY="http://127.0.0.1:7890"
+$env:HTTPS_PROXY="http://127.0.0.1:7890"
+```
+
+#### Linux / macOS
+
+```bash
+export HTTP_PROXY=http://127.0.0.1:7890
+export HTTPS_PROXY=http://127.0.0.1:7890
+```
+
+### 验证网络连接
+
+```bash
+ping google.com
+```
+
+如果无法 ping 通，说明需要配置代理才能访问 Google API。
+
+## 基础使用
+
+### 交互模式
+
+启动交互式对话：
+
+```bash
+npm exec @google/gemini-cli
+```
+
+### 非交互模式
+
+直接输入问题：
+
+```bash
+npm exec @google/gemini-cli -- -p "你好，请介绍一下自己"
+```
+
+### 常用命令选项
+
+| 选项 | 说明 |
+|------|------|
+| `-p, --prompt` | 非交互模式，指定提示词 |
+| `-m, --model` | 指定使用的模型 |
+| `-d, --debug` | 调试模式 |
+| `-y, --yolo` | 自动接受所有操作 |
+| `--approval-mode` | 审批模式：`default`, `auto_edit`, `yolo`, `plan` |
+
+### 查看帮助
+
+```bash
+npm exec @google/gemini-cli -- --help
+```
+
+## 进阶功能
+
+### MCP 服务器管理
+
+```bash
+# 查看 MCP 命令
+gemini mcp
+```
+
+### 扩展管理
+
+```bash
+# 查看已安装的扩展
+gemini extensions list
+```
+
+### 技能管理
+
+```bash
+# 查看可用技能
+gemini skills list
+```
+
+## 常见问题
+
+### 1. API 密钥无效
+
+- 检查密钥是否正确复制
+- 确认密钥是否已过期
+- 验证 API 是否在密钥所属项目中启用
+
+### 2. 网络连接失败
+
+- 检查网络是否正常
+- 配置代理环境变量
+- 确认防火墙是否阻止访问
+
+### 3. 权限错误
+
+- 以管理员身份运行终端
+- 检查环境变量权限
+
+### 4. 模块未找到错误
+
+- 重新安装 Gemini CLI
+- 清除 npm 缓存
+
+## 定价与限制
+
+### 免费额度
+
+- 新用户享有免费试用额度
+- 具体限制请查看 [Google AI 定价](https://ai.google/pricing)
+
+### 付费升级
+
+如需更高额度，可以通过 Google AI Studio 升级到付费计划。
+
+## 最佳实践
+
+### 安全建议
+
+1. **不要将 API 密钥硬编码**：使用环境变量
+2. **定期轮换密钥**：定期更换 API 密钥
+3. **限制密钥权限**：为不同应用创建不同的密钥
+4. **监控使用量**：定期检查 API 使用情况
+
+### 性能优化
+
+1. **使用缓存**：减少重复请求
+2. **批量处理**：合理批量处理任务
+3. **选择合适的模型**：根据任务复杂度选择模型
+
+## 相关资源
+
+- [Google AI Studio](https://aistudio.google.com/)
+- [Gemini API 文档](https://ai.google.dev/docs)
+- [Gemini CLI GitHub](https://github.com/google/gemini-cli)

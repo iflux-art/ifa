@@ -51,18 +51,9 @@ export const LatestPostsCard = ({
 							>
 								<FileText className="mt-0.5 h-3 w-3 shrink-0 text-muted-foreground/70 group-hover:text-foreground/80" />
 								<div className="min-w-0 flex-1">
-									<p className="line-clamp-2 text-muted-foreground leading-relaxed group-hover:text-foreground">
+									<p className="truncate text-muted-foreground leading-relaxed group-hover:text-foreground">
 										{post.title}
 									</p>
-									{post.date && (
-										<p className="mt-1 text-muted-foreground/60 text-xs">
-											{new Date(post.date).toLocaleDateString("zh-CN", {
-												year: "numeric",
-												month: "short",
-												day: "numeric",
-											})}
-										</p>
-									)}
 								</div>
 							</Link>
 						);

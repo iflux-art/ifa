@@ -30,6 +30,8 @@ export const MDXCode = ({ children, className, ...props }: MDXCodeProps) => {
 					"not-prose",
 					"relative",
 					"rounded",
+					"border",
+					"border-border",
 					"bg-muted",
 					"px-[0.3rem]",
 					"py-[0.2rem]",
@@ -37,6 +39,11 @@ export const MDXCode = ({ children, className, ...props }: MDXCodeProps) => {
 					"text-sm",
 					"font-semibold",
 					"text-primary",
+					"transition-all",
+					"duration-300",
+					"hover:border-primary/50",
+					"hover:shadow-md",
+					"hover:shadow-primary/10",
 					"dark:bg-muted/80",
 					"dark:text-primary/90",
 					"before:hidden",
@@ -56,8 +63,6 @@ export const MDXCode = ({ children, className, ...props }: MDXCodeProps) => {
 			}
 		}
 	}, []);
-
-	// 格式化函数不再需要，我们在useEffect中处理
 
 	return (
 		<code ref={codeRef} className={className} {...props}>

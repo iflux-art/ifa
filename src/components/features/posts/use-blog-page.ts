@@ -75,7 +75,6 @@ export function useBlogPage(
 		},
 		{
 			expiry: 5 * 60 * 1000, // 5分钟缓存
-			strategy: "cache-first",
 			validator: (data) => Array.isArray(data),
 		},
 	);
@@ -104,7 +103,7 @@ export function useBlogPage(
 	}, [posts, category, tag]);
 
 	// 计算分类统计
-	const calculateCategoriesData = useCallback(() => {
+	const categoriesData = useMemo(() => {
 		// 重新计算分类统计
 		const categoriesCount: Record<string, number> = {};
 		for (const post of posts) {
@@ -131,29 +130,8 @@ export function useBlogPage(
 		return { categories, postsCount };
 	}, [posts]);
 
-	// 分类统计（使用统一缓存机制）
-	const { data: categoriesData } = useCache<{
-		categories: CategoryWithCount[];
-		postsCount: Record<string, number>;
-	}>(
-		`blog_categories_${posts.length}_${category ?? "all"}_${tag ?? "all"}`,
-		() => {
-			return Promise.resolve(calculateCategoriesData());
-		},
-		{
-			expiry: 5 * 60 * 1000, // 5分钟缓存
-			strategy: "cache-first",
-			validator: (data) =>
-				data !== null &&
-				typeof data === "object" &&
-				Array.isArray(data.categories) &&
-				typeof data.postsCount === "object",
-		},
-	);
-
 	// 计算相关文章
-	const calculateRelatedPosts = useCallback(() => {
-		// 重新计算相关文章
+	const relatedPosts = useMemo(() => {
 		return posts.slice(0, 10).map((post) => ({
 			title: post.title ?? "",
 			href: `/posts/${post.slug ?? ""}`,
@@ -162,25 +140,8 @@ export function useBlogPage(
 		}));
 	}, [posts]);
 
-	// 相关文章（使用统一缓存机制）
-	const { data: relatedPostsData } = useCache<
-		UseBlogPageReturn["relatedPosts"]
-	>(
-		`blog_related_${posts.length}`,
-		() => {
-			// 重新计算相关文章
-			return Promise.resolve(calculateRelatedPosts());
-		},
-		{
-			expiry: 5 * 60 * 1000, // 5分钟缓存
-			strategy: "cache-first",
-			validator: (data) => Array.isArray(data),
-		},
-	);
-
 	// 计算最新文章
-	const calculateLatestPosts = useCallback(() => {
-		// 重新计算最新文章
+	const latestPosts = useMemo(() => {
 		return posts
 			.filter((post) => post.date)
 			.slice(0, 5)
@@ -191,20 +152,6 @@ export function useBlogPage(
 				category: post.category,
 			}));
 	}, [posts]);
-
-	// 最新发布的文章（使用统一缓存机制）
-	const { data: latestPostsData } = useCache<UseBlogPageReturn["latestPosts"]>(
-		`blog_latest_${posts.length}`,
-		() => {
-			// 重新计算最新文章
-			return Promise.resolve(calculateLatestPosts());
-		},
-		{
-			expiry: 5 * 60 * 1000, // 5分钟缓存
-			strategy: "cache-first",
-			validator: (data) => Array.isArray(data),
-		},
-	);
 
 	// 处理分类点击
 	const handleCategoryClick = (newCategory: string | null) => {
@@ -232,10 +179,10 @@ export function useBlogPage(
 		// 数据状态
 		posts,
 		filteredPosts,
-		categories: categoriesData?.categories ?? [],
-		postsCount: categoriesData?.postsCount ?? {},
-		relatedPosts: relatedPostsData ?? [],
-		latestPosts: latestPostsData ?? [],
+		categories: categoriesData.categories,
+		postsCount: categoriesData.postsCount,
+		relatedPosts,
+		latestPosts,
 
 		// 加载状态
 		loading,
@@ -249,6 +196,8 @@ export function useBlogPage(
 		handleTagClick,
 
 		// 刷新数据
-		refreshData,
+		refreshData: async () => {
+			await refreshData();
+		},
 	};
 }
