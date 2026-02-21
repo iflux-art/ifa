@@ -72,15 +72,13 @@ async function getBlogPageData() {
 }
 
 export default async function Home() {
-	const { allPosts, allTags, categories, latestPosts } =
-		await getBlogPageData();
+	const { allPosts, allTags, categories } = await getBlogPageData();
 
 	return (
 		<BlogPageContainer
 			initialPosts={allPosts}
 			allTags={allTags}
 			categories={categories}
-			latestPosts={latestPosts}
 		/>
 	);
 }

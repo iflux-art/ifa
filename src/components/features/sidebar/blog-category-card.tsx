@@ -77,27 +77,28 @@ export const BlogCategoryCard = ({
 				</CardHeader>
 			)}
 			<CardContent className={showHeader ? "pt-0 pb-4" : "py-4"}>
-				<div className="hide-scrollbar max-h-[215px] space-y-1.5 overflow-y-auto sm:max-h-[215px] sm:space-y-2">
-					{categories.map((category) => (
-						<button
-							key={category.name}
-							type="button"
-							onClick={() =>
-								handleClick(
-									selectedCategory === category.name ? null : category.name,
-								)
-							}
-							className={cn(
-								"flex min-h-[44px] w-full touch-manipulation items-center gap-2 rounded-md px-2.5 py-2.5 text-left text-xs transition-colors sm:min-h-[36px] sm:px-3 sm:py-2",
-								selectedCategory === category.name
-									? "bg-primary font-medium text-primary-foreground"
-									: "text-muted-foreground hover:bg-muted/60 hover:text-foreground active:bg-muted/80",
-							)}
-						>
-							<Folder className="h-3.5 w-3.5" />
-							<span className="flex-1">{category.name}</span>
-						</button>
-					))}
+				<div className="hide-scrollbar overflow-y-auto">
+					<div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+						{categories.map((category) => {
+							const isSelected = selectedCategory === category.name;
+							return (
+								<button
+									key={category.name}
+									type="button"
+									onClick={() => handleClick(isSelected ? null : category.name)}
+									className={cn(
+										"h-6 min-h-[32px] cursor-pointer touch-manipulation rounded-md px-2.5 py-1.5 font-normal text-sm transition-all duration-200 sm:h-5 sm:min-h-[20px] sm:px-2 sm:py-0.5 sm:text-[10px]",
+										"hover:shadow-sm active:scale-95",
+										isSelected
+											? "bg-primary text-primary-foreground shadow-sm"
+											: "border-0 bg-muted/60 text-muted-foreground hover:bg-primary/10 hover:text-primary active:bg-primary/20",
+									)}
+								>
+									{category.name}
+								</button>
+							);
+						})}
+					</div>
 				</div>
 			</CardContent>
 		</Card>

@@ -5,7 +5,6 @@ import type { BlogPost } from "@/components/features/posts/blog-types";
 import { useBlogPage } from "@/components/features/posts/use-blog-page";
 
 import { BlogCategoryCard } from "@/components/features/sidebar/blog-category-card";
-import { LatestPostsCard } from "@/components/features/sidebar/latest-posts-card";
 import { SidebarWrapper } from "@/components/features/sidebar/sidebar-wrapper";
 import { TagCloudCard } from "@/components/features/sidebar/tag-cloud-card";
 
@@ -13,12 +12,6 @@ interface BlogPageContainerProps {
 	initialPosts?: BlogPost[];
 	allTags?: { name: string; count: number }[];
 	categories?: { name: string; count: number }[];
-	latestPosts?: {
-		title: string;
-		href: string;
-		date?: string;
-		category?: string;
-	}[];
 	/** 总文章数 */
 	totalPosts?: number;
 }
@@ -31,7 +24,6 @@ export const BlogPageContainer = ({
 	initialPosts = [],
 	allTags = [],
 	categories = [],
-	latestPosts = [],
 }: BlogPageContainerProps) => {
 	const {
 		filteredPosts,
@@ -51,7 +43,6 @@ export const BlogPageContainer = ({
 					name,
 					count: count as number,
 				}));
-	const effectiveLatestPosts = latestPosts.length > 0 ? latestPosts : [];
 
 	// 使用过滤后的文章
 	const displayPosts = filteredPosts;
@@ -63,14 +54,12 @@ export const BlogPageContainer = ({
 				categories={effectiveCategories}
 				selectedCategory={category}
 				onCategoryClick={handleCategoryClick}
-				showHeader={false}
 			/>
 			<TagCloudCard
 				allTags={effectiveTags}
 				selectedTag={tag}
 				onTagClick={handleTagClick}
 			/>
-			<LatestPostsCard posts={effectiveLatestPosts} currentSlug={[]} />
 		</>
 	);
 

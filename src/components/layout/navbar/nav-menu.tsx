@@ -42,6 +42,8 @@ export const NavListMenu = ({ className = "" }: NavListMenuProps) => {
 							isActive ? "text-primary" : "text-muted-foreground",
 						)}
 						aria-current={isActive ? "page" : undefined}
+						target={navItem.external ? "_blank" : undefined}
+						rel={navItem.external ? "noopener noreferrer" : undefined}
 					>
 						{navItem.label}
 					</Link>

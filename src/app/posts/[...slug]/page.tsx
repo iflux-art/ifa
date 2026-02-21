@@ -44,7 +44,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 			frontmatter,
 			headings,
 			relatedPosts,
-			latestPosts,
 			allTags,
 			allCategories,
 		} = await getBlogContent(resolvedParams.slug);
@@ -56,7 +55,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 				frontmatter={frontmatter}
 				headings={headings}
 				relatedPosts={relatedPosts}
-				latestPosts={latestPosts}
 				allTags={allTags}
 				allCategories={allCategories}
 			/>

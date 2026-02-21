@@ -3,7 +3,6 @@
 import type { BlogFrontmatter } from "@/components/features/posts/blog-content";
 import { PostMeta } from "@/components/features/posts/post-meta";
 import { BlogCategoryCard } from "@/components/features/sidebar/blog-category-card";
-import { LatestPostsCard } from "@/components/features/sidebar/latest-posts-card";
 import { RelatedPostsCard } from "@/components/features/sidebar/related-posts-card";
 import { SidebarWrapper } from "@/components/features/sidebar/sidebar-wrapper";
 import { TableOfContents } from "@/components/features/sidebar/table-of-contents";
@@ -27,12 +26,6 @@ interface BlogPostPageProps {
 		category?: string;
 		slug: string[];
 	}[];
-	latestPosts: {
-		title: string;
-		href: string;
-		date?: string;
-		category?: string;
-	}[];
 	allTags: {
 		name: string;
 		count: number;
@@ -53,7 +46,6 @@ export const BlogPostPageContainer = ({
 	frontmatter,
 	headings,
 	relatedPosts,
-	latestPosts,
 	allTags,
 	allCategories,
 }: BlogPostPageProps) => {
@@ -77,7 +69,6 @@ export const BlogPostPageContainer = ({
 				categories={allCategories}
 				selectedCategory={frontmatter.category}
 				enableRouting
-				showHeader={false}
 			/>
 			<TagCloudCard
 				allTags={allTags}
@@ -86,7 +77,6 @@ export const BlogPostPageContainer = ({
 			/>
 			<TableOfContents headings={headings} className="prose-sm" />
 			<RelatedPostsCard posts={relatedPosts} currentSlug={slug.slice(1)} />
-			<LatestPostsCard posts={latestPosts} currentSlug={slug.slice(1)} />
 		</>
 	);
 
@@ -133,10 +123,9 @@ export const BlogPostPageContainer = ({
 										)}
 									>
 										<header className="mb-8">
-											<h1 className="mb-8 font-bold text-2xl tracking-tight sm:text-2xl">
+											<h1 className="mb-4 font-bold text-2xl tracking-tight sm:text-2xl">
 												{title}
 											</h1>
-											{/* 使用 PostMeta 组件显示文章元数据 */}
 											<PostMeta date={date} wordCount={content.length} />
 										</header>
 
@@ -144,6 +133,74 @@ export const BlogPostPageContainer = ({
 											<ClientMDXRenderer content={content} />
 										</div>
 									</article>
+
+									{/* 版权声明卡片 */}
+									<div className="mt-6 rounded-lg border bg-card p-4 text-card-foreground shadow-sm transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 sm:p-5 lg:p-6">
+										<div className="flex flex-col gap-3">
+											<div className="flex items-center gap-2">
+												<div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+													<svg
+														viewBox="0 0 24 24"
+														className="h-4 w-4 text-primary"
+														fill="none"
+														stroke="currentColor"
+														strokeWidth="2"
+														role="img"
+														aria-hidden="true"
+													>
+														<circle cx="12" cy="12" r="10" />
+														<path d="M12 6v6l4 2" />
+													</svg>
+												</div>
+												<span className="font-medium text-sm">版权声明</span>
+											</div>
+											<div className="space-y-2 text-muted-foreground text-sm">
+												<p>本文为作者原创文章，遵循 CC BY-NC-ND 4.0 协议。</p>
+												<ul className="list-inside list-disc space-y-1 pl-1">
+													<li>
+														<span className="text-foreground">署名</span>
+														：转载时请注明出处
+													</li>
+													<li>
+														<span className="text-foreground">
+															非商业性使用
+														</span>
+														：禁止商业用途
+													</li>
+													<li>
+														<span className="text-foreground">禁止演绎</span>
+														：不得修改原文
+													</li>
+												</ul>
+											</div>
+											<a
+												href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+												target="_blank"
+												rel="noopener noreferrer"
+												className="group relative inline-flex items-center gap-1 text-primary text-sm"
+											>
+												<span className="relative">
+													查看完整许可证
+													<span className="absolute bottom-0 left-0 h-[1px] w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+												</span>
+												<svg
+													className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke="currentColor"
+													strokeWidth="2"
+													role="img"
+													aria-hidden="true"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+													/>
+												</svg>
+											</a>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
