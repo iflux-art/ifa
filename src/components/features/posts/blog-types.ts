@@ -57,8 +57,10 @@ export interface BlogPost extends ContentItem {
 	authorBio?: string;
 	/** Blog post published status */
 	published?: boolean;
-	/** Blog post slug */
+	/** Blog post slug (translated) */
 	slug: string;
+	/** Original slug before translation */
+	originalSlug?: string;
 	/** Blog post image (alias for cover) */
 	image?: string;
 }

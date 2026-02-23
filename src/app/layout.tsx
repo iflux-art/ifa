@@ -5,6 +5,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import type React from "react";
 import { Footer, MainNavbar, ThemeProvider } from "@/components";
+import { MobileMenuProvider } from "@/components/layout/navbar/mobile-menu-context";
 import { SITE_METADATA } from "@/config";
 
 // 使用 next/font 优化字体加载
@@ -101,13 +102,15 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
 				enableSystem={false}
 				disableTransitionOnChange
 			>
-				{/* 页面主体布局容器 */}
-				<div className="flex min-h-screen flex-col">
-					<MainNavbar className="sticky top-0 z-50 flex-shrink-0" />
-					{/* 主内容区域 - 使用 flex-1 让 footer 固定底部 */}
-					<main className="flex-1">{children}</main>
-					<Footer className="flex-shrink-0" />
-				</div>
+				<MobileMenuProvider>
+					{/* 页面主体布局容器 */}
+					<div className="flex min-h-screen flex-col">
+						<MainNavbar className="sticky top-0 z-50 flex-shrink-0" />
+						{/* 主内容区域 - 使用 flex-1 让 footer 固定底部 */}
+						<main className="flex-1">{children}</main>
+						<Footer className="flex-shrink-0" />
+					</div>
+				</MobileMenuProvider>
 			</ThemeProvider>
 		</body>
 	</html>

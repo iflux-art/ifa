@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useMemo, useRef } from "react";
 import { BlogListContent } from "@/components/features/posts/blog-list-content";
 import type { BlogPost } from "@/components/features/posts/blog-types";
 import { useBlogPage } from "@/components/features/posts/use-blog-page";
@@ -7,6 +8,7 @@ import { useBlogPage } from "@/components/features/posts/use-blog-page";
 import { BlogCategoryCard } from "@/components/features/sidebar/blog-category-card";
 import { SidebarWrapper } from "@/components/features/sidebar/sidebar-wrapper";
 import { TagCloudCard } from "@/components/features/sidebar/tag-cloud-card";
+import { useMobileMenu } from "./navbar/mobile-menu-context";
 
 interface BlogPageContainerProps {
 	initialPosts?: BlogPost[];
@@ -25,6 +27,7 @@ export const BlogPageContainer = ({
 	allTags = [],
 	categories = [],
 }: BlogPageContainerProps) => {
+	const { setSidebar } = useMobileMenu();
 	const {
 		filteredPosts,
 		postsCount,
@@ -44,24 +47,43 @@ export const BlogPageContainer = ({
 					count: count as number,
 				}));
 
+	// 左侧边栏内容
+	const sidebarContent = useMemo(
+		() => (
+			<>
+				<BlogCategoryCard
+					categories={effectiveCategories}
+					selectedCategory={category}
+					onCategoryClick={handleCategoryClick}
+				/>
+				<TagCloudCard
+					allTags={effectiveTags}
+					selectedTag={tag}
+					onTagClick={handleTagClick}
+				/>
+			</>
+		),
+		[
+			effectiveCategories,
+			effectiveTags,
+			category,
+			tag,
+			handleCategoryClick,
+			handleTagClick,
+		],
+	);
+
 	// 使用过滤后的文章
 	const displayPosts = filteredPosts;
 
-	// 左侧边栏内容
-	const leftSidebar = (
-		<>
-			<BlogCategoryCard
-				categories={effectiveCategories}
-				selectedCategory={category}
-				onCategoryClick={handleCategoryClick}
-			/>
-			<TagCloudCard
-				allTags={effectiveTags}
-				selectedTag={tag}
-				onTagClick={handleTagClick}
-			/>
-		</>
-	);
+	const hasSetSidebar = useRef(false);
+
+	useEffect(() => {
+		if (!hasSetSidebar.current) {
+			hasSetSidebar.current = true;
+			setSidebar(sidebarContent);
+		}
+	}, [setSidebar, sidebarContent]);
 
 	return (
 		<div className="min-h-screen bg-background">
@@ -87,7 +109,7 @@ export const BlogPageContainer = ({
 											},
 										}}
 									>
-										<div className="space-y-6">{leftSidebar}</div>
+										<div className="space-y-6">{sidebarContent}</div>
 									</SidebarWrapper>
 								</div>
 

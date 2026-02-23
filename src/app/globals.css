@@ -367,4 +367,61 @@
 	.focus-ring-inset {
 		@apply outline-none ring-2 ring-inset ring-ring/50;
 	}
+
+	/* 移动菜单动画 */
+	@keyframes slide-in-right {
+		from {
+			transform: translateX(100%);
+			opacity: 0;
+		}
+		to {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+
+	@keyframes slide-out-right {
+		from {
+			transform: translateX(0);
+			opacity: 1;
+		}
+		to {
+			transform: translateX(100%);
+			opacity: 0;
+		}
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fade-out {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
+
+	.animate-slide-in-right {
+		animation: slide-in-right 0.3s ease-out forwards;
+	}
+
+	.animate-slide-out-right {
+		animation: slide-out-right 0.3s ease-in forwards;
+	}
+
+	.animate-fade-in {
+		animation: fade-in 0.2s ease-out forwards;
+	}
+
+	.animate-fade-out {
+		animation: fade-out 0.2s ease-in forwards;
+	}
 }

@@ -87,7 +87,7 @@ export const BlogCategoryCard = ({
 									type="button"
 									onClick={() => handleClick(isSelected ? null : category.name)}
 									className={cn(
-										"h-6 min-h-[32px] cursor-pointer touch-manipulation rounded-md px-2.5 py-1.5 font-normal text-sm transition-all duration-200 sm:h-5 sm:min-h-[20px] sm:px-2 sm:py-0.5 sm:text-[10px]",
+										"h-6 min-h-[32px] cursor-pointer touch-manipulation rounded-md px-2.5 py-1.5 font-normal text-xs transition-all duration-200 sm:h-5 sm:min-h-[20px] sm:px-2 sm:py-0.5 sm:text-[10px]",
 										"hover:shadow-sm active:scale-95",
 										isSelected
 											? "bg-primary text-primary-foreground shadow-sm"

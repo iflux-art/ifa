@@ -27,6 +27,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { cache } from "react";
+import { toSlug, translateBatch } from "@/lib/translation";
 import type { BlogPost } from "./blog-types";
 
 // ==================== 类型定义 ====================
@@ -71,24 +72,35 @@ function createBlogPost(
 	filePath: string,
 	data: Record<string, unknown>,
 	blogDir: string,
+	slugMap: Map<string, string>,
 ): BlogPost {
 	const relativePath = path.relative(blogDir, filePath);
-	const slug = relativePath
+	const originalSlug = relativePath
 		.replace(/\.(mdx|md)$/, "")
 		.replace(/\\/g, "/")
 		.split("/");
 
+	const translatedSlug = originalSlug.map(
+		(segment) => slugMap.get(segment) ?? toSlug(segment),
+	);
+
+	const slugStr = translatedSlug.join("/");
+
 	return {
-		id: slug.join("/"),
-		slug: slug.join("/"),
-		title: (data.title as string) ?? slug[slug.length - 1] ?? slug.join("/"),
+		id: slugStr,
+		slug: slugStr,
+		originalSlug: originalSlug.join("/"),
+		title:
+			(data.title as string) ??
+			originalSlug[originalSlug.length - 1] ??
+			originalSlug.join("/"),
 		description:
 			(data.description as string) ?? (data.excerpt as string) ?? "暂无描述",
 		excerpt: (data.excerpt as string) ?? "点击阅读全文",
 		date: String(data.date),
 		image: data.cover as string | undefined,
 		tags: (data.tags as string[]) ?? [],
-		category: (data.category as string) ?? slug[0] ?? "未分类",
+		category: (data.category as string) ?? translatedSlug[0] ?? "uncategorized",
 	};
 }
 
@@ -114,13 +126,37 @@ async function buildBlogCache(): Promise<BlogCache> {
 	const tagCounts: Record<string, number> = {};
 	const categoryCounts: Record<string, number> = {};
 
+	// 收集所有需要翻译的路径段
+	const segmentsToTranslate = new Set<string>();
+	for (const filePath of files) {
+		const relativePath = path.relative(CONTENT_DIR, filePath);
+		const segments = relativePath
+			.replace(/\.(mdx|md)$/, "")
+			.replace(/\\/g, "/")
+			.split("/");
+		for (const segment of segments) {
+			if (segment && !/^[a-zA-Z0-9-]+$/.test(segment)) {
+				segmentsToTranslate.add(segment);
+			}
+		}
+	}
+
+	// 批量翻译
+	const slugMap = new Map<string, string>();
+	if (segmentsToTranslate.size > 0) {
+		const translated = await translateBatch([...segmentsToTranslate]);
+		for (const [original, translatedSlug] of translated) {
+			slugMap.set(original, toSlug(translatedSlug));
+		}
+	}
+
 	for (const filePath of files) {
 		const fileContent = await fs.readFile(filePath, "utf8");
 		const { data } = matter(fileContent);
 
 		if (data.published === false) continue;
 
-		const post = createBlogPost(filePath, data, CONTENT_DIR);
+		const post = createBlogPost(filePath, data, CONTENT_DIR, slugMap);
 		posts.push(post);
 
 		// 统计分类
@@ -236,4 +272,20 @@ export async function getPostsByTag(tag: string): Promise<BlogPost[]> {
  */
 export function clearBlogCache(): void {
 	// unstable_cache 由 Next.js 自动管理，无需手动清除
+}
+
+/**
+ * 获取 slug 到 originalSlug 的映射（用于重定向）
+ */
+export async function getSlugRedirectMap(): Promise<Map<string, string>> {
+	const cache = await getBlogCache();
+	const redirectMap = new Map<string, string>();
+
+	for (const post of cache.posts) {
+		if (post.originalSlug && post.slug !== post.originalSlug) {
+			redirectMap.set(post.originalSlug, post.slug);
+		}
+	}
+
+	return redirectMap;
 }

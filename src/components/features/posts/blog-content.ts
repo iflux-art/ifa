@@ -53,6 +53,31 @@ async function findBlogFile(slug: string[]): Promise<string | null> {
 		return indexMd;
 	} catch {}
 
+	// 尝试通过缓存中的 slug 映射查找
+	const slugStr = decodedSlug.join("/");
+	const cache = await getBlogCache();
+
+	for (const post of cache.posts) {
+		// 用翻译后的 slug 匹配，找到后用 originalSlug 查找文件
+		if (post.slug === slugStr && post.originalSlug) {
+			const originalPath = path.join(
+				CONTENT_DIR,
+				...post.originalSlug.split("/"),
+			);
+			const originalMdx = `${originalPath}.mdx`;
+			try {
+				await fs.access(originalMdx);
+				return originalMdx;
+			} catch {}
+
+			const originalMd = `${originalPath}.md`;
+			try {
+				await fs.access(originalMd);
+				return originalMd;
+			} catch {}
+		}
+	}
+
 	return null;
 }
 

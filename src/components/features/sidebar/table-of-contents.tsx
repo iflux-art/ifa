@@ -2,6 +2,7 @@
 
 import { Text } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useMobileMenu } from "@/components/layout/navbar/mobile-menu-context";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useHeadingObserver } from "@/hooks/use-heading-observer";
 import { cn } from "@/lib/utils";
@@ -41,9 +42,6 @@ const SCROLL_OFFSET = NAVBAR_HEIGHT;
 
 /**
  * 平滑滚动到指定元素
- * @param elementId 目标元素ID
- * @param offset 偏移量（默认为0）
- * @param updateHash 是否更新URL hash（默认为false）
  */
 function scrollToElement(
 	elementId: string,
@@ -58,18 +56,14 @@ function scrollToElement(
 	const elementPosition = element.getBoundingClientRect().top;
 	const offsetPosition = elementPosition + window.scrollY - offset;
 
-	// 使用浏览器原生平滑滚动
 	window.scrollTo({
 		top: offsetPosition,
 		behavior: "smooth",
 	});
 
-	// 如果需要更新hash，在滚动完成后更新
 	if (updateHash) {
-		// 使用setTimeout确保在滚动完成后更新hash
 		setTimeout(() => {
 			history.replaceState(null, "", `#${elementId}`);
-			// 触发hashchange事件，使useHeadingObserver能够正确更新active状态
 			window.dispatchEvent(new HashChangeEvent("hashchange"));
 		}, 100);
 	}
@@ -79,13 +73,12 @@ function scrollToElement(
 interface HeadingItemProps {
 	heading: TocHeading;
 	isActive: boolean;
+	onClick?: () => void;
 }
 
-const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
-	// 计算缩进，根据标题级别
+function HeadingItem({ heading, isActive, onClick }: HeadingItemProps) {
 	const indent = (heading.level - 2) * 0.75;
 
-	// 根据标题级别设置不同的样式
 	const headingSize =
 		{
 			2: "font-medium",
@@ -95,7 +88,6 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
 
 	return (
 		<div className="relative">
-			{/* 选中状态的粗线 */}
 			<div
 				className={`absolute top-1.5 bottom-1.5 left-2 w-0.5 rounded-full transition-all duration-300 ease-out ${
 					isActive
@@ -109,11 +101,8 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
 				className={cn(
 					"group relative flex min-w-0 items-start py-1.5 text-xs transition-colors duration-200",
 					headingSize,
-					// 普通文本
 					"text-muted-foreground",
-					// hover 状态
 					"hover:rounded-sm hover:bg-primary/5 hover:font-medium hover:text-foreground",
-					// active 状态
 					isActive && "rounded-sm bg-primary/10 font-medium text-foreground",
 					"w-full",
 				)}
@@ -122,8 +111,8 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
 				}}
 				onClick={(e) => {
 					e.preventDefault();
-					// 直接滚动到元素，不更新hash
 					scrollToElement(heading.id, SCROLL_OFFSET, true);
+					onClick?.();
 				}}
 			>
 				<span className="overflow-wrap-anywhere block w-full hyphens-auto whitespace-normal break-words text-left leading-relaxed">
@@ -132,61 +121,63 @@ const HeadingItem = ({ heading, isActive }: HeadingItemProps) => {
 			</a>
 		</div>
 	);
-};
+}
 
 // 目录容器组件
 interface TocContainerProps {
 	headings: TocHeading[];
 	activeId: string | null;
 	tocRef: React.RefObject<HTMLDivElement | null>;
+	onItemClick?: () => void;
 }
 
-const TocContainer = ({ headings, activeId, tocRef }: TocContainerProps) => (
-	<div
-		ref={tocRef}
-		className="hide-scrollbar max-h-64 overflow-y-auto scroll-smooth"
-	>
-		<div className="relative">
-			{/* 左侧细线 */}
-			<div className="absolute top-0 bottom-0 left-2 w-px bg-border" />
+function TocContainer({
+	headings,
+	activeId,
+	tocRef,
+	onItemClick,
+}: TocContainerProps) {
+	return (
+		<div
+			ref={tocRef}
+			className="hide-scrollbar max-h-64 overflow-y-auto scroll-smooth"
+		>
+			<div className="relative">
+				<div className="absolute top-0 bottom-0 left-2 w-px bg-border" />
 
-			<div className="space-y-1">
-				{headings.map((heading, _index) => (
-					<HeadingItem
-						key={heading.id}
-						heading={heading}
-						isActive={activeId === heading.id}
-					/>
-				))}
+				<div className="space-y-1">
+					{headings.map((heading, _index) => (
+						<HeadingItem
+							key={heading.id}
+							heading={heading}
+							isActive={activeId === heading.id}
+							onClick={onItemClick}
+						/>
+					))}
+				</div>
 			</div>
 		</div>
-	</div>
-);
+	);
+}
 
 /**
  * 目录卡片组件
- *
- * 以卡片形式显示文档的目录结构，支持点击导航和滚动高亮
- * 样式与其他侧边栏卡片保持一致
  */
-export const TableOfContents = ({
+export function TableOfContents({
 	headings,
 	className,
 	title = "目录",
-}: TableOfContentsProps) => {
+}: TableOfContentsProps) {
 	const tocRef = useRef<HTMLDivElement>(null);
+	const { closeMenu } = useMobileMenu();
 
-	// 使用自定义 hook 处理标题观察
 	const activeId = useHeadingObserver(headings);
 
-	// 自动滚动目录到当前活动标题
 	useEffect(() => {
-		// 如果没有标题，不执行任何操作
 		if (headings.length === 0 || !activeId || !tocRef.current) {
 			return;
 		}
 
-		// 防抖逻辑
 		const timeoutId = setTimeout(() => {
 			const activeElement = tocRef.current?.querySelector(
 				`a[href="#${activeId}"]`,
@@ -207,30 +198,25 @@ export const TableOfContents = ({
 						containerRect.height / 2 +
 						activeRect.height / 2;
 
-					// 使用更平滑的滚动
 					tocRef.current.scrollTo({
 						top: tocRef.current.scrollTop + scrollTop,
 						behavior: "smooth",
 					});
 				}
 			}
-		}, 100); // 减少延迟以提高响应性
+		}, 100);
 
 		return () => {
 			clearTimeout(timeoutId);
 		};
 	}, [activeId, headings.length]);
 
-	// 过滤掉h1标题，只显示h2-h4
 	const filteredHeadings = headings.filter(
 		(heading: TocHeading) => heading.level >= 2 && heading.level <= 4,
 	);
 
-	// 根据标题级别对目录进行分组和嵌套
 	const organizeHeadings = (headings: TocHeading[]) =>
-		// 确保标题ID唯一性
 		headings.map((heading, index) => {
-			// 如果ID为空或者不存在，生成一个基于文本的ID
 			if (!heading.id) {
 				heading.id = `heading-${heading.text
 					.toLowerCase()
@@ -239,7 +225,7 @@ export const TableOfContents = ({
 			}
 			return heading;
 		});
-	// 如果过滤后没有标题，返回null，不显示任何内容
+
 	if (filteredHeadings.length === 0) {
 		return null;
 	}
@@ -264,8 +250,9 @@ export const TableOfContents = ({
 					headings={organizedHeadings}
 					activeId={activeId}
 					tocRef={tocRef}
+					onItemClick={closeMenu}
 				/>
 			</CardContent>
 		</Card>
 	);
-};
+}

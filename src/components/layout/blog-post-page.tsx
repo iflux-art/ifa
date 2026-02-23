@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useMemo, useRef } from "react";
 import type { BlogFrontmatter } from "@/components/features/posts/blog-content";
 import { PostMeta } from "@/components/features/posts/post-meta";
 import { BlogCategoryCard } from "@/components/features/sidebar/blog-category-card";
@@ -10,6 +11,7 @@ import { TagCloudCard } from "@/components/features/sidebar/tag-cloud-card";
 import ClientMDXRenderer from "@/components/mdx/client-mdx-renderer";
 
 import { cn } from "@/lib/utils";
+import { useMobileMenu } from "./navbar/mobile-menu-context";
 
 interface BlogPostPageProps {
 	slug: string[];
@@ -49,6 +51,8 @@ export const BlogPostPageContainer = ({
 	allTags,
 	allCategories,
 }: BlogPostPageProps) => {
+	const { setSidebar } = useMobileMenu();
+
 	// 标题从 frontmatter 获取（提供 slug 作为后备）
 	const title = frontmatter.title ?? slug.join("/");
 	const date = frontmatter.date
@@ -63,25 +67,45 @@ export const BlogPostPageContainer = ({
 	const currentTags = frontmatter.tags || [];
 
 	// 左侧边栏内容（包含原来右侧边栏的内容）
-	const leftSidebar = (
-		<>
-			<BlogCategoryCard
-				categories={allCategories}
-				selectedCategory={frontmatter.category}
-				enableRouting
-			/>
-			<TagCloudCard
-				allTags={allTags}
-				selectedTags={currentTags}
-				useDefaultRouting
-			/>
-			<TableOfContents headings={headings} className="prose-sm" />
-			<RelatedPostsCard posts={relatedPosts} currentSlug={slug.slice(1)} />
-		</>
+	const sidebarContent = useMemo(
+		() => (
+			<>
+				<TableOfContents headings={headings} className="prose-sm" />
+				<BlogCategoryCard
+					categories={allCategories}
+					selectedCategory={frontmatter.category}
+					enableRouting
+				/>
+				<TagCloudCard
+					allTags={allTags}
+					selectedTags={currentTags}
+					useDefaultRouting
+				/>
+				<RelatedPostsCard posts={relatedPosts} currentSlug={slug.slice(1)} />
+			</>
+		),
+		[
+			allCategories,
+			allTags,
+			currentTags,
+			frontmatter.category,
+			headings,
+			relatedPosts,
+			slug,
+		],
 	);
 
 	// 右侧边栏内容（现在为空）
 	const _rightSidebar = null; // 保留变量但添加下划线前缀以避免未使用警告
+
+	const hasSetSidebar = useRef(false);
+
+	useEffect(() => {
+		if (!hasSetSidebar.current) {
+			hasSetSidebar.current = true;
+			setSidebar(sidebarContent);
+		}
+	}, [setSidebar, sidebarContent]);
 
 	return (
 		<div className="min-h-screen bg-background">
@@ -107,7 +131,7 @@ export const BlogPostPageContainer = ({
 											},
 										}}
 									>
-										<div className="space-y-6">{leftSidebar}</div>
+										<div className="space-y-6">{sidebarContent}</div>
 									</SidebarWrapper>
 								</div>
 

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "workspace": {
+    "name": "ifa",
+    "createdAt": 1771811812270,
+    "preset": "starter"
+  },
+  "authorizedRoots": [
+    "C:\\project\\ifa"
+  ]
+}

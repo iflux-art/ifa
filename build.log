@@ -1,0 +1,58 @@
+
+> blog@1.0.0 build C:\project\ifa
+> next build
+
+   ▲ Next.js 15.5.12
+   - Environments: .env.production
+   - Experiments (use with caution):
+     ✓ mdxRs
+     · optimizePackageImports
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 2.7s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/171) ...
+   Generating static pages (42/171) 
+   Generating static pages (85/171) 
+   Generating static pages (128/171) 
+ ✓ Generating static pages (171/171)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS  Revalidate  Expire
+┌ ○ /                                    1.17 kB         119 kB          1h      1y
+├ ○ /_not-found                            161 B         103 kB
+├ ƒ /api-docs                              161 B         103 kB
+├ ƒ /api/blog/posts                        161 B         103 kB
+├ ƒ /api/blog/tags                         161 B         103 kB
+├ ƒ /api/blog/tags/[tag]                   161 B         103 kB
+├ ƒ /api/blog/tags/count                   161 B         103 kB
+├ ƒ /api/blog/timeline                     161 B         103 kB
+├ ƒ /api/links/ws                          161 B         103 kB
+├ ƒ /api/mcp-tools                         161 B         103 kB
+├ ƒ /api/search                            161 B         103 kB
+├ ƒ /api/search/blog                       161 B         103 kB
+├ ○ /api/search/index                      161 B         103 kB          1h      1y
+├ ƒ /feed.xml                              161 B         103 kB
+├ ○ /friends                              3.3 kB         124 kB
+├ ƒ /llms.txt                              161 B         103 kB
+├ ● /posts/[...slug]                       183 B         337 kB          1h      1y
+├   ├ /posts/广告/广告理论/一个广告人的自白                                            1h      1y
+├   ├ /posts/广告/广告理论/文案发烧                                                1h      1y
+├   ├ /posts/广告/广告理论/文案训练手册                                              1h      1y
+├   └ [+152 more paths]
+├ ○ /robots.txt                            161 B         103 kB
+└ ○ /sitemap.xml                           161 B         103 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/2fb5a030-bf7cdaa5da1bc0eb.js  54.2 kB
+  ├ chunks/377-cedb6d208bbf80bd.js       46.2 kB
+  └ other shared chunks (total)          2.01 kB
+
+
+ƒ Middleware                             34.2 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
